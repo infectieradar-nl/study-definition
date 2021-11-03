@@ -69,7 +69,7 @@ export class Q2NL extends Item {
                     ])
                 },
                 {
-                    key: '5', role: 'option',
+                    key: '6', role: 'option',
                     content: new Map([
                         ["en", "Not applicable, I am fully vaccinated and not planning to get a third booster vaccination"],
                         ["nl", "Niet meer van toepassing: ik ben volledig gevaccineerd en niet van plan om een derde (booster) vaccinatie te nemen"],

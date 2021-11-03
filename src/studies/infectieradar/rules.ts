@@ -48,17 +48,19 @@ const handleWeekly = StudyEngine.ifThen(
             ParticipantFlags.hasOnGoingSymptoms.values.no
         )
     ),
+    // vaccination:
     StudyEngine.if(
-        StudyEngine.or(
+        /*StudyEngine.or(
             StudyEngine.and(
                 StudyEngine.singleChoice.any(Weekly.Q2NL.key, "4"), // this key is selected
-                StudyEngine.singleChoice.none("weekly.Q2bNL", "5") // something else selected
+                StudyEngine.singleChoice.none(Weekly.Q2bNL.key, "5") // something else selected
             ),
             StudyEngine.and(
                 StudyEngine.singleChoice.any(Weekly.Q2NL.key, "3"), // this key is selected
-                StudyEngine.singleChoice.any("weekly.Q2bNL", "5") // this key is selected
+                StudyEngine.singleChoice.any(Weekly.Q2bNL.key, "5") // this key is selected
             ),
-        ),
+        ),*/
+        StudyEngine.singleChoice.any(Weekly.Q2NL.key, "5", "6"), // this key is selected
         StudyEngine.participantActions.updateFlag("21-vacc", "full"),
     ),
     StudyEngine.if(

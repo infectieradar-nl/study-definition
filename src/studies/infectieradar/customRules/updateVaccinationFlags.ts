@@ -7,11 +7,13 @@ export const updateVaccinationFlag_20211103_rules = {
     rules: [
         StudyEngine.if(
             StudyEngine.participantState.hasParticipantFlag('21-vacc', 'full'),
-            StudyEngine.participantActions.updateFlag('todo', 'todo')
+            StudyEngine.participantActions.updateFlag('21-vacc-old', 'full'),
+            StudyEngine.participantActions.removeFlag('21-vacc'),
         ),
         StudyEngine.if(
             StudyEngine.participantState.hasParticipantFlag('21-vacc', 'never'),
-            StudyEngine.participantActions.updateFlag('todo', 'todo')
+            StudyEngine.participantActions.updateFlag('21-vacc-old', 'never'),
+            StudyEngine.participantActions.removeFlag('21-vacc'),
         )
     ]
 }
