@@ -18,12 +18,17 @@ npm install
 
 ### Normal use
 
-Edit the content for example inside `src/studies/tekenradar` as you wish.
+Edit the content for example inside `src/studies/infectieradar` as you wish.
 
 To run the script to generate all the configuration files, you can use:
 
 ```sh
 npm start study=<studyKey>
+```
+
+For example:
+```sh
+npm start study=infectieradar
 ```
 
 The results will be generated inside the `output` folder.
