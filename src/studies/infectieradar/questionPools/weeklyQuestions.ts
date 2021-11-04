@@ -4,6 +4,7 @@ import { Item } from "../../../case-editor/types/item";
 import { SurveyItemGenerators } from "../../../case-editor/utils/question-type-generator";
 
 
+
 export class HasSymptomsGroup extends Group {
     /*
     Q1: QuestionAboutMedicalHistory;
