@@ -3,13 +3,11 @@ import { StudyEngine } from '../expression-utils/studyEngineExpressions';
 
 
 export class StudyRules {
-    name: string;
     private enterRules?: Expression[];
     private submitRules?: Expression[];
     private timerRules?: Expression[];
 
     constructor(
-        name: string,
         enterRules?: Expression[],
         submitRules?: Expression[],
         timerRules?: Expression[],
@@ -17,7 +15,6 @@ export class StudyRules {
         this.enterRules = enterRules;
         this.submitRules = submitRules;
         this.timerRules = timerRules;
-        this.name = name;
     }
 
     get() {

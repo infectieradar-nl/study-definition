@@ -35,10 +35,11 @@ class WeeklyDef extends SurveyDefinition {
 
         // Initialize/Configure questions here:
         this.Q2NL = new Q2NL(this.key, true);
-        const conditionForQ2aNL = SurveyEngine.singleChoice.any(this.Q2NL.key, '3', '4', '5');
-        this.Q2aNL = new Q2aNL(this.key, conditionForQ2aNL, true);
-        this.Q2bNL = new Q2bNL(this.key, true);
-        this.Q2cNL = new Q2cNL(this.key, true);
+        const conditionForVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '3', '4', '5');
+        const conditionForNotVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '2',);
+        this.Q2aNL = new Q2aNL(this.key, conditionForVaccindated, true);
+        this.Q2bNL = new Q2bNL(this.key, conditionForVaccindated, true);
+        this.Q2cNL = new Q2cNL(this.key, conditionForNotVaccindated, true);
 
         this.Q1 = new SymptomsQuestion(this.key, true);
 
@@ -50,6 +51,9 @@ class WeeklyDef extends SurveyDefinition {
         // Define order of the questions here:
         this.addItem(this.Q2NL.get());
         this.addItem(this.Q2aNL.get());
+        this.addItem(this.Q2bNL.get());
+        this.addItem(this.Q2cNL.get());
+
         this.addItem(this.Q1.get());
         this.addItem(this.HS.get());
     }

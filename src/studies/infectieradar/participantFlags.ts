@@ -6,6 +6,12 @@ export const ParticipantFlags = {
             yes: '1'
         }
     },
-
+    covidVaccine21: {
+        key: '21-vacc',
+        values: {
+            full: 'full',
+            never: 'never'
+        }
+    }
 }
 

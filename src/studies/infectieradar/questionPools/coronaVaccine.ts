@@ -1,7 +1,9 @@
 import { Expression } from "survey-engine/lib/data_types";
 import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngineExpressions";
 import { Item } from "../../../case-editor/types/item";
+import { ComponentGenerators } from "../../../case-editor/utils/componentGenerators";
 import { SurveyItemGenerators } from "../../../case-editor/utils/question-type-generator";
+import { ParticipantFlags } from "../participantFlags";
 
 export class Q2NL extends Item {
     constructor(parentKey: string, isRequired?: boolean) {
@@ -11,8 +13,8 @@ export class Q2NL extends Item {
 
     buildItem() {
         const itemCondition = SurveyEngine.logic.and(
-            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('21-vacc', 'full')),
-            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('21-vacc', 'never')),
+            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.full)),
+            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.never)),
         )
 
         return SurveyItemGenerators.singleChoice({
@@ -121,28 +123,6 @@ export class Q2aNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.multipleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
-            questionText: new Map([['en', 'TODO']]),
-            responseOptions: [],
-            /*
-            content: new Map([
-                ['en', 'Hello']
-            ]),*/
-        })
-    }
-}
-
-export class Q2bNL extends Item {
-    constructor(parentKey: string, isRequired: boolean) {
-        super(parentKey, 'Q2bNL');
-        this.isRequired = isRequired;
-    }
-
-    buildItem() {
         return SurveyItemGenerators.dateInput({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -163,10 +143,83 @@ export class Q2bNL extends Item {
     }
 }
 
+export class Q2bNL extends Item {
+    constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+        super(parentKey, 'Q2bNL');
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ["en", "With which vaccin are you vaccinated?"],
+                ["nl", "Met welk vaccin ben je gevaccineerd?"],
+            ]),
+            responseOptions: [
+                {
+                    key: '1', role: 'option',
+                    content: new Map([
+                        ["en", "BioNTech/Pfizer"],
+                        ["nl", "BioNTech/Pfizer"],
+                    ])
+                },
+                {
+                    key: '2', role: 'option',
+                    content: new Map([
+                        ["en", "Moderna"],
+                        ["nl", "Moderna"],
+                    ])
+                },
+                {
+                    key: '3', role: 'option',
+                    content: new Map([
+                        ["en", "AstraZeneca"],
+                        ["nl", "AstraZeneca"],
+                    ])
+                },
+                {
+                    key: '4', role: 'option',
+                    content: new Map([
+                        ["en", "CureVac"],
+                        ["nl", "CureVac"],
+                    ])
+                },
+                {
+                    key: '5', role: 'option',
+                    content: new Map([
+                        ["en", "Janssen"],
+                        ["nl", "Janssen"],
+                    ])
+                },
+                {
+                    key: '6', role: 'option',
+                    content: new Map([
+                        ["en", "Sanofi"],
+                        ["nl", "Sanofi"],
+                    ])
+                },
+                {
+                    key: '7', role: 'option',
+                    content: new Map([
+                        ["en", "I don't know"],
+                        ["nl", "Weet ik niet"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
 export class Q2cNL extends Item {
-    constructor(parentKey: string, isRequired: boolean) {
+    constructor(parentKey: string, condition: Expression, isRequired: boolean) {
         super(parentKey, 'Q2cNL');
         this.isRequired = isRequired;
+        this.condition = condition;
     }
 
     buildItem() {
@@ -175,12 +228,108 @@ export class Q2cNL extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new Map([['en', 'TODO']]),
-            responseOptions: [],
-            /*
-            content: new Map([
-                ['en', 'Hello']
-            ]),*/
+            questionText: new Map([
+                ["en", "What were your reasons for NOT getting a coronavirus vaccination?"],
+                ["nl", "Wat zijn voor jouw de belangrijkste redenen om geen vaccin tegen het coronavirus te halen?"],
+            ]),
+            helpGroupContent: this.getHelpGroupcontent(),
+            topDisplayCompoments: [
+                ComponentGenerators.text({
+                    className: 'mb-2',
+                    content: new Map([
+                        ['en', 'Select all options that apply'],
+                        ['nl', 'Meerdere antwoorden mogelijk'],
+                    ])
+                })
+            ],
+            responseOptions: [
+                {
+                    key: '0', role: 'option',
+                    content: new Map([
+                        ["en", "I have already had corona"],
+                        ["nl", "Ik heb al corona gehad"],
+                    ])
+                },
+                {
+                    key: '1', role: 'option',
+                    content: new Map([
+                        ["en", "I don't belong to a risk group"],
+                        ["nl", "Ik behoor niet tot een risicogroep"],
+                    ])
+                },
+                {
+                    key: '2', role: 'option',
+                    content: new Map([
+                        ["en", "I believe the vaccine is too new"],
+                        ["nl", "Ik vind het vaccin te nieuw"],
+                    ])
+                },
+                {
+                    key: '3', role: 'option',
+                    content: new Map([
+                        ["en", "I am afraid of possible side-effects"],
+                        ["nl", "Ik ben bang voor mogelijke bijwerkingen (op lange of korte termijn)"],
+                    ])
+                },
+                {
+                    key: '4', role: 'option',
+                    content: new Map([
+                        ["en", "I don't like vaccinations"],
+                        ["nl", "Ik hou niet van het krijgen van vaccinaties"],
+                    ])
+                },
+                {
+                    key: '5', role: 'option',
+                    content: new Map([
+                        ["en", "I doubt the effectiveness of the coronavaccine"],
+                        ["nl", "Ik twijfel aan de werking van het coronavaccin"],
+                    ])
+                },
+                {
+                    key: '6', role: 'option',
+                    content: new Map([
+                        ["en", "Other reason(s)"],
+                        ["nl", "Andere reden"],
+                    ])
+                },
+            ],
         })
+    }
+
+    private getHelpGroupcontent() {
+        return [
+            {
+                content: new Map([
+                    ["en", "Why are we asking this?"],
+                    ["nl", "Waarom vragen we dit?"],
+                    ["fr", "Pourquoi demandons-nous cela?"],
+                ]),
+                style: [{ key: 'variant', value: 'h5' }],
+            },
+            {
+                content: new Map([
+                    ["en", "We would like to know why some people get vaccinated and others do not."],
+                    ["nl", "We willen graag onderzoeken waarom sommige mensen zich wel laten vaccineren en anderen niet."],
+                    ["fr", "Nous aimerions savoir pourquoi certaines personnes se font vacciner et d'autres pas."],
+                ]),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            {
+                content: new Map([
+                    ["en", "How should I answer it?"],
+                    ["nl", "Hoe moet ik deze vraag beantwoorden?"],
+                    ["fr", "Comment dois-je répondre?"],
+                ]),
+                style: [{ key: 'variant', value: 'h5' }],
+            },
+            {
+                content: new Map([
+                    ["en", "Tick all those reasons that were important in your decision."],
+                    ["nl", "Geef alle redenen aan die een rol spelen in de beslissing."],
+                    ["fr", "Cochez toutes les raisons qui ont influencé votre décision."],
+                ]),
+                // style: [{ key: 'variant', value: 'p' }],
+            },
+        ]
     }
 }
