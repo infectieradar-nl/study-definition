@@ -2,7 +2,7 @@ import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngine
 import { SurveyDefinition } from "../../../case-editor/types/surveyDefinition";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1fNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
-import { HasSymptomsGroup, SymptomsQuestion } from "../questionPools/weeklyQuestions";
+import { FinalText, HasSymptomsGroup, SymptomsGroup } from "../questionPools/weeklyQuestions";
 
 class WeeklyDef extends SurveyDefinition {
     // vaccination:
@@ -34,11 +34,10 @@ class WeeklyDef extends SurveyDefinition {
     Q1dNL: Q1dNL;
     Q1b2NL: Q1b2NL;
 
-
-
     // symptoms:
-    Q1: SymptomsQuestion;
+    Q1: SymptomsGroup;
     HS: HasSymptomsGroup;
+    FinalText: FinalText;
 
     constructor() {
         super({
@@ -96,10 +95,11 @@ class WeeklyDef extends SurveyDefinition {
         this.Q1dNL = new Q1dNL(this.key, conditionForBloodTest, true);
         this.Q1b2NL = new Q1b2NL(this.key, conditionForBloodTest, true);
 
-        this.Q1 = new SymptomsQuestion(this.key, true);
+        this.Q1 = new SymptomsGroup(this.key);
 
-        const hasSymptoms = SurveyEngine.multipleChoice.none(this.Q1.key, this.Q1.noSymptomsKey);
+        const hasSymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
         this.HS = new HasSymptomsGroup(this.key, hasSymptoms);
+        this.FinalText = new FinalText(this.key);
     }
 
     buildSurvey() {
@@ -133,6 +133,7 @@ class WeeklyDef extends SurveyDefinition {
 
         this.addItem(this.Q1.get());
         this.addItem(this.HS.get());
+        this.addItem(this.FinalText.get());
     }
 }
 
