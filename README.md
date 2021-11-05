@@ -27,6 +27,7 @@ npm start study=<studyKey>
 ```
 
 For example:
+
 ```sh
 npm start study=infectieradar
 ```
