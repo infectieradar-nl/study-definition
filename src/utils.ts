@@ -30,8 +30,12 @@ const generateSurveyFiles = (study: Study, outputPath: string, pretty?: boolean)
     } else {
         Logger.log(`\tNo surveys in the study.`)
     }
+    const surveyOutPath = `${outputPath}/surveys`;
+    if (!fs.existsSync(surveyOutPath)) {
+        fs.mkdirSync(surveyOutPath, { recursive: true })
+    }
     study.surveys.forEach(survey => {
-        const fileName = `${outputPath}/${survey.key}.json`;
+        const fileName = `${surveyOutPath}/${survey.key}.json`;
         const outputObject = {
             studyKey: study.studyKey,
             survey: survey.getSurvey()

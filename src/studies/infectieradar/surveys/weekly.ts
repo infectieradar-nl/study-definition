@@ -97,8 +97,9 @@ class WeeklyDef extends SurveyDefinition {
 
         this.Q1 = new SymptomsGroup(this.key);
 
-        const hasSymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
-        this.HS = new HasSymptomsGroup(this.key, hasSymptoms);
+        const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
+        const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
+        this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
         this.FinalText = new FinalText(this.key);
     }
 
