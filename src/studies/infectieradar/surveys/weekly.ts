@@ -1,10 +1,11 @@
-import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngineExpressions";
-import { SurveyDefinition } from "../../../case-editor/types/surveyDefinition";
+import { SurveyDefinition } from "case-editor-tools/surveys/types";
+import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1fNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
 import { FinalText, HasSymptomsGroup, SymptomsGroup } from "../questionPools/weeklyQuestions";
 
 class WeeklyDef extends SurveyDefinition {
+
     // vaccination:
     Q2NL: Q2NL;
     Q2aNL: Q2aNL;
@@ -38,6 +39,8 @@ class WeeklyDef extends SurveyDefinition {
     Q1: SymptomsGroup;
     HS: HasSymptomsGroup;
     FinalText: FinalText;
+
+
 
     constructor() {
         super({

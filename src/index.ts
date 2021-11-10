@@ -1,7 +1,7 @@
-import { Logger } from './case-editor/logger/logger';
-import { Study } from './case-editor/types/study';
+import { Logger } from "case-editor-tools/logger/logger";
+import { Study } from "case-editor-tools/types/study";
 import { InfectieradarStudy } from './studies/infectieradar';
-import { generateFilesForStudy } from './utils';
+import { generateFilesForStudy } from 'case-editor-tools/exporter';
 
 const studies: Study[] = [
     InfectieradarStudy,

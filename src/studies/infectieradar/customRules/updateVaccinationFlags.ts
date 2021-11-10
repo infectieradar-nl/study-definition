@@ -1,4 +1,4 @@
-import { StudyEngine } from "../../../case-editor/expression-utils/studyEngineExpressions";
+import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 
 

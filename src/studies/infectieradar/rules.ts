@@ -1,6 +1,6 @@
 import { Expression } from "survey-engine/lib/data_types";
-import { StudyEngine } from "../../case-editor/expression-utils/studyEngineExpressions";
-import { StudyRules } from "../../case-editor/types/studyRules";
+import { StudyRules } from "case-editor-tools/types/studyRules";
+import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";

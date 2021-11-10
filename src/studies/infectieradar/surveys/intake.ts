@@ -1,5 +1,5 @@
-import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngineExpressions";
-import { SurveyDefinition } from "../../../case-editor/types/surveyDefinition";
+import { SurveyDefinition } from "case-editor-tools/surveys/types";
+import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText } from "../questionPools/intakeQuestions";
 
 class IntakeDef extends SurveyDefinition {

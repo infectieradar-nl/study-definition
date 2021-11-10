@@ -1,12 +1,11 @@
 import { Expression } from "survey-engine/lib/data_types";
-import { matrixKey, responseGroupKey } from "../../../case-editor/constants/key-definitions";
-import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngineExpressions";
-import { ItemEditor } from "../../../case-editor/survey-editor/item-editor";
-import { Group } from "../../../case-editor/types/group";
-import { Item } from "../../../case-editor/types/item";
-import { ComponentGenerators } from "../../../case-editor/utils/componentGenerators";
-import { initMatrixQuestion, ResponseRowCell, SurveyItemGenerators } from "../../../case-editor/utils/question-type-generator";
-import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "../../../case-editor/utils/simple-generators";
+import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
+import { Item, Group } from "case-editor-tools/surveys/types";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
+import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
+import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ParticipantFlags } from "../participantFlags";
 
 
@@ -84,7 +83,7 @@ class SymptomsTitle extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.display({
+        return SurveyItems.display({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             condition: this.condition,
@@ -114,7 +113,7 @@ class SymptomsQuestion extends Item {
     buildItem() {
         const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
 
-        return SurveyItemGenerators.multipleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -325,7 +324,7 @@ class Q2 extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -519,7 +518,7 @@ class Q4 extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -608,7 +607,7 @@ class Q5 extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -691,7 +690,7 @@ export class FinalText extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.surveyEnd(
+        return SurveyItems.surveyEnd(
             this.parentKey,
             new Map([
                 //["en", "This was all for now, please submit your responses. By filling out this survey regularly (eg. weekly), you can help us fight the virus."],
@@ -736,7 +735,7 @@ class QFeverStart extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -818,7 +817,7 @@ class QFeverDevelopedSuddenly extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -906,7 +905,7 @@ class QTempertureTaken extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -992,7 +991,7 @@ class QHighestTemp extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1136,7 +1135,7 @@ class Q7 extends Item {
             '0', '5'
         )
 
-        return SurveyItemGenerators.multipleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1259,7 +1258,7 @@ class Q7a extends Item {
 
     buildItem() {
 
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1602,7 +1601,7 @@ class Q9 extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.multipleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1772,7 +1771,7 @@ class Q9b extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1895,7 +1894,7 @@ class Q10NL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1949,7 +1948,7 @@ class Q10bNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -2034,7 +2033,7 @@ class Q10cNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -2152,7 +2151,7 @@ class Q11 extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,

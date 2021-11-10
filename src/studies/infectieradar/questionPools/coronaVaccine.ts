@@ -1,9 +1,9 @@
 import { Expression } from "survey-engine/lib/data_types";
-import { SurveyEngine } from "../../../case-editor/expression-utils/surveyEngineExpressions";
-import { Item } from "../../../case-editor/types/item";
-import { ComponentGenerators } from "../../../case-editor/utils/componentGenerators";
-import { SurveyItemGenerators } from "../../../case-editor/utils/question-type-generator";
+import { Item } from "case-editor-tools/surveys/types";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { ParticipantFlags } from "../participantFlags";
+
 
 export class Q2NL extends Item {
     constructor(parentKey: string, isRequired?: boolean) {
@@ -17,7 +17,7 @@ export class Q2NL extends Item {
             SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.never)),
         )
 
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -123,7 +123,7 @@ export class Q2aNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.dateInput({
+        return SurveyItems.dateInput({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -151,7 +151,7 @@ export class Q2bNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.singleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -223,7 +223,7 @@ export class Q2cNL extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.multipleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,

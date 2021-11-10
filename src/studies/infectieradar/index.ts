@@ -1,4 +1,4 @@
-import { Study } from "../../case-editor/types/study";
+import { Study } from "case-editor-tools/types/study";
 import { studyRules } from "./rules";
 import { updateVaccinationFlag_20211103_rules } from "./customRules/updateVaccinationFlags";
 import { Intake } from "./surveys/intake";
