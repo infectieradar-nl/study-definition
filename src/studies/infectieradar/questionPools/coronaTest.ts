@@ -233,7 +233,7 @@ export class Q1jNL extends Item {
     }
 
     buildItem() {
-        return SurveyItems.multipleChoice({
+        return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,

@@ -689,7 +689,7 @@ export class Q4cNLb extends Item {
             condition: this.condition,
             questionText: new Map([
                 ["en", "Where are you employed in education or childcare? Assume the normal situation (thus without measures against corona)"],
-                ["nl", "Waar werkt je in het onderwijs of kinderopvang? Ga uit van de normale situatie (dus zonder coronamaatregelen)."],
+                ["nl", "Waar werk je in het onderwijs of kinderopvang? Ga uit van de normale situatie (dus zonder coronamaatregelen)."],
             ]),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
@@ -774,7 +774,7 @@ export class Q4cNLc extends Item {
             condition: this.condition,
             questionText: new Map([
                 ["en", "Where are you employed within health care? Assume the normal situation (thus without measures against the coronavirus)"],
-                ["nl", "Waar werkt je in de gezondheidszorg? Ga uit van de normale situatie (dus zonder coronamaatregelen)"],
+                ["nl", "Waar werk je in de gezondheidszorg? Ga uit van de normale situatie (dus zonder coronamaatregelen)"],
             ]),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
