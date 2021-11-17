@@ -3,6 +3,7 @@ import { studyRules } from "./rules";
 import { updateVaccinationFlag_20211103_rules } from "./customRules/updateVaccinationFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
+import { reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToIntake";
 
 
 export const InfectieradarStudy: Study = {
@@ -14,6 +15,7 @@ export const InfectieradarStudy: Study = {
     ],
     studyRules: studyRules,
     customStudyRules: [
-        updateVaccinationFlag_20211103_rules
+        updateVaccinationFlag_20211103_rules,
+        reinvitePeopleToIntake_rules,
     ]
 }

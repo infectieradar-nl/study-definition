@@ -20,16 +20,21 @@ const entryRules: Expression[] = [
 const handleIntake = StudyEngine.ifThen(
     StudyEngine.checkSurveyResponseKey(Intake.key),
     // then do:
-    StudyEngine.participantActions.assignedSurveys.removeAll(),
-    StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio'),
+    StudyEngine.participantActions.assignedSurveys.remove(Intake.key, 'all'),
+    StudyEngine.ifThen(
+        StudyEngine.not(
+            StudyEngine.participantState.hasSurveyKeyAssigned(Weekly.key)
+        ),
+        StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio')
+    ),
     StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
+    StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal', StudyEngine.timestampWithOffset({ years: 1 })),
 )
 
 const handleWeekly = StudyEngine.ifThen(
     StudyEngine.checkSurveyResponseKey(Weekly.key),
     // then do:
-    StudyEngine.participantActions.assignedSurveys.removeAll(),
-    StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
+    StudyEngine.participantActions.assignedSurveys.remove(Weekly.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio', StudyEngine.timestampWithOffset({
         hours: 1,
     })),
