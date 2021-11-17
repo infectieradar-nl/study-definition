@@ -1,0 +1,100 @@
+[
+  {
+    "name": "IF",
+    "data": [
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "hasParticipantFlag",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc"
+            },
+            {
+              "dtype": "str",
+              "str": "full"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "UPDATE_FLAG",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc-old"
+            },
+            {
+              "dtype": "str",
+              "str": "full"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "REMOVE_FLAG",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "IF",
+    "data": [
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "hasParticipantFlag",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc"
+            },
+            {
+              "dtype": "str",
+              "str": "never"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "UPDATE_FLAG",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc-old"
+            },
+            {
+              "dtype": "str",
+              "str": "never"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "REMOVE_FLAG",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "21-vacc"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

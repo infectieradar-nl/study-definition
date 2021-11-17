@@ -1,0 +1,416 @@
+[
+  {
+    "name": "IFTHEN",
+    "data": [
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "checkEventType",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "ENTER"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "ADD_NEW_SURVEY",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "intake"
+            },
+            {
+              "dtype": "num",
+              "num": 0
+            },
+            {
+              "dtype": "num",
+              "num": 0
+            },
+            {
+              "dtype": "str",
+              "str": "normal"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "IFTHEN",
+    "data": [
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "checkEventType",
+          "data": [
+            {
+              "dtype": "str",
+              "str": "SUBMIT"
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "IFTHEN",
+          "data": [
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "checkSurveyResponseKey",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "intake"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "REMOVE_SURVEYS_BY_KEY",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "intake"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "IFTHEN",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "not",
+                      "data": [
+                        {
+                          "dtype": "exp",
+                          "exp": {
+                            "name": "hasSurveyKeyAssigned",
+                            "data": [
+                              {
+                                "dtype": "str",
+                                "str": "weekly"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "ADD_NEW_SURVEY",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "weekly"
+                        },
+                        {
+                          "dtype": "num",
+                          "num": 0
+                        },
+                        {
+                          "dtype": "num",
+                          "num": 0
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "prio"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "ADD_NEW_SURVEY",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "intake"
+                  },
+                  {
+                    "dtype": "num",
+                    "num": 0
+                  },
+                  {
+                    "dtype": "num",
+                    "num": 0
+                  },
+                  {
+                    "dtype": "str",
+                    "str": "optional"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "ADD_NEW_SURVEY",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "intake"
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "timestampWithOffset",
+                      "data": [
+                        {
+                          "dtype": "num",
+                          "num": 31536000
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "num",
+                    "num": 0
+                  },
+                  {
+                    "dtype": "str",
+                    "str": "normal"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "IFTHEN",
+          "data": [
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "checkSurveyResponseKey",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "weekly"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "REMOVE_SURVEYS_BY_KEY",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "weekly"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "ADD_NEW_SURVEY",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "weekly"
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "timestampWithOffset",
+                      "data": [
+                        {
+                          "dtype": "num",
+                          "num": 3600
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "num",
+                    "num": 0
+                  },
+                  {
+                    "dtype": "str",
+                    "str": "prio"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "IF",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "responseHasKeysAny",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "weekly.HS.Q4"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg.scg"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "2"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "prev"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "prev"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "0"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "IF",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "responseHasKeysAny",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "weekly.Q2NL"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg.scg"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "5"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "6"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "21-vacc"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "full"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "IF",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "responseHasKeysAny",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "weekly.Q2NL"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg.scg"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "2"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "21-vacc"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "never"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
