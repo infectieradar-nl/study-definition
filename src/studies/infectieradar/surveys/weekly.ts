@@ -120,8 +120,10 @@ class WeeklyDef extends SurveyDefinition {
 
         this.Q12bNL = new Q12bNL(this.key, conditionForQuarantineToday, true);
         const conditionForQuarantineWork = SurveyEngine.singleChoice.any(this.Q12bNL.key, '1');
+        const conditionForNotRetired = SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('retired', 'true'));
+        const conditionForQ12cNL = SurveyEngine.logic.and(conditionForNotQuarantine, conditionForNotRetired);
 
-        this.Q12cNL = new Q12cNL(this.key, conditionForNotQuarantine, true);
+        this.Q12cNL = new Q12cNL(this.key, conditionForQ12cNL, true);
         const conditionForQuarantineOther = SurveyEngine.singleChoice.any(this.Q12cNL.key, '1');
         const conditionForQ12dNL = SurveyEngine.logic.or(conditionForQuarantineWork, conditionForQuarantineOther);
 

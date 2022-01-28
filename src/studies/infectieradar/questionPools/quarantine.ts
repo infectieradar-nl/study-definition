@@ -1,7 +1,6 @@
 import { Expression } from "survey-engine/lib/data_types";
 import { Item } from "case-editor-tools/surveys/types";
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
+import { SurveyItems } from "case-editor-tools/surveys";
 
 export class Q12NL extends Item {
     constructor(parentKey: string, isRequired: boolean) {
@@ -148,7 +147,6 @@ export class Q12cNL extends Item {
                 },
                 {
                     key: '3', role: 'option',
-                    displayCondition: SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('retired', 'true')),
                     content: new Map([
                         ["nl", "Niet van toepassing, afgelopen week had ik geen werk/school; bijvoorbeeld pensioen/vakantie/langdurig ziek etc.)"],
                     ])
