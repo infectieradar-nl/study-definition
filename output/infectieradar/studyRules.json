@@ -191,6 +191,50 @@
                   }
                 ]
               }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "IF",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "responseHasKeysAny",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "intake.Q4"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg.scg"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "7"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "retired"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
             }
           ]
         }

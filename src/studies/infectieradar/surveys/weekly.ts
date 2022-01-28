@@ -3,6 +3,8 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1fNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
 import { FinalText, HasSymptomsGroup, SymptomsGroup } from "../questionPools/weeklyQuestions";
+import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
+import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 class WeeklyDef extends SurveyDefinition {
 
@@ -34,10 +36,15 @@ class WeeklyDef extends SurveyDefinition {
     Q4title: Q4title;
     Q1dNL: Q1dNL;
     Q1b2NL: Q1b2NL;
-
     // symptoms:
     Q1: SymptomsGroup;
     HS: HasSymptomsGroup;
+    // Quarantine:
+    Q12NL: Q12NL;
+    Q12aNL: Q12aNL;
+    Q12bNL: Q12bNL;
+    Q12cNL: Q12cNL;
+    Q12dNL: Q12dNL;
     FinalText: FinalText;
 
 
@@ -103,6 +110,25 @@ class WeeklyDef extends SurveyDefinition {
         const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
         const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
         this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
+
+        this.Q12NL = new Q12NL(this.key, true);
+        const conditionForQuarantine = SurveyEngine.singleChoice.any(this.Q12NL.key, '1');
+        const conditionForNotQuarantine = SurveyEngine.singleChoice.any(this.Q12NL.key, '0',);
+
+        this.Q12aNL = new Q12aNL(this.key, conditionForQuarantine, true);
+        const conditionForQuarantineToday = SurveyEngine.singleChoice.any(this.Q12aNL.key, '1');
+
+        this.Q12bNL = new Q12bNL(this.key, conditionForQuarantineToday, true);
+        const conditionForQuarantineWork = SurveyEngine.singleChoice.any(this.Q12bNL.key, '1');
+        const conditionForRetirement = SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('retired', 'true'));
+        const conditionForQ12cNL = SurveyEngine.logic.or(conditionForNotQuarantine, conditionForRetirement);
+
+        this.Q12cNL = new Q12cNL(this.key, conditionForQ12cNL, true);
+        const conditionForQuarantineOther = SurveyEngine.singleChoice.any(this.Q12cNL.key, '1');
+        const conditionForQ12dNL = SurveyEngine.logic.or(conditionForQuarantineWork, conditionForQuarantineOther);
+
+        this.Q12dNL = new Q12dNL(this.key, conditionForQ12dNL, true);
+
         this.FinalText = new FinalText(this.key);
     }
 
@@ -134,9 +160,15 @@ class WeeklyDef extends SurveyDefinition {
         this.addItem(this.Q1dNL.get());
         this.addItem(this.Q1b2NL.get());
 
-
         this.addItem(this.Q1.get());
         this.addItem(this.HS.get());
+
+        this.addItem(this.Q12NL.get());
+        this.addItem(this.Q12aNL.get());
+        this.addItem(this.Q12bNL.get());
+        this.addItem(this.Q12cNL.get());
+        this.addItem(this.Q12dNL.get());
+
         this.addItem(this.FinalText.get());
     }
 }

@@ -227,7 +227,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "str": "Nee!"
+                                  "str": "Nee"
                                 }
                               ]
                             }
@@ -1054,7 +1054,7 @@
                   }
                 },
                 {
-                  "key": "Skq",
+                  "key": "xMI",
                   "role": "text",
                   "style": [
                     {
@@ -1505,7 +1505,7 @@
               },
               "items": [
                 {
-                  "key": "w5r",
+                  "key": "SAJ",
                   "role": "text",
                   "content": [
                     {
@@ -2242,7 +2242,7 @@
               },
               "items": [
                 {
-                  "key": "LXW",
+                  "key": "eSH",
                   "role": "text",
                   "content": [
                     {
@@ -4085,7 +4085,7 @@
               },
               "items": [
                 {
-                  "key": "xq2",
+                  "key": "WEn",
                   "role": "text",
                   "content": [
                     {
@@ -4438,7 +4438,7 @@
                   },
                   "items": [
                     {
-                      "key": "Dpq",
+                      "key": "tjZ",
                       "role": "text",
                       "content": [
                         {
@@ -9013,7 +9013,7 @@
                                   ]
                                 }
                               ],
-                              "key": "WVCR"
+                              "key": "3Lsw"
                             },
                             {
                               "key": "mat",
@@ -11571,7 +11571,7 @@
                       }
                     },
                     {
-                      "key": "rzP",
+                      "key": "SSZ",
                       "role": "text",
                       "style": [
                         {
@@ -14016,6 +14016,638 @@
                 }
               ]
             }
+          },
+          {
+            "key": "weekly.Q12NL",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Heb je de afgelopen week in quarantaine gezeten?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "0",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Nee"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "weekly.Q12NL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "key": "weekly.Q12aNL",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Zit je vandaag nog in quarantaine?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "0",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Nee"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "condition": {
+              "name": "responseHasKeysAll",
+              "data": [
+                {
+                  "dtype": "str",
+                  "str": "weekly.Q12NL"
+                },
+                {
+                  "dtype": "str",
+                  "str": "rg.scg"
+                },
+                {
+                  "dtype": "str",
+                  "str": "1"
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "weekly.Q12aNL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "key": "weekly.Q12bNL",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Heb je door de quarantaine de afgelopen week tenminste 1 dag niet kunnen werken of niet naar school gekund?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb dag(en) werk/school gemist"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "2",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Nee (ik kon bijvoorbeeld thuiswerken, online de les volgen)"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "3",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Niet van toepassing, afgelopen week had ik geen werk/school; bijvoorbeeld pensioen/vakantie/langdurig ziek etc.)"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "condition": {
+              "name": "responseHasKeysAll",
+              "data": [
+                {
+                  "dtype": "str",
+                  "str": "weekly.Q12aNL"
+                },
+                {
+                  "dtype": "str",
+                  "str": "rg.scg"
+                },
+                {
+                  "dtype": "str",
+                  "str": "1"
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "weekly.Q12bNL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "key": "weekly.Q12cNL",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Heb je de afgelopen week ten minste 1 dag niet kunnen werken of niet naar school gekund om een andere reden dan quarantaine?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "2",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Nee"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "3",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Niet van toepassing, afgelopen week had ik geen werk/school; bijvoorbeeld pensioen/vakantie/langdurig ziek etc.)"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "condition": {
+              "name": "or",
+              "data": [
+                {
+                  "dtype": "exp",
+                  "exp": {
+                    "name": "responseHasKeysAll",
+                    "data": [
+                      {
+                        "dtype": "str",
+                        "str": "weekly.Q12NL"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "rg.scg"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "0"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "dtype": "exp",
+                  "exp": {
+                    "name": "not",
+                    "data": [
+                      {
+                        "dtype": "exp",
+                        "exp": {
+                          "name": "eq",
+                          "data": [
+                            {
+                              "dtype": "exp",
+                              "exp": {
+                                "name": "getAttribute",
+                                "data": [
+                                  {
+                                    "dtype": "exp",
+                                    "exp": {
+                                      "name": "getAttribute",
+                                      "data": [
+                                        {
+                                          "dtype": "exp",
+                                          "exp": {
+                                            "name": "getContext",
+                                            "data": []
+                                          }
+                                        },
+                                        {
+                                          "dtype": "str",
+                                          "str": "participantFlags"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "dtype": "str",
+                                    "str": "retired"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "dtype": "str",
+                              "str": "true"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "weekly.Q12cNL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "key": "weekly.Q12dNL",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Heb je vandaag nog steeds niet kunnen werken of naar school kunnen gaan?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik ben vandaag niet aan het werk/naar school"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "2",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Nee (ik kon bijvoorbeeld thuiswerken, online de les volgen)"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "3",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Niet van toepassing, ik hoef vandaag niet te werken of naar school"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "condition": {
+              "name": "or",
+              "data": [
+                {
+                  "dtype": "exp",
+                  "exp": {
+                    "name": "responseHasKeysAll",
+                    "data": [
+                      {
+                        "dtype": "str",
+                        "str": "weekly.Q12bNL"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "rg.scg"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "dtype": "exp",
+                  "exp": {
+                    "name": "responseHasKeysAll",
+                    "data": [
+                      {
+                        "dtype": "str",
+                        "str": "weekly.Q12cNL"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "rg.scg"
+                      },
+                      {
+                        "dtype": "str",
+                        "str": "1"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "weekly.Q12dNL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
           },
           {
             "key": "weekly.surveyEnd",

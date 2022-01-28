@@ -29,6 +29,11 @@ const handleIntake = StudyEngine.ifThen(
     ),
     StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
     StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal', StudyEngine.timestampWithOffset({ years: 1 })),
+
+    StudyEngine.if(
+        StudyEngine.singleChoice.any(Intake.QMainActivity.key, "7"),
+        StudyEngine.participantActions.updateFlag('retired', 'true')
+    )
 )
 
 const handleWeekly = StudyEngine.ifThen(
