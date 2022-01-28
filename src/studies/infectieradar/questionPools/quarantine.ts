@@ -148,6 +148,7 @@ export class Q12cNL extends Item {
                 },
                 {
                     key: '3', role: 'option',
+                    displayCondition: SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag('retired', 'true')),
                     content: new Map([
                         ["nl", "Niet van toepassing, afgelopen week had ik geen werk/school; bijvoorbeeld pensioen/vakantie/langdurig ziek etc.)"],
                     ])
