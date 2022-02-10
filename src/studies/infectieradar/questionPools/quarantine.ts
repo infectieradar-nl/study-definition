@@ -14,7 +14,7 @@ export class Q12NL extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            //helpGroupContent: this.getHelpGroupContent(),
+            helpGroupContent: this.getHelpGroupContent(),
             questionText: new Map([
                 ["nl", "Heb je de afgelopen week in quarantaine gezeten?"],
             ]),
@@ -35,6 +35,22 @@ export class Q12NL extends Item {
         })
     }
 
+    getHelpGroupContent() {
+        return [
+            {
+                content: new Map([
+                    ["nl", "Verschil tussen quarantaine en isolatie"],
+                ]),
+                style: [{ key: 'variant', value: 'h5' }],
+            },
+            {
+                content: new Map([
+                    ["nl", "Er is een belangrijk verschil tussen quarantaine en isolatie. Als je een positieve testuitslag krijgt, heb je COVID-19. Je bent dan een aantal dagen besmettelijk en gaat daarom in isolatie. Dit betekent dat je je afzondert om te voorkomen dat je andere mensen besmet. Nadat je hebt gehoord dat jouw huisgenoot of een nauw contact corona heeft en zelf misschien ook besmet bent ga je in quarantaine. Dit doe je uit voorzorg, zodat als je inderdaad besmet bent geraakt, het virus niet verder verspreid."],
+                ]),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+        ]
+    }
 }
 
 export class Q12aNL extends Item {

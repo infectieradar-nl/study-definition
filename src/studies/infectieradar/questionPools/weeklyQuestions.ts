@@ -10,6 +10,7 @@ import { ParticipantFlags } from "../participantFlags";
 
 
 
+
 export class HasSymptomsGroup extends Group {
     Q2: Q2;
     Q3: Q3;
@@ -23,7 +24,8 @@ export class HasSymptomsGroup extends Group {
     Q10bNL: Q10bNL;
     Q10cNL: Q10cNL;
     Q11: Q11;
-    
+
+
 
     constructor(parentKey: string, groupCondition: Expression, hasFeverCondition: Expression) {
         super(parentKey, 'HS');
@@ -43,7 +45,8 @@ export class HasSymptomsGroup extends Group {
         this.Q10bNL = new Q10bNL(this.key, conditionForTimeOffwork, true);
         this.Q10cNL = new Q10cNL(this.key, conditionForTimeOffwork, true);
         this.Q11 = new Q11(this.key, true);
-        
+
+
     }
 
     buildGroup() {
@@ -59,7 +62,8 @@ export class HasSymptomsGroup extends Group {
         this.addItem(this.Q10bNL.get());
         this.addItem(this.Q10cNL.get());
         this.addItem(this.Q11.get());
-        
+
+
     }
 }
 
@@ -2274,3 +2278,4 @@ class Q11 extends Item {
         ]
     }
 }
+

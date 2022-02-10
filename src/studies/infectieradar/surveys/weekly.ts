@@ -39,7 +39,7 @@ class WeeklyDef extends SurveyDefinition {
     // symptoms:
     Q1: SymptomsGroup;
     HS: HasSymptomsGroup;
-    // Quarantine:
+    // quarantine:
     Q12NL: Q12NL;
     Q12aNL: Q12aNL;
     Q12bNL: Q12bNL;
