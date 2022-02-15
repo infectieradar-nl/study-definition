@@ -33,7 +33,11 @@ export class HasSymptomsGroup extends Group {
         this.groupEditor.setCondition(groupCondition);
 
         this.Q2 = new Q2(this.key, true);
-        this.Q3 = new Q3(this.key, SurveyEngine.singleChoice.none(this.Q2.key, this.Q2.optionsKey.yes), true);
+        this.Q3 = new Q3(this.key,
+            SurveyEngine.logic.or(
+                SurveyEngine.logic.not(SurveyEngine.hasResponse(this.Q2.key, 'rg.scg')),
+                SurveyEngine.singleChoice.none(this.Q2.key, this.Q2.optionsKey.yes)
+            ), true);
         this.Q4 = new Q4(this.key, this.Q3.key, true);
         this.Q5 = new Q5(this.key, true);
         this.FeverGroup = new FeverGroup(this.key, hasFeverCondition);
@@ -409,10 +413,6 @@ class Q2 extends Item {
 }
 
 class Q3 extends Item {
-    optionsKey = {
-        no: '1',
-        yes: '0',
-    }
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
         super(parentKey, 'Q3');
 
