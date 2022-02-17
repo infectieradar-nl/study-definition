@@ -32,7 +32,8 @@ const handleIntake = StudyEngine.ifThen(
 
     StudyEngine.if(
         StudyEngine.singleChoice.any(Intake.QMainActivity.key, "7"),
-        StudyEngine.participantActions.updateFlag('retired', 'true')
+        StudyEngine.participantActions.updateFlag('retired', 'true'),
+        StudyEngine.participantActions.updateFlag('retired', 'false'),
     )
 )
 
