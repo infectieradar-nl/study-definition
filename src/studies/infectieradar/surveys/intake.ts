@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText } from "../questionPools/intakeQuestions";
+import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q24NLb, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText } from "../questionPools/intakeQuestions";
 
 class IntakeDef extends SurveyDefinition {
     QGender: QGender;
@@ -35,6 +35,7 @@ class IntakeDef extends SurveyDefinition {
     Q10d: Q10d;
     Q23NL: Q23NL;
     Q24NL: Q24NL;
+    Q24NLb: Q24NLb;
     FinalText: FinalText;
 
     constructor() {
@@ -91,6 +92,7 @@ class IntakeDef extends SurveyDefinition {
         this.Q10d = new Q10d(this.key, SurveyEngine.singleChoice.any(this.Q10.key, '2'), isRequired);
         this.Q23NL = new Q23NL(this.key, isRequired);
         this.Q24NL = new Q24NL(this.key, isRequired);
+        this.Q24NLb = new Q24NLb(this.key, SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6'), isRequired);
         this.FinalText = new FinalText(this.key);
     }
 
@@ -127,6 +129,7 @@ class IntakeDef extends SurveyDefinition {
         this.addItem(this.Q10d.get());
         this.addItem(this.Q23NL.get());
         this.addItem(this.Q24NL.get());
+        this.addItem(this.Q24NLb.get());
         this.addItem(this.FinalText.get());
     }
 }

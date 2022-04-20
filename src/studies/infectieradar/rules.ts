@@ -61,7 +61,7 @@ const handleWeekly = StudyEngine.ifThen(
     ),
     // vaccination:
     StudyEngine.if(
-        StudyEngine.singleChoice.any(Weekly.Q2NL.key, "5", "6"), // this key is selected
+        StudyEngine.singleChoice.any(Weekly.Q2NL.key, "5"), // this key is selected
         StudyEngine.participantActions.updateFlag(
             ParticipantFlags.covidVaccine21.key,
             ParticipantFlags.covidVaccine21.values.full

@@ -138,7 +138,7 @@
                           "code": "nl",
                           "parts": [
                             {
-                              "str": "Om een overzicht te krijgen hoeveel mensen binnen infectieradar al gevaccineerd zijn"
+                              "str": "Om een overzicht te krijgen hoeveel mensen binnen infectieradar al gevaccineerd zijn."
                             }
                           ]
                         }
@@ -195,6 +195,44 @@
                               "str": "Geef aan of je sinds het invullen van de vorige vragenlijst een vaccinatie gehad hebt.  Wij onthouden de antwoorden  uit eerdere vragenlijsten en weten dus zo of je al gevaccineerd bent. Vul 'nee' in wanneer je sinds het invullen van de vorige vragenlijst geen nieuwe vaccinatie hebt gehad, maar al wel een of twee keer gevaccineerd bent."
                             }
                           ]
+                        }
+                      ]
+                    },
+                    {
+                      "role": "text",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Wat betekent basisserie afgerond?"
+                            }
+                          ]
+                        }
+                      ],
+                      "style": [
+                        {
+                          "key": "variant",
+                          "value": "h5"
+                        }
+                      ]
+                    },
+                    {
+                      "role": "text",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manier, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."
+                            }
+                          ]
+                        }
+                      ],
+                      "style": [
+                        {
+                          "key": "variant",
+                          "value": "p"
                         }
                       ]
                     }
@@ -278,72 +316,6 @@
                           ]
                         },
                         {
-                          "key": "3",
-                          "role": "option",
-                          "content": [
-                            {
-                              "code": "en",
-                              "parts": [
-                                {
-                                  "str": "Yes, I have been vaccinated for the first time against the coronavirus"
-                                }
-                              ]
-                            },
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Ja, ik heb sinds de vorige vragenlijst een eerste vaccinatie ontvangen tegen het coronavirus"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "key": "4",
-                          "role": "option",
-                          "content": [
-                            {
-                              "code": "en",
-                              "parts": [
-                                {
-                                  "str": "Yes, I have been vaccinated for the second time against the coronavirus"
-                                }
-                              ]
-                            },
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Ja, ik heb sinds de vorige vragenlijst een tweede vaccinatie ontvangen tegen het coronavirus"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "key": "5",
-                          "role": "option",
-                          "content": [
-                            {
-                              "code": "en",
-                              "parts": [
-                                {
-                                  "str": "Yes, I have been vaccinated for the third time against the coronavirus"
-                                }
-                              ]
-                            },
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Ja, ik heb sinds de vorige vragenlijst een derde (booster) vaccinatie ontvangen tegen het coronavirus"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
                           "key": "6",
                           "role": "option",
                           "content": [
@@ -351,7 +323,7 @@
                               "code": "en",
                               "parts": [
                                 {
-                                  "str": "Not applicable, I am fully vaccinated and not planning to get a third booster vaccination"
+                                  "str": "Not applicable, I am fully vaccinated and not planning to get a (booster) vaccination"
                                 }
                               ]
                             },
@@ -359,7 +331,95 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "str": "Niet meer van toepassing: ik ben volledig gevaccineerd en niet van plan om een derde (booster) vaccinatie te nemen"
+                                  "str": "Niet meer van toepassing, ik heb de basisserie afgerond en niet van plan om een (booster) vaccinatie te nemen"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "7",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I've been vaccinated once but I'm not fully vaccinated"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb één vaccinatie tegen het coronavirus ontvangen maar de basisserie niet afgerond"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "8",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I've received one or two vaccinations, I'm fully vaccinated"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie van één of twee prikken nu afgerond"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "9",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I'm fully vaccinated and received the first booster"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "10",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I'm fully vaccinated and received the second booster"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"
                                 }
                               ]
                             }
@@ -603,15 +663,19 @@
                 },
                 {
                   "dtype": "str",
-                  "str": "3"
+                  "str": "7"
                 },
                 {
                   "dtype": "str",
-                  "str": "4"
+                  "str": "8"
                 },
                 {
                   "dtype": "str",
-                  "str": "5"
+                  "str": "9"
+                },
+                {
+                  "dtype": "str",
+                  "str": "10"
                 }
               ]
             },
@@ -849,15 +913,19 @@
                 },
                 {
                   "dtype": "str",
-                  "str": "3"
+                  "str": "7"
                 },
                 {
                   "dtype": "str",
-                  "str": "4"
+                  "str": "8"
                 },
                 {
                   "dtype": "str",
-                  "str": "5"
+                  "str": "9"
+                },
+                {
+                  "dtype": "str",
+                  "str": "10"
                 }
               ]
             },
@@ -1054,7 +1122,7 @@
                   }
                 },
                 {
-                  "key": "PHS",
+                  "key": "W4u",
                   "role": "text",
                   "style": [
                     {
@@ -1505,7 +1573,7 @@
               },
               "items": [
                 {
-                  "key": "kre",
+                  "key": "Zf9",
                   "role": "text",
                   "content": [
                     {
@@ -2242,7 +2310,7 @@
               },
               "items": [
                 {
-                  "key": "3y9",
+                  "key": "IFt",
                   "role": "text",
                   "content": [
                     {
@@ -4085,7 +4153,7 @@
               },
               "items": [
                 {
-                  "key": "NvQ",
+                  "key": "I9W",
                   "role": "text",
                   "content": [
                     {
@@ -4438,7 +4506,7 @@
                   },
                   "items": [
                     {
-                      "key": "kkS",
+                      "key": "tqv",
                       "role": "text",
                       "content": [
                         {
@@ -6050,19 +6118,51 @@
                   ]
                 },
                 "condition": {
-                  "name": "responseHasOnlyKeysOtherThan",
+                  "name": "or",
                   "data": [
                     {
-                      "dtype": "str",
-                      "str": "weekly.HS.Q2"
+                      "dtype": "exp",
+                      "exp": {
+                        "name": "not",
+                        "data": [
+                          {
+                            "dtype": "exp",
+                            "exp": {
+                              "name": "hasResponse",
+                              "data": [
+                                {
+                                  "dtype": "str",
+                                  "str": "weekly.HS.Q2"
+                                },
+                                {
+                                  "dtype": "str",
+                                  "str": "rg.scg"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
                     },
                     {
-                      "dtype": "str",
-                      "str": "rg.scg"
-                    },
-                    {
-                      "dtype": "str",
-                      "str": "0"
+                      "dtype": "exp",
+                      "exp": {
+                        "name": "responseHasOnlyKeysOtherThan",
+                        "data": [
+                          {
+                            "dtype": "str",
+                            "str": "weekly.HS.Q2"
+                          },
+                          {
+                            "dtype": "str",
+                            "str": "rg.scg"
+                          },
+                          {
+                            "dtype": "str",
+                            "str": "0"
+                          }
+                        ]
+                      }
                     }
                   ]
                 },
@@ -9013,7 +9113,7 @@
                                   ]
                                 }
                               ],
-                              "key": "eKdr"
+                              "key": "efeT"
                             },
                             {
                               "key": "mat",
@@ -11571,7 +11671,7 @@
                       }
                     },
                     {
-                      "key": "lFk",
+                      "key": "YJ4",
                       "role": "text",
                       "style": [
                         {
@@ -14068,7 +14168,7 @@
                           "code": "nl",
                           "parts": [
                             {
-                              "str": "Er is een belangrijk verschil tussen quarantaine en isolatie. Als je een positieve testuitslag krijgt, heb je COVID-19. Je bent dan een aantal dagen besmettelijk en gaat daarom in isolatie. Dit betekent dat je je afzondert om te voorkomen dat je andere mensen besmet. Nadat je hebt gehoord dat jouw huisgenoot of een nauw contact corona heeft en zelf misschien ook besmet bent ga je in quarantaine. Dit doe je uit voorzorg, zodat als je inderdaad besmet bent geraakt, het virus niet verder verspreid."
+                              "str": "Er is een belangrijk verschil tussen quarantaine en isolatie. Als je een positieve testuitslag krijgt, heb je COVID-19. Je bent dan een aantal dagen besmettelijk en gaat daarom in isolatie. Dit betekent dat je je afzondert om te voorkomen dat je andere mensen besmet. Nadat je hebt gehoord dat jouw huisgenoot of een nauw contact corona heeft en zelf misschien ook besmet bent ga je in quarantaine. Dit doe je uit voorzorg, zodat als je inderdaad besmet bent geraakt, het virus zich niet verder verspreidt."
                             }
                           ]
                         }

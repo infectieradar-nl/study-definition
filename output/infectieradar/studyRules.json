@@ -232,6 +232,22 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "UPDATE_FLAG",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "retired"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "false"
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -381,10 +397,6 @@
                         {
                           "dtype": "str",
                           "str": "5"
-                        },
-                        {
-                          "dtype": "str",
-                          "str": "6"
                         }
                       ]
                     }

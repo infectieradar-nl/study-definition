@@ -3417,7 +3417,7 @@
                   }
                 },
                 {
-                  "key": "huy",
+                  "key": "wE2",
                   "role": "text",
                   "style": [
                     {
@@ -7299,7 +7299,7 @@
                   }
                 },
                 {
-                  "key": "H1o",
+                  "key": "yBn",
                   "role": "text",
                   "style": [
                     {
@@ -8700,7 +8700,7 @@
                   }
                 },
                 {
-                  "key": "QQg",
+                  "key": "08M",
                   "role": "text",
                   "style": [
                     {
@@ -9021,7 +9021,7 @@
                   ]
                 },
                 {
-                  "key": "Ebs",
+                  "key": "JtB",
                   "role": "text",
                   "style": [
                     {
@@ -9342,7 +9342,7 @@
                   ]
                 },
                 {
-                  "key": "fHC",
+                  "key": "VjS",
                   "role": "text",
                   "style": [
                     {
@@ -10720,7 +10720,7 @@
                   ]
                 },
                 {
-                  "key": "a7F",
+                  "key": "022",
                   "role": "text",
                   "style": [
                     {
@@ -11314,7 +11314,7 @@
                   }
                 },
                 {
-                  "key": "Dgs",
+                  "key": "X81",
                   "role": "text",
                   "style": [
                     {
@@ -11949,6 +11949,52 @@
                   ]
                 },
                 {
+                  "role": "helpGroup",
+                  "items": [
+                    {
+                      "role": "text",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Wat betekent basisserie afgerond?"
+                            }
+                          ]
+                        }
+                      ],
+                      "style": [
+                        {
+                          "key": "variant",
+                          "value": "h5"
+                        }
+                      ]
+                    },
+                    {
+                      "role": "text",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manier, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."
+                            }
+                          ]
+                        }
+                      ],
+                      "style": [
+                        {
+                          "key": "variant",
+                          "value": "p"
+                        }
+                      ]
+                    }
+                  ],
+                  "order": {
+                    "name": "sequential"
+                  }
+                },
+                {
                   "key": "rg",
                   "role": "responseGroup",
                   "items": [
@@ -11956,28 +12002,6 @@
                       "key": "scg",
                       "role": "singleChoiceGroup",
                       "items": [
-                        {
-                          "key": "0",
-                          "role": "option",
-                          "content": [
-                            {
-                              "code": "en",
-                              "parts": [
-                                {
-                                  "str": "Yes"
-                                }
-                              ]
-                            },
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Ja"
-                                }
-                              ]
-                            }
-                          ]
-                        },
                         {
                           "key": "1",
                           "role": "option",
@@ -11995,6 +12019,94 @@
                               "parts": [
                                 {
                                   "str": "Nee"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "3",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I received one vaccination but I'm not fully vaccinated"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb één vaccinatie tegen het coronavirus ontvangen maar de basisserie niet afgerond"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "4",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I received one or two vaccination, I'm fully vaccinated"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie van één of twee prikken nu afgerond"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "5",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I'm fully vaccinated and I received the first booster"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "6",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Yes, I'm fully vaccinated and I received the second booster"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"
                                 }
                               ]
                             }
@@ -12041,6 +12153,172 @@
                     {
                       "dtype": "str",
                       "str": "intake.Q24NL"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "key": "intake.Q24NLb",
+            "version": 1,
+            "components": {
+              "role": "root",
+              "order": {
+                "name": "sequential"
+              },
+              "items": [
+                {
+                  "role": "title",
+                  "content": [
+                    {
+                      "code": "en",
+                      "parts": [
+                        {
+                          "str": "When did you receive your last corona vaccination?"
+                        }
+                      ]
+                    },
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": "Wat is (ongeveer) de datum van laatste vaccinatie tegen het coronavirus?"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "rg",
+                  "role": "responseGroup",
+                  "items": [
+                    {
+                      "key": "scg",
+                      "role": "singleChoiceGroup",
+                      "items": [
+                        {
+                          "key": "1",
+                          "role": "dateInput",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "Choose date:"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Kies datum:"
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "min": {
+                              "dtype": "exp",
+                              "exp": {
+                                "name": "timestampWithOffset",
+                                "data": [
+                                  {
+                                    "dtype": "num",
+                                    "num": -48211200
+                                  }
+                                ]
+                              }
+                            },
+                            "max": {
+                              "dtype": "exp",
+                              "exp": {
+                                "name": "timestampWithOffset",
+                                "data": [
+                                  {
+                                    "dtype": "num",
+                                    "num": 0
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "key": "0",
+                          "role": "option",
+                          "content": [
+                            {
+                              "code": "en",
+                              "parts": [
+                                {
+                                  "str": "I don't know/can't remember"
+                                }
+                              ]
+                            },
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Dat weet ik niet (meer)"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "condition": {
+              "name": "responseHasKeysAll",
+              "data": [
+                {
+                  "dtype": "str",
+                  "str": "intake.Q24NL"
+                },
+                {
+                  "dtype": "str",
+                  "str": "rg.scg"
+                },
+                {
+                  "dtype": "str",
+                  "str": "3"
+                },
+                {
+                  "dtype": "str",
+                  "str": "4"
+                },
+                {
+                  "dtype": "str",
+                  "str": "5"
+                },
+                {
+                  "dtype": "str",
+                  "str": "6"
+                }
+              ]
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "intake.Q24NLb"
                     },
                     {
                       "dtype": "str",

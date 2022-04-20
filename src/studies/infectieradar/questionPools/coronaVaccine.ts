@@ -49,7 +49,7 @@ export class Q2NL extends Item {
                         ["nl", "Nee, ik ben sinds de vorige vragenlijst wel uitgenodigd, maar ik ben van plan om NIET te gaan"],
                     ])
                 },
-                {
+                /*{
                     key: '3', role: 'option',
                     content: new Map([
                         ["en", "Yes, I have been vaccinated for the first time against the coronavirus"],
@@ -69,12 +69,40 @@ export class Q2NL extends Item {
                         ["en", "Yes, I have been vaccinated for the third time against the coronavirus"],
                         ["nl", "Ja, ik heb sinds de vorige vragenlijst een derde (booster) vaccinatie ontvangen tegen het coronavirus"],
                     ])
-                },
+                },*/
                 {
                     key: '6', role: 'option',
                     content: new Map([
-                        ["en", "Not applicable, I am fully vaccinated and not planning to get a third booster vaccination"],
-                        ["nl", "Niet meer van toepassing: ik ben volledig gevaccineerd en niet van plan om een derde (booster) vaccinatie te nemen"],
+                        ["en", "Not applicable, I am fully vaccinated and not planning to get a (booster) vaccination"],
+                        ["nl", "Niet meer van toepassing, ik heb de basisserie afgerond en niet van plan om een (booster) vaccinatie te nemen"],
+                    ])
+                },
+                {
+                    key: '7', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I've been vaccinated once but I'm not fully vaccinated"],
+                        ["nl", "Ja, ik heb één vaccinatie tegen het coronavirus ontvangen maar de basisserie niet afgerond"],
+                    ])
+                },
+                {
+                    key: '8', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I've received one or two vaccinations, I'm fully vaccinated"],
+                        ["nl", "Ja, ik heb de basisserie van één of twee prikken nu afgerond"],
+                    ])
+                },
+                {
+                    key: '9', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I'm fully vaccinated and received the first booster"],
+                        ["nl", "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"],
+                    ])
+                },
+                {
+                    key: '10', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I'm fully vaccinated and received the second booster"],
+                        ["nl", "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"],
                     ])
                 },
             ],
@@ -93,7 +121,7 @@ export class Q2NL extends Item {
             {
                 content: new Map([
                     ["en", "To create an overview of how many participants are vaccinated"],
-                    ["nl", "Om een overzicht te krijgen hoeveel mensen binnen infectieradar al gevaccineerd zijn"],
+                    ["nl", "Om een overzicht te krijgen hoeveel mensen binnen infectieradar al gevaccineerd zijn."],
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
@@ -109,8 +137,19 @@ export class Q2NL extends Item {
                     ["en", "Please indicate whether you are vaccinated."],
                     ["nl", "Geef aan of je sinds het invullen van de vorige vragenlijst een vaccinatie gehad hebt.  Wij onthouden de antwoorden  uit eerdere vragenlijsten en weten dus zo of je al gevaccineerd bent. Vul 'nee' in wanneer je sinds het invullen van de vorige vragenlijst geen nieuwe vaccinatie hebt gehad, maar al wel een of twee keer gevaccineerd bent."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
+            {
+                content: new Map([
+                    ["nl", "Wat betekent basisserie afgerond?"],
+                ]),
+                style: [{ key: 'variant', value: 'h5' }],
+            },
+            {
+                content: new Map([
+                    ["nl", "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manieren, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."],
+                ]),
+            },
+            // style: [{ key: 'variant', value: 'p' }],            
         ]
     }
 }

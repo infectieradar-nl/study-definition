@@ -45,7 +45,7 @@ export class Q12NL extends Item {
             },
             {
                 content: new Map([
-                    ["nl", "Er is een belangrijk verschil tussen quarantaine en isolatie. Als je een positieve testuitslag krijgt, heb je COVID-19. Je bent dan een aantal dagen besmettelijk en gaat daarom in isolatie. Dit betekent dat je je afzondert om te voorkomen dat je andere mensen besmet. Nadat je hebt gehoord dat jouw huisgenoot of een nauw contact corona heeft en zelf misschien ook besmet bent ga je in quarantaine. Dit doe je uit voorzorg, zodat als je inderdaad besmet bent geraakt, het virus niet verder verspreid."],
+                    ["nl", "Er is een belangrijk verschil tussen quarantaine en isolatie. Als je een positieve testuitslag krijgt, heb je COVID-19. Je bent dan een aantal dagen besmettelijk en gaat daarom in isolatie. Dit betekent dat je je afzondert om te voorkomen dat je andere mensen besmet. Nadat je hebt gehoord dat jouw huisgenoot of een nauw contact corona heeft en zelf misschien ook besmet bent ga je in quarantaine. Dit doe je uit voorzorg, zodat als je inderdaad besmet bent geraakt, het virus zich niet verder verspreidt."],
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },

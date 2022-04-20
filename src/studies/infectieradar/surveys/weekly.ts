@@ -68,7 +68,7 @@ class WeeklyDef extends SurveyDefinition {
 
         // Initialize/Configure questions here:
         this.Q2NL = new Q2NL(this.key, true);
-        const conditionForVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '3', '4', '5');
+        const conditionForVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10');
         const conditionForNotVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '2',);
         this.Q2aNL = new Q2aNL(this.key, conditionForVaccindated, true);
         this.Q2bNL = new Q2bNL(this.key, conditionForVaccindated, true);

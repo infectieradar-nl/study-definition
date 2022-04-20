@@ -3008,19 +3008,20 @@ export class Q24NL extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
+            helpGroupContent: this.getHelpGroupContent(),
             questionText: new Map([
                 ["en", "Did you get a corona vaccination last year?"],
                 ["nl", "Ben je het afgelopen jaar gevaccineerd tegen het coronavirus?"],
             ]),
             responseOptions: [
-                {
+                /*{
                     key: '0', role: 'option',
                     content: new Map([
                         ["en", "Yes"],
                         ["nl", "Ja"],
                     ])
                 },
-                {
+                */{
                     key: '1', role: 'option',
                     content: new Map([
                         ["en", "No"],
@@ -3028,9 +3029,95 @@ export class Q24NL extends Item {
                     ])
                 },
                 {
+                    key: '3', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I received one vaccination but I'm not fully vaccinated"],
+                        ["nl", "Ja, ik heb één vaccinatie tegen het coronavirus ontvangen maar de basisserie niet afgerond"],
+                    ])
+                },
+                {
+                    key: '4', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I received one or two vaccination, I'm fully vaccinated"],
+                        ["nl", "Ja, ik heb de basisserie van één of twee prikken nu afgerond"],
+                    ])
+                },
+                {
+                    key: '5', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I'm fully vaccinated and I received the first booster"],
+                        ["nl", "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"],
+                    ])
+                },
+                {
+                    key: '6', role: 'option',
+                    content: new Map([
+                        ["en", "Yes, I'm fully vaccinated and I received the second booster"],
+                        ["nl", "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"],
+                    ])
+                },
+                {
                     key: '2', role: 'option',
                     content: new Map([
                         ["en", "I can't remember (anymore)"],
+                        ["nl", "Dat weet ik niet (meer)"],
+                    ])
+                },
+            ],
+        })
+    }
+    getHelpGroupContent() {
+        return [
+            {
+                content: new Map([
+                    ["nl", "Wat betekent basisserie afgerond?"],
+                ]),
+                style: [{ key: 'variant', value: 'h5' }],
+            },
+            {
+                content: new Map([
+                    ["nl", "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manieren, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."],
+                ]),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+        ]
+    }
+}
+
+
+export class Q24NLb extends Item {
+    constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+        super(parentKey, 'Q24NLb');
+        this.condition = condition;
+        this.isRequired = isRequired;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ["en", "When did you receive your last corona vaccination?"],
+                ["nl", "Wat is (ongeveer) de datum van laatste vaccinatie tegen het coronavirus?"],
+            ]),
+            responseOptions: [
+                {
+                    key: '1', role: 'dateInput',
+                    optionProps: {
+                        min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -48211200) }, //39830400=468 days
+                        max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+                    },
+                    content: new Map([
+                        ["en", "Choose date:"],
+                        ["nl", "Kies datum:"],
+                    ])
+                },
+                {
+                    key: '0', role: 'option',
+                    content: new Map([
+                        ["en", "I don't know/can't remember"],
                         ["nl", "Dat weet ik niet (meer)"],
                     ])
                 },
