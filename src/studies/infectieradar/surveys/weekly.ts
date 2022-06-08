@@ -1,9 +1,9 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1fNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
+import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
 import { FinalText, HasSymptomsGroup, SymptomsGroup } from "../questionPools/weeklyQuestions";
-import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
+//import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 class WeeklyDef extends SurveyDefinition {
@@ -27,7 +27,7 @@ class WeeklyDef extends SurveyDefinition {
     Q1d1NL: Q1d1NL;
     Q1cNL: Q1cNL;
     Q1eNL: Q1eNL;
-    Q1fNL: Q1fNL;
+    //Q1fNL: Q1fNL;
     Q1gNL: Q1gNL;
     Q1hNL: Q1hNL;
     Q1b1NL: Q1b1NL;
@@ -39,12 +39,12 @@ class WeeklyDef extends SurveyDefinition {
     // symptoms:
     Q1: SymptomsGroup;
     HS: HasSymptomsGroup;
-    // quarantine:
+    /*quarantine:
     Q12NL: Q12NL;
     Q12aNL: Q12aNL;
     Q12bNL: Q12bNL;
     Q12cNL: Q12cNL;
-    Q12dNL: Q12dNL;
+    Q12dNL: Q12dNL;*/
     FinalText: FinalText;
 
 
@@ -96,7 +96,7 @@ class WeeklyDef extends SurveyDefinition {
         this.Q1d1NL = new Q1d1NL(this.key, conditionForPCR, true);
         this.Q1cNL = new Q1cNL(this.key, conditionForPCR, true);
         this.Q1eNL = new Q1eNL(this.key, conditionForPCR, true);
-        this.Q1fNL = new Q1fNL(this.key, conditionForPCR, true);
+        //this.Q1fNL = new Q1fNL(this.key, conditionForPCR, true);
         this.Q1gNL = new Q1gNL(this.key, conditionForPCR, true);
         this.Q1hNL = new Q1hNL(this.key, conditionForPCR, true);
         this.Q1b1NL = new Q1b1NL(this.key, conditionForPCR, true);
@@ -111,7 +111,7 @@ class WeeklyDef extends SurveyDefinition {
         const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
         this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
 
-        this.Q12NL = new Q12NL(this.key, true);
+        /*this.Q12NL = new Q12NL(this.key, true);
         const conditionForQuarantine = SurveyEngine.singleChoice.any(this.Q12NL.key, '1');
         const conditionForNotQuarantine = SurveyEngine.singleChoice.any(this.Q12NL.key, '0',);
 
@@ -127,7 +127,7 @@ class WeeklyDef extends SurveyDefinition {
         const conditionForQuarantineOther = SurveyEngine.singleChoice.any(this.Q12cNL.key, '1');
         const conditionForQ12dNL = SurveyEngine.logic.or(conditionForQuarantineWork, conditionForQuarantineOther);
 
-        this.Q12dNL = new Q12dNL(this.key, conditionForQ12dNL, true);
+        this.Q12dNL = new Q12dNL(this.key, conditionForQ12dNL, true);*/
 
         this.FinalText = new FinalText(this.key);
     }
@@ -150,7 +150,7 @@ class WeeklyDef extends SurveyDefinition {
         this.addItem(this.Q1d1NL.get());
         this.addItem(this.Q1cNL.get());
         this.addItem(this.Q1eNL.get());
-        this.addItem(this.Q1fNL.get());
+        //this.addItem(this.Q1fNL.get());
         this.addItem(this.Q1gNL.get());
         this.addItem(this.Q1hNL.get());
         this.addItem(this.Q1b1NL.get());
@@ -163,11 +163,11 @@ class WeeklyDef extends SurveyDefinition {
         this.addItem(this.Q1.get());
         this.addItem(this.HS.get());
 
-        this.addItem(this.Q12NL.get());
+        /*this.addItem(this.Q12NL.get());
         this.addItem(this.Q12aNL.get());
         this.addItem(this.Q12bNL.get());
         this.addItem(this.Q12cNL.get());
-        this.addItem(this.Q12dNL.get());
+        this.addItem(this.Q12dNL.get());*/
 
         this.addItem(this.FinalText.get());
     }

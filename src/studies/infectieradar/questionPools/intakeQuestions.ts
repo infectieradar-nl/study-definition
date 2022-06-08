@@ -3106,7 +3106,7 @@ export class Q24NLb extends Item {
                 {
                     key: '1', role: 'dateInput',
                     optionProps: {
-                        min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -48211200) }, //39830400=468 days
+                        min: { dtype: 'num', num: 1609891200 },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
                     },
                     content: new Map([

@@ -3417,7 +3417,7 @@
                   }
                 },
                 {
-                  "key": "wE2",
+                  "key": "fcJ",
                   "role": "text",
                   "style": [
                     {
@@ -7299,7 +7299,7 @@
                   }
                 },
                 {
-                  "key": "yBn",
+                  "key": "MLy",
                   "role": "text",
                   "style": [
                     {
@@ -8700,7 +8700,7 @@
                   }
                 },
                 {
-                  "key": "08M",
+                  "key": "PAo",
                   "role": "text",
                   "style": [
                     {
@@ -9021,7 +9021,7 @@
                   ]
                 },
                 {
-                  "key": "JtB",
+                  "key": "Jv8",
                   "role": "text",
                   "style": [
                     {
@@ -9342,7 +9342,7 @@
                   ]
                 },
                 {
-                  "key": "VjS",
+                  "key": "Loo",
                   "role": "text",
                   "style": [
                     {
@@ -10720,7 +10720,7 @@
                   ]
                 },
                 {
-                  "key": "022",
+                  "key": "vjO",
                   "role": "text",
                   "style": [
                     {
@@ -11314,7 +11314,7 @@
                   }
                 },
                 {
-                  "key": "X81",
+                  "key": "jSH",
                   "role": "text",
                   "style": [
                     {
@@ -11977,7 +11977,7 @@
                           "code": "nl",
                           "parts": [
                             {
-                              "str": "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manier, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."
+                              "str": "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manieren, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."
                             }
                           ]
                         }
@@ -12224,16 +12224,8 @@
                           ],
                           "properties": {
                             "min": {
-                              "dtype": "exp",
-                              "exp": {
-                                "name": "timestampWithOffset",
-                                "data": [
-                                  {
-                                    "dtype": "num",
-                                    "num": -48211200
-                                  }
-                                ]
-                              }
+                              "dtype": "num",
+                              "num": 1609891200
                             },
                             "max": {
                               "dtype": "exp",

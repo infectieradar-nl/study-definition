@@ -148,6 +148,7 @@ export class Q2NL extends Item {
                 content: new Map([
                     ["nl", "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manieren, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."],
                 ]),
+                style: [{ key: 'variant', value: 'p' }],
             },
             // style: [{ key: 'variant', value: 'p' }],            
         ]
