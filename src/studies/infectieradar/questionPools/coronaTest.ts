@@ -1,4 +1,4 @@
-import { Expression } from "survey-engine/lib/data_types";
+import { Expression } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";

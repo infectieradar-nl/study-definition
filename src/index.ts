@@ -1,10 +1,12 @@
 import { Logger } from "case-editor-tools/logger/logger";
 import { Study } from "case-editor-tools/types/study";
 import { InfectieradarStudy } from './studies/infectieradar';
+import { LongCovidStudy } from './studies/longcovid';
 import { generateFilesForStudy } from 'case-editor-tools/exporter';
 
 const studies: Study[] = [
     InfectieradarStudy,
+    LongCovidStudy,
 ];
 
 const readStudyKey = () => {

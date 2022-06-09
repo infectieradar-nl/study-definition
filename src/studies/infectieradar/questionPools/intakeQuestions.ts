@@ -1,10 +1,10 @@
-import { Expression } from "survey-engine/lib/data_types";
+import { Expression } from "survey-engine/data_types";
 import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { Item } from "case-editor-tools/surveys/types";
 import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
+import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 

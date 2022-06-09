@@ -1,4 +1,4 @@
-import { Expression } from "survey-engine/lib/data_types";
+import { Expression } from "survey-engine/data_types";
 import { StudyRules } from "case-editor-tools/types/studyRules";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ParticipantFlags } from "./participantFlags";

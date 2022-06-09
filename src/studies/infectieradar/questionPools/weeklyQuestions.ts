@@ -1,9 +1,9 @@
-import { Expression } from "survey-engine/lib/data_types";
+import { Expression } from "survey-engine/data_types";
 import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { Item, Group } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
+import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ParticipantFlags } from "../participantFlags";
@@ -331,7 +331,7 @@ class Q2 extends Item {
         super(parentKey, 'Q2');
 
         this.isRequired = isRequired;
-        this.condition = SurveyEngine.hasParticipantFlag(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes);
+        this.condition = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes);
     }
 
     buildItem() {

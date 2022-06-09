@@ -1,4 +1,4 @@
-import { Expression } from "survey-engine/lib/data_types";
+import { Expression } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
@@ -13,8 +13,8 @@ export class Q2NL extends Item {
 
     buildItem() {
         const itemCondition = SurveyEngine.logic.and(
-            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.full)),
-            SurveyEngine.logic.not(SurveyEngine.hasParticipantFlag(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.never)),
+            SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.full)),
+            SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.covidVaccine21.key, ParticipantFlags.covidVaccine21.values.never)),
         )
 
         return SurveyItems.singleChoice({
@@ -150,7 +150,7 @@ export class Q2NL extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            // style: [{ key: 'variant', value: 'p' }],            
+            // style: [{ key: 'variant', value: 'p' }],
         ]
     }
 }
