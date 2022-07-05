@@ -5,6 +5,7 @@ import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
 import { FinalText, HasSymptomsGroup, SymptomsGroup } from "../questionPools/weeklyQuestions";
 //import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
+import { surveyKeys } from "../contants";
 
 class WeeklyDef extends SurveyDefinition {
 
@@ -51,7 +52,7 @@ class WeeklyDef extends SurveyDefinition {
 
     constructor() {
         super({
-            surveyKey: 'weekly',
+            surveyKey: surveyKeys.weekly,
             name: new Map([
                 ["en", "How do you feel today?"],
                 ["nl", "Wekelijkse vragenlijst"],

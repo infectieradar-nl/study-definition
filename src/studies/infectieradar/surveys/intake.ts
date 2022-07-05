@@ -1,6 +1,7 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q24NLb, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText } from "../questionPools/intakeQuestions";
+import { surveyKeys } from "../contants";
 
 class IntakeDef extends SurveyDefinition {
     QGender: QGender;
@@ -40,7 +41,7 @@ class IntakeDef extends SurveyDefinition {
 
     constructor() {
         super({
-            surveyKey: 'intake',
+            surveyKey: surveyKeys.intake,
             name: new Map([
                 ["en", "About You"],
                 ["nl", "Achtergrond informatie"],
