@@ -5,6 +5,7 @@ export const flagFinishedParticipants_rules = {
     name: "flagFinishedParticipants",
     rules: [
         StudyEngine.if(
+            // If:
             StudyEngine.and(
                 StudyEngine.checkConditionForOldResponses(
                     StudyEngine.singleChoice.any('T12.TEST.Q11', 'nee', 'ja', 'notanymore'),
