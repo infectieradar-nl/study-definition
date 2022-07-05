@@ -5,13 +5,15 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToIntake";
 import { updateRetirementFlag_rules } from "./customRules/addRetirementFlag";
+import { SwabEntry } from "./surveys/swabEntry";
 
 export const InfectieradarStudy: Study = {
     studyKey: 'default',
     outputFolderName: 'infectieradar',
     surveys: [
         Weekly,
-        Intake
+        Intake,
+        SwabEntry,
     ],
     studyRules: studyRules,
     customStudyRules: [
