@@ -6,7 +6,7 @@ class SwabSampleDef extends SurveyDefinition {
         super({
             surveyKey: surveyKeys.swabSample,
             name: new Map([
-                ["en", "TODO: "],
+                ["en", "Weakly questionnaire"],
                 ["nl", "Wekelijkse vragenlijst"],
             ]),
             description: new Map([
