@@ -9,6 +9,7 @@ class SwabEntryDef extends SurveyDefinition {
   Intro: Intro;
   CodeVal: CodeValQuestion;
   Consent: Consent;
+  Infos: Infos;
   Name: Name;
   Addr: Address;
   Tel: Telephone;
@@ -36,6 +37,7 @@ class SwabEntryDef extends SurveyDefinition {
     this.Intro = new Intro(this.key);
     this.CodeVal = new CodeValQuestion(this.key, true);
     this.Consent = new Consent(this.key, true);
+    this.Infos = new Infos(this.key);
     this.Name = new Name(this.key, true);
     this.Addr = new Address(this.key, true);
     this.Tel = new Telephone(this.key, true);
@@ -46,6 +48,7 @@ class SwabEntryDef extends SurveyDefinition {
     this.addItem(this.Intro.get());
     this.addItem(this.CodeVal.get());
     this.addItem(this.Consent.get());
+    this.addItem(this.Infos.get());
     this.addItem(this.Name.get());
     this.addItem(this.Addr.get());
     this.addItem(this.Tel.get());
@@ -59,9 +62,41 @@ class Intro extends Item {
   }
 
   markdownContent = `
-## Testen met Infectieradar 
+## Testen met Infectieradar
 Om Corona beter in de gaten te houden en meer te weten welke andere ziekteverwekkers ook klachten veroorzaken vragen we een geselecteerde groep deelnemers coronazelftesten uit te voeren. Soms vragen we ook om een neus- en keelmonster. Dit neus- en keelmonster wordt in het laboratorium onderzocht voor corona (ook het variant) en andere ziekteverwekkers (bijvoorbeeld griep of een ander coronavirus).
-Deelnemers aan dit aanvullend onderzoek zijn uitgenodigd per brief en ontvangen gratis coronazelftesten en krijgen een uitslag van de neus- en keeltesten. 
+Deelnemers aan dit aanvullend onderzoek zijn uitgenodigd per brief en ontvangen gratis coronazelftesten en krijgen een uitslag van de neus- en keeltesten.
+
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+        })
+      ]
+    })
+  }
+
+}
+
+class Infos extends Item {
+  constructor(parentKey: string) {
+    super(parentKey, 'Infos');
+  }
+
+  markdownContent = `
+TODO: some additional infos, e.g., as a bullet list:
+
+- do step 1
+- do step 2
+- step 3 is very **important**
+
 
 `
 
@@ -147,7 +182,7 @@ class Consent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om testen te ontvangen moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan. 
+Om testen te ontvangen moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan.
 Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te lezen.
 `]]),
         })
@@ -166,7 +201,7 @@ Het onderzoek is gericht op het in kaart brengen van gezondheidsklachten die kun
 Ook:
 -	Heb ik de informatie op de website van Infectieradar over het onderzoek en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf) over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
 -	Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
--	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming. Na het stopzetten van de deelname zijn alleen nog mijn onderzoeksgegevens beschikbaar. Daarnaast gelden de bewaartermijnen, zoals opgegeven in de privacyverklaring, voor mijn overige persoonsgegevens. 
+-	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming. Na het stopzetten van de deelname zijn alleen nog mijn onderzoeksgegevens beschikbaar. Daarnaast gelden de bewaartermijnen, zoals opgegeven in de privacyverklaring, voor mijn overige persoonsgegevens.
 -	Weet ik dat de onderzoeksgegevens van mijn eventuele neus- en keelmonster(s) tot 15 jaar na ontvangst bewaard kan worden en later nog voor een ander onderzoek gebruikt kan worden. En weet ik dat mijn contactgegevens en accountgegevens 2 jaar na de laatste inlog op de websites van het RIVM zelftestportaal en mijn onderzoeksgegevens tot 30 jaar na het invullen van de vragenlijsten worden bewaard en dat onderzoeksgegevens kunnen worden gedeeld met de deelnemers aan het samenwerkingsverband Influenzanet. De onderzoeksresultaten hebben geen bewaartermijn en kunnen dus gepubliceerd blijven.
 -	Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord), mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer), mijn onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder andere de eerste 4 cijfers van mijn postcode, mijn geboortejaar en maand, gegevens over mijn gezondheid en zelftest- en zelfswab-uitslagen) en mijn eventuele neus- en keelmonster(s) worden verwerkt.
 -	Weet ik dat voor het versturen van nieuwe zelftesten en neus- en keelmonster(s) mijn accountgegevens (e-mailadres en wachtwoord) en mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer) worden gebruikt.
