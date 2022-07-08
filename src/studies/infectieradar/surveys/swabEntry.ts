@@ -91,13 +91,10 @@ class Infos extends Item {
   }
 
   markdownContent = `
-TODO: some additional infos, e.g., as a bullet list:
-
-- do step 1
-- do step 2
-- step 3 is very **important**
-
-
+## Naam, adres, e-mail en 06-nummer
+Voor het versturen en ontvangen van testen gebruikt het RIVM een [zelftestportaal](https://rivmportal.glean.nl/user/auth). Dit is een aparte website waar je extra testen kunt bestellen en je uitslag kan inzien.
+Dit [zelftestportaal](https://rivmportal.glean.nl/user/auth) staat los van de Infectieradarwebsite en maakt gebruik van een inlogprocedure met e-mail en SMS. 
+Daarom vragen we hieronder je naam/adres/e-mail en 06-nummer achter te laten. 
 `
 
   buildItem(): SurveySingleItem {
