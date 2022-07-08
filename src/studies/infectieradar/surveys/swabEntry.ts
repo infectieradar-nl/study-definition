@@ -8,7 +8,7 @@ import { surveyKeys } from "../contants";
 class SwabEntryDef extends SurveyDefinition {
   Intro: Intro;
   CodeVal: CodeValQuestion;
-
+  Consent: Consent;
   Name: Name;
   Addr: Address;
   Tel: Telephone;
@@ -35,6 +35,7 @@ class SwabEntryDef extends SurveyDefinition {
 
     this.Intro = new Intro(this.key);
     this.CodeVal = new CodeValQuestion(this.key, true);
+    this.Consent = new Consent(this.key, true);
     this.Name = new Name(this.key, true);
     this.Addr = new Address(this.key, true);
     this.Tel = new Telephone(this.key, true);
@@ -44,6 +45,7 @@ class SwabEntryDef extends SurveyDefinition {
   buildSurvey(): void {
     this.addItem(this.Intro.get());
     this.addItem(this.CodeVal.get());
+    this.addItem(this.Consent.get());
     this.addItem(this.Name.get());
     this.addItem(this.Addr.get());
     this.addItem(this.Tel.get());
@@ -115,6 +117,68 @@ class CodeValQuestion extends Item {
           ]
         }
       ]
+    })
+  }
+}
+
+class Consent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Consent');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.consent({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'TODO: title for consent question'],
+      ]),
+      checkBoxLabel: new Map([
+        ["nl", "Toestemming geven"],
+      ]),
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+TODO: current text copied from tekenradar
+
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
+*We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
+`]]),
+        })
+      ],
+      dialogTitle: new Map([
+        ["nl", "Toestemmingsformulier"],
+      ]),
+      dialogContent: new Map([
+        ["nl", `
+**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
+
+Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
+
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.
+
+Ook:
+- Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
+- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.
+- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
+- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).
+- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.
+- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
+        `]]),
+      acceptBtn: new Map([
+        ["nl", "Ja, ik geef toestemming"],
+      ]),
+      rejectBtn: new Map([
+        ["nl", "Ik doe toch niet mee"],
+      ]),
     })
   }
 }
