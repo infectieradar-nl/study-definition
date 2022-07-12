@@ -6,19 +6,21 @@ import { Weekly } from "./surveys/weekly";
 import { reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToIntake";
 import { updateRetirementFlag_rules } from "./customRules/addRetirementFlag";
 import { SwabEntry } from "./surveys/swabEntry";
+import { SwabSample } from "./surveys/swabSample";
 
 export const InfectieradarStudy: Study = {
-    studyKey: 'default',
-    outputFolderName: 'infectieradar',
-    surveys: [
-        Weekly,
-        Intake,
-        SwabEntry,
-    ],
-    studyRules: studyRules,
-    customStudyRules: [
-        updateVaccinationFlag_20211103_rules,
-        reinvitePeopleToIntake_rules,
-        updateRetirementFlag_rules,
-    ]
+  studyKey: 'default',
+  outputFolderName: 'infectieradar',
+  surveys: [
+    Weekly,
+    Intake,
+    SwabEntry,
+    SwabSample,
+  ],
+  studyRules: studyRules,
+  customStudyRules: [
+    updateVaccinationFlag_20211103_rules,
+    reinvitePeopleToIntake_rules,
+    updateRetirementFlag_rules,
+  ]
 }
