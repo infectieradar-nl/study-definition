@@ -14,13 +14,13 @@ class SwabSampleDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.swabSample,
       name: new Map([
-        ["nl", "TODO: name"],
+        ["nl", "Zelfteststudie binnen Infectieradar"],
       ]),
       description: new Map([
-        ["nl", "TODO: description"],
+        ["nl", "Om te weten welke varianten van COVID-19 welke klachten veroorzaken, en om te onderzoeken welke andere ziekteverwekkers klachten veroorzaken voeren we een zelfteststudie uit. Klik hier om je gevevens achter te laten enom mee te doen"],
       ]),
       durationText: new Map([
-        ["nl", "TODO: duration"],
+        ["nl", "Binnen 3 minuten doe je mee!"],
       ])
     });
 
@@ -51,10 +51,15 @@ class Intro extends Item {
   }
 
   markdownContent = `
-## TODO:
-Infos that you were selected for the swab sampling this week
+## Je bent geselecteerd voor een neus- en keelmonster.
 
-**Please confirm participation**
+Stuur alsjeblieft zo spoedig mogelijk een neus- en keelmonster naar het RIVM. 
+Hiermee draag je bij aan kennis over welke ziekteverwekkers deze week klachten veroorzaken. 
+
+Het is echter belangrijk dat je in staat bent om het monster in de komende 12 uur te nemen.
+Lukt dit? 
+
+Als je mee doet ontvang je na minimaal twee weken een uitslag in je zelftestportaal.
 `
 
   buildItem(): SurveySingleItem {
@@ -94,22 +99,22 @@ class ConfirmParticipation extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "TODO: question to confirm, you will send in the swab"],
+        ["nl", "Lukt het om in de komende 12 uur een neus- en keelmonster af te nemen?"],
       ]),
       questionSubText: new Map([
-        ["nl", "TODO: we need this because slots are limited"],
+        ["nl", "Lukt het niet, geef dit dan aan, dan zoeken we iemand anders"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "Ja, dit lukt"],
           ])
         },
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "Nee"],
+            ["nl", "Nee, dit lukt niet"],
           ])
         },
       ],
@@ -125,7 +130,13 @@ class InfosWhenConfirmed extends Item {
   }
 
   markdownContent = `
-Add infos (markdown format) about what participant need to do when confirms to be send in sample
+Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
+Volg de instructies in het testpakket, of lees ze hier[link] na. 
+
+Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
+Bewaar het monster in de koelkast totdat je het op de post doet. 
+
+Je ontvangt een uitslag na minimaal twee weken.
 `
 
   buildItem(): SurveySingleItem {
@@ -152,7 +163,10 @@ class InfosWhenRejected extends Item {
   }
 
   markdownContent = `
-Add infos (markdown format) to be displayed if participant rejects to participant this week.
+Dank je wel. 
+Je hoeft nu verder niets te doen. 
+
+We zoeken verder naar iemand anders die dit wel kan. 
 `
 
   buildItem(): SurveySingleItem {

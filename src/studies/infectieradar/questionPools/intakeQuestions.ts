@@ -3145,10 +3145,10 @@ export class SelfSwabInvite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "TODO: were you invited to the self-swabbing study"],
+        ["nl", "Heb je een brief ontvangen om deel te nemen aan de zelfteststudie van Infectieradar?"],
       ]),
       questionSubText: new Map([
-        ["nl", "TODO: you might have received a letter"],
+        ["nl", "In het begin van september (2022) zijn er mensen per brief uitgenodigd om deel te nemen aan een zelfteststudie. Heb je ook een brief ontvangen vul dan Ja in, anders Nee"],
       ]),
       responseOptions: [
         {
