@@ -102,7 +102,8 @@ const handleSwabEntry = StudyEngine.ifThen(
 const handleSwabSample = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(SwabSample.key),
   // THEN:
-  StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all')
+  StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
+  StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse)
 )
 
 const submitRules: Expression[] = [
