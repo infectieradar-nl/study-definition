@@ -312,11 +312,12 @@ export class Q21NL extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '0', role: 'input',
+          key: '0', role: 'numberInput',
           content: new Map([
             ["en", "Length"],
             ["nl", "Lengte"],
-          ])
+          ]),
+          optionProps: { min: 0, max: 250 }
         },
         {
           key: '1', role: 'option',
@@ -368,11 +369,12 @@ export class Q22NL extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '0', role: 'input',
+          key: '0', role: 'numberInput',
           content: new Map([
             ["en", "Weight"],
             ["nl", "Gewicht"],
-          ])
+          ]),
+          optionProps: { min: 0, max: 300 }
         },
         {
           key: '1', role: 'option',
