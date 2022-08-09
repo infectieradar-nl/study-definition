@@ -13,6 +13,9 @@ export const ParticipantFlags = {
       never: 'never'
     }
   },
+  lastReplyToVaccination: {
+    key: 'lastReplyToVaccination',
+  },
   selfSwabbing: {
     key: 'selfSwabbing',
     values: {

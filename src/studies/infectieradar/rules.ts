@@ -68,18 +68,10 @@ const handleWeekly = StudyEngine.ifThen(
   ),
   // vaccination:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(Weekly.Q2NL.key, "5"), // this key is selected
-    StudyEngine.participantActions.updateFlag(
-      ParticipantFlags.covidVaccine21.key,
-      ParticipantFlags.covidVaccine21.values.full
-    ),
-  ),
-  StudyEngine.if(
-    StudyEngine.singleChoice.any(Weekly.Q2NL.key, '2'), // this key is selected
-    StudyEngine.participantActions.updateFlag(
-      ParticipantFlags.covidVaccine21.key,
-      ParticipantFlags.covidVaccine21.values.never
-    )
+    // if Q2NL answered
+    StudyEngine.hasResponseKey(Weekly.Q2NL.key, 'rg.scg'),
+    // then save timestamp into flag
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
   ),
   handleSelfSwabbingSampler(),
 )
