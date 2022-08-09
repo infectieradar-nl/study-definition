@@ -7,7 +7,7 @@ import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { handleSelfSwabbingIsInvited, handleSelfSwabbingSampler } from "./ruleUtils";
-import { externalServiceNames } from "./contants";
+import { externalServiceNames, reports } from "./contants";
 
 
 
@@ -95,7 +95,8 @@ const handleSwabEntry = StudyEngine.ifThen(
       ParticipantFlags.selfSwabbing.key,
       ParticipantFlags.selfSwabbing.values.active
     ),
-    StudyEngine.participantActions.externalEventHandler(externalServiceNames.entyCodeUsed)
+    StudyEngine.participantActions.externalEventHandler(externalServiceNames.entryCodeUsed),
+    StudyEngine.participantActions.reports.init(reports.selfSwabbingEntry.key)
   )
 )
 

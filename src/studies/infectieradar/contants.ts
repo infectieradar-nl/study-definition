@@ -7,7 +7,13 @@ export const surveyKeys = {
 }
 
 export const externalServiceNames = {
-  entyCodeUsed: 'entyCodeUsed',
+  entryCodeUsed: 'entryCodeUsed',
   samplerInviteResponse: 'samplerInviteResponse',
   samplerIsSelected: 'samplerIsSelected',
+}
+
+export const reports = {
+  selfSwabbingEntry: {
+    key: 'selfSwabbingEntry'
+  }
 }
