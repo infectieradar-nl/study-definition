@@ -7,7 +7,8 @@ import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { handleSelfSwabbingIsInvited, handleSelfSwabbingSampler } from "./ruleUtils";
-import { externalServiceNames, reports } from "./contants";
+import { externalServiceNames, reports, surveyKeys } from "./contants";
+import { QuitSwabbing } from "./surveys/quitSwabbing";
 
 
 
@@ -96,7 +97,12 @@ const handleSwabEntry = StudyEngine.ifThen(
       ParticipantFlags.selfSwabbing.values.active
     ),
     StudyEngine.participantActions.externalEventHandler(externalServiceNames.entryCodeUsed),
-    StudyEngine.participantActions.reports.init(reports.selfSwabbingEntry.key)
+    StudyEngine.participantActions.reports.init(reports.selfSwabbingEntry.key),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingContactData.key,
+      ParticipantFlags.selfSwabbingContactData.values.active
+    ),
+    StudyEngine.participantActions.assignedSurveys.add(QuitSwabbing.key, 'optional'),
   )
 )
 
@@ -107,12 +113,57 @@ const handleSwabSample = StudyEngine.ifThen(
   StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse)
 )
 
+const handleQuitSwabbing = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(QuitSwabbing.key),
+  // THEN:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(QuitSwabbing.Confirm.key, QuitSwabbing.Confirm.optionKeys.yes), // this key is selected
+    // THEN:
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbing.key,
+      ParticipantFlags.selfSwabbing.values.quitted
+    ),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingContactData.key,
+      ParticipantFlags.selfSwabbingContactData.values.manualDeleted
+    ),
+    StudyEngine.participantActions.assignedSurveys.remove(SwabEntry.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(QuitSwabbing.key, 'all'),
+    StudyEngine.participantActions.confidentialResponses.removeAll(),
+    StudyEngine.participantActions.reports.init(reports.selfSwabbingQuit.key),
+  )
+)
+
+const autoRemoveContactData = StudyEngine.ifThen(
+  StudyEngine.and(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(
+      ParticipantFlags.selfSwabbingContactData.key,
+      ParticipantFlags.selfSwabbingContactData.values.active,
+    ),
+    StudyEngine.participantState.lastSubmissionDateOlderThan(
+      StudyEngine.timestampWithOffset({ days: -12 * 7 }),
+      surveyKeys.swabEntry
+    ),
+  ),
+  StudyEngine.participantActions.confidentialResponses.removeAll(),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.selfSwabbingContactData.key,
+    ParticipantFlags.selfSwabbingContactData.values.autoDeleted
+  ),
+)
+
 const submitRules: Expression[] = [
   handleIntake,
   handleWeekly,
   handleSwabEntry,
   handleSwabSample,
+  handleQuitSwabbing,
 ];
+
+const timerRules: Expression[] = [
+  autoRemoveContactData,
+]
 
 /**
  * STUDY RULES
@@ -120,4 +171,5 @@ const submitRules: Expression[] = [
 export const studyRules = new StudyRules(
   entryRules,
   submitRules,
+  timerRules,
 )

@@ -7,6 +7,7 @@ import { reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToInta
 import { updateRetirementFlag_rules } from "./customRules/addRetirementFlag";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
+import { QuitSwabbing } from "./surveys/quitSwabbing";
 
 export const InfectieradarStudy: Study = {
   studyKey: 'default',
@@ -16,6 +17,7 @@ export const InfectieradarStudy: Study = {
     Intake,
     SwabEntry,
     SwabSample,
+    QuitSwabbing,
   ],
   studyRules: studyRules,
   customStudyRules: [

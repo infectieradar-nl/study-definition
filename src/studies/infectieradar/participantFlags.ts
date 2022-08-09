@@ -19,7 +19,16 @@ export const ParticipantFlags = {
       notInvited: 'notInvited',
       invited: 'invited',
       active: 'active',
+      quitted: 'quitted',
     }
-  }
+  },
+  selfSwabbingContactData: {
+    key: 'contactDataForSelfSwabbing',
+    values: {
+      active: 'active',
+      manualDeleted: 'manual-deleted',
+      autoDeleted: 'auto-deleted'
+    },
+  },
 }
 

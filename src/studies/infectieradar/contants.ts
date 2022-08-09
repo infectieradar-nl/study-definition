@@ -4,6 +4,7 @@ export const surveyKeys = {
   intake: 'intake',
   swabEntry: 'SwabEntry',
   swabSample: 'SwabSample',
+  quitSwabbing: 'QuitSwabbing',
 }
 
 export const externalServiceNames = {
@@ -15,5 +16,8 @@ export const externalServiceNames = {
 export const reports = {
   selfSwabbingEntry: {
     key: 'selfSwabbingEntry'
+  },
+  selfSwabbingQuit: {
+    key: 'selfSwabbingQuit'
   }
 }
