@@ -13,7 +13,9 @@ class SwabEntryDef extends SurveyDefinition {
   Name: Name;
   Addr: Address;
   Tel: Telephone;
+  TelConfirm: TelephoneConfirm;
   Email: Email;
+  EmailConfirm: EmailConfirm;
 
 
   constructor() {
@@ -41,7 +43,9 @@ class SwabEntryDef extends SurveyDefinition {
     this.Name = new Name(this.key, true);
     this.Addr = new Address(this.key, true);
     this.Tel = new Telephone(this.key, true);
+    this.TelConfirm = new TelephoneConfirm(this.key, true, this.Tel.key);
     this.Email = new Email(this.key, true);
+    this.EmailConfirm = new EmailConfirm(this.key, true, this.Email.key);
   }
 
   buildSurvey(): void {
@@ -52,7 +56,9 @@ class SwabEntryDef extends SurveyDefinition {
     this.addItem(this.Name.get());
     this.addItem(this.Addr.get());
     this.addItem(this.Tel.get());
+    this.addItem(this.TelConfirm.get());
     this.addItem(this.Email.get());
+    this.addItem(this.EmailConfirm.get());
   }
 }
 
@@ -93,7 +99,7 @@ class Infos extends Item {
   markdownContent = `
 ## Naam, adres, e-mail en 06-nummer
 Voor het versturen en ontvangen van testen gebruikt het RIVM een [zelftestportaal](https://rivmportal.glean.nl/user/auth). Dit is een aparte website waar je extra testen kunt bestellen en je uitslag kan inzien.
-Dit [zelftestportaal](https://rivmportal.glean.nl/user/auth) staat los van de Infectieradarwebsite en maakt gebruik van een inlogprocedure met e-mail en SMS. 
+Dit [zelftestportaal](https://rivmportal.glean.nl/user/auth) staat los van de Infectieradarwebsite en maakt gebruik van een inlogprocedure met e-mail en SMS.
 Daarom vragen we hieronder je naam/adres/e-mail en 06-nummer achter te laten. De testen ontvang je dan automatisch in enkele weken.
 `
 
@@ -348,7 +354,51 @@ class Email extends Item {
         'nl', 'Wat is je e-mailadres?'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']])
+      placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']]),
+      customValidations: [{
+        key: 'format',
+        rule: SurveyEngine.checkResponseValueWithRegex(
+          this.key, 'rg.ic',
+          '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$'
+        ),
+        type: 'hard'
+      }]
+
+    })
+  }
+}
+
+class EmailConfirm extends Item {
+  emailRefKey: string;
+
+  constructor(parentKey: string, required: boolean, emailRefKey: string, condition?: Expression) {
+    super(parentKey, 'EmailConfirm');
+
+    this.condition = condition;
+    this.isRequired = required;
+    this.emailRefKey = emailRefKey;
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'TODO: Confirm your email: Wat is je e-mailadres?'
+      ]]),
+      confidentialMode: "replace",
+      placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']]),
+      customValidations: [{
+        key: 'equals',
+        rule: SurveyEngine.compare.eq(
+          SurveyEngine.getResponseValueAsStr(this.key, 'rg.ic'),
+          SurveyEngine.getResponseValueAsStr(this.emailRefKey, 'rg.ic'),
+        ),
+        type: 'hard'
+      }]
+
     })
   }
 }
@@ -371,7 +421,50 @@ class Telephone extends Item {
         'nl', 'Wat is je 06-nummer?'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', '06-########']])
+      placeholderText: new Map([['nl', '06-########']]),
+      customValidations: [{
+        key: 'format',
+        rule: SurveyEngine.checkResponseValueWithRegex(
+          this.key,
+          'rg.ic',
+          '^((\\+316){1}[1-9]{1}[0-9]{7})|((\\+324){1}[1-9]{1}[0-9]{7})|((\\+336){1}[1-9]{1}[0-9]{7,9})|((\\+337){1}[1-9]{1}[0-9]{7,9})|((\\+4915){1}[0-9]{7,9})|((\\+4916){1}[0-9]{7,9})|((\\+4917){1}[0-9]{7,9})|((\\+44){1}[0-9]{7,11})$'
+        ),
+        type: 'hard'
+      }]
+    })
+  }
+}
+
+class TelephoneConfirm extends Item {
+  telRefKey: string;
+
+  constructor(parentKey: string, required: boolean, telRefKey: string, condition?: Expression) {
+    super(parentKey, 'TelConfirm');
+
+    this.telRefKey = telRefKey;
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'TODO: Confirm/Repeat Wat is je 06-nummer?'
+      ]]),
+      confidentialMode: "replace",
+      placeholderText: new Map([['nl', '06-########']]),
+      customValidations: [{
+        key: 'equals',
+        rule: SurveyEngine.compare.eq(
+          SurveyEngine.getResponseValueAsStr(this.key, 'rg.ic'),
+          SurveyEngine.getResponseValueAsStr(this.telRefKey, 'rg.ic'),
+        ),
+        type: 'hard'
+      }]
     })
   }
 }
