@@ -21,3 +21,7 @@ export const reports = {
     key: 'selfSwabbingQuit'
   }
 }
+
+export const messageTypes = {
+  reinviteToIntake: 'reinviteToIntake'
+}
