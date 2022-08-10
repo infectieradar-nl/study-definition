@@ -12,7 +12,7 @@ class SwabSampleDef extends SurveyDefinition {
 
   constructor() {
     super({
-      surveyKey: surveyKeys.swabSample,
+      surveyKey: surveyKeys.SwabSample,
       name: new Map([
         ["nl", "Zelfteststudie binnen Infectieradar"],
       ]),
@@ -53,11 +53,11 @@ class Intro extends Item {
   markdownContent = `
 ## Je bent geselecteerd voor een neus- en keelmonster.
 
-Stuur alsjeblieft zo spoedig mogelijk een neus- en keelmonster naar het RIVM. 
-Hiermee draag je bij aan kennis over welke ziekteverwekkers deze week klachten veroorzaken. 
+Stuur alsjeblieft zo spoedig mogelijk een neus- en keelmonster naar het RIVM.
+Hiermee draag je bij aan kennis over welke ziekteverwekkers deze week klachten veroorzaken.
 
 Het is echter belangrijk dat je in staat bent om het monster in de komende 12 uur te nemen.
-Lukt dit? 
+Lukt dit?
 
 Als je mee doet ontvang je na minimaal twee weken een uitslag in je zelftestportaal.
 `
@@ -131,10 +131,10 @@ class InfosWhenConfirmed extends Item {
 
   markdownContent = `
 Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
-Volg de instructies in het testpakket, of lees ze hier[link] na. 
+Volg de instructies in het testpakket, of lees ze hier[link] na.
 
 Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
-Bewaar het monster in de koelkast totdat je het op de post doet. 
+Bewaar het monster in de koelkast totdat je het op de post doet.
 
 Je ontvangt een uitslag na minimaal twee weken.
 `
@@ -163,10 +163,10 @@ class InfosWhenRejected extends Item {
   }
 
   markdownContent = `
-Dank je wel. 
-Je hoeft nu verder niets te doen. 
+Dank je wel.
+Je hoeft nu verder niets te doen.
 
-We zoeken verder naar iemand anders die dit wel kan. 
+We zoeken verder naar iemand anders die dit wel kan.
 `
 
   buildItem(): SurveySingleItem {
