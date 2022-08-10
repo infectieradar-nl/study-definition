@@ -14,10 +14,10 @@ class QuitSwabbing_Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.quitSwabbing,
       name: new Map([
-        ['nl', 'TODO: Intrekken toestemming contactgegevens']
+        ['nl', 'Intrekken toestemming voor deelname aan het zelftest-onderzoek']
       ]),
       description: new Map([
-        ['nl', 'Klink hier om je toestemming in te trekken voor het bewaren van contactgevens']
+        ['nl', 'Klink hier om je toestemming in te trekken voor het bewaren van contact- en laboratoriumgevens']
       ]),
       durationText: new Map([
         ['nl', 'Invullen duurt minder dan 1 minuut']
@@ -56,7 +56,7 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-TODO: Je hebt eerder toestemming gegeven om je contactgegevens 12 weken lang te bewaren om te kunnen worden benaderd voor aanvullend onderzoek. Als je wilt kun je hieronder die toestemming weer intrekken. Je contactgegevens worden dan direct verwijderd, en zullen dus niet meer gebruikt worden om je te benaderen voor aanvullend onderzoek.
+Je hebt eerder toestemming gegeven om deel te nemen aan de zelftest-studie binnen Infectieradar. Als je wilt kun je hieronder die toestemming weer intrekken. Je contactgegevens binnen Infectieradar worden dan verwijderd, en je zult geen zelftest gerelateerde vragen meer ontvangen. Wel blijf je deelnemen aan Infectieradar (maar dan zonder de zelftesten).
 `
             ],
           ]),
@@ -86,7 +86,7 @@ export class ConfirmQuitting extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: Wil je je toestemming om je contactgegevens te bewaren intrekken?'],
+        ['nl', 'Wil je je toestemming om deel te nemen aan de zelfteststudie intrekken?'],
       ]),
       responseOptions: [
         {
@@ -116,7 +116,7 @@ class Feedback extends Item {
   }
 
   buildItem() {
-    const questionText = 'TODO: Als je nog feedback voor ons hebt, kun je dat hieronder invullen'
+    const questionText = 'Als je nog feedback voor ons hebt, kun je dat hieronder invullen'
 
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
