@@ -5,14 +5,13 @@ import { Expression } from 'survey-engine/data_types';
 import { surveyKeys } from '../contants';
 
 
-class QuitSwabbing_Def extends SurveyDefinition {
+class SwabStudyfull_Def extends SurveyDefinition {
   Explanation: ExplanationText;
-  Confirm: ConfirmQuitting;
-  Feedback: Feedback;
+  ContactLater: ContactLater;
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: surveyKeys.QuitSwabbing,
+      surveyKey: surveyKeys.SwabStudyFull,
       name: new Map([
         ['nl', 'TODO: Intrekken toestemming contactgegevens']
       ]),
@@ -28,14 +27,12 @@ class QuitSwabbing_Def extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.Explanation = new ExplanationText(this.key)
-    this.Confirm = new ConfirmQuitting(this.key, required)
-    this.Feedback = new Feedback(this.key, false);
+    this.ContactLater = new ContactLater(this.key, required)
   }
 
   buildSurvey() {
     this.addItem(this.Explanation.get())
-    this.addItem(this.Confirm.get())
-    this.addItem(this.Feedback.get())
+    this.addItem(this.ContactLater.get())
   }
 }
 
@@ -56,7 +53,7 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-TODO: Je hebt eerder toestemming gegeven om je contactgegevens 12 weken lang te bewaren om te kunnen worden benaderd voor aanvullend onderzoek. Als je wilt kun je hieronder die toestemming weer intrekken. Je contactgegevens worden dan direct verwijderd, en zullen dus niet meer gebruikt worden om je te benaderen voor aanvullend onderzoek.
+TODO: add text explaining study is booked full - they can use infectieradar, etc.
 `
             ],
           ]),
@@ -67,13 +64,13 @@ TODO: Je hebt eerder toestemming gegeven om je contactgegevens 12 weken lang te 
   }
 }
 
-export class ConfirmQuitting extends Item {
+export class ContactLater extends Item {
   optionKeys = {
     yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'ConfirmQuitting');
+    super(parentKey, 'ContactLater');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -86,7 +83,10 @@ export class ConfirmQuitting extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: Wil je je toestemming om je contactgegevens te bewaren intrekken?'],
+        ['nl', 'TODO: Can we contact you later?'],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'TODO: E.g., if more samples are available'],
       ]),
       responseOptions: [
         {
@@ -106,34 +106,5 @@ export class ConfirmQuitting extends Item {
   }
 }
 
-class Feedback extends Item {
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Feedback');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    const questionText = 'TODO: Als je nog feedback voor ons hebt, kun je dat hieronder invullen'
-
-    return SurveyItems.multilineTextInput({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', questionText],
-      ]),
-      questionSubText: new Map([
-        ['nl', 'Let op: deze informatie wordt eerst opgeslagen en niet direct door de onderzoekers bekeken.'],
-      ]),
-      inputLabelText: new Map([
-        ['nl', ''],
-      ]),
-    })
-  }
-}
-
-export const QuitSwabbing = new QuitSwabbing_Def(true);
+export const SwabStudyfull = new SwabStudyfull_Def(true);

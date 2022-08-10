@@ -9,6 +9,7 @@ import { SwabSample } from "./surveys/swabSample";
 import { handleSelfSwabbingIsInvited, handleSelfSwabbingSampler } from "./ruleUtils";
 import { externalServiceNames, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
+import { SwabStudyfull } from "./surveys/swabStudyFull";
 
 
 
@@ -98,6 +99,21 @@ const handleSwabEntry = StudyEngine.ifThen(
   )
 )
 
+const handleSwabStudyFull = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(SwabStudyfull.key),
+  // THEN:
+  StudyEngine.ifThen(
+    // if filled out correctly:
+    StudyEngine.singleChoice.any(SwabStudyfull.ContactLater.key, SwabStudyfull.ContactLater.optionKeys.yes),
+    // Then:
+    StudyEngine.participantActions.assignedSurveys.remove(SwabStudyfull.key, 'all'),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbing.key,
+      ParticipantFlags.selfSwabbing.values.interestedLater
+    ),
+  )
+)
+
 const handleSwabSample = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(SwabSample.key),
   // THEN:
@@ -135,7 +151,7 @@ const autoRemoveContactData = StudyEngine.ifThen(
     ),
     StudyEngine.participantState.lastSubmissionDateOlderThan(
       StudyEngine.timestampWithOffset({ days: -12 * 7 }),
-      surveyKeys.swabEntry
+      surveyKeys.SwabEntry
     ),
   ),
   StudyEngine.participantActions.confidentialResponses.removeAll(),
@@ -149,6 +165,7 @@ const submitRules: Expression[] = [
   handleIntake,
   handleWeekly,
   handleSwabEntry,
+  handleSwabStudyFull,
   handleSwabSample,
   handleQuitSwabbing,
 ];

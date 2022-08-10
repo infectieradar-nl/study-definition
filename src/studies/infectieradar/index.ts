@@ -8,6 +8,7 @@ import { updateRetirementFlag_rules } from "./customRules/addRetirementFlag";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
+import { SwabStudyfull } from "./surveys/swabStudyFull";
 
 export const InfectieradarStudy: Study = {
   studyKey: 'default',
@@ -16,6 +17,7 @@ export const InfectieradarStudy: Study = {
     Weekly,
     Intake,
     SwabEntry,
+    SwabStudyfull,
     SwabSample,
     QuitSwabbing,
   ],

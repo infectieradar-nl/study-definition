@@ -1,9 +1,11 @@
+import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ClozeItemTypes, SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { surveyKeys } from "../contants";
+import { ParticipantFlags } from "../participantFlags";
 
 class SwabEntryDef extends SurveyDefinition {
   Intro: Intro;
@@ -20,7 +22,7 @@ class SwabEntryDef extends SurveyDefinition {
 
   constructor() {
     super({
-      surveyKey: surveyKeys.swabEntry,
+      surveyKey: surveyKeys.SwabEntry,
       name: new Map([
         ["en", "Register for Testing in Infectieradar"],
         ["nl", "Aanmelden voor Testen in Infectieradar"],
@@ -39,13 +41,21 @@ class SwabEntryDef extends SurveyDefinition {
     this.Intro = new Intro(this.key);
     this.CodeVal = new CodeValQuestion(this.key, true);
     this.Consent = new Consent(this.key, true);
-    this.Infos = new Infos(this.key);
-    this.Name = new Name(this.key, true);
-    this.Addr = new Address(this.key, true);
-    this.Tel = new Telephone(this.key, true);
-    this.TelConfirm = new TelephoneConfirm(this.key, true, this.Tel.key);
-    this.Email = new Email(this.key, true);
-    this.EmailConfirm = new EmailConfirm(this.key, true, this.Email.key);
+
+    const showContactQuestions = SurveyEngine.logic.or(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.selfSwabbing.key,
+        ParticipantFlags.selfSwabbing.values.invitedWithoutCode,
+      ),
+      SurveyEngine.hasResponse(this.CodeVal.key, 'rg.ic')
+    );
+    this.Infos = new Infos(this.key, showContactQuestions);
+    this.Name = new Name(this.key, true, showContactQuestions);
+    this.Addr = new Address(this.key, true, showContactQuestions);
+    this.Tel = new Telephone(this.key, true, showContactQuestions);
+    this.TelConfirm = new TelephoneConfirm(this.key, true, this.Tel.key, showContactQuestions);
+    this.Email = new Email(this.key, true, showContactQuestions);
+    this.EmailConfirm = new EmailConfirm(this.key, true, this.Email.key, showContactQuestions);
   }
 
   buildSurvey(): void {
@@ -92,8 +102,9 @@ Deelnemers aan dit aanvullend onderzoek zijn uitgenodigd per brief en ontvangen 
 }
 
 class Infos extends Item {
-  constructor(parentKey: string) {
+  constructor(parentKey: string, condition: Expression) {
     super(parentKey, 'Infos');
+    this.condition = condition;
   }
 
   markdownContent = `

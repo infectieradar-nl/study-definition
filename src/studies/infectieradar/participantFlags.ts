@@ -19,8 +19,10 @@ export const ParticipantFlags = {
   selfSwabbing: {
     key: 'selfSwabbing',
     values: {
+      invitedWithoutCode: 'invitedWithoutCode',
       notInvited: 'notInvited',
       invited: 'invited',
+      interestedLater: 'interestedLater',
       active: 'active',
       quitted: 'quitted',
     }

@@ -4,6 +4,7 @@ import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
+import { SwabStudyfull } from "./surveys/swabStudyFull";
 
 
 export const handleSelfSwabbingIsInvited = () => StudyEngine.ifThen(
@@ -15,9 +16,18 @@ export const handleSelfSwabbingIsInvited = () => StudyEngine.ifThen(
   StudyEngine.if(
     StudyEngine.singleChoice.any(Intake.SelfSwabInvite.key, Intake.SelfSwabInvite.optionKeys.yes),
     // Then:
-    StudyEngine.do(
-      StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.invited),
-      StudyEngine.participantActions.assignedSurveys.add(SwabEntry.key, 'immediate')
+
+    StudyEngine.if(
+      StudyEngine.externalEventEval(externalServiceNames.samplerIsStudyFull),
+      // is full
+      StudyEngine.do(
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.invited),
+        StudyEngine.participantActions.assignedSurveys.add(SwabStudyfull.key, 'immediate')
+      ),
+      StudyEngine.do(
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.invited),
+        StudyEngine.participantActions.assignedSurveys.add(SwabEntry.key, 'immediate')
+      ),
     ),
     // Else:
     StudyEngine.do(

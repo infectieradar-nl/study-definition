@@ -2,15 +2,17 @@
 export const surveyKeys = {
   weekly: 'weekly',
   intake: 'intake',
-  swabEntry: 'SwabEntry',
-  swabSample: 'SwabSample',
-  quitSwabbing: 'QuitSwabbing',
+  SwabEntry: 'SwabEntry',
+  SwabStudyFull: 'SwabStudyFull',
+  SwabSample: 'SwabSample',
+  QuitSwabbing: 'QuitSwabbing',
 }
 
 export const externalServiceNames = {
   entryCodeUsed: 'entryCodeUsed',
   samplerInviteResponse: 'samplerInviteResponse',
   samplerIsSelected: 'samplerIsSelected',
+  samplerIsStudyFull: 'samplerIsStudyFull',
 }
 
 export const reports = {
