@@ -397,7 +397,7 @@ class EmailConfirm extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'TODO: Confirm your email: Wat is je e-mailadres?'
+        'nl', 'Voer je e-mailadres nogmaals in.'
       ]]),
       confidentialMode: "replace",
       placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']]),
@@ -429,10 +429,10 @@ class Telephone extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'Wat is je 06-nummer?'
+        'nl', 'Wat is je 06-nummer? (gebruik de internationale notatie: +316nummer)'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', '06-########']]),
+      placeholderText: new Map([['nl', '+316########']]),
       customValidations: [{
         key: 'format',
         rule: SurveyEngine.checkResponseValueWithRegex(
@@ -464,10 +464,10 @@ class TelephoneConfirm extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'TODO: Confirm/Repeat Wat is je 06-nummer?'
+        'nl', 'Voer je 06-nummer nogmaals in.'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', '06-########']]),
+      placeholderText: new Map([['nl', '+316########']]),
       customValidations: [{
         key: 'equals',
         rule: SurveyEngine.compare.eq(
