@@ -13,10 +13,10 @@ class SwabStudyfull_Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.SwabStudyFull,
       name: new Map([
-        ['nl', 'TODO: Intrekken toestemming contactgegevens']
+        ['nl', 'Aantal zelftestdeelnemers is bereikt']
       ]),
       description: new Map([
-        ['nl', 'Klink hier om je toestemming in te trekken voor het bewaren van contactgevens']
+        ['nl', 'Geef hier aan of we je later kunnen vragen om alsnog mee te doen met zelftesten']
       ]),
       durationText: new Map([
         ['nl', 'Invullen duurt minder dan 1 minuut']
@@ -53,7 +53,7 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-TODO: add text explaining study is booked full - they can use infectieradar, etc.
+Op dit moment is het maximaal aantal deelnemers voor het ontvangen van zelftesten bereikt. Dit betekend dat je elke week je klachten door geeft maar dat je geen zelftest hoeft te doen (voor het onderzoek) of iets hoeft op te sturen naar het RIVM als je klachten hebt. Je informatie en deelname is nog steeds zeer waardevol.     
 `
             ],
           ]),
@@ -83,10 +83,10 @@ export class ContactLater extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: Can we contact you later?'],
+        ['nl', 'Mogen we je benaderen als we nieuwe zelftestdeelnemers zoeken?'],
       ]),
       questionSubText: new Map([
-        ['nl', 'TODO: E.g., if more samples are available'],
+        ['nl', 'Bijvoorbeeld als er deelnemers uitvallen of er meer zelftestdeelnemers nodig zijn.'],
       ]),
       responseOptions: [
         {
