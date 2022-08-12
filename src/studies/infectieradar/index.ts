@@ -9,6 +9,7 @@ import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
+import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParticipantToSelfSwabbingWithoutCode";
 
 export const InfectieradarStudy: Study = {
   studyKey: 'default',
@@ -26,5 +27,6 @@ export const InfectieradarStudy: Study = {
     updateVaccinationFlag_20211103_rules,
     reinvitePeopleToIntake_rules,
     updateRetirementFlag_rules,
+    inviteToSelfSwabbingWithoutCode_rules,
   ]
 }

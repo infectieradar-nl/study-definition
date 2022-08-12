@@ -39,7 +39,12 @@ class SwabEntryDef extends SurveyDefinition {
 
 
     this.Intro = new Intro(this.key);
-    this.CodeVal = new CodeValQuestion(this.key, true);
+    this.CodeVal = new CodeValQuestion(this.key, true, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.selfSwabbing.key,
+        ParticipantFlags.selfSwabbing.values.invitedWithoutCode,
+      ),
+    ));
     this.Consent = new Consent(this.key, true);
 
     const showContactQuestions = SurveyEngine.logic.or(
@@ -133,9 +138,10 @@ Daarom vragen we hieronder je naam/adres/e-mail en 06-nummer achter te laten. De
 
 
 class CodeValQuestion extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'CodeVal');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {
