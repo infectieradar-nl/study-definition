@@ -47,7 +47,7 @@ class SwabEntryDef extends SurveyDefinition {
         ParticipantFlags.selfSwabbing.key,
         ParticipantFlags.selfSwabbing.values.invitedWithoutCode,
       ),
-      SurveyEngine.hasResponse(this.CodeVal.key, 'rg.ic')
+      SurveyEngine.hasResponse(this.CodeVal.key, 'rg.cv')
     );
     this.Infos = new Infos(this.key, showContactQuestions);
     this.Name = new Name(this.key, true, showContactQuestions);
