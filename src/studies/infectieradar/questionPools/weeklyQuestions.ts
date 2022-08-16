@@ -2286,9 +2286,9 @@ export class SelfSwabPositiveInstructions extends Item {
   }
 
   markdownContent = `
-## TODO
-
-This text and box would be displayed, if active part of self swabbing and has positive test in the weekly
+Je hebt een resultaat van een coronatest - is deze positief neem dan een neus- en keelmonster en stuur deze op naar het RIVM. 
+Ben je coronatest negatief (heb je geen corona) dan wordt je misschien geslecteerd om een neus- en keelmonster in te sturen. 
+We selecteren deelnemers zonder corona op het moment dat ze het formulier opslaan. Vul daarom het formulier helemaal in en volg de instructies. 
 `
 
   buildItem(): SurveySingleItem {
