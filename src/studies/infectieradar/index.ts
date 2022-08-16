@@ -10,6 +10,7 @@ import { SwabSample } from "./surveys/swabSample";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParticipantToSelfSwabbingWithoutCode";
+import { participantMessages } from "./messageConfigs/participantMessages";
 
 export const InfectieradarStudy: Study = {
   studyKey: 'default',
@@ -23,6 +24,9 @@ export const InfectieradarStudy: Study = {
     QuitSwabbing,
   ],
   studyRules: studyRules,
+  messageConfigs: [
+    participantMessages
+  ],
   customStudyRules: [
     updateVaccinationFlag_20211103_rules,
     reinvitePeopleToIntake_rules,

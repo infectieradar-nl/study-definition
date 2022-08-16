@@ -7,7 +7,7 @@ import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { handleSelfSwabbingIsInvited, handleSelfSwabbingSampler } from "./ruleUtils";
-import { externalServiceNames, reports, surveyKeys } from "./contants";
+import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 
@@ -96,6 +96,7 @@ const handleSwabEntry = StudyEngine.ifThen(
       ParticipantFlags.selfSwabbingContactData.values.active
     ),
     StudyEngine.participantActions.assignedSurveys.add(QuitSwabbing.key, 'optional'),
+    StudyEngine.participantActions.messages.add(messageTypes.selftestConfirmation, StudyEngine.timestampWithOffset({ days: 0 })),
   )
 )
 
