@@ -2279,6 +2279,33 @@ class Q11 extends Item {
   }
 }
 
+export class SelfSwabTemporaryInfo extends Item {
+  constructor(parentKey: string, condition: Expression) {
+    super(parentKey, 'SelfSwabTemporaryInfo');
+    this.condition = condition;
+  }
+
+  markdownContent = `
+TODO: this should be a message, telling participants, they are in the self-swabbing, but it starts only later, etc.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+        })
+      ]
+    })
+  }
+
+}
+
 export class SelfSwabPositiveInstructions extends Item {
   constructor(parentKey: string, condition: Expression) {
     super(parentKey, 'SelfSwabPositiveInstructions');
@@ -2286,9 +2313,9 @@ export class SelfSwabPositiveInstructions extends Item {
   }
 
   markdownContent = `
-Je hebt een resultaat van een coronatest - is deze positief neem dan een neus- en keelmonster en stuur deze op naar het RIVM. 
-Ben je coronatest negatief (heb je geen corona) dan wordt je misschien geslecteerd om een neus- en keelmonster in te sturen. 
-We selecteren deelnemers zonder corona op het moment dat ze het formulier opslaan. Vul daarom het formulier helemaal in en volg de instructies. 
+Je hebt een resultaat van een coronatest - is deze positief neem dan een neus- en keelmonster en stuur deze op naar het RIVM.
+Ben je coronatest negatief (heb je geen corona) dan wordt je misschien geslecteerd om een neus- en keelmonster in te sturen.
+We selecteren deelnemers zonder corona op het moment dat ze het formulier opslaan. Vul daarom het formulier helemaal in en volg de instructies.
 `
 
   buildItem(): SurveySingleItem {

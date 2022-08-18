@@ -74,7 +74,7 @@ const handleWeekly = StudyEngine.ifThen(
     // then save timestamp into flag
     StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
   ),
-  handleSelfSwabbingSampler(),
+  // handleSelfSwabbingSampler(),
 )
 
 const handleSwabEntry = StudyEngine.ifThen(

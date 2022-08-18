@@ -27,4 +27,5 @@ export const reports = {
 export const messageTypes = {
   reinviteToIntake: 'reinviteToIntake',
   selftestConfirmation: 'selftest-confirmation',
+  invitationSelfswabExistingusers: 'invitation-selfswab-existingusers'
 }

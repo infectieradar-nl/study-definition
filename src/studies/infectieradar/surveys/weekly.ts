@@ -2,13 +2,14 @@ import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
-import { FinalText, HasSymptomsGroup, SelfSwabPositiveInstructions, SymptomsGroup } from "../questionPools/weeklyQuestions";
+import { FinalText, HasSymptomsGroup, SelfSwabPositiveInstructions, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 //import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
 
 class WeeklyDef extends SurveyDefinition {
+  SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
   // vaccination:
   Q2NL: Q2NL;
@@ -70,6 +71,10 @@ class WeeklyDef extends SurveyDefinition {
         ["nl", "Invullen duurt 15 seconden tot 3 minuten, afhankelijk van je klachten."],
       ])
     });
+
+    this.SelfSwabTemporaryInfo = new SelfSwabTemporaryInfo(this.key, SurveyEngine.participantFlags.hasKeyAndValue(
+      ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.active
+    ));
 
     // Initialize/Configure questions here:
     this.Q2NL = new Q2NL(this.key, true);
@@ -147,6 +152,8 @@ class WeeklyDef extends SurveyDefinition {
 
   buildSurvey() {
     // Define order of the questions here:
+    this.addItem(this.SelfSwabTemporaryInfo.get());
+
     this.addItem(this.Q2NL.get());
     this.addItem(this.Q2aNL.get());
     this.addItem(this.Q2bNL.get());
@@ -173,7 +180,7 @@ class WeeklyDef extends SurveyDefinition {
     this.addItem(this.Q1dNL.get());
     this.addItem(this.Q1b2NL.get());
 
-    this.addItem(this.SelfSwabPositiveInstructions.get(), true);
+    // this.addItem(this.SelfSwabPositiveInstructions.get(), true);
 
     this.addItem(this.Q1.get());
     this.addItem(this.HS.get());
