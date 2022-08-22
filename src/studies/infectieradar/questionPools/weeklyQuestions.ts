@@ -2286,7 +2286,7 @@ export class SelfSwabTemporaryInfo extends Item {
   }
 
   markdownContent = `
-TODO: this should be a message, telling participants, they are in the self-swabbing, but it starts only later, etc.
+Meld elke week je klachten. Tot eind september versturen we zelftestpakketten naar deelnemers. Vanaf zaterdag 1 oktober kan je gevraagd worden om een neus- en keelmonster in te sturen. 
 `
 
   buildItem(): SurveySingleItem {
