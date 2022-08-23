@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q24NLb, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText, SelfSwabInvite } from "../questionPools/intakeQuestions";
+import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q24NLb, Q25NL, Q4b1NL, Q4b2NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText, SelfSwabInvite } from "../questionPools/intakeQuestions";
 import { surveyKeys } from "../contants";
 
 class IntakeDef extends SurveyDefinition {
@@ -10,6 +10,8 @@ class IntakeDef extends SurveyDefinition {
   Q21NL: Q21NL;
   Q22NL: Q22NL;
   QMainActivity: QMainActivity;
+  Q4b1NL: Q4b1NL;
+  Q4b2NL: Q4b2NL; 
   Q4cNL: Q4cNL;
   Q4cNLb: Q4cNLb;
   Q4cNLc: Q4cNLc;
@@ -37,6 +39,7 @@ class IntakeDef extends SurveyDefinition {
   Q23NL: Q23NL;
   Q24NL: Q24NL;
   Q24NLb: Q24NLb;
+  Q25NL: Q25NL;
   SelfSwabInvite: SelfSwabInvite;
   FinalText: FinalText;
 
@@ -65,6 +68,12 @@ class IntakeDef extends SurveyDefinition {
     this.Q21NL = new Q21NL(this.key, isRequired);
     this.Q22NL = new Q22NL(this.key, isRequired);
     this.QMainActivity = new QMainActivity(this.key, isRequired);
+    this.Q4b1NL = new Q4b1NL(this.key,
+      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'), 
+      isRequired);
+    this.Q4b2NL = new Q4b2NL(this.key,
+      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'), 
+      isRequired);
     this.Q4cNL = new Q4cNL(this.key,
       SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2'),
       isRequired);
@@ -94,7 +103,10 @@ class IntakeDef extends SurveyDefinition {
     this.Q10d = new Q10d(this.key, SurveyEngine.singleChoice.any(this.Q10.key, '2'), isRequired);
     this.Q23NL = new Q23NL(this.key, isRequired);
     this.Q24NL = new Q24NL(this.key, isRequired);
-    this.Q24NLb = new Q24NLb(this.key, SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6'), isRequired);
+    this.Q24NLb = new Q24NLb(this.key, SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6', '7'), isRequired);
+    this.Q25NL = new Q25NL(this.key,
+      SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6', '7'),
+      isRequired);
     this.SelfSwabInvite = new SelfSwabInvite(this.key, true);
     this.FinalText = new FinalText(this.key);
   }
@@ -106,6 +118,8 @@ class IntakeDef extends SurveyDefinition {
     this.addItem(this.Q21NL.get());
     this.addItem(this.Q22NL.get());
     this.addItem(this.QMainActivity.get());
+    this.addItem(this.Q4b1NL.get());
+    this.addItem(this.Q4b2NL.get());
     this.addItem(this.Q4cNL.get());
     this.addItem(this.Q4cNLb.get());
     this.addItem(this.Q4cNLc.get());
@@ -133,6 +147,7 @@ class IntakeDef extends SurveyDefinition {
     this.addItem(this.Q23NL.get());
     this.addItem(this.Q24NL.get());
     this.addItem(this.Q24NLb.get());
+    this.addItem(this.Q25NL.get());
     this.addItem(this.SelfSwabInvite.get());
     this.addItem(this.FinalText.get());
   }

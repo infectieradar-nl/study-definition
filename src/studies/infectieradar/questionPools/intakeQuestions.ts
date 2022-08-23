@@ -538,6 +538,179 @@ export class QMainActivity extends Item {
   }
 }
 
+
+//Add question for Selfswab Study from Sep 2022 on
+export class Q4b1NL extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'Q4b1NL');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "What are the first 4 digits of the place where you spend most of your time, other than your home? For example your (volunteer) work or school/university?"],
+        ["nl", "Wat zijn de eerste 4 cijfers van de postcode van de plaats waar je de meeste tijd doorbrengt, anders dan thuis? Dit kan bijvoorbeeld je (vrijwilligers) werkplek of onderwijsinstelling zijn."],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'input',
+          // style: [{ key: 'className', value: 'w-100' }],
+          content: new Map([
+            ["en", "Postcode:"],
+            ["nl", "Postcode"],
+          ]),
+          description: new Map([
+            ["en", "the first 4 digits"],
+            ["nl", "de eerste vier cijfers"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "I don't know"],
+            ["nl", "Dat weet ik niet"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "Not applicable"],
+            ["nl", "Niet van toepassing"],
+          ])
+        },
+      ],
+      customValidations: [
+        {
+          key: 'r2',
+          type: 'hard',
+          rule: expWithArgs('or',
+            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
+          )
+        }
+      ],
+      bottomDisplayCompoments: [
+        {
+          role: 'error',
+          content: generateLocStrings(new Map([
+            ["en", "Please enter the first four digits of the postal code of your work/school/university"],
+            ["nl", "Voer de eerste vier cijfers van de postcode van je werk/school/universiteit in"],
+          ])),
+          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+        }
+      ]
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "To check how representative our sample is, and to see whether the chance of getting flu varies across the country."],
+          ["nl", "We doen onderzoek naar de regionale verspreiding van infecties."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Please choose the first part of the post-code (the part before the space)."],
+          ["nl", "Het gaat alleen om de eerste 4 cijfers van je postcode (dus niet de letters)."],
+        ]),
+        // style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
+//Add question for Selfswab Study from Sep 2022 on
+export class Q4b2NL extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'Q4b2NL');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "On an average week how often do you go to your (volunteer) work or school/university?"],
+        ["nl", "Hoeveel dagen ga je (gemiddeld) per week naar deze (vrijwilligers) werkplek/onderwijsinstelling of een andere plaats waar je veel tijd doorbrengt, anders dan thuis?"],
+      ]),
+      //helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "1"],
+            ["nl", "1"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "2"],
+            ["nl", "2"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "3"],
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "4"],
+            ["nl", "4"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "5"],
+            ["nl", "5"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "More than 5"],
+            ["nl", "Meer dan 5"],
+          ])
+        },
+      ],
+    })
+  }
+}
+
 export class Q4cNL extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q4cNL');
@@ -2802,8 +2975,8 @@ export class Q10d extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2021/2022?"],
-        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2021/2022)?"],
+        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2022/2023?"],
+        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2022/2023)?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -2968,8 +3141,8 @@ export class Q23NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you get a pneumococcal vaccine last winter season (2020/2021)?"],
-        ["nl", "Heb je het afgelopen winterseizoen (2020/2021) een pneumokokkenprik gehaald?"],
+        ["en", "Did you get a pneumococcal vaccine last winter season (2021/2022)?"],
+        ["nl", "Heb je het afgelopen winterseizoen (2021/2022) een pneumokokkenprik gehaald?"],
       ]),
       responseOptions: [
         {
@@ -3012,8 +3185,8 @@ export class Q24NL extends Item {
       condition: this.condition,
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", "Did you get a corona vaccination last year?"],
-        ["nl", "Ben je het afgelopen jaar gevaccineerd tegen het coronavirus?"],
+        ["en", "Did you receive a corona vaccination?"],
+        ["nl", "Ben je gevaccineerd tegen het coronavirus?"],
       ]),
       responseOptions: [
                 /*{
@@ -3040,22 +3213,29 @@ export class Q24NL extends Item {
         {
           key: '4', role: 'option',
           content: new Map([
-            ["en", "Yes, I received one or two vaccination, I'm fully vaccinated"],
-            ["nl", "Ja, ik heb de basisserie van één of twee prikken nu afgerond"],
+            ["en", "Yes, I'm fully vaccinated"],
+            ["nl", "Ja, ik heb de basisserie afgerond"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
             ["en", "Yes, I'm fully vaccinated and I received the first booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"],
+            ["nl", "Ja, ik heb de basisserie afgerond en één herhaalprik ontvangen"],
           ])
         },
         {
           key: '6', role: 'option',
           content: new Map([
             ["en", "Yes, I'm fully vaccinated and I received the second booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"],
+            ["nl", "Ja, ik heb de basisserie afgerond, en twee herhaalprikken ontvangen"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["en", "Yes, I'm fully vaccinated and I received the third booster"],
+            ["nl", "Ja, ik heb de basisserie afgerond en drie herhaalprikken ontvangen "],
           ])
         },
         {
@@ -3102,7 +3282,7 @@ export class Q24NLb extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "When did you receive your last corona vaccination?"],
-        ["nl", "Wat is (ongeveer) de datum van laatste vaccinatie tegen het coronavirus?"],
+        ["nl", "Wat is (ongeveer) de datum van je laatste vaccinatie tegen het coronavirus?"],
       ]),
       responseOptions: [
         {
@@ -3123,6 +3303,100 @@ export class Q24NLb extends Item {
             ["nl", "Dat weet ik niet (meer)"],
           ])
         },
+      ],
+    })
+  }
+}
+
+export class Q25NL extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'Q25NL');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "Which vaccin did you receive?"],
+        ["nl", "Met welk vaccin ben je gevaccineerd?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "BioNTech/Pfizer"],
+            ["nl", "BioNTech/Pfizer"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "Moderna"],
+            ["nl", "Moderna"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "AstraZeneca"],
+            ["nl", "AstraZeneca"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "CureVac"],
+            ["nl", "CureVac"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "Janssen"],
+            ["nl", "Janssen"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "Sanofi"],
+            ["nl", "Sanofi"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["en", "Novovax"],
+            ["nl", "Novovax"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["en", "A combination of different brands"],
+            ["nl", "Een combinatie van verschillende merken"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "Other"],
+            ["nl", "Anders"],
+          ])
+        },
+      
+        {
+          key: '10', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Dat weet ik niet (meer)"],
+          ])
+        },  
       ],
     })
   }
