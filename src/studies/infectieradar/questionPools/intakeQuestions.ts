@@ -400,7 +400,7 @@ export class Q22NL extends Item {
       {
         content: new Map([
           ["en", "Please, write down your weight in kilo's."],
-          ["nl", "Geef aan wat je gewicht is in hele kilo's. Wanneeer je het niet precies weet mag je het ook schatten."],
+          ["nl", "Geef aan wat je gewicht is in hele kilo's. Wanneer je het niet precies weet mag je het ook schatten."],
         ]),
         style: [{ key: 'variant', value: 'p' }],
       },
@@ -1653,7 +1653,7 @@ export class Q7b extends Item {
       {
         content: new Map([
           ["en", "It has been suggested that using public transport may be a risk for getting flu. We would like to check this."],
-          ["nl", "Veel mensen denken dat het openbaar vervoer een risico op infecties met zich mee brengt, wij hopen dit te onderzoeken."],
+          ["nl", "Veel mensen denken dat het openbaar vervoer een risico op infecties met zich mee brengt. Wij hopen dit te onderzoeken."],
           ["fr", "Il a été suggéré que l'utilisation des transports publics augmente les risques de contracter la grippe. Nous tenons à le vérifier."],
         ]),
         style: [{ key: 'variant', value: 'p' }],

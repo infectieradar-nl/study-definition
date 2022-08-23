@@ -165,8 +165,6 @@ class InfosWhenRejected extends Item {
   markdownContent = `
 Dank je wel.
 Je hoeft nu verder niets te doen.
-
-We zoeken verder naar iemand anders die dit wel kan.
 `
 
   buildItem(): SurveySingleItem {
