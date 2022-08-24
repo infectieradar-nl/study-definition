@@ -12,6 +12,7 @@ import { ParticipantFlags } from "../participantFlags";
 
 
 export class HasSymptomsGroup extends Group {
+  q1_2: q1_2;
   Q2: Q2;
   Q3: Q3;
   Q4: Q4;
@@ -32,6 +33,7 @@ export class HasSymptomsGroup extends Group {
 
     this.groupEditor.setCondition(groupCondition);
 
+    this.q1_2 = new q1_2(this.key, true);
     this.Q2 = new Q2(this.key, true);
     this.Q3 = new Q3(this.key,
       SurveyEngine.logic.or(
@@ -54,6 +56,7 @@ export class HasSymptomsGroup extends Group {
   }
 
   buildGroup() {
+    this.addItem(this.q1_2.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
@@ -321,6 +324,41 @@ class SymptomsQuestion extends Item {
   }
 }
 
+class q1_2 extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'q1_2');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.numericSlider({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      //helpGroupContent: this.getHelpGroupContent(),
+      questionText: new Map([
+      ["en", "On a scale from 0 to 100, how good or bad was your health last week because of the symptoms?"],
+      ["nl", "Hoe goed of slecht was je gezondheid, in de afgelopen week, door je gemelde klachten?"],
+    ]),
+    questionSubText: new Map([
+      ["en", "The scale goes from 0 to 100, 100 means the best health status you can imagine and 0 means the worst health status you can imagine."],
+      ["nl", "Deze schaal loopt van 0 tot 100, waarbij 100 staat voor de beste gezondheid die je je kunt voorstellen en 0 staat voor de slechtste gezondheid die je je kunt voorstellen."],
+    ]),
+    sliderLabel: new Map([
+      ["en", "Your answer:"],
+      ["nl", "Jouw selectie:"],
+    ]),
+    noResponseLabel: new Map([
+      ["en", "Change the value of the slider by dragging the button."],
+      ["nl", "Sleep de knop om je keuze te maken."],
+    ]),
+    min: 0,
+    max: 100,
+    stepSize: 1,
+  })
+}
+}
 
 class Q2 extends Item {
   optionsKey = {
@@ -411,6 +449,7 @@ class Q2 extends Item {
     ]
   }
 }
+
 
 class Q3 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
