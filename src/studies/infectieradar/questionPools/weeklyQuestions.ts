@@ -134,7 +134,7 @@ class SymptomsQuestion extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Did you have any general symptoms such as"],
-        ["nl", "Had je in de afgelopen week geen, één of meerdere van deze klachten? (chronische klachten hoeven hier niet gemeld te worden)"],
+        ["nl", "Geef alsjeblieft aan of je geen of tenminste één van de volgende klachten hebt gehad in de afgelopen week (chronische klachten hoeven hier niet gemeld te worden)"],
       ]),
       responseOptions: [
         {
