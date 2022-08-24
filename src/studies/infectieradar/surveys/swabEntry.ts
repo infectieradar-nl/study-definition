@@ -84,7 +84,7 @@ class Intro extends Item {
 
   markdownContent = `
 ## Zelftest-onderzoek
-Met dit formulier kan je jezelf registreren als deelnemer voor het zelftest-onderzoek. Meer informatie over dit onderzoek kan je [*hier*](/about-selfswabstudy) vinden.
+Met dit formulier kan je jezelf registreren als deelnemer voor het zelftest-onderzoek. Meer informatie over dit onderzoek kan je [*hier*](https://www.infectieradar.nl/about-selfswabstudy) vinden.
 `
 
   buildItem(): SurveySingleItem {
@@ -212,12 +212,12 @@ Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te lezen.
         ["nl", `
 **Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
 
-Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het [zelftest-onderzoek van Infectieradar](/about-selfteststudy) en ga je akkoord dat het RIVM je gegevens voor dit onderzoek zal verwerken.
+Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het [zelftest-onderzoek van Infectieradar](https://www.infectieradar.nl/selfteststudy) en ga je akkoord dat het RIVM je gegevens voor dit onderzoek zal verwerken.
 
 Het onderzoek is gericht op het in kaart brengen van gezondheidsklachten die kunnen wijzen op infectieziekten, zoals het coronavirus (COVID-19). Dit onderzoek is van belang om na te gaan of het aantal mensen met klachten toe- of afneemt en om de verspreiding van infectieziekten in de gaten te houden. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Infectieradar](/privacy).
 
 Ook:
--	Heb ik de informatie op de website van Infectieradar over het [onderzoek](/about-selfteststudy) en de [privacyverklaring](/privacy) over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+-	Heb ik de informatie op de website van Infectieradar over het [onderzoek](https://www.infectieradar.nl/about-selfteststudy) en de [privacyverklaring](/privacy) over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
 -	Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
 -	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming. Na het stopzetten van de deelname zijn alleen nog mijn onderzoeksgegevens en eventueel ingezonden neus- en keelmonsters voor het onderzoek beschikbaar, de onderzoeksgegevens en monsters zijn dan echter niet meer te herleiden tot mij als persoon. Daarnaast gelden de bewaartermijnen, zoals opgegeven in de [privacyverklaring](/privacy), voor mijn overige persoonsgegevens.
 -	Weet ik dat de onderzoeksgegevens van mijn eventuele neus- en keelmonster(s) tot 15 jaar na ontvangst bewaard kan worden en later nog voor een ander onderzoek kunnen worden gebruikt. En weet ik dat mijn contactgegevens en accountgegevens 2 jaar na de laatste inlog op Infectieradar of het (zelftest)portaal [GLEAN](https://rivmportal.glean.nl/) en mijn onderzoeksgegevens tot 15 jaar na het invullen van de vragenlijsten worden bewaard en dat onderzoeksgegevens kunnen worden gedeeld met de deelnemers aan het samenwerkingsverband Influenzanet. De onderzoeksresultaten hebben geen bewaartermijn en kunnen dus gepubliceerd blijven.
