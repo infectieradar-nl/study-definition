@@ -3416,7 +3416,7 @@ export class Q26NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "On a scale from 0 to 100, how good or bad was your health the last week?"],
+        ["en", "On a scale from 0 to 100, how good or bad was your health last week?"],
         ["nl", "Hoe goed of slecht was je gezondheid de afgelopen week?"],
       ]),
       questionSubText: new Map([
