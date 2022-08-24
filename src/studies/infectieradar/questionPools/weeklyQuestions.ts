@@ -2258,6 +2258,7 @@ class Q11 extends Item {
         {
           key: '10', role: 'option',
           content: new Map([
+            ["en", "Yes, because I got vaccinated"],
             ["nl", "Ja, ik heb een vaccinatie gehad die de klachten heeft veroorzaakt"],
           ])
         },
