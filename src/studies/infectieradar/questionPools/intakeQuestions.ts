@@ -3402,6 +3402,43 @@ export class Q25NL extends Item {
   }
 }
 
+export class Q26NL extends Item {
+	  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Q26NL');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.numericSlider({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "On a scale from 0 to 100, how good or bad was your health the last week?"],
+        ["nl", "Hoe goed of slecht was je gezondheid de afgelopen week?"],
+      ]),
+      questionSubText: new Map([
+        ["en", "The scale goes from 0 to 100, 100 means the best health status you can imagine and 0 means the worst health status you can imagine."],
+        ["nl", "Deze schaal loopt van 0 tot 100, waarbij 100 staat voor de beste gezondheid die je je kunt voorstellen en 0 staat voor de slechtste gezondheid die je je kunt voorstellen."],
+      ]),
+      sliderLabel: new Map([
+        ["en", "Your answer:"],
+        ["nl", "Jouw selectie:"],
+      ]),
+      noResponseLabel: new Map([
+        ["en", "Change the value of the slider by dragging the button."],
+        ["nl", "Sleep de knop om je keuze te maken."],
+      ]),
+      min: 0,
+      max: 100,
+      stepSize: 1,
+    })
+  }
+}
+
+
 
 export class SelfSwabInvite extends Item {
   optionKeys = {
