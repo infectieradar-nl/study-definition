@@ -2326,7 +2326,7 @@ export class SelfSwabTemporaryInfo extends Item {
   }
 
   markdownContent = `
-Meld elke week je klachten. Tot eind september versturen we zelftestpakketten naar deelnemers. Vanaf zaterdag 1 oktober kan je gevraagd worden om een neus- en keelmonster in te sturen. 
+Meld elke week je klachten. Tot eind september versturen we zelftestpakketten naar deelnemers. Vanaf maandag 3 oktober kan je gevraagd worden om een neus- en keelmonster in te sturen. 
 `
 
   buildItem(): SurveySingleItem {
