@@ -5,9 +5,11 @@ import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { ParticipantFlags } from "../participantFlags";
 
 
-export class Q2NL extends Item {
+
+
+export class Q1NL extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
-    super(parentKey, 'Q2NL');
+    super(parentKey, 'Q1NL');
     this.isRequired = isRequired;
   }
 
@@ -23,18 +25,63 @@ export class Q2NL extends Item {
       isRequired: this.isRequired,
       condition: itemCondition,
       questionText: new Map([
-        ["en", "Did you receive a vaccination against corona since the last survey?"],
-        ["nl", "Heb je sinds de vorige vragenlijst een vaccinatie ontvangen tegen het coronavirus?"],
+        ["en", "Four weeks ago you received a questionnaire about your vaccination status. This question is to monitor any further changes. Select the option that applies to you."],
+        ["nl", "Vier weken geleden heb je vragen beantwoord over je vaccinatiestatus. Deze vraag is bedoeld om eventuele verdere veranderingen in je vaccinatiestatus te controleren. Selecteer de optie die voor jou van toepassing is."],
+      ]),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "In the meantime nothing has changed in terms of vaccination for me."],
+            ["nl", "In de tussentijd is er voor mij niets veranderd op het gebied van vaccinatie."],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated."],
+            ["nl", "In de tussentijd kreeg ik een nieuwe dosis vaccin, of een nieuwe uitnodiging om gevaccineerd te worden."],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date."],
+            ["nl", "Ik weet het niet zeker, en zou deze vragen willen beantwoorden om er zeker van te zijn dat mijn informatie over vaccinatie up to date is."],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+     
+export class Q2NL extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'Q2NL');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "In the last month did you receive a vaccination against corona?"],
+        ["nl", "Heb je in de afgelopen maand een vaccinatie ontvangen tegen het coronavirus?"],
       ]),
       helpGroupContent: this.getHelpGroupcontent(),
       responseOptions: [
-        {
+        /*{
           key: '0', role: 'option',
           content: new Map([
             ["en", "No"],
             ["nl", "Nee"],
           ])
-        },
+        },*/
         {
           key: '1', role: 'option',
           content: new Map([
@@ -73,8 +120,8 @@ export class Q2NL extends Item {
         {
           key: '6', role: 'option',
           content: new Map([
-            ["en", "Not applicable, I am fully vaccinated and not planning to get a (booster) vaccination"],
-            ["nl", "Niet meer van toepassing, ik heb de basisserie afgerond en niet van plan om een (booster) vaccinatie te nemen"],
+            ["en", "Not applicable, I am fully vaccinated and not planning to get a booster vaccination"],
+            ["nl", "Niet meer van toepassing, ik heb de basisserie afgerond en niet van plan om een herhaalprik te nemen"],
           ])
         },
         {
@@ -87,22 +134,29 @@ export class Q2NL extends Item {
         {
           key: '8', role: 'option',
           content: new Map([
-            ["en", "Yes, I've received one or two vaccinations, I'm fully vaccinated"],
-            ["nl", "Ja, ik heb de basisserie van één of twee prikken nu afgerond"],
+            ["en", "Yes, I've received the last dose, now I'm fully vaccinated"],
+            ["nl", "Ja, ik heb de laatste dosis van de basisserie ontvangen en heb deze nu afgerond "],
           ])
         },
         {
           key: '9', role: 'option',
           content: new Map([
             ["en", "Yes, I'm fully vaccinated and received the first booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en een eerste booster ontvangen"],
+            ["nl", "Ja, ik heb eerder de basisserie afgerond en nu de eerste herhaalprik ontvangen"],
           ])
         },
         {
           key: '10', role: 'option',
           content: new Map([
             ["en", "Yes, I'm fully vaccinated and received the second booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en een tweede booster ontvangen"],
+            ["nl", "Ja, ik heb eerder de basisserie afgerond en nu de tweede herhaalprik ontvangen"],
+          ])
+        },
+        {
+          key: '11', role: 'option',
+          content: new Map([
+            ["en", "Yes, I'm fully vaccinated and received the third booster"],
+            ["nl", "Ja, ik heb eerder de basisserie afgerond en nu de derde herhaalprik ontvangen"],
           ])
         },
       ],
@@ -241,6 +295,20 @@ export class Q2bNL extends Item {
           content: new Map([
             ["en", "Sanofi"],
             ["nl", "Sanofi"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["en", "Novovax"],
+            ["nl", "Novovax"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "Other"],
+            ["nl", "Anders"],
           ])
         },
         {
