@@ -2602,8 +2602,8 @@ export class Q9 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2020/2021)"],
-        ["nl", "Heb je in het afgelopen griepseizoen (2020/2021) een griepprik gehaald?"],
+        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2021/2022)"],
+        ["nl", "Heb je in het afgelopen winterseizoen (2021/2022) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2686,8 +2686,8 @@ export class Q10 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2021/2022)"],
-        ["nl", "Ben je van plan om voor dit griepseizoen (2021/2022) een griepprik te halen?"],
+        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2022/2023)"],
+        ["nl", "Ben je van plan om voor dit griepseizoen (2022/2023) een griepprik te halen?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2779,8 +2779,8 @@ export class Q10b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When were you vaccinated against flu in the season 2021/2022?"],
-        ["nl", "Wanneer ben je dit griepseizoen (2021/2022) gevaccineerd tegen de griep?"],
+        ["en", "When were you vaccinated against flu in the season 2022/2023?"],
+        ["nl", "Wanneer ben je dit griepseizoen (2022/2023) gevaccineerd tegen de griep?"],
       ]),
       responseOptions: [
         {

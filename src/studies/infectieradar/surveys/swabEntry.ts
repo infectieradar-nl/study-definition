@@ -84,7 +84,7 @@ class Intro extends Item {
 
   markdownContent = `
 ## Zelftest-onderzoek
-Met dit formulier kan je jezelf registreren als deelnemer voor het zelftest-onderzoek. Meer informatie over dit onderzoek kan je [*hier*](https://www.infectieradar.nl/about-selfswabstudy) vinden.
+Met dit formulier kan je jezelf registreren als deelnemer voor het zelftest-onderzoek. Meer informatie over dit onderzoek kan je [*hier*](https://www.infectieradar.nl/about-selfteststudy) vinden.
 `
 
   buildItem(): SurveySingleItem {
