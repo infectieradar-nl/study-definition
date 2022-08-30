@@ -11,7 +11,7 @@ class IntakeDef extends SurveyDefinition {
   Q22NL: Q22NL;
   QMainActivity: QMainActivity;
   Q4b1NL: Q4b1NL;
-  Q4b2NL: Q4b2NL; 
+  Q4b2NL: Q4b2NL;
   Q4cNL: Q4cNL;
   Q4cNLb: Q4cNLb;
   Q4cNLc: Q4cNLc;
@@ -70,10 +70,10 @@ class IntakeDef extends SurveyDefinition {
     this.Q22NL = new Q22NL(this.key, isRequired);
     this.QMainActivity = new QMainActivity(this.key, isRequired);
     this.Q4b1NL = new Q4b1NL(this.key,
-      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'), 
+      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'),
       isRequired);
     this.Q4b2NL = new Q4b2NL(this.key,
-      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'), 
+      SurveyEngine.singleChoice.any(this.Q4b1NL.key, '0'),
       isRequired);
     this.Q4cNL = new Q4cNL(this.key,
       SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2'),
