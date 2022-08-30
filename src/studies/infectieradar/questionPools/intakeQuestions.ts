@@ -593,7 +593,7 @@ export class Q4b1NL extends Item {
           rule: expWithArgs('or',
             expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
             expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9][0-9][0-9]$'),
-            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
+            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1', '2')
           )
         }
       ],
@@ -3389,21 +3389,21 @@ export class Q25NL extends Item {
             ["nl", "Anders"],
           ])
         },
-      
+
         {
           key: '10', role: 'option',
           content: new Map([
             ["en", "I don't know/can't remember"],
             ["nl", "Dat weet ik niet (meer)"],
           ])
-        },  
+        },
       ],
     })
   }
 }
 
 export class Q26NL extends Item {
-	  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Q26NL');
     this.isRequired = isRequired;
     this.condition = condition;
