@@ -70,7 +70,7 @@ class IntakeDef extends SurveyDefinition {
     this.Q22NL = new Q22NL(this.key, isRequired);
     this.QMainActivity = new QMainActivity(this.key, isRequired);
     this.Q4b1NL = new Q4b1NL(this.key,
-      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '8'),
+      SurveyEngine.singleChoice.any(this.QMainActivity.key, '0', '1', '2', '3', '4', '5', '7', '8'),
       isRequired);
     this.Q4b2NL = new Q4b2NL(this.key,
       SurveyEngine.singleChoice.any(this.Q4b1NL.key, '0'),
