@@ -33,7 +33,7 @@ class SwabEntryDef extends SurveyDefinition {
       ]),
       durationText: new Map([
         ["en", "Fill in your personal details so we can send you the tests, and you can see testresults."],
-        ["nl", "Lees meer over het zelftest-onderzoek onder [Informatie](https://www.infectieradar.nl/about-selfteststudy). Laat eventueel hier je gegevens achter zodat we je testen kunnen toesturen, en je je uitslag kan inzien."],
+        ["nl", "Lees meer over het zelftest-onderzoek onder Informatie."],
       ])
     });
 
