@@ -369,6 +369,7 @@ class Email extends Item {
         'nl', 'Wat is je e-mailadres?'
       ]]),
       confidentialMode: "replace",
+      transformLetterCaseTo: 'lower',
       placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']]),
       customValidations: [{
         key: 'format',
@@ -404,6 +405,7 @@ class EmailConfirm extends Item {
         'nl', 'Voer je e-mailadres nogmaals in.'
       ]]),
       confidentialMode: "replace",
+      transformLetterCaseTo: 'lower',
       placeholderText: new Map([['nl', 'XXXXXXXX@XXXXX.XX']]),
       customValidations: [{
         key: 'equals',
