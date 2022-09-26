@@ -3460,10 +3460,10 @@ export class SelfSwabInvite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je een brief ontvangen om deel te nemen aan de zelfteststudie van Infectieradar?"],
+        ["nl", "Wil je meedoen aan het zelftest-onderzoek binnen Infectieradar? Je ontvangt dan corona zelftesten en materiaal voor een neus- en keelmonster. Lees meer over dit onderzoek onder Informatie/Over het zelftest-onderzoek."],
       ]),
       questionSubText: new Map([
-        ["nl", "In het begin van september (2022) zijn er mensen per brief uitgenodigd om deel te nemen aan een zelfteststudie. Heb je ook een brief ontvangen vul dan Ja in, anders Nee"],
+        ["nl", "Dit griepseizoen onderzoeken we de oorzaak van luchtwegklachten. Zodat we beter weten hoeveel mensen klachten hebben door griep, corona, RSV en andere virussen. Wil je meedoen, vul dan Ja in, anders Nee"],
       ]),
       responseOptions: [
         {
