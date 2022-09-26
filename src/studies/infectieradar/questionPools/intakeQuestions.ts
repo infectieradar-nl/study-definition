@@ -7,6 +7,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { ParticipantFlags } from "../participantFlags";
 
 
 export class QGender extends Item {
@@ -3449,6 +3450,7 @@ export class SelfSwabInvite extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'SelfSwabInvite');
     this.isRequired = isRequired;
+    this.condition = SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.selfSwabbing.key));
   }
 
   buildItem() {
