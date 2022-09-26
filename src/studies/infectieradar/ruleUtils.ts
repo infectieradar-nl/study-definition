@@ -25,7 +25,7 @@ export const handleSelfSwabbingIsInvited = () => StudyEngine.ifThen(
         StudyEngine.participantActions.assignedSurveys.add(SwabStudyfull.key, 'immediate')
       ),
       StudyEngine.do(
-        StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.invited),
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbing.key, ParticipantFlags.selfSwabbing.values.invitedWithoutCode),
         StudyEngine.participantActions.assignedSurveys.add(SwabEntry.key, 'immediate')
       ),
     ),
