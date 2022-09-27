@@ -54,7 +54,7 @@ class Intro extends Item {
 ## Je bent geselecteerd voor een neus- en keelmonster.
 
 Stuur alsjeblieft zo spoedig mogelijk een neus- en keelmonster naar het RIVM.
-Hiermee draag je bij aan kennis over welke ziekteverwekkers deze week klachten veroorzaken.
+Hiermee draag je bij aan kennis over welke virussen deze week klachten veroorzaken.
 
 Het is echter belangrijk dat je in staat bent om het monster in de komende 12 uur te nemen.
 Lukt dit?
@@ -102,7 +102,7 @@ class ConfirmParticipation extends Item {
         ["nl", "Lukt het om in de komende 12 uur een neus- en keelmonster af te nemen?"],
       ]),
       questionSubText: new Map([
-        ["nl", "Lukt het niet, geef dit dan aan, dan zoeken we iemand anders"],
+        ["nl", "Lukt het niet, geef dit dan aan."],
       ]),
       responseOptions: [
         {
@@ -131,7 +131,8 @@ class InfosWhenConfirmed extends Item {
 
   markdownContent = `
 Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
-Volg de instructies in het testpakket, of lees ze hier[link] na.
+
+Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2) na.
 
 Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
 Bewaar het monster in de koelkast totdat je het op de post doet.
