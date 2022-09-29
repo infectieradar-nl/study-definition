@@ -29,5 +29,5 @@ export const messageTypes = {
   reinviteToIntake: 'reinviteToIntake',
   selftestConfirmation: 'selftest-confirmation',
   invitationSelfswabExistingusers: 'invitation-selfswab-existingusers',
-  swabConfirmation: 'swabConfirmation'
+  swabConfirmation: 'swab-confirmation'
 }
