@@ -1,4 +1,6 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
+import { Duration } from "case-editor-tools/types/duration";
+import { Expression } from "survey-engine/data_types";
 import { externalServiceNames, surveyKeys } from "./contants";
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
@@ -103,3 +105,20 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
   )
 )
 
+const hasSurveyKeyValidUntilSoonerThan = (surveyKey: string, delta: Duration, reference?: number | Expression) => {
+  return StudyEngine.gt(
+    StudyEngine.timestampWithOffset(delta, reference),
+    StudyEngine.participantState.getSurveyKeyAssignedUntil(surveyKey),
+  )
+}
+
+export const isSurveyExpired = (surveyKey: string) => StudyEngine.and(
+  StudyEngine.participantState.hasSurveyKeyAssigned(surveyKey),
+  hasSurveyKeyValidUntilSoonerThan(surveyKey, { seconds: 0 })
+)
+
+export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifThen(
+  isSurveyExpired(surveyKey),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKey, 'all'),
+)

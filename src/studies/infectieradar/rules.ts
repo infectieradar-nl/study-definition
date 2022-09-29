@@ -6,7 +6,7 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
-import { handleSelfSwabbingIsInvited, handleSelfSwabbingLogic } from "./ruleUtils";
+import { handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
@@ -189,8 +189,8 @@ const submitRules: Expression[] = [
 
 const timerRules: Expression[] = [
   autoRemoveContactData,
-  swabSampleExpired, // -> remove swabSampleSurvey
-  swabNotSelectedExpired, // -> remove swabSampleSurvey
+  handleExpired_removeSurvey(SwabSample.key),
+  handleExpired_removeSurvey(SwabNotSelected.key),
 ]
 
 /**
