@@ -5,6 +5,7 @@ export const surveyKeys = {
   SwabEntry: 'SwabEntry',
   SwabStudyFull: 'SwabStudyFull',
   SwabSample: 'SwabSample',
+  SwabNotSelected: 'SwabNotSelected',
   QuitSwabbing: 'QuitSwabbing',
 }
 
@@ -27,5 +28,6 @@ export const reports = {
 export const messageTypes = {
   reinviteToIntake: 'reinviteToIntake',
   selftestConfirmation: 'selftest-confirmation',
-  invitationSelfswabExistingusers: 'invitation-selfswab-existingusers'
+  invitationSelfswabExistingusers: 'invitation-selfswab-existingusers',
+  swabConfirmation: 'swabConfirmation'
 }

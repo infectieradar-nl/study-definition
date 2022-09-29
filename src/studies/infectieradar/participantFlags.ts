@@ -27,6 +27,9 @@ export const ParticipantFlags = {
       quitted: 'quitted',
     }
   },
+  selfSwabbingSampledTime: {
+    key: 'selfSwabbingSampledTime',
+  },
   selfSwabbingContactData: {
     key: 'contactDataForSelfSwabbing',
     values: {

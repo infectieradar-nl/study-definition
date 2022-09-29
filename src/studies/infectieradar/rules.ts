@@ -6,10 +6,11 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
-import { handleSelfSwabbingIsInvited, handleSelfSwabbingSampler } from "./ruleUtils";
+import { handleSelfSwabbingIsInvited, handleSelfSwabbingLogic } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
+import { SwabNotSelected } from "./surveys/swabNotSelected";
 
 
 
@@ -74,7 +75,7 @@ const handleWeekly = StudyEngine.ifThen(
     // then save timestamp into flag
     StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
   ),
-  // handleSelfSwabbingSampler(),
+  handleSelfSwabbingLogic(),
 )
 
 const handleSwabEntry = StudyEngine.ifThen(
@@ -119,7 +120,21 @@ const handleSwabSample = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(SwabSample.key),
   // THEN:
   StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
-  StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse)
+  StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(SwabSample.Confirm.key, SwabSample.Confirm.optionKeys.yes),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingSampledTime.key,
+      StudyEngine.timestampWithOffset({ days: 0 }),
+    ),
+    StudyEngine.participantActions.messages.add(messageTypes.swabConfirmation, StudyEngine.timestampWithOffset({ hours: 0 }))
+  )
+)
+
+const handleSwabNotSelected = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(SwabNotSelected.key),
+  // THEN:
+  StudyEngine.participantActions.assignedSurveys.remove(SwabNotSelected.key, 'all'),
 )
 
 const handleQuitSwabbing = StudyEngine.ifThen(
@@ -168,11 +183,14 @@ const submitRules: Expression[] = [
   handleSwabEntry,
   handleSwabStudyFull,
   handleSwabSample,
+  handleSwabNotSelected,
   handleQuitSwabbing,
 ];
 
 const timerRules: Expression[] = [
   autoRemoveContactData,
+  swabSampleExpired, // -> remove swabSampleSurvey
+  swabNotSelectedExpired, // -> remove swabSampleSurvey
 ]
 
 /**
