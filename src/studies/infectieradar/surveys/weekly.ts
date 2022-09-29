@@ -2,7 +2,7 @@ import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { Q1NL, Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
-import { FinalText, HasSymptomsGroup, SelfSwabPositiveInstructions, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
+import { FinalText, HasSymptomsGroup, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 //import { Q12NL, Q12aNL, Q12bNL, Q12cNL, Q12dNL } from "../questionPools/quarantine";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { surveyKeys } from "../contants";
@@ -12,7 +12,7 @@ class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
   // vaccination:'
-  Q1NL: Q1NL; 
+  Q1NL: Q1NL;
   Q2NL: Q2NL;
   Q2aNL: Q2aNL;
   Q2bNL: Q2bNL;
@@ -40,8 +40,6 @@ class WeeklyDef extends SurveyDefinition {
   Q4title: Q4title;
   Q1dNL: Q1dNL;
   Q1b2NL: Q1b2NL;
-
-  SelfSwabPositiveInstructions: SelfSwabPositiveInstructions;
 
   // symptoms:
   Q1: SymptomsGroup;
@@ -82,7 +80,7 @@ class WeeklyDef extends SurveyDefinition {
     // Initialize/Configure questions here:
     this.Q1NL = new Q1NL(this.key, true);
     this.Q2NL = new Q2NL(this.key,
-      SurveyEngine.singleChoice.any(this.Q1NL.key, '1', '2'), 
+      SurveyEngine.singleChoice.any(this.Q1NL.key, '1', '2'),
       isRequired);
     /*const conditionForVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10', '11');
     const conditionForNotVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '2',);
@@ -130,14 +128,6 @@ class WeeklyDef extends SurveyDefinition {
     this.Q1dNL = new Q1dNL(this.key, conditionForBloodTest, true);
     this.Q1b2NL = new Q1b2NL(this.key, conditionForBloodTest, true);
 
-    const showSelfSwabPositiveInstructions = SurveyEngine.logic.and(
-      SurveyEngine.participantFlags.hasKeyAndValue(
-        ParticipantFlags.selfSwabbing.key,
-        ParticipantFlags.selfSwabbing.values.active,
-      ),
-      SurveyEngine.multipleChoice.any(this.Q1aNL.key, this.Q1aNL.optionKeys.blood, this.Q1aNL.optionKeys.selfTest, this.Q1aNL.optionKeys.pcr)
-    );
-    this.SelfSwabPositiveInstructions = new SelfSwabPositiveInstructions(this.key, showSelfSwabPositiveInstructions)
     this.Q1 = new SymptomsGroup(this.key);
 
     const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
@@ -195,8 +185,6 @@ class WeeklyDef extends SurveyDefinition {
     this.addItem(this.Q4title.get());
     this.addItem(this.Q1dNL.get());
     this.addItem(this.Q1b2NL.get());
-
-    // this.addItem(this.SelfSwabPositiveInstructions.get(), true);
 
     this.addItem(this.Q1.get());
     this.addItem(this.HS.get());

@@ -2,6 +2,7 @@ import { Expression } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
+import { ParticipantFlags } from "../participantFlags";
 
 
 export class Q1aNL extends Item {
@@ -144,7 +145,8 @@ export class Q1kNL extends Item {
 
 export class Q1b3NL extends Item {
   optionKeys = {
-    positive: '1'
+    positive: '1',
+    negative: '2',
   }
 
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
@@ -164,6 +166,21 @@ export class Q1b3NL extends Item {
         ["nl", "Wat was de uitslag van de zelftest? Wanneer je meerdere zelftesten hebt gedaan en één daarvan was positief, vul dan hier 'positief' in."],
         ["fr", " Quel a été votre température mesurée la plus élevée?"],
       ]),
+      bottomDisplayCompoments: [ComponentGenerators.markdown({
+        content: new Map([
+          ["nl", `
+Vul het formulier helemaal in om uit te vinden of je een neus- en keelmonster moet uitvoeren.
+`],
+        ]),
+        displayCondition: SurveyEngine.logic.and(
+          SurveyEngine.singleChoice.any(this.key, this.optionKeys.negative, this.optionKeys.positive),
+          SurveyEngine.participantFlags.hasKeyAndValue(
+            ParticipantFlags.selfSwabbing.key,
+            ParticipantFlags.selfSwabbing.values.active
+          )
+        ),
+        className: 'mt-2 text-primary fw-bold',
+      })],
       responseOptions: [
         {
           key: this.optionKeys.positive, role: 'option',
@@ -173,7 +190,7 @@ export class Q1b3NL extends Item {
           ])
         },
         {
-          key: '2', role: 'option',
+          key: this.optionKeys.negative, role: 'option',
           content: new Map([
             ["en", "Negative, NO evidence for infection with coronavirus"],
             ["nl", "Negatief, dus GEEN bewijs voor besmetting met het coronavirus"],
@@ -715,6 +732,10 @@ export class Q1hNL extends Item {
 }
 
 export class Q1b1NL extends Item {
+  optionKeys = {
+    positive: '1',
+    negative: '2',
+  }
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q1b1NL');
     this.isRequired = isRequired;
@@ -732,16 +753,31 @@ export class Q1b1NL extends Item {
         ["nl", "Wat was de uitslag van de keel/neus slijmvliestest?"],
         ["fr", " Quel a été votre température mesurée la plus élevée?"],
       ]),
+      bottomDisplayCompoments: [ComponentGenerators.markdown({
+        content: new Map([
+          ["nl", `
+Vul het formulier helemaal in om uit te vinden of je een neus- en keelmonster moet uitvoeren.
+`],
+        ]),
+        displayCondition: SurveyEngine.logic.and(
+          SurveyEngine.singleChoice.any(this.key, this.optionKeys.negative, this.optionKeys.positive),
+          SurveyEngine.participantFlags.hasKeyAndValue(
+            ParticipantFlags.selfSwabbing.key,
+            ParticipantFlags.selfSwabbing.values.active
+          )
+        ),
+        className: 'mt-2 text-primary fw-bold',
+      })],
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: this.optionKeys.positive, role: 'option',
           content: new Map([
             ["en", "Positive, evidence for infection with coronavirus"],
             ["nl", "Positief, dus WEL besmet (geweest) met het coronavirus"],
           ])
         },
         {
-          key: '2', role: 'option',
+          key: this.optionKeys.negative, role: 'option',
           content: new Map([
             ["en", "Negative, NO evidence for infection with coronavirus"],
             ["nl", "Negatief, dus GEEN bewijs voor besmetting met het coronavirus"],

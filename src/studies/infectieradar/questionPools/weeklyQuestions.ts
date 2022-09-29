@@ -338,26 +338,26 @@ class q1_2 extends Item {
       condition: this.condition,
       //helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-      ["en", "On a scale from 0 to 100, how good or bad was your health last week because of the symptoms?"],
-      ["nl", "Hoe goed of slecht was je gezondheid, in de afgelopen week, door je gemelde klachten?"],
-    ]),
-    questionSubText: new Map([
-      ["en", "The scale goes from 0 to 100, 100 means the best health status you can imagine and 0 means the worst health status you can imagine."],
-      ["nl", "Deze schaal loopt van 0 tot 100, waarbij 100 staat voor de beste gezondheid die je je kunt voorstellen en 0 staat voor de slechtste gezondheid die je je kunt voorstellen."],
-    ]),
-    sliderLabel: new Map([
-      ["en", "Your answer:"],
-      ["nl", "Jouw selectie:"],
-    ]),
-    noResponseLabel: new Map([
-      ["en", "Change the value of the slider by dragging the button."],
-      ["nl", "Sleep de knop om je keuze te maken."],
-    ]),
-    min: 0,
-    max: 100,
-    stepSize: 1,
-  })
-}
+        ["en", "On a scale from 0 to 100, how good or bad was your health last week because of the symptoms?"],
+        ["nl", "Hoe goed of slecht was je gezondheid, in de afgelopen week, door je gemelde klachten?"],
+      ]),
+      questionSubText: new Map([
+        ["en", "The scale goes from 0 to 100, 100 means the best health status you can imagine and 0 means the worst health status you can imagine."],
+        ["nl", "Deze schaal loopt van 0 tot 100, waarbij 100 staat voor de beste gezondheid die je je kunt voorstellen en 0 staat voor de slechtste gezondheid die je je kunt voorstellen."],
+      ]),
+      sliderLabel: new Map([
+        ["en", "Your answer:"],
+        ["nl", "Jouw selectie:"],
+      ]),
+      noResponseLabel: new Map([
+        ["en", "Change the value of the slider by dragging the button."],
+        ["nl", "Sleep de knop om je keuze te maken."],
+      ]),
+      min: 0,
+      max: 100,
+      stepSize: 1,
+    })
+  }
 }
 
 class Q2 extends Item {
@@ -2326,34 +2326,7 @@ export class SelfSwabTemporaryInfo extends Item {
   }
 
   markdownContent = `
-Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neus en/of een zere keel doe dan een coronazelftest. Uitslagen van neus- en keelmonsters hoeven niet opnieuw gemeld te worden.  
-`
-
-  buildItem(): SurveySingleItem {
-    return SurveyItems.display({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      condition: this.condition,
-      content: [
-        ComponentGenerators.markdown({
-          content: new Map([
-            ["nl", this.markdownContent],
-          ]),
-        })
-      ]
-    })
-  }
-
-}
-
-export class SelfSwabPositiveInstructions extends Item {
-  constructor(parentKey: string, condition: Expression) {
-    super(parentKey, 'SelfSwabPositiveInstructions');
-    this.condition = condition;
-  }
-
-  markdownContent = `
-Vul het formulier helemaal in om uit te vinden of je een neus- en keelmonster moet uitvoeren.
+Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neus en/of een zere keel doe dan een coronazelftest. Uitslagen van neus- en keelmonsters hoeven niet opnieuw gemeld te worden.
 `
 
   buildItem(): SurveySingleItem {
