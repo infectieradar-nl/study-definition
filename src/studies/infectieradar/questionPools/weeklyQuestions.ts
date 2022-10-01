@@ -2326,7 +2326,7 @@ export class SelfSwabTemporaryInfo extends Item {
   }
 
   markdownContent = `
-Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neus en/of een zere keel doe dan een coronazelftest. Uitslagen van neus- en keelmonsters hoeven niet opnieuw gemeld te worden.
+Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neus en/of een zere keel doe dan een coronazelftest. Eventuele uitslagen van neus- en keelmonsters die je naar het RIVM hebt gestuurd in verband met het zelftest-onderzoek hoeven niet opnieuw gemeld te worden.
 `
 
   buildItem(): SurveySingleItem {
