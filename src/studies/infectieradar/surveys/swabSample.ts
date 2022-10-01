@@ -135,9 +135,15 @@ Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
 Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2) na.
 
 Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
-Bewaar het monster in de koelkast totdat je het op de post doet.
 
-Je ontvangt een uitslag na minimaal twee weken.
+- Houd rekening met de lichtingstijden van de brievenbus zodat het monster niet onnodig lang onderweg is in de post. Is het vandaag vrijdag, zaterdag of zondag, leg het monster dan in de afgesloten retourenvelop in de koelkast. Doe de retourenvelop maandag op de bus.
+- Wanneer je in isolatie zit ivm corona, dan kan je het monster in de afgesloten retourenvelop in de koelkast bewaren tot je isolatie is afgelopen, of een huisgenoot (die niet in isolatie zit) kan het op de bus doen.
+
+Je ontvangt automatisch een nieuw zelftest-pakket, bestel daarom niets extra.
+
+Het resultaat van jouw neus- en keelmonster wordt na 2 weken teruggekoppeld zodat je weet wat de oorzaak van jouw klachten was. Het resultaat vind je terug in het GLEAN portaal. Je ontvangt hiervoor een bericht.
+
+*Bovenstaande instructies ontvang je ook per e-mail.*
 `
 
   buildItem(): SurveySingleItem {

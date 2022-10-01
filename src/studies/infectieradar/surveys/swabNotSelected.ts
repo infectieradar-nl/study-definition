@@ -12,7 +12,7 @@ class SwabNotSelected_Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.SwabNotSelected,
       name: new Map([
-        ['nl', 'Niet geselecteerd']
+        ['nl', 'Niet geselecteerd voor een neus- en keelmonster']
       ]),
       description: new Map([
         ['nl', 'Dit is een bericht die je ontvangt als je deze week niet bent geselecteerd voor het insturen van een neus- en keelmonster.']
@@ -51,13 +51,13 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-#Je bent niet geselecteerd, je hoeft niets toe doen#
+## Je bent niet geselecteerd, je hoeft niets toe doen 
 
 Dank je wel voor het doorgeven van de testuitslag. 
 Echter, deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster.
 Je hoeft verder niets te doen.
 
-Nogmaals dank voor melden.
+Nogmaals dank voor het melden.
 `
             ],
           ]),
