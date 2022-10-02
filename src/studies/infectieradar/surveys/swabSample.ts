@@ -14,13 +14,13 @@ class SwabSampleDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.SwabSample,
       name: new Map([
-        ["nl", "Zelfteststudie binnen Infectieradar"],
+        ["nl", "Je bent geselecteerd voor het afnemen van een neus- en keelmonster"],
       ]),
       description: new Map([
-        ["nl", "Om te weten welke varianten van COVID-19 welke klachten veroorzaken, en om te onderzoeken welke andere ziekteverwekkers klachten veroorzaken voeren we een zelfteststudie uit. Klik hier om je gevevens achter te laten enom mee te doen"],
+        ["nl", "Laat weten of je de komende 12 uur een neus- en keelmonster kan afnemen"],
       ]),
       durationText: new Map([
-        ["nl", "Binnen 3 minuten doe je mee!"],
+        ["nl", "Vul in"],
       ])
     });
 
@@ -132,7 +132,7 @@ class InfosWhenConfirmed extends Item {
   markdownContent = `
 Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
 
-Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2) na.
+Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2).
 
 Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
 
