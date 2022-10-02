@@ -48,38 +48,55 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     ParticipantFlags.selfSwabbing.values.active,
   ),
   StudyEngine.if(
-    StudyEngine.gt(
-      StudyEngine.timestampWithOffset({ days: -10 }),
-      StudyEngine.participantState.getParticipantFlagValue(ParticipantFlags.selfSwabbingSampledTime.key)
+    StudyEngine.or(
+      StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingSampledTime.key)),
+      StudyEngine.gt(
+        StudyEngine.timestampWithOffset({ days: -10 }),
+        StudyEngine.participantState.getParticipantFlagValue(ParticipantFlags.selfSwabbingSampledTime.key)
+      ),
     ),
     // If true:
     StudyEngine.do(
       // POSITIVE case
-      StudyEngine.ifThen(
-        // TODO:
-        StudyEngine.and(
-          StudyEngine.or(
+      StudyEngine.if(
+        StudyEngine.or(
+          StudyEngine.and(
             StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.positive),
+            StudyEngine.lt(
+              StudyEngine.timestampWithOffset({ hours: -71 }),
+              StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+            )),
+          StudyEngine.and(
             StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.positive),
-          ),
-          StudyEngine.lt(
-            StudyEngine.timestampWithOffset({ hours: -71 }),
-            StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+            StudyEngine.lt(
+              StudyEngine.timestampWithOffset({ hours: -71 }),
+              StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
+            )
           )
         ),
+        //),
         // if positive then:
         StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
+        // else:
+        StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
       ),
       // NEGATIVE case
-      StudyEngine.ifThen(
+      StudyEngine.if(
         StudyEngine.and(
           StudyEngine.or(
-            StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
-            StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
-          ),
-          StudyEngine.lt(
-            StudyEngine.timestampWithOffset({ hours: -71 }),
-            StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+            StudyEngine.and(
+              StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
+              StudyEngine.lt(
+                StudyEngine.timestampWithOffset({ hours: -71 }),
+                StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+              )),
+            StudyEngine.and(
+              StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
+              StudyEngine.lt(
+                StudyEngine.timestampWithOffset({ hours: -71 }),
+                StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
+              )
+            )
           ),
           StudyEngine.multipleChoice.any(
             Weekly.Q1.QSymptoms.key,
@@ -97,7 +114,9 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
           StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
           // else:
           StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
-        )
+        ),
+        // else:
+        StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
       ),
     ),
     // else:
