@@ -110,10 +110,10 @@ class WeeklyDef extends SurveyDefinition {
     this.Q2title = new Q2title(this.key, conditionForSelfTest);
     this.Q1kNL = new Q1kNL(this.key, conditionForSelfTest, true);
     this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
-    const conditionForPositiveSelfTest = SurveyEngine.singleChoice.any(
-      this.Q1b3NL.key, this.Q1b3NL.optionKeys.positive
+    const conditionForAnsweredSelfTest = SurveyEngine.singleChoice.any(
+      this.Q1b3NL.key, this.Q1b3NL.optionKeys.positive, this.Q1b3NL.optionKeys.negative
     );
-    this.Q1d3NL = new Q1d3NL(this.key, conditionForPositiveSelfTest, true);
+    this.Q1d3NL = new Q1d3NL(this.key, conditionForAnsweredSelfTest, true);
     this.Q1jNL = new Q1jNL(this.key, conditionForSelfTest, true);
     this.Q3title = new Q3title(this.key, conditionForPCR);
     this.Q1d1NL = new Q1d1NL(this.key, conditionForPCR, true);

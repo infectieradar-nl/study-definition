@@ -40,87 +40,97 @@ export const handleSelfSwabbingIsInvited = () => StudyEngine.ifThen(
   )
 )
 
+const wasNotSampledRecently = () => StudyEngine.or(
+  StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingSampledTime.key)),
+  StudyEngine.gt(
+    StudyEngine.timestampWithOffset({ days: -10 }),
+    StudyEngine.participantState.getParticipantFlagValue(ParticipantFlags.selfSwabbingSampledTime.key)
+  ),
+);
+
+const hasRecentPositiveTest = () => StudyEngine.or(
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.positive),
+    StudyEngine.lt(
+      StudyEngine.timestampWithOffset({ hours: -71 }),
+      StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+    )),
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.positive),
+    StudyEngine.lt(
+      StudyEngine.timestampWithOffset({ hours: -71 }),
+      StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
+    )
+  )
+);
+
+const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
+  StudyEngine.or(
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
+      StudyEngine.lt(
+        StudyEngine.timestampWithOffset({ hours: -71 }),
+        StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+      )),
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
+      StudyEngine.lt(
+        StudyEngine.timestampWithOffset({ hours: -71 }),
+        StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
+      )
+    )
+  ),
+  StudyEngine.multipleChoice.any(
+    Weekly.Q1.QSymptoms.key,
+    '3', '5', '6', '7'
+  ),
+  StudyEngine.lt(
+    StudyEngine.timestampWithOffset({ hours: -120 }),
+    StudyEngine.getResponseValueAsNum(Weekly.HS.Q3.key, 'rg.0')
+  ),
+);
+
+const assignSwabSample = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabNotSelected, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabSample, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
+)
+
+const assignSwabNotSelected = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabSample, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabNotSelected, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
+)
 
 export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
-  // If part of the cohort:
+  // If part of the cohort ->
   StudyEngine.participantState.hasParticipantFlagKeyAndValue(
     ParticipantFlags.selfSwabbing.key,
     ParticipantFlags.selfSwabbing.values.active,
   ),
+  // Then do following:
   StudyEngine.if(
-    StudyEngine.or(
-      StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingSampledTime.key)),
-      StudyEngine.gt(
-        StudyEngine.timestampWithOffset({ days: -10 }),
-        StudyEngine.participantState.getParticipantFlagValue(ParticipantFlags.selfSwabbingSampledTime.key)
-      ),
-    ),
+    wasNotSampledRecently(),
     // If true:
-    StudyEngine.do(
-      // POSITIVE case
-      StudyEngine.if(
-        StudyEngine.or(
-          StudyEngine.and(
-            StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.positive),
-            StudyEngine.lt(
-              StudyEngine.timestampWithOffset({ hours: -71 }),
-              StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
-            )),
-          StudyEngine.and(
-            StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.positive),
-            StudyEngine.lt(
-              StudyEngine.timestampWithOffset({ hours: -71 }),
-              StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
-            )
-          )
-        ),
-        //),
-        // if positive then:
-        StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
-        // else:
-        StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
-      ),
-      // NEGATIVE case
+    StudyEngine.if(
+      hasRecentPositiveTest(),
+      // THEN POSITIVE CASE:
+      assignSwabSample(),
+      // ELSE NEGATIVE CASE:
       StudyEngine.if(
         StudyEngine.and(
-          StudyEngine.or(
-            StudyEngine.and(
-              StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
-              StudyEngine.lt(
-                StudyEngine.timestampWithOffset({ hours: -71 }),
-                StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
-              )),
-            StudyEngine.and(
-              StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
-              StudyEngine.lt(
-                StudyEngine.timestampWithOffset({ hours: -71 }),
-                StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
-              )
-            )
-          ),
-          StudyEngine.multipleChoice.any(
-            Weekly.Q1.QSymptoms.key,
-            '3', '5', '6', '7'
-          ),
-          StudyEngine.lt(
-            StudyEngine.timestampWithOffset({ hours: -120 }),
-            StudyEngine.getResponseValueAsNum(Weekly.HS.Q3.key, 'rg.0')
-          ),
-        ),
-        // if negative then:
-        StudyEngine.if(
+          hasRecentNegativeTestAndRecentSymptoms(),
+          // Use sampler:
           StudyEngine.externalEventEval(externalServiceNames.samplerIsSelected),
-          // sampled:
-          StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
-          // else:
-          StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
         ),
+        // sampled:
+        assignSwabSample(),
         // else:
-        StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
-      ),
+        assignSwabNotSelected(),
+      )
     ),
     // else:
-    StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
+    assignSwabNotSelected(),
   )
 )
 
