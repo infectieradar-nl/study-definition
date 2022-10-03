@@ -127,7 +127,7 @@ const handleSwabSample = StudyEngine.ifThen(
       ParticipantFlags.selfSwabbingSampledTime.key,
       StudyEngine.timestampWithOffset({ days: 0 }),
     ),
-    StudyEngine.participantActions.messages.add(messageTypes.swabConfirmation, StudyEngine.timestampWithOffset({ hours: 0 }))
+    StudyEngine.participantActions.messages.add(messageTypes.infosAfterSelectionForSwabbing, StudyEngine.timestampWithOffset({ hours: 0 }))
   )
 )
 
