@@ -222,8 +222,8 @@ export class Q1d3NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What was the date of the positive selftest? Please guess if you can't remember the date exactly."],
-        ["nl", "Wat was de datum van de positieve zelftest? Als je de datum niet meer precies weet mag je deze schatten."],
+        ["en", "What was the date of the selftest? Please guess if you can't remember the date exactly."],
+        ["nl", "Wat was de datum van de zelftestafname? Als je de datum niet meer precies weet mag je deze schatten."],
       ]),
       responseOptions: [
         {
