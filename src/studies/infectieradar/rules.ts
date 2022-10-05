@@ -44,6 +44,9 @@ const handleIntake = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag('retired', 'true'),
     StudyEngine.participantActions.updateFlag('retired', 'false'),
   ),
+
+  // Set vaccination flag with current time, so that weekly survey can use the value:
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
 )
 
 const handleWeekly = StudyEngine.ifThen(
