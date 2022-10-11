@@ -17,7 +17,7 @@ class SwabSampleDef extends SurveyDefinition {
         ["nl", "Je bent geselecteerd voor het afnemen van een neus- en keelmonster"],
       ]),
       description: new Map([
-        ["nl", "Laat weten of je de komende 12 uur een neus- en keelmonster kan afnemen"],
+        ["nl", "Laat weten of je de komende 24 uur een neus- en keelmonster kan afnemen"],
       ]),
       durationText: new Map([
         ["nl", "Vul in"],
@@ -56,7 +56,7 @@ class Intro extends Item {
 Stuur alsjeblieft zo spoedig mogelijk een neus- en keelmonster naar het RIVM.
 Hiermee draag je bij aan kennis over welke virussen deze week klachten veroorzaken.
 
-Het is echter belangrijk dat je in staat bent om het monster in de komende 12 uur te nemen.
+Het is echter belangrijk dat je in staat bent om het monster in de komende 24 uur te nemen.
 Lukt dit?
 
 Als je mee doet ontvang je na minimaal twee weken een uitslag in je zelftestportaal.
@@ -99,7 +99,7 @@ class ConfirmParticipation extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Lukt het om in de komende 12 uur een neus- en keelmonster af te nemen?"],
+        ["nl", "Lukt het om in de komende 24 uur een neus- en keelmonster af te nemen?"],
       ]),
       questionSubText: new Map([
         ["nl", "Lukt het niet, geef dit dan aan."],
@@ -130,20 +130,33 @@ class InfosWhenConfirmed extends Item {
   }
 
   markdownContent = `
-Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 12 uur.
+Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 24 uur.
 
 Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2).
+Of bekijk de video hieronder.
 
 Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
 
 - Houd rekening met de lichtingstijden van de brievenbus zodat het monster niet onnodig lang onderweg is in de post. Is het vandaag vrijdag, zaterdag of zondag, leg het monster dan in de afgesloten retourenvelop in de koelkast. Doe de retourenvelop maandag op de bus.
 - Wanneer je in isolatie zit ivm corona, dan kan je het monster in de afgesloten retourenvelop in de koelkast bewaren tot je isolatie is afgelopen, of een huisgenoot (die niet in isolatie zit) kan het op de bus doen.
+- **Extra verzoek: doe de relevante zelftest ook in de envelop (alleen de test-cassette, geen swab of buffer).** 
 
 Je ontvangt automatisch een nieuw zelftest-pakket, bestel daarom niets extra.
 
 Het resultaat van jouw neus- en keelmonster wordt na 2 weken teruggekoppeld zodat je weet wat de oorzaak van jouw klachten was. Het resultaat vind je terug in het GLEAN portaal. Je ontvangt hiervoor een bericht.
 
 *Bovenstaande instructies ontvang je ook per e-mail.*
+
+***
+
+## Video
+Hieronder een filmpje met uitleg over de afname van het neus- en keelmonster.
+<br></br>
+
+<video controls="controls" width=100%>
+    <source src="www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-web-hd.mp4" type="video/mp4">
+    Uw browser ondersteunt het video-element niet.
+</video>
 `
 
   buildItem(): SurveySingleItem {
