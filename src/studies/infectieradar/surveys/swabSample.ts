@@ -135,11 +135,11 @@ Dank je wel dat je een neus- en keelmonster kan afnemen in de komende 24 uur.
 Volg de instructies in het testpakket, of lees ze [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_1.jpg)(pagina 1) en [hier](https://infectieradar.nl/assets/images/TG_137321_zelfbemonstering_V71024_2.jpg)(pagina 2).
 Of bekijk de video hieronder.
 
-Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele envelop in het pakket).
+Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebruik hiervoor de gele retourenvelop in het pakket).
 
 - Houd rekening met de lichtingstijden van de brievenbus zodat het monster niet onnodig lang onderweg is in de post. Is het vandaag vrijdag, zaterdag of zondag, leg het monster dan in de afgesloten retourenvelop in de koelkast. Doe de retourenvelop maandag op de bus.
 - Wanneer je in isolatie zit ivm corona, dan kan je het monster in de afgesloten retourenvelop in de koelkast bewaren tot je isolatie is afgelopen, of een huisgenoot (die niet in isolatie zit) kan het op de bus doen.
-- **Extra verzoek: doe de relevante zelftest ook in de envelop (alleen de test-cassette, geen swab of buffer).** 
+- **Extra verzoek: doe de corona zelftest die je thuis afgelezen hebt ook in de gele retourenvelop **(alleen de witte test-cassette, daar waar de C- en T-streepjes op staan). In de gele retourenvelop zitten dan het neus- en keelmonster en de test-cassette.
 
 Je ontvangt automatisch een nieuw zelftest-pakket, bestel daarom niets extra.
 
