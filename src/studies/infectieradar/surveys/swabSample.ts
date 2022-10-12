@@ -139,7 +139,7 @@ Na het afnemen stuur je het monster zo spoedig mogelijk op naar het RIVM (gebrui
 
 - Houd rekening met de lichtingstijden van de brievenbus zodat het monster niet onnodig lang onderweg is in de post. Is het vandaag vrijdag, zaterdag of zondag, leg het monster dan in de afgesloten retourenvelop in de koelkast. Doe de retourenvelop maandag op de bus.
 - Wanneer je in isolatie zit ivm corona, dan kan je het monster in de afgesloten retourenvelop in de koelkast bewaren tot je isolatie is afgelopen, of een huisgenoot (die niet in isolatie zit) kan het op de bus doen.
-- **Extra verzoek: doe de corona zelftest die je thuis afgelezen hebt ook in de gele retourenvelop **(alleen de witte test-cassette, daar waar de C- en T-streepjes op staan). In de gele retourenvelop zitten dan het neus- en keelmonster en de test-cassette.
+- **Extra verzoek: doe de corona zelftest die je thuis afgelezen hebt ook in de gele retourenvelop** (alleen de witte test-cassette, daar waar de C- en T-streepjes op staan). In de gele retourenvelop zitten dan het neus- en keelmonster en de test-cassette.
 
 Je ontvangt automatisch een nieuw zelftest-pakket, bestel daarom niets extra.
 
@@ -154,7 +154,7 @@ Hieronder een filmpje met uitleg over de afname van het neus- en keelmonster.
 <br></br>
 
 <video controls="controls" width=100%>
-    <source src="www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-web-hd.mp4" type="video/mp4">
+    <source src="https://www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-web-hd.mp4" type="video/mp4">
     Uw browser ondersteunt het video-element niet.
 </video>
 `
