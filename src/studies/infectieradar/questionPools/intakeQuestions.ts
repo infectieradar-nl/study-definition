@@ -3450,7 +3450,12 @@ export class SelfSwabInvite extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'SelfSwabInvite');
     this.isRequired = isRequired;
-    this.condition = SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.selfSwabbing.key));
+    this.condition = SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.selfSwabbing.key,
+        ParticipantFlags.selfSwabbing.values.active
+      )
+    );
   }
 
   buildItem() {
