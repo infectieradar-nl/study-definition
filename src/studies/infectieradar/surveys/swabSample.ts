@@ -151,10 +151,11 @@ Het resultaat van jouw neus- en keelmonster wordt na 2 weken teruggekoppeld zoda
 
 ## Video
 Hieronder een filmpje met uitleg over de afname van het neus- en keelmonster.
-<br></br>
 
-<video controls="controls" width=100%>
+<video controls="controls" width=100% poster="https://www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-still-middel.jpg">
     <source src="https://www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-web-hd.mp4" type="video/mp4">
+    <source src="https://www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-web.webm" type="video/webm">
+    <source src="https://www.rovid.nl/rivm/aco/2022/rivm-aco-20221007-id1s866uo-bron.mxf" type="video/mxf">
     Uw browser ondersteunt het video-element niet.
 </video>
 `

@@ -53,8 +53,8 @@ class ExplanationText extends Item {
             ["nl", `
 ## Je bent niet geselecteerd, je hoeft niets te doen. 
 
-Dank je wel voor het doorgeven van je klachten en/of testuitslag. 
-Echter, deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster.
+Dank je wel voor je melding. 
+Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster.
 Je hoeft verder niets te doen.
 
 Nogmaals dank voor het melden.
