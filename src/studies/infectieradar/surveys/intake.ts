@@ -114,6 +114,7 @@ class IntakeDef extends SurveyDefinition {
   }
 
   buildSurvey() {
+    this.addItem(this.SelfSwabInvite.get());
     this.addItem(this.QGender.get());
     this.addItem(this.QBirthdate.get());
     this.addItem(this.QPostal.get());
@@ -151,7 +152,6 @@ class IntakeDef extends SurveyDefinition {
     this.addItem(this.Q24NLb.get());
     this.addItem(this.Q25NL.get());
     this.addItem(this.Q26NL.get());
-    this.addItem(this.SelfSwabInvite.get());
     this.addItem(this.FinalText.get());
   }
 }
