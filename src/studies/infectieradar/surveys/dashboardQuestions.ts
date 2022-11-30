@@ -1,13 +1,15 @@
-import { Expression, SurveySingleItem } from "survey-engine/data_types";
-import { Item, Group } from "case-editor-tools/surveys/types";
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { Expression } from 'survey-engine/data_types';
+import { surveyKeys } from '../contants';
 
-export class DashboardGroup extends Group {
-  //q100: q100;
-  //q101: q101;
+
+class DashboardSample extends SurveyDefinition {
+
+  q101: q101;
   IntroGebruik: IntroGebruik;
-  q102: q102;
+  /*q102: q102;
   q103a: q103a;
   q103b: q103b;
   q104: q104;
@@ -26,55 +28,79 @@ export class DashboardGroup extends Group {
   q114: q114;
   q115: q115;
   q116: q116;
-  q117: q117;
+  q117: q117;*/
 
-  
-  constructor(parentKey: string, groupCondition: Expression, export class DashboardGroup extends Group {
-    : Expression) {
-    super(parentKey, 'DG');
+  constructor() {
+    super({
+      surveyKey: surveyKeys.Dashboard,
+      name: new Map([
+        ['nl', 'Aantal zelftestdeelnemers is bereikt']
+      ]),
+      description: new Map([
+        ['nl', 'Geef hier aan of we je later kunnen vragen om alsnog mee te doen met zelftesten']
+      ]),
+      durationText: new Map([
+        ['nl', 'Invullen duurt minder dan 1 minuut']
+      ]),
+    });
 
-    this.groupEditor.setCondition(groupCondition);
+    const isRequired = true;
 
-    this.IntroGebruik = new IntroGebruik(this.key, true);
-    this.q102  = new q102(this.key, true);
+    this.q101 = new q101(this.key, isRequired);
+    this.IntroGebruik = new IntroGebruik(this.key);
+    /*this.q102 = new q102(this.key, true, isRequired);
     this.q103a = new q103a(this.key,
       SurveyEngine.singleChoice.any(this.q102.key, '0'), isRequired);
     this.q103b = new q103a(this.key,
         SurveyEngine.singleChoice.any(this.q102.key, '1', '2', '3', '4'), isRequired);
+    this.q104 = new q104(this.key, true, isRequired);
+    this.IntroBegrip = new IntroBegrip(this.key, true);
+    this.q105a = new q105a(this.key, true, isRequired);
+    this.q105b = new q105b(this.key, true, isRequired);
+    this.q106 = new q106(this.key, true, isRequired);
+    this.q107 = new q107(this.key, true, isRequired);
+    this.q108 = new q108(this.key, true, isRequired);
+    this.q109 = new q109(this.key, true, isRequired);
+    this.q110 = new q110(this.key, true, isRequired);
+    this.IntroLayout = new IntroLayout(this.key, true);
+    this.q111 = new q111(this.key, true, isRequired);
+    this.q112 = new q112(this.key, true, isRequired);
+    this.q113 = new q113(this.key, true, isRequired);
+    this.q114 = new q114(this.key, true, isRequired);
+    this.q115 = new q115(this.key, true, isRequired);
+    this.q116 = new q116(this.key, true, isRequired);
+    this.q117 = new q117(this.key, true, isRequired);*/
+    }
 
-
-
-
-  }
-
-
-buildGroup() {
-  //this.addItem(this.q100.get());
-  //this.addItem(this.q101.get());
-  this.addItem(this.IntroGebruik.get());
-  this.addItem(this.q102.get());
-  this.addItem(this.q103a.get());
-  this.addItem(this.q103b.get());
-  this.addItem(this.q104.get());
-  this.addItem(this.IntroBegrip.get());
-  this.addItem(this.q105a.get());
-  this.addItem(this.q105b.get());
-  this.addItem(this.q106.get());
-  this.addItem(this.q107.get());
-  this.addItem(this.q108.get());
-  this.addItem(this.q109.get());
-  this.addItem(this.q110.get());
-  this.addItem(this.IntroLayout.get());
-  this.addItem(this.q111.get());
-  this.addItem(this.q112.get());
-  this.addItem(this.q113.get());
-  this.addItem(this.q114.get());
-  this.addItem(this.q115.get());
-  this.addItem(this.q116.get());
-  this.addItem(this.q117.get());
+  buildSurvey() {
+    // Define order of the questions here:
+    this.addItem(this.q101.get());
+    this.addItem(this.IntroGebruik.get());
+    /*this.addItem(this.q102.get());
+    this.addItem(this.q103a.get());
+    this.addItem(this.q103b.get());
+    this.addItem(this.q104.get());
+    this.addItem(this.IntroBegrip.get());
+    this.addItem(this.q105a.get());
+    this.addItem(this.q105b.get());
+    this.addItem(this.q106.get());
+    this.addItem(this.q107.get());
+    this.addItem(this.q108.get());
+    this.addItem(this.q109.get());
+    this.addItem(this.q110.get());
+    this.addItem(this.IntroLayout.get());
+    this.addItem(this.q111.get());
+    this.addItem(this.q112.get());
+    this.addItem(this.q113.get());
+    this.addItem(this.q114.get());
+    this.addItem(this.q115.get());
+    this.addItem(this.q116.get());
+    this.addItem(this.q117.get());*/
   }
 }
 
+
+/*  
 export class q100 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q100');
@@ -89,7 +115,7 @@ export class q100 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers. Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op www.infectieradar.nl. De vragenlijst duurt 5 minuten en is geheel vrijblijvend. "],
+        ["nl", "We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers. Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl). De vragenlijst duurt 5 minuten en is geheel vrijblijvend. "],
       ]),
       responseOptions: [
         {
@@ -107,13 +133,12 @@ export class q100 extends Item {
       ]
     })
   }
-}
+}*/
 
 export class q101 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q101');
-    this.isRequired = isRequired;
-    this.condition = condition;
+    this.isRequired = isRequired;    
   }
 
   buildItem() {
@@ -391,7 +416,7 @@ class IntroBegrip extends Item {
       content: [
         ComponentGenerators.text({
           content: new Map([
-            ["nl", "De volgende vragen gaan over je begrip van het eerste figuur op de “actuele resultaten” pagina, namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen."],
+            ["nl", "De volgende vragen gaan over je begrip van het eerste figuur op de [*“actuele resultaten” pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen."],
           ])
         }),
       ]
@@ -740,7 +765,7 @@ class IntroLayout extends Item {
       content: [
         ComponentGenerators.text({
           content: new Map([
-            ["nl", "Open de “actuele resultaten” pagina. Bekijk de hele pagina en focus op de lay-out. Ga daarna terug naar de vragen."],
+            ["nl", "Open de [*“actuele resultaten” pagina*](https://www.infectieradar.nl/results). Bekijk de hele pagina en focus op de lay-out. Ga daarna terug naar de vragen."],
           ])
         }),
       ]
@@ -1027,3 +1052,5 @@ export class q117 extends Item {
     })
   }
 }
+
+export const Dashboard = new DashboardSample();

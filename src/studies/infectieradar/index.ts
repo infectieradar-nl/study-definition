@@ -12,6 +12,7 @@ import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParticipantToSelfSwabbingWithoutCode";
 import { participantMessages } from "./messageConfigs/participantMessages";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
+import { Dashboard } from "./surveys/dashboardQuestions";
 
 
 export const InfectieradarStudy: Study = {
@@ -25,6 +26,7 @@ export const InfectieradarStudy: Study = {
     SwabSample,
     SwabNotSelected,
     QuitSwabbing,
+    Dashboard
   ],
   studyRules: studyRules,
   messageConfigs: [
