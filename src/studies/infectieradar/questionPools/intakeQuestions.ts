@@ -90,7 +90,6 @@ export class QBirthdate extends Item {
 
   buildItem() {
     const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-    editor.setVersion(1);
 
     // QUESTION TEXT
     editor.setTitleComponent(

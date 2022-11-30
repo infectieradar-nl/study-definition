@@ -461,7 +461,6 @@ class Q3 extends Item {
 
   buildItem() {
     const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-    editor.setVersion(1);
 
     // QUESTION TEXT
     editor.setTitleComponent(
@@ -1368,7 +1367,6 @@ class Q7b extends Item {
   buildItem() {
     const itemKey = this.key;
     const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
 
     // QUESTION TEXT
     editor.setTitleComponent(
