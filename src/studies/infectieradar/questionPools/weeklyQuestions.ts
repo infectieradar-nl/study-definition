@@ -755,7 +755,7 @@ export class FinalText extends Item {
     return SurveyItems.surveyEnd(
       this.parentKey,
       new Map([
-        ["nl", "Nogmaals hartelijk dan voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst!"],
+        ["nl", "Hartelijk dan voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
       ]),
       this.condition,
     )
@@ -2361,37 +2361,3 @@ Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neu
 
 }
 
-/*
-export class q100 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-    super(parentKey, 'q100');
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.multipleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["nl", "We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers. Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl). De vragenlijst duurt 5 minuten en is geheel vrijblijvend. "],
-      ]),
-      responseOptions: [
-        {
-          key: '1', role: 'option',
-          content: new Map([
-            ["nl", "Ja, ik wil wel een aantal vragen beantwoorden over het delen van resultaten"],
-          ])
-        },
-        {
-          key: '0', role: 'option',
-          content: new Map([
-            ["nl", "Nee, ik wil geen vragen beantwoorden over het delen van resultaten"],
-          ])
-        },
-      ]
-    })
-  }
-}*/

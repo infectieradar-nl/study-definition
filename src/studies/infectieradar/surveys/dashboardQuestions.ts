@@ -7,9 +7,10 @@ import { surveyKeys } from '../contants';
 
 class DashboardSample extends SurveyDefinition {
 
+  q100: q100;
   q101: q101;
   IntroGebruik: IntroGebruik;
-  /*q102: q102;
+  q102: q102;
   q103a: q103a;
   q103b: q103b;
   q104: q104;
@@ -28,55 +29,58 @@ class DashboardSample extends SurveyDefinition {
   q114: q114;
   q115: q115;
   q116: q116;
-  q117: q117;*/
+  q117: q117;
 
   constructor() {
     super({
       surveyKey: surveyKeys.Dashboard,
       name: new Map([
-        ['nl', 'Aantal zelftestdeelnemers is bereikt']
+        ['nl', 'Vragenlijst actuele resultaten pagina Infectieradar']
       ]),
       description: new Map([
-        ['nl', 'Geef hier aan of we je later kunnen vragen om alsnog mee te doen met zelftesten']
+        ['nl', 'Geef hier aan of we je later kunnen vragen om alsnog mee te doen']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt minder dan 1 minuut']
+        ['nl', 'Invullen duurt minder dan 5 minuut']
       ]),
     });
 
     const isRequired = true;
 
-    this.q101 = new q101(this.key, isRequired);
+    this.q100 = new q100(this.key, isRequired);
+    this.q101 = new q101(this.key,
+      SurveyEngine.singleChoice.any(this.q100.key, '0'), isRequired);
     this.IntroGebruik = new IntroGebruik(this.key);
-    /*this.q102 = new q102(this.key, true, isRequired);
+    this.q102 = new q102(this.key, isRequired);
     this.q103a = new q103a(this.key,
       SurveyEngine.singleChoice.any(this.q102.key, '0'), isRequired);
-    this.q103b = new q103a(this.key,
-        SurveyEngine.singleChoice.any(this.q102.key, '1', '2', '3', '4'), isRequired);
-    this.q104 = new q104(this.key, true, isRequired);
-    this.IntroBegrip = new IntroBegrip(this.key, true);
-    this.q105a = new q105a(this.key, true, isRequired);
-    this.q105b = new q105b(this.key, true, isRequired);
-    this.q106 = new q106(this.key, true, isRequired);
-    this.q107 = new q107(this.key, true, isRequired);
-    this.q108 = new q108(this.key, true, isRequired);
-    this.q109 = new q109(this.key, true, isRequired);
-    this.q110 = new q110(this.key, true, isRequired);
-    this.IntroLayout = new IntroLayout(this.key, true);
-    this.q111 = new q111(this.key, true, isRequired);
-    this.q112 = new q112(this.key, true, isRequired);
-    this.q113 = new q113(this.key, true, isRequired);
-    this.q114 = new q114(this.key, true, isRequired);
-    this.q115 = new q115(this.key, true, isRequired);
-    this.q116 = new q116(this.key, true, isRequired);
-    this.q117 = new q117(this.key, true, isRequired);*/
+    this.q103b = new q103b(this.key,
+      SurveyEngine.singleChoice.any(this.q102.key, '1', '2', '3', '4'), isRequired);
+    this.q104 = new q104(this.key, isRequired);
+    this.IntroBegrip = new IntroBegrip(this.key);
+    this.q105a = new q105a(this.key, isRequired);
+    this.q105b = new q105b(this.key, isRequired);
+    this.q106 = new q106(this.key, isRequired);
+    this.q107 = new q107(this.key, isRequired);
+    this.q108 = new q108(this.key, isRequired);
+    this.q109 = new q109(this.key, isRequired);
+    this.q110 = new q110(this.key, isRequired);
+    this.IntroLayout = new IntroLayout(this.key);
+    this.q111 = new q111(this.key, isRequired);
+    this.q112 = new q112(this.key, isRequired);
+    this.q113 = new q113(this.key, isRequired);
+    this.q114 = new q114(this.key, isRequired);
+    this.q115 = new q115(this.key, isRequired);
+    this.q116 = new q116(this.key, isRequired);
+    this.q117 = new q117(this.key, isRequired);
     }
 
   buildSurvey() {
     // Define order of the questions here:
+    this.addItem(this.q100.get());
     this.addItem(this.q101.get());
     this.addItem(this.IntroGebruik.get());
-    /*this.addItem(this.q102.get());
+    this.addItem(this.q102.get());
     this.addItem(this.q103a.get());
     this.addItem(this.q103b.get());
     this.addItem(this.q104.get());
@@ -95,17 +99,16 @@ class DashboardSample extends SurveyDefinition {
     this.addItem(this.q114.get());
     this.addItem(this.q115.get());
     this.addItem(this.q116.get());
-    this.addItem(this.q117.get());*/
+    this.addItem(this.q117.get());
   }
 }
 
 
-/*  
+  
 export class q100 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q100');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -133,12 +136,13 @@ export class q100 extends Item {
       ]
     })
   }
-}*/
+}
 
 export class q101 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string,  condition: Expression, isRequired: boolean) {
     super(parentKey, 'q101');
-    this.isRequired = isRequired;    
+    this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -214,10 +218,9 @@ class IntroGebruik extends Item {
 }
 
 export class q102 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q102');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -370,10 +373,9 @@ export class q103b extends Item {
 }
 
 export class q104 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q104');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -425,10 +427,9 @@ class IntroBegrip extends Item {
 }
 
 export class q105a extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q105a');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -477,10 +478,9 @@ export class q105a extends Item {
 }
 
 export class q105b extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q105b');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -535,10 +535,9 @@ export class q105b extends Item {
 }
 
 export class q106 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q106');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -575,10 +574,9 @@ export class q106 extends Item {
 }
 
 export class q107 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q107');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -615,10 +613,9 @@ export class q107 extends Item {
 }
 
 export class q108 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q108');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -667,10 +664,9 @@ export class q108 extends Item {
 }
 
 export class q109 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q109');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -719,10 +715,9 @@ export class q109 extends Item {
 }
 
 export class q110 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q110');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -774,10 +769,9 @@ class IntroLayout extends Item {
 }
 
 export class q111 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q111');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -826,10 +820,9 @@ export class q111 extends Item {
 }
 
 export class q112 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q112');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -878,10 +871,9 @@ export class q112 extends Item {
 }
 
 export class q113 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q113');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -924,10 +916,9 @@ export class q113 extends Item {
 }
 
 export class q114 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q114');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -964,10 +955,9 @@ export class q114 extends Item {
 }
 
 export class q115 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q115');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -998,10 +988,9 @@ export class q115 extends Item {
 }
 
 export class q116 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q116');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
@@ -1026,10 +1015,9 @@ export class q116 extends Item {
 }
 
 export class q117 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q117');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
