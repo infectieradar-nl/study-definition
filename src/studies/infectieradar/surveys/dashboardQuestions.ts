@@ -35,10 +35,10 @@ class DashboardSample extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.Dashboard,
       name: new Map([
-        ['nl', 'Vragenlijst actuele resultaten pagina Infectieradar']
+        ['nl', 'Vragenlijst actuele resultatenpagina']
       ]),
       description: new Map([
-        ['nl', 'Geef hier aan of we je later kunnen vragen om alsnog mee te doen']
+        ['nl', 'Geef je mening over de resultatenpagina van Infectieradar']
       ]),
       durationText: new Map([
         ['nl', 'Invullen duurt minder dan 5 minuut']
@@ -49,7 +49,7 @@ class DashboardSample extends SurveyDefinition {
 
     this.q100 = new q100(this.key, isRequired);
     this.q101 = new q101(this.key,
-      SurveyEngine.singleChoice.any(this.q100.key, '0'), isRequired);
+      SurveyEngine.singleChoice.any(this.q100.key, '1'), isRequired);
     this.IntroGebruik = new IntroGebruik(this.key);
     this.q102 = new q102(this.key, isRequired);
     this.q103a = new q103a(this.key,
@@ -1004,7 +1004,7 @@ export class q116 extends Item {
       ]),
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: '1', role: 'input',
           content: new Map([
             ["nl", "Suggesties:"],
           ])
@@ -1031,7 +1031,7 @@ export class q117 extends Item {
       ]),
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: '1', role: 'input',
           content: new Map([
             ["nl", "Verdere opmerkingen/suggesties:"],
           ])
