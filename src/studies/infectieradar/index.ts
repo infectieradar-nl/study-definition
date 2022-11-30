@@ -13,6 +13,7 @@ import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParti
 import { participantMessages } from "./messageConfigs/participantMessages";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { Dashboard } from "./surveys/dashboardQuestions";
+import { fixLastVaccinationAnswerFlag_rules } from "./customRules/fixLastVaccinationAnswerFlag";
 
 
 export const InfectieradarStudy: Study = {
@@ -37,5 +38,6 @@ export const InfectieradarStudy: Study = {
     reinvitePeopleToIntake_rules,
     updateRetirementFlag_rules,
     inviteToSelfSwabbingWithoutCode_rules,
+    fixLastVaccinationAnswerFlag_rules,
   ]
 }
