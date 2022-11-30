@@ -755,7 +755,7 @@ export class FinalText extends Item {
     return SurveyItems.surveyEnd(
       this.parentKey,
       new Map([
-        ["nl", "Hartelijk dan voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
+        ["nl", "Hartelijk dank voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
       ]),
       this.condition,
     )

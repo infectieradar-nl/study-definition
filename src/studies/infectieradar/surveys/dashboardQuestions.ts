@@ -30,6 +30,7 @@ class DashboardSample extends SurveyDefinition {
   q115: q115;
   q116: q116;
   q117: q117;
+  FinalText: FinalText;
 
   constructor() {
     super({
@@ -73,6 +74,7 @@ class DashboardSample extends SurveyDefinition {
     this.q115 = new q115(this.key, isRequired);
     this.q116 = new q116(this.key, isRequired);
     this.q117 = new q117(this.key, isRequired);
+    this.FinalText = new FinalText(this.key);
     }
 
   buildSurvey() {
@@ -100,6 +102,7 @@ class DashboardSample extends SurveyDefinition {
     this.addItem(this.q115.get());
     this.addItem(this.q116.get());
     this.addItem(this.q117.get());
+    this.addItem(this.FinalText.get());
   }
 }
 
@@ -1006,7 +1009,13 @@ export class q116 extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Suggesties:"],
+            ["nl", "Ja, namelijk:"],
+          ])
+        },
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
           ])
         },
       ]
@@ -1033,11 +1042,33 @@ export class q117 extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Verdere opmerkingen/suggesties:"],
+            ["nl", "Ja, namelijk:"],
+          ])
+        },
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
           ])
         },
       ]
     })
+  }
+}
+
+export class FinalText extends Item {
+  constructor(parentKey: string) {
+    super(parentKey, 'FinalText');
+  }
+
+  buildItem() {
+    return SurveyItems.surveyEnd(
+      this.parentKey,
+      new Map([
+        ["nl", "Hartelijk dank voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
+      ]),
+      this.condition,
+    )
   }
 }
 
