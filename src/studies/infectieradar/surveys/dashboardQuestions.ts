@@ -49,8 +49,8 @@ class DashboardSample extends SurveyDefinition {
     const isRequired = true;
 
     this.q100 = new q100(this.key, isRequired);
-    this.q101 = new q101(this.key,
-      SurveyEngine.singleChoice.any(this.q100.key, '1'), isRequired);
+    const conditionForWantToParticipate = SurveyEngine.singleChoice.any(this.q100.key, '1');
+    this.q101 = new q101(this.key, conditionForWantToParticipate, isRequired);
     this.IntroGebruik = new IntroGebruik(this.key);
     this.q102 = new q102(this.key, isRequired);
     this.q103a = new q103a(this.key,
@@ -75,7 +75,7 @@ class DashboardSample extends SurveyDefinition {
     this.q116 = new q116(this.key, isRequired);
     this.q117 = new q117(this.key, isRequired);
     this.FinalText = new FinalText(this.key);
-    }
+  }
 
   buildSurvey() {
     // Define order of the questions here:
@@ -107,7 +107,7 @@ class DashboardSample extends SurveyDefinition {
 }
 
 
-  
+
 export class q100 extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'q100');
@@ -115,7 +115,7 @@ export class q100 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.multipleChoice({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -142,7 +142,7 @@ export class q100 extends Item {
 }
 
 export class q101 extends Item {
-  constructor(parentKey: string,  condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q101');
     this.isRequired = isRequired;
     this.condition = condition;
