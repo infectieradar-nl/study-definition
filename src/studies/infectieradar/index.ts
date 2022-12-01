@@ -14,6 +14,7 @@ import { participantMessages } from "./messageConfigs/participantMessages";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { Dashboard } from "./surveys/dashboardQuestions";
 import { fixLastVaccinationAnswerFlag_rules } from "./customRules/fixLastVaccinationAnswerFlag";
+import { assignDashboardQuestions_rules } from "./customRules/assignDashboardQuestions";
 
 
 export const InfectieradarStudy: Study = {
@@ -39,5 +40,6 @@ export const InfectieradarStudy: Study = {
     updateRetirementFlag_rules,
     inviteToSelfSwabbingWithoutCode_rules,
     fixLastVaccinationAnswerFlag_rules,
+    assignDashboardQuestions_rules,
   ]
 }

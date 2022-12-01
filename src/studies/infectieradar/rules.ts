@@ -180,6 +180,13 @@ const autoRemoveContactData = StudyEngine.ifThen(
   ),
 )
 
+const handleDashboardQuestions = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(surveyKeys.Dashboard),
+  // THEN:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.Dashboard, 'all'),
+)
+
+
 const submitRules: Expression[] = [
   handleIntake,
   handleWeekly,
@@ -188,6 +195,7 @@ const submitRules: Expression[] = [
   handleSwabSample,
   handleSwabNotSelected,
   handleQuitSwabbing,
+  handleDashboardQuestions,
 ];
 
 const timerRules: Expression[] = [
