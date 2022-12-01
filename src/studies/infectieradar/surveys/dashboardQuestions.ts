@@ -121,8 +121,21 @@ export class q100 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers. Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl). De vragenlijst duurt 5 minuten en is geheel vrijblijvend. "],
+        ["nl", "Participation"],
       ]),
+      // titleClassName: 'd-none',
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          className: 'fw-bold mb-2',
+          content: new Map([
+            ['nl',
+              `
+We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers.
+
+Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl). De vragenlijst duurt 5 minuten en is geheel vrijblijvend.`
+            ]])
+        })
+      ],
       responseOptions: [
         {
           key: '1', role: 'option',
