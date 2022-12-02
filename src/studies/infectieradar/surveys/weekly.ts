@@ -42,8 +42,6 @@ class WeeklyDef extends SurveyDefinition {
   Q1: SymptomsGroup;
   HS: HasSymptomsGroup;
 
-  //q100: q100;
-
   FinalText: FinalText;
 
 
@@ -127,8 +125,6 @@ class WeeklyDef extends SurveyDefinition {
     const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
     this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
 
-    //this.q100 = new q100(this.key);
-
     this.FinalText = new FinalText(this.key);
   }
 
@@ -165,9 +161,7 @@ class WeeklyDef extends SurveyDefinition {
 
     this.addItem(this.Q1.get());
     this.addItem(this.HS.get());
-
-    //this.addItem(this.q100.get());
-    
+  
     this.addItem(this.FinalText.get());
   }
 }

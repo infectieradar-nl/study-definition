@@ -9,12 +9,12 @@ class DashboardSample extends SurveyDefinition {
 
   q100: q100;
   q101: q101;
-  IntroGebruik: IntroGebruik;
+  //IntroGebruik: IntroGebruik;
   q102: q102;
   q103a: q103a;
   q103b: q103b;
   q104: q104;
-  IntroBegrip: IntroBegrip;
+ //IntroBegrip: IntroBegrip;
   q105a: q105a;
   q105b: q105b;
   q106: q106;
@@ -22,7 +22,7 @@ class DashboardSample extends SurveyDefinition {
   q108: q108;
   q109: q109;
   q110: q110;
-  IntroLayout: IntroLayout;
+  //IntroLayout: IntroLayout;
   q111: q111;
   q112: q112;
   q113: q113;
@@ -51,42 +51,42 @@ class DashboardSample extends SurveyDefinition {
     this.q100 = new q100(this.key, isRequired);
     const conditionForWantToParticipate = SurveyEngine.singleChoice.any(this.q100.key, '1');
     this.q101 = new q101(this.key, conditionForWantToParticipate, isRequired);
-    this.IntroGebruik = new IntroGebruik(this.key);
-    this.q102 = new q102(this.key, isRequired);
+    //this.IntroGebruik = new IntroGebruik(this.key, conditionForWantToParticipate);
+    this.q102 = new q102(this.key, conditionForWantToParticipate, isRequired);
     this.q103a = new q103a(this.key,
       SurveyEngine.singleChoice.any(this.q102.key, '0'), isRequired);
     this.q103b = new q103b(this.key,
       SurveyEngine.singleChoice.any(this.q102.key, '1', '2', '3', '4'), isRequired);
-    this.q104 = new q104(this.key, isRequired);
-    this.IntroBegrip = new IntroBegrip(this.key);
-    this.q105a = new q105a(this.key, isRequired);
-    this.q105b = new q105b(this.key, isRequired);
-    this.q106 = new q106(this.key, isRequired);
-    this.q107 = new q107(this.key, isRequired);
-    this.q108 = new q108(this.key, isRequired);
-    this.q109 = new q109(this.key, isRequired);
-    this.q110 = new q110(this.key, isRequired);
-    this.IntroLayout = new IntroLayout(this.key);
-    this.q111 = new q111(this.key, isRequired);
-    this.q112 = new q112(this.key, isRequired);
-    this.q113 = new q113(this.key, isRequired);
-    this.q114 = new q114(this.key, isRequired);
-    this.q115 = new q115(this.key, isRequired);
-    this.q116 = new q116(this.key, isRequired);
-    this.q117 = new q117(this.key, isRequired);
-    this.FinalText = new FinalText(this.key);
+    this.q104 = new q104(this.key, conditionForWantToParticipate, isRequired);
+    //this.IntroBegrip = new IntroBegrip(this.key, conditionForWantToParticipate);
+    this.q105a = new q105a(this.key, conditionForWantToParticipate, isRequired);
+    this.q105b = new q105b(this.key, conditionForWantToParticipate, isRequired);
+    this.q106 = new q106(this.key, conditionForWantToParticipate, isRequired);
+    this.q107 = new q107(this.key, conditionForWantToParticipate, isRequired);
+    this.q108 = new q108(this.key, conditionForWantToParticipate, isRequired);
+    this.q109 = new q109(this.key, conditionForWantToParticipate, isRequired);
+    this.q110 = new q110(this.key, conditionForWantToParticipate, isRequired);
+   //this.IntroLayout = new IntroLayout(this.key, conditionForWantToParticipate);
+    this.q111 = new q111(this.key, conditionForWantToParticipate, isRequired);
+    this.q112 = new q112(this.key, conditionForWantToParticipate, isRequired);
+    this.q113 = new q113(this.key, conditionForWantToParticipate, isRequired);
+    this.q114 = new q114(this.key, conditionForWantToParticipate, isRequired);
+    this.q115 = new q115(this.key, conditionForWantToParticipate, isRequired);
+    this.q116 = new q116(this.key, conditionForWantToParticipate, isRequired);
+    this.q117 = new q117(this.key, conditionForWantToParticipate, isRequired);
+    this.FinalText= new FinalText(this.key);
   }
 
   buildSurvey() {
     // Define order of the questions here:
     this.addItem(this.q100.get());
     this.addItem(this.q101.get());
-    this.addItem(this.IntroGebruik.get());
+    //this.addItem(this.IntroGebruik.get());
     this.addItem(this.q102.get());
     this.addItem(this.q103a.get());
     this.addItem(this.q103b.get());
     this.addItem(this.q104.get());
-    this.addItem(this.IntroBegrip.get());
+    //this.addItem(this.IntroBegrip.get());
     this.addItem(this.q105a.get());
     this.addItem(this.q105b.get());
     this.addItem(this.q106.get());
@@ -94,7 +94,7 @@ class DashboardSample extends SurveyDefinition {
     this.addItem(this.q108.get());
     this.addItem(this.q109.get());
     this.addItem(this.q110.get());
-    this.addItem(this.IntroLayout.get());
+    //this.addItem(this.IntroLayout.get());
     this.addItem(this.q111.get());
     this.addItem(this.q112.get());
     this.addItem(this.q113.get());
@@ -121,7 +121,7 @@ export class q100 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Participation"],
+        ["nl", "Deelname vragenlijst actuele resultaten pagina"],
       ]),
       // titleClassName: 'd-none',
       topDisplayCompoments: [
@@ -212,9 +212,11 @@ export class q101 extends Item {
   }
 }
 
+/*
 class IntroGebruik extends Item {
-  constructor(parentKey: string) {
-    super(parentKey, 'IntroGebruik');
+  constructor(parentKey: string, condition: Expression,) {
+    super(parentKey, 'IntroGebruik')
+    this.condition = condition;
   }
 
   buildItem() {
@@ -225,19 +227,21 @@ class IntroGebruik extends Item {
       content: [
         ComponentGenerators.text({
           content: new Map([
-            ["nl", "De volgende vragen gaan over hoe vaak je welke onderdelen gebruikt op de “actuele resultaten” pagina."],
+            ["nl", "De volgende vragen gaan over hoe vaak je welke onderdelen gebruikt op de [*“actuele resultaten” pagina.*](https://www.infectieradar.nl/results).",
           ])
         }),
       ]
     })
   }
-}
+}*/
 
 export class q102 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q102');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
+
 
   buildItem() {
     return SurveyItems.singleChoice({
@@ -246,8 +250,19 @@ export class q102 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Bekijk je wel eens de informatie op de “actuele resultaten” pagina?"],
+        ["nl", "Gebruik van de actuele resultaten pagina"],
       ]),
+      // titleClassName: 'd-none',
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          className: 'fw-bold mb-2',
+          content: new Map([
+            ['nl',
+              `De volgende vragen gaan over hoe vaak je welke onderdelen gebruikt op de [*actuele resultaten pagina.*](https://www.infectieradar.nl/results).
+               Bekijk je wel eens de informatie op de “actuele resultaten” pagina?`
+            ]])
+        })
+      ],
       responseOptions: [
         {
           key: '0', role: 'option',
@@ -389,9 +404,10 @@ export class q103b extends Item {
 }
 
 export class q104 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression,isRequired: boolean) {
     super(parentKey, 'q104');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -421,9 +437,10 @@ export class q104 extends Item {
   }
 }
 
-class IntroBegrip extends Item {
-  constructor(parentKey: string) {
+/*class IntroBegrip extends Item {
+  constructor(parentKey: string, condition: Expression) {
     super(parentKey, 'IntroBegrip');
+    this.condition = condition;
   }
 
   buildItem() {
@@ -434,18 +451,19 @@ class IntroBegrip extends Item {
       content: [
         ComponentGenerators.text({
           content: new Map([
-            ["nl", "De volgende vragen gaan over je begrip van het eerste figuur op de [*“actuele resultaten” pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen."],
+            ["nl", "De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen."],
           ])
         }),
       ]
     })
   }
-}
+}*/
 
 export class q105a extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q105a');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -455,8 +473,19 @@ export class q105a extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?"],
+        ["nl", "Figuur 'Trendlijn COVID-19-achtige klachten'"],
       ]),
+      // titleClassName: 'd-none',
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          className: 'fw-bold mb-2',
+          content: new Map([
+            ['nl',
+              `De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen.
+              In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?`
+            ]])
+        })
+      ],
       responseOptions: [
         {
           key: '1', role: 'option',
@@ -494,9 +523,10 @@ export class q105a extends Item {
 }
 
 export class q105b extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q105b');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -551,9 +581,10 @@ export class q105b extends Item {
 }
 
 export class q106 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q106');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -590,9 +621,10 @@ export class q106 extends Item {
 }
 
 export class q107 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q107');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -629,9 +661,10 @@ export class q107 extends Item {
 }
 
 export class q108 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q108');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -680,9 +713,10 @@ export class q108 extends Item {
 }
 
 export class q109 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q109');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -731,9 +765,10 @@ export class q109 extends Item {
 }
 
 export class q110 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q110');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -763,9 +798,10 @@ export class q110 extends Item {
   }
 }
 
-class IntroLayout extends Item {
-  constructor(parentKey: string) {
+/*class IntroLayout extends Item {
+  constructor(parentKey: string, condition: Expression) {
     super(parentKey, 'IntroLayout');
+    this.condition = condition;
   }
 
   buildItem() {
@@ -776,18 +812,19 @@ class IntroLayout extends Item {
       content: [
         ComponentGenerators.text({
           content: new Map([
-            ["nl", "Open de [*“actuele resultaten” pagina*](https://www.infectieradar.nl/results). Bekijk de hele pagina en focus op de lay-out. Ga daarna terug naar de vragen."],
+            ["nl", "Open de [*actuele resultaten pagina*](https://www.infectieradar.nl/results). Bekijk de hele pagina en focus op de lay-out. Ga daarna terug naar de vragen."],
           ])
         }),
       ]
     })
   }
-}
+}*/
 
 export class q111 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q111');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -797,8 +834,19 @@ export class q111 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat vind je van het kleurgebruik op de “actuele resultaten” pagina?"],
+        ["nl", "Kleurgebruik"],
       ]),
+      // titleClassName: 'd-none',
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          className: 'fw-bold mb-2',
+          content: new Map([
+            ['nl',
+              `Open de [*actuele resultaten pagina*](https://www.infectieradar.nl/results). Bekijk de hele pagina en focus op de lay-out. Ga daarna terug naar de vragen.
+              Wat vind je van het kleurgebruik op de “actuele resultaten” pagina?`
+            ]])
+        })
+      ],
       responseOptions: [
         {
           key: '1', role: 'option',
@@ -836,9 +884,10 @@ export class q111 extends Item {
 }
 
 export class q112 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q112');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -887,9 +936,10 @@ export class q112 extends Item {
 }
 
 export class q113 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q113');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -932,9 +982,10 @@ export class q113 extends Item {
 }
 
 export class q114 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q114');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -971,9 +1022,10 @@ export class q114 extends Item {
 }
 
 export class q115 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q115');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1004,9 +1056,10 @@ export class q115 extends Item {
 }
 
 export class q116 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q116');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1037,9 +1090,10 @@ export class q116 extends Item {
 }
 
 export class q117 extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q117');
-    this.isRequired = isRequired;
+    this.isRequired = isRequired
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1078,7 +1132,7 @@ export class FinalText extends Item {
     return SurveyItems.surveyEnd(
       this.parentKey,
       new Map([
-        ["nl", "Hartelijk dank voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
+        ["nl", "Hartelijk dank voor je reactie."],
       ]),
       this.condition,
     )
