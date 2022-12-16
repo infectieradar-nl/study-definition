@@ -365,13 +365,13 @@ export class q103b extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Het figuur met COVID-19 achtige klachten over tijd"],
+            ["nl", "Het figuur met COVID-19-achtige klachten over tijd"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Het figuur met COVID-19 achtige klachten per provincie"],
+            ["nl", "Het figuur met COVID-19-achtige klachten per provincie"],
           ])
         },
         {
@@ -473,7 +473,7 @@ export class q105a extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Figuur 'Trendlijn COVID-19-achtige klachten'"],
+        ["nl", "Figuur Trendlijn COVID-19-achtige klachten"],
       ]),
       // titleClassName: 'd-none',
       topDisplayCompoments: [
@@ -481,8 +481,7 @@ export class q105a extends Item {
           className: 'fw-bold mb-2',
           content: new Map([
             ['nl',
-              `De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen.
-              In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?`
+              `De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen. In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?`
             ]])
         })
       ],
@@ -490,7 +489,7 @@ export class q105a extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Erg makkelijk"],
+            ["nl", "Makkelijk"],
           ])
         },
         {
@@ -514,7 +513,7 @@ export class q105a extends Item {
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Erg moeilijk"],
+            ["nl", "Moeilijk"],
           ])
         },
       ]
@@ -594,7 +593,7 @@ export class q106 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Stel: je hebt vorige week in Infectieradar aangegeven dat je koorts hebt. De klacht koorts valt onder de definitie van COVID-19-achtige klachten en daarmee word je meegeteld in de berekening voor personen met COVID-19-achtige klachten. Deze week heb je nog steeds koorts en dit vul je weer in de vragenlijst. Wordt jouw melding deze week opnieuw meegeteld in de figuur over COVID-19-achtige klachten?"],
+        ["nl", "Stel: je hebt vorige week in Infectieradar aangegeven dat je koorts hebt. De klacht koorts valt onder de definitie van COVID-19-achtige klachten en daarmee word je meegeteld in de berekening voor personen met COVID-19-achtige klachten. Deze week heb je nog steeds koorts en dit vul je weer in de vragenlijst. Wordt jouw melding deze week opnieuw meegeteld in het figuur over COVID-19-achtige klachten?"],
       ]),
       responseOptions: [
         {
@@ -726,13 +725,13 @@ export class q109 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat vind je van het taalgebruik van de tekst naast het figuur?"],
+        ["nl", "Wat vind je van het taalgebruik in de tekst naast het figuur?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Erg makkelijk"],
+            ["nl", "Makkelijk"],
           ])
         },
         {
@@ -756,7 +755,7 @@ export class q109 extends Item {
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Erg moeilijk"],
+            ["nl", "Moeilijk"],
           ])
         },
       ]
@@ -778,7 +777,7 @@ export class q110 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je suggesties om de figuur en/of de tekst begrijpelijker te maken? Denk hierbij voor het figuur bijvoorbeeld aan een andere weergave en voor de tekst aan een andere woordkeuze, zinsopbouw of uitleg van begrippen."],
+        ["nl", "Heb je suggesties om het figuur en/of de tekst begrijpelijker te maken? Denk hierbij voor het figuur bijvoorbeeld aan een andere weergave en voor de tekst aan een andere woordkeuze, zinsopbouw of uitleg van begrippen."],
       ]),
       responseOptions: [
         {
@@ -1103,7 +1102,7 @@ export class q117 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je nog verdere opmerkingen of suggesties voor het verbeteren van de “actuele resultaten” pagina die nog niet aan bod zijn gekomen in de vragenlijst?"],
+        ["nl", "Heb je nog andere opmerkingen of suggesties voor het verbeteren van de “actuele resultaten” pagina die nog niet aan bod zijn gekomen in de vragenlijst?"],
       ]),
       responseOptions: [
         {
