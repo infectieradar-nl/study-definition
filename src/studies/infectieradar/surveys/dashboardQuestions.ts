@@ -132,7 +132,7 @@ export class q100 extends Item {
               `
 We vinden het belangrijk om resultaten uit Infectieradar te delen met deelnemers.
 
-Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl). De vragenlijst duurt 5 minuten en is geheel vrijblijvend.`
+Om dit zo goed mogelijk te blijven doen, willen we je vragen om een korte vragenlijst in te vullen over de “actuele resultaten” op [*www.infectieradar.nl*](https://www.infectieradar.nl/results). De vragenlijst duurt 5 minuten en is geheel vrijblijvend.`
             ]])
         })
       ],
@@ -489,13 +489,13 @@ export class q105a extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Makkelijk"],
+            ["nl", "Erg makkelijk"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Iets te makkelijk"],
+            ["nl", "Makkelijk"],
           ])
         },
         {
@@ -507,13 +507,13 @@ export class q105a extends Item {
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Iets te moeilijk"],
+            ["nl", "Moeilijk"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Moeilijk"],
+            ["nl", "Erg moeilijk"],
           ])
         },
       ]
@@ -535,7 +535,7 @@ export class q105b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "In plaats van een percentage zouden we ook iets anders kunnen weergeven. Stel het percentage is 5%, welke van de alternatieven vind je prettiger?"],
+        ["nl", "In plaats van een percentage zouden we ook iets anders kunnen weergeven. Stel: het percentage van personen met COVID-19-achtige klachten is 5%, welke van de alternatieven vind je prettiger geformuleerd?"],
       ]),
       responseOptions: [
         {
@@ -731,13 +731,13 @@ export class q109 extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Makkelijk"],
+            ["nl", "Erg makkelijk"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Iets te makkelijk"],
+            ["nl", "Makkelijk"],
           ])
         },
         {
@@ -749,13 +749,13 @@ export class q109 extends Item {
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Iets te moeilijk"],
+            ["nl", "Moeilijk"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Moeilijk"],
+            ["nl", "Erg moeilijk"],
           ])
         },
       ]
@@ -948,7 +948,7 @@ export class q113 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Zou je het fijn vinden als er bovenaan de “actuele resultaten” pagina een inhoudsopgave wordt toegevoegd?"],
+        ["nl", "Zou je het fijn vinden als er bovenaan de “actuele resultaten” pagina een inhoudsopgave met directe links naar specifieke figuren wordt toegevoegd?"],
       ]),
       responseOptions: [
         {
@@ -1034,7 +1034,7 @@ export class q115 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Is de volgorde waarop de figuren en teksten met resultaten worden weergegeven logisch?"],
+        ["nl", "Vind je de volgorde waarop de figuren en teksten met resultaten worden weergegeven logisch?"],
       ]),
       responseOptions: [
         {
