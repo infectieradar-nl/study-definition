@@ -258,8 +258,10 @@ export class q102 extends Item {
           className: 'fw-bold mb-2',
           content: new Map([
             ['nl',
-              `De volgende vragen gaan over hoe vaak je welke onderdelen gebruikt op de [*actuele resultaten pagina.*](https://www.infectieradar.nl/results).
-               Bekijk je wel eens de informatie op de “actuele resultaten” pagina?`
+              `
+De volgende vragen gaan over hoe vaak je welke onderdelen gebruikt op de [*actuele resultaten pagina.*](https://www.infectieradar.nl/results).
+               
+Bekijk je wel eens de informatie op de “actuele resultaten” pagina?`
             ]])
         })
       ],
@@ -481,7 +483,10 @@ export class q105a extends Item {
           className: 'fw-bold mb-2',
           content: new Map([
             ['nl',
-              `De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: “Trendlijn COVID-19-achtige klachten”. Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen. In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?`
+              `
+De volgende vragen gaan over je begrip van het eerste figuur op de [*actuele resultaten pagina*](https://www.infectieradar.nl/results), namelijk: Trendlijn COVID-19-achtige klachten. 
+              
+Bekijk het figuur en lees de bijbehorende tekst op de “actuele resultaten” pagina. Ga vervolgens terug naar de vragen. In dit figuur staat het percentage deelnemers met COVID-19-achtige klachten over tijd. Vind je het makkelijk om dit percentage te begrijpen?`
             ]])
         })
       ],
