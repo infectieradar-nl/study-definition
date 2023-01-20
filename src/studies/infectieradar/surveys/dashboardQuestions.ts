@@ -1,4 +1,4 @@
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+/*import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { Expression } from 'survey-engine/data_types';
@@ -235,6 +235,7 @@ class IntroGebruik extends Item {
   }
 }*/
 
+/*
 export class q102 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q102');
@@ -460,7 +461,7 @@ export class q104 extends Item {
     })
   }
 }*/
-
+/*
 export class q105a extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q105a');
@@ -823,7 +824,7 @@ export class q110 extends Item {
     })
   }
 }*/
-
+/*
 export class q111 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'q111');
@@ -1144,3 +1145,4 @@ export class FinalText extends Item {
 }
 
 export const Dashboard = new DashboardSample();
+*/

@@ -7,7 +7,6 @@ export const surveyKeys = {
   SwabSample: 'SwabSample',
   SwabNotSelected: 'SwabNotSelected',
   QuitSwabbing: 'QuitSwabbing',
-  Dashboard: 'Dashboard'
 }
 
 export const externalServiceNames = {

@@ -729,7 +729,7 @@ class Q5 extends Item {
   }
 }
 
-/* Temporarily changed for Dashboard questionnaire
+
 export class FinalText extends Item {
   constructor(parentKey: string) {
     super(parentKey, 'FinalText');
@@ -741,21 +741,6 @@ export class FinalText extends Item {
       new Map([
         //["en", "This was all for now, please submit your responses. By filling out this survey regularly (eg. weekly), you can help us fight the virus."],
         ["nl", "Dit was de laatste vraag. Sla je antwoorden op door op verzenden te klikken. Dank voor het invullen. Volgende week vragen we je weer."],
-      ]),
-      this.condition,
-    )
-  }
-}*/
-export class FinalText extends Item {
-  constructor(parentKey: string) {
-    super(parentKey, 'FinalText');
-  }
-
-  buildItem() {
-    return SurveyItems.surveyEnd(
-      this.parentKey,
-      new Map([
-        ["nl", "Hartelijk dank voor je bijdrage aan Infectieradar en het invullen van deze vragenlijst."],
       ]),
       this.condition,
     )
