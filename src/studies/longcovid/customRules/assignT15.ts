@@ -38,6 +38,8 @@ export const assignT15Retroactively_rules = {
       StudyEngine.participantActions.assignedSurveys.remove('T15', 'all'),
       // ASSIGN T15 from study start:
       assignSurveyFromStudyStart('T15', "prio", 450, 42),
+      // REMOVE exitFlag
+      StudyEngine.participantActions.removeFlag('exitStatus'),
       // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
       StudyEngine.participantActions.updateFlag(
         flagKey,
