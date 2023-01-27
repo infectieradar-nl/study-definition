@@ -3,10 +3,12 @@ import { Study } from "case-editor-tools/types/study";
 import { InfectieradarStudy } from './studies/infectieradar';
 import { LongCovidStudy } from './studies/longcovid';
 import { generateFilesForStudy } from 'case-editor-tools/exporter';
+import { StreptokidsStudy } from "./studies/streptokids";
 
 const studies: Study[] = [
   InfectieradarStudy,
   LongCovidStudy,
+  StreptokidsStudy,
 ];
 
 const readStudyKey = () => {
