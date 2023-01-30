@@ -7,6 +7,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 class CaseDef extends SurveyDefinition {
   Intro: Intro;
 
+  UV: UserVerificationQuestion;
   FinalText: FinalText;
 
   constructor() {
@@ -28,11 +29,13 @@ class CaseDef extends SurveyDefinition {
 
     this.Intro = new Intro(this.key);
 
+    this.UV = new UserVerificationQuestion(this.key, isRequired)
     this.FinalText = new FinalText(this.key);
   }
 
   buildSurvey() {
     this.addItem(this.Intro.get());
+    this.addItem(this.UV.get());
     this.addItem(this.FinalText.get());
   }
 }
@@ -59,6 +62,33 @@ TODO: add explanation
             ["nl", this.markdownContent],
           ]),
         })
+      ]
+    })
+  }
+}
+
+export class UserVerificationQuestion extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'UV');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Controlevraag'],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'Dit is een controlevraag om te bevestigen dat je geen robot bent. Typ het juiste antwoord in het antwoordveld hieronder.'],
+      ]),
+      responseItemDefs: [
+        {
+          key: 'uv', role: 'userVerification', mapToRole: 'input',
+        }
       ]
     })
   }
