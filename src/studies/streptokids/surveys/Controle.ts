@@ -3,11 +3,13 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { surveyKeys } from "../contants";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { expWithArgs, generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 import { responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
+import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 
 class ControleDef extends SurveyDefinition {
-  intro: intro;
+  //intro: intro;
   studienummer: studienummer;
   demo_geboortejaar: demo_geboortejaar;
   demo_geslacht: demo_geslacht;
@@ -26,13 +28,14 @@ class ControleDef extends SurveyDefinition {
   antibiotica_start: antibiotica_start;
   ziekenhuis: ziekenhuis;
   klachten_huishouden: klachten_huishouden;
+  klachten_opvang: klachten_opvang;
   klachten_omgeving: klachten_omgeving;
   vacc_corona: vacc_corona;
   vacc_corona_datum: vacc_corona_datum;
   vacc_griep: vacc_griep;
   opleiding_ouder: opleiding_ouder;
   resultaten: resultaten;
-
+  //email?
   outtro: outtro;
 
 
@@ -53,7 +56,7 @@ class ControleDef extends SurveyDefinition {
 
     const isRequired = true;
 
-    this.intro = new intro(this.key);
+    //this.intro = new intro(this.key);
     this.studienummer = new studienummer(this.key, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, isRequired);
@@ -75,6 +78,8 @@ class ControleDef extends SurveyDefinition {
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, isRequired);
     this.klachten_huishouden = new klachten_huishouden(this.key, isRequired);
+    this.klachten_opvang = new klachten_opvang(this.key,
+      SurveyEngine.singleChoice.any(this.kind_opvang.key, '1'), isRequired);
     this.klachten_omgeving = new klachten_omgeving(this.key, isRequired);
     this.vacc_corona = new vacc_corona(this.key, isRequired);
     this.vacc_corona_datum = new vacc_corona_datum(this.key,
@@ -86,7 +91,7 @@ class ControleDef extends SurveyDefinition {
   }
 
   buildSurvey() {
-    this.addItem(this.intro.get());
+    //this.addItem(this.intro.get());
     this.addItem(this.studienummer.get());
     this.addItem(this.demo_geboortejaar.get());
     this.addItem(this.demo_geslacht.get());
@@ -105,6 +110,7 @@ class ControleDef extends SurveyDefinition {
     this.addItem(this.antibiotica_start.get());
     this.addItem(this.ziekenhuis.get());
     this.addItem(this.klachten_huishouden.get());
+    this.addItem(this.klachten_opvang.get());
     this.addItem(this.klachten_omgeving.get());
     this.addItem(this.vacc_corona.get());
     this.addItem(this.vacc_corona_datum.get());
@@ -116,7 +122,7 @@ class ControleDef extends SurveyDefinition {
 }
 
 
-export class intro extends Item {
+/*export class intro extends Item {
   constructor(parentKey: string) {
     super(parentKey, 'intro');
   }
@@ -165,7 +171,7 @@ Als u aan het einde van het onderzoek de resultaten wilt weten, kunt u onderaan 
     })
   }
 }
-
+*/
 
 export class studienummer extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -174,27 +180,18 @@ export class studienummer extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ["nl", "Wat is het studienummer van uw kind? U vindt het studienummer in de uitnodigingsmail voor het onderzoek van het RIVM."],
-      ]),
-      responseOptions: [
-        {
-          key: '1', role: 'numberInput',
-          // style: [{ key: 'className', value: 'w-100' }],
-          content: new Map([
-            ["nl", "Studienummer"],
-          ]),
-          optionProps: { min: 200000000, max: 300000000 } //range?
-        },
-      ]
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Wat is het studienummer van uw kind? U vindt het studienummer in de uitnodigingsmail voor het onderzoek van het RIVM.'
+      ]]),
     })
   }
 }
+
 
 export class demo_geboortejaar extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -203,24 +200,78 @@ export class demo_geboortejaar extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["nl", "Wat is het geboortejaar van uw kind?"],
-      ]),
-      responseOptions: [
+    const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
+
+    // QUESTION TEXT
+    editor.setTitleComponent(
+      generateTitleComponent(new Map([
+        ["nl", "Wanneer ben je geboren (maand en jaar)?"],
+      ]))
+    );
+
+    /* INFO POPUP
+    editor.setHelpGroupComponent(
+      generateHelpGroupComponent([
         {
-          key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Geboortejaar"],
+            ["nl", "Waarom vragen we dit?"],
           ]),
-          optionProps: { min: 2010, max: 2030 } //range?
+          style: [{ key: 'variant', value: 'h5' }],
         },
-      ],
+        {
+          content: new Map([
+            ["nl", "Om te kijken naar verschillen tussen leeftijdsgroepen."],
+          ]),
+          // style: [{ key: 'variant', value: 'p' }],
+        },
+      ])
+    );*/
+
+    // RESPONSE PART
+    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+    const dateInputEditor = new ComponentEditor(undefined, {
+      key: '1',
+      role: 'dateInput'
+    });
+    dateInputEditor.setProperties({
+      dateInputMode: { str: 'YM' },
+      min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -3311280000) }, // Andere offset?
+      max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
     })
+    editor.addExistingResponseComponent(dateInputEditor.getComponent(), rg?.key);
+    editor.addExistingResponseComponent({
+      key: 'feedback',
+      role: 'text',
+      style: [{ key: 'className', value: 'fst-italic mt-1' }],
+      displayCondition: expWithArgs('isDefined',
+        expWithArgs('getResponseItem', editor.getItem().key, [responseGroupKey, '1'].join('.'))
+      ),
+      content: [
+        {
+          code: 'en', parts: [
+            { dtype: 'exp', exp: expWithArgs('dateResponseDiffFromNow', editor.getItem().key, [responseGroupKey, '1'].join('.'), 'years', 1) },
+            { str: ' years old' }
+          ]
+        },
+        {
+          code: 'nl', parts: [
+            { dtype: 'exp', exp: expWithArgs('dateResponseDiffFromNow', editor.getItem().key, [responseGroupKey, '1'].join('.'), 'years', 1) },
+            { str: ' jaren oud' }
+          ]
+        },
+      ]
+    }, rg?.key);
+
+    // VALIDATIONs
+    if (this.isRequired) {
+      editor.addValidation({
+        key: 'r1',
+        type: 'hard',
+        rule: expWithArgs('hasResponse', this.key, responseGroupKey)
+      });
+    }
+
+    return editor.getItem();
   }
 }
 
@@ -271,26 +322,17 @@ export class demo_postcode extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ["nl", "Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont? Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'
+      ]]),
+      questionSubText: new Map([
+         ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
       ]),
-      responseOptions: [
-        {
-          key: '1', role: 'input',
-          // style: [{ key: 'className', value: 'w-100' }],
-          content: new Map([
-            ["nl", "Postcode"],
-          ]),
-          description: new Map([
-            ["nl", "de eerste vier cijfers"],
-          ])
-        },
-      ],
       customValidations: [
         {
           key: 'r2',
@@ -323,23 +365,17 @@ export class demo_huish_totaal extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee. Met huishouden bedoelen we alle mensen met wie uw kind in één huis woont. Als uw kind in meerdere huishoudens woont, vragen we het huishouden te kiezen waar uw kind het meest woont."],
+        ["nl", "Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee."],
       ]),
-      responseOptions: [
-        {
-          key: '1', role: 'input',
-          // style: [{ key: 'className', value: 'w-100' }],
-          content: new Map([
-            ["nl", "Aantal personen huishouden"],
-          ]),
-        },
-      ],
+      questionSubText: new Map([
+        ["nl", "Met huishouden bedoelen we alle mensen met wie uw kind in één huis woont. Als uw kind in meerdere huishoudens woont, vragen we het huishouden te kiezen waar uw kind het meest woont."],
+     ]),
       customValidations: [
         {
           key: 'r2',
@@ -363,7 +399,7 @@ export class demo_huish_kinderen extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -371,15 +407,6 @@ export class demo_huish_kinderen extends Item {
       questionText: new Map([
         ["nl", "Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee."],
       ]),
-      responseOptions: [
-        {
-          key: '1', role: 'input',
-          // style: [{ key: 'className', value: 'w-100' }],
-          content: new Map([
-            ["nl", "Aantal personen huishouden"],
-          ]),
-        },
-      ],
       customValidations: [
         {
           key: 'r2',
@@ -1067,10 +1094,11 @@ export class klachten_huishouden extends Item {
 }
 
 
-export class klachten_omgeving extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'klachten_omgeving');
+export class klachten_opvang extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'klachten_opvang');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1080,8 +1108,9 @@ export class klachten_omgeving extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken last van een van de volgende klachten? (meerdere antwoorden mogelijk)"],
+        ["nl", "Indien uw kind naar school/kinderopvang gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
       ]),
+      helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
           key: '1', role: 'option',
@@ -1163,6 +1192,139 @@ export class klachten_omgeving extends Item {
         },
       ]
     })
+  }
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["nl", "Uitleg roodvonk"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Roodvonk is een kinderziekte die we vooral zien bij kinderen tussen 3 en 8 jaar. Uw kind heeft dan koorts, keelpijn en ruwe (rode) plekjes op de huid, en soms misselijkheid met overgeven. Ook kan de tong rood en bobbelig worden (frambozentong). Als uw kind weer beter wordt, kan de huid vervellen.)"],
+        ]),
+        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+      },
+    ]
+  }
+}
+
+
+export class klachten_omgeving extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'klachten_omgeving');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken last van een van de volgende klachten? (meerdere antwoorden mogelijk)"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Roodvonk"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Krentenbaard (impetigo)"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Waterpokken"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "Keelontsteking"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "Neusverkoudheid"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Keelpijn"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["nl", "Benauwdheid"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["nl", "Hoesten"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["nl", "Koorts (38 graden of meer)"],
+          ])
+        },
+        {
+          key: '10', role: 'option',
+          content: new Map([
+            ["nl", "Schurft (scabies)"],
+          ])
+        },
+        {
+          key: '11', role: 'option',
+          content: new Map([
+            ["nl", "Ontstoken wond(je) of huidontsteking"],
+          ])
+        },
+        {
+          key: '12', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet"],
+          ])
+        },
+        {
+          key: '13', role: 'input',
+          content: new Map([
+            ["nl", "Anders, namelijk:"],
+          ])
+        },
+      ]
+    })
+  }
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["nl", "Uitleg roodvonk"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Roodvonk is een kinderziekte die we vooral zien bij kinderen tussen 3 en 8 jaar. Uw kind heeft dan koorts, keelpijn en ruwe (rode) plekjes op de huid, en soms misselijkheid met overgeven. Ook kan de tong rood en bobbelig worden (frambozentong). Als uw kind weer beter wordt, kan de huid vervellen.)"],
+        ]),
+        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+      },
+    ]
   }
 }
 
