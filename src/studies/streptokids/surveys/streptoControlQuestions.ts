@@ -563,7 +563,7 @@ export class kind_oppas extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Ging uw kind de afgelopen 4 weken naar de oppas?"],
+        ["nl", "Ging uw kind de afgelopen 4 weken naar de oppas (bij iemand anders) thuis/gastouder?"],
       ]),
       responseOptions: [
         {
