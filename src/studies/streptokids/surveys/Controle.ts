@@ -129,15 +129,15 @@ class intro extends Item {
 ## Streptokids onderzoek
 Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld krentenbaard of roodvonk. Soms kunnen mensen in korte tijd ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS’ infectie. Op dit moment zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat kan.
 
-Doel van het onderzoek
+##### **Doel van het onderzoek**
 
 Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie.  Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder ziek worden door een invasieve GAS infectie.
 
-Wat houdt meedoen in?
+##### **Wat houdt meedoen in?**
 
 Wilt u meedoen aan het onderzoek? Dan stellen wij u een paar vragen over uw kind en zijn/haar omgeving. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig.
 
-Gebruik van de gegevens van uw kind
+##### **Gebruik van de gegevens van uw kind**
 
 Het RIVM mag alleen de gegevens van de vragenlijst gebruiken indien u hiervoor toestemming geeft. U heeft al toestemming gegeven om mee te doen aan dit onderzoek, waarvoor hartelijk dank. Door deze vragenlijst in te vullen stemt u in met het gebruiken van de antwoorden voor dit onderzoek. De vragenlijst is anoniem. Dit betekent dat het RIVM niet terug kan vinden door wie deze vragenlijst is ingevuld.
 
