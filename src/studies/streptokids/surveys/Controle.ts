@@ -5,11 +5,9 @@ import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
-import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 
 class ControleDef extends SurveyDefinition {
-  //intro: intro;
+  intro: intro;
   studienummer: studienummer;
   demo_geboortejaar: demo_geboortejaar;
   demo_geslacht: demo_geslacht;
@@ -43,20 +41,20 @@ class ControleDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.Controle,
       name: new Map([
-        ["nl", "TODO: Achtergrond informatie"],
+        ["nl", "Vragenlijst Streptokids"],
       ]),
       description: new Map([
-        ["nl", "TODO: Klik op dit aanmeldingsformulier om je achtergrondinformatie in te vullen."],
+        ["nl", "Klik op dit formulier om de vragenlijst in te vullen."],
       ]),
       durationText: new Map([
-        ["nl", "TODO: Invullen duurt 5 minuten."],
+        ["nl", "Invullen duurt ongeveer 10 minuten."],
       ]),
       availableFor: 'public',
     });
 
     const isRequired = true;
 
-    //this.intro = new intro(this.key);
+    this.intro = new intro(this.key);
     this.studienummer = new studienummer(this.key, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, isRequired);
@@ -91,7 +89,7 @@ class ControleDef extends SurveyDefinition {
   }
 
   buildSurvey() {
-    //this.addItem(this.intro.get());
+    this.addItem(this.intro.get());
     this.addItem(this.studienummer.get());
     this.addItem(this.demo_geboortejaar.get());
     this.addItem(this.demo_geslacht.get());
@@ -122,56 +120,48 @@ class ControleDef extends SurveyDefinition {
 }
 
 
-/*export class intro extends Item {
+class intro extends Item {
   constructor(parentKey: string) {
     super(parentKey, 'intro');
   }
 
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["nl", "Deelname onderzoek groep A streptokokken bij kinderen"],
-      ]),
-      // titleClassName: 'd-none',
-      topDisplayCompoments: [
-        ComponentGenerators.markdown({
-          className: 'fw-bold mb-2',
-          content: new Map([
-            ['nl',
-              `
+  markdownContent = `
+## Streptokids onderzoek
 Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld krentenbaard of roodvonk. Soms kunnen mensen in korte tijd ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS’ infectie. Op dit moment zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat kan.
 
 Doel van het onderzoek
+
 Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie.  Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder ziek worden door een invasieve GAS infectie.
 
 Wat houdt meedoen in?
+
 Wilt u meedoen aan het onderzoek? Dan stellen wij u een paar vragen over uw kind en zijn/haar omgeving. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig.
 
 Gebruik van de gegevens van uw kind
+
 Het RIVM mag alleen de gegevens van de vragenlijst gebruiken indien u hiervoor toestemming geeft. U heeft al toestemming gegeven om mee te doen aan dit onderzoek, waarvoor hartelijk dank. Door deze vragenlijst in te vullen stemt u in met het gebruiken van de antwoorden voor dit onderzoek. De vragenlijst is anoniem. Dit betekent dat het RIVM niet terug kan vinden door wie deze vragenlijst is ingevuld.
 
-Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment vragen om uw gegevens te laten verwijderen. Dat kan door een e-mail te sturen naar: streptokids@rivm.nl. Meer informatie vindt u in de privacyverklaring van het RIVM.
+Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment vragen om uw gegevens te laten verwijderen. Dat kan door een e-mail te sturen naar: streptokids@rivm.nl. Meer informatie vindt u in de [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM.
 
-Als u aan het einde van het onderzoek de resultaten wilt weten, kunt u onderaan de vragenlijst laten weten. `
-            ]])
-        })
-      ],
-      responseOptions: [
-        {
-          key: '1', role: 'option',
+Als u aan het einde van het onderzoek de resultaten wilt weten, kunt u onderaan de vragenlijst laten weten.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
           content: new Map([
-            ["nl", "Verder"],
-          ])
-        },
+            ["nl", this.markdownContent],
+          ]),
+        })
       ]
     })
   }
 }
-*/
+
 
 export class studienummer extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -180,18 +170,27 @@ export class studienummer extends Item {
   }
 
   buildItem() {
-    return SurveyItems.textInput({
+    return SurveyItems.numericInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      condition: this.condition,
       isRequired: this.isRequired,
-      questionText: new Map([[
-        'nl', 'Wat is het studienummer van uw kind? U vindt het studienummer in de uitnodigingsmail voor het onderzoek van het RIVM.'
-      ]]),
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wat is het studienummer van uw kind? U vindt het studienummer in de uitnodigingsmail voor het onderzoek van het RIVM.'],
+      ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '160px',
+      inputLabel: new Map([
+        ['nl', '12 cijfers']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 100000000000,
+        max: 999999999999
+      }
     })
   }
 }
-
 
 export class demo_geboortejaar extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -200,78 +199,25 @@ export class demo_geboortejaar extends Item {
   }
 
   buildItem() {
-    const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-      generateTitleComponent(new Map([
-        ["nl", "Wanneer ben je geboren (maand en jaar)?"],
-      ]))
-    );
-
-    /* INFO POPUP
-    editor.setHelpGroupComponent(
-      generateHelpGroupComponent([
-        {
-          content: new Map([
-            ["nl", "Waarom vragen we dit?"],
-          ]),
-          style: [{ key: 'variant', value: 'h5' }],
-        },
-        {
-          content: new Map([
-            ["nl", "Om te kijken naar verschillen tussen leeftijdsgroepen."],
-          ]),
-          // style: [{ key: 'variant', value: 'p' }],
-        },
-      ])
-    );*/
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const dateInputEditor = new ComponentEditor(undefined, {
-      key: '1',
-      role: 'dateInput'
-    });
-    dateInputEditor.setProperties({
-      dateInputMode: { str: 'YM' },
-      min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -3311280000) }, // Andere offset?
-      max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+    return SurveyItems.numericInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wat is het geboortejaar van uw kind?'],
+      ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
+      inputLabel: new Map([
+        ['nl', 'geboortejaar']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 2011,
+        max: 2023
+      }
     })
-    editor.addExistingResponseComponent(dateInputEditor.getComponent(), rg?.key);
-    editor.addExistingResponseComponent({
-      key: 'feedback',
-      role: 'text',
-      style: [{ key: 'className', value: 'fst-italic mt-1' }],
-      displayCondition: expWithArgs('isDefined',
-        expWithArgs('getResponseItem', editor.getItem().key, [responseGroupKey, '1'].join('.'))
-      ),
-      content: [
-        {
-          code: 'en', parts: [
-            { dtype: 'exp', exp: expWithArgs('dateResponseDiffFromNow', editor.getItem().key, [responseGroupKey, '1'].join('.'), 'years', 1) },
-            { str: ' years old' }
-          ]
-        },
-        {
-          code: 'nl', parts: [
-            { dtype: 'exp', exp: expWithArgs('dateResponseDiffFromNow', editor.getItem().key, [responseGroupKey, '1'].join('.'), 'years', 1) },
-            { str: ' jaren oud' }
-          ]
-        },
-      ]
-    }, rg?.key);
-
-    // VALIDATIONs
-    if (this.isRequired) {
-      editor.addValidation({
-        key: 'r1',
-        type: 'hard',
-        rule: expWithArgs('hasResponse', this.key, responseGroupKey)
-      });
-    }
-
-    return editor.getItem();
   }
 }
 
@@ -314,7 +260,6 @@ export class demo_geslacht extends Item {
   }
 }
 
-
 export class demo_postcode extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'demo_postcode');
@@ -322,41 +267,27 @@ export class demo_postcode extends Item {
   }
 
   buildItem() {
-    return SurveyItems.textInput({
+    return SurveyItems.numericInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      condition: this.condition,
       isRequired: this.isRequired,
-      questionText: new Map([[
-        'nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'
-      ]]),
-      questionSubText: new Map([
-         ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'],
       ]),
-      customValidations: [
-        {
-          key: 'r2',
-          type: 'hard',
-          rule: expWithArgs('or',
-            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
-            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9][0-9][0-9]$'),
-            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
-          )
-        }
-      ],
-      bottomDisplayCompoments: [
-        {
-          role: 'error',
-          content: generateLocStrings(new Map([
-            ["nl", "Voer de eerste vier cijfers van je postcode in"],
-          ])),
-          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
-        }
-      ]
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
+      inputLabel: new Map([
+        ['nl', '4 cijfers']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 1000,
+        max: 9999
+      }
     })
   }
 }
-
 
 export class demo_huish_totaal extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -365,28 +296,27 @@ export class demo_huish_totaal extends Item {
   }
 
   buildItem() {
-    return SurveyItems.textInput({
+    return SurveyItems.numericInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee."],
+        ['nl', 'Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
       ]),
       questionSubText: new Map([
         ["nl", "Met huishouden bedoelen we alle mensen met wie uw kind in één huis woont. Als uw kind in meerdere huishoudens woont, vragen we het huishouden te kiezen waar uw kind het meest woont."],
-     ]),
-      customValidations: [
-        {
-          key: 'r2',
-          type: 'hard',
-          rule: expWithArgs('or',
-            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
-            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9]$'),
-            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
-          )
-        }
-      ],
+      ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
+      inputLabel: new Map([
+        ['nl', '']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 1,
+        max: 99
+      }
     })
   }
 }
@@ -399,25 +329,24 @@ export class demo_huish_kinderen extends Item {
   }
 
   buildItem() {
-    return SurveyItems.textInput({
+    return SurveyItems.numericInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee."],
+        ['nl', 'Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
       ]),
-      customValidations: [
-        {
-          key: 'r2',
-          type: 'hard',
-          rule: expWithArgs('or',
-            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
-            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9]$'),
-            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
-          )
-        }
-      ],
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
+      inputLabel: new Map([
+        ['nl', '']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 1,
+        max: 99
+      }
     })
   }
 }
@@ -502,7 +431,6 @@ export class aandoeningen extends Item {
     })
   }
 }
-
 
 export class medicijnen extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -671,7 +599,6 @@ export class kind_school extends Item {
     })
   }
 }
-
 
 export class klachten_kind extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -881,7 +808,6 @@ export class klachten_seh extends Item {
   }
 }
 
-
 export class antibiotica extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'antibiotica');
@@ -953,7 +879,6 @@ export class antibiotica_start extends Item {
   }
 }
 
-
 export class ziekenhuis extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'ziekenhuis');
@@ -992,7 +917,6 @@ export class ziekenhuis extends Item {
     })
   }
 }
-
 
 export class klachten_huishouden extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -1092,7 +1016,6 @@ export class klachten_huishouden extends Item {
     })
   }
 }
-
 
 export class klachten_opvang extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
@@ -1211,7 +1134,6 @@ export class klachten_opvang extends Item {
   }
 }
 
-
 export class klachten_omgeving extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'klachten_omgeving');
@@ -1328,7 +1250,6 @@ export class klachten_omgeving extends Item {
   }
 }
 
-
 export class vacc_corona extends Item {
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'vacc_corona');
@@ -1386,7 +1307,6 @@ export class vacc_corona extends Item {
   }
 }
 
-
 export class vacc_corona_datum extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
     super(parentKey, 'vacc_corona_datum');
@@ -1418,7 +1338,6 @@ export class vacc_corona_datum extends Item {
     })
   }
 }
-
 
 export class vacc_griep extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -1458,7 +1377,6 @@ export class vacc_griep extends Item {
     })
   }
 }
-
 
 export class opleiding_ouder extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -1549,7 +1467,6 @@ export class resultaten extends Item {
     })
   }
 }
-
 
 class outtro extends Item {
   constructor(parentKey: string) {
