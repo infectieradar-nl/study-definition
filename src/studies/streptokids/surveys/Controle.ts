@@ -214,7 +214,7 @@ export class demo_geboortejaar extends Item {
       ]),
       labelBehindInput: true,
       componentProperties: {
-        min: 2011,
+        min: 2017,
         max: 2023
       }
     })
