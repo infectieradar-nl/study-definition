@@ -3,8 +3,7 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { surveyKeys } from "../contants";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
-import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 
 class ControleDef extends SurveyDefinition {
   intro: intro;
@@ -25,6 +24,7 @@ class ControleDef extends SurveyDefinition {
   antibiotica: antibiotica;
   antibiotica_start: antibiotica_start;
   ziekenhuis: ziekenhuis;
+  ingreep: ingreep;
   klachten_huishouden: klachten_huishouden;
   klachten_opvang: klachten_opvang;
   klachten_omgeving: klachten_omgeving;
@@ -33,8 +33,7 @@ class ControleDef extends SurveyDefinition {
   vacc_griep: vacc_griep;
   opleiding_ouder: opleiding_ouder;
   resultaten: resultaten;
-  //email?
-  outtro: outtro;
+  FinalText: FinalText;
 
 
   constructor() {
@@ -68,13 +67,14 @@ class ControleDef extends SurveyDefinition {
     this.kind_school = new kind_school(this.key, isRequired);
     this.klachten_kind = new klachten_kind(this.key, isRequired);
     this.klachten_huisarts = new klachten_huisarts(this.key,
-      SurveyEngine.singleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'), isRequired);
+      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '13'), isRequired);
     this.klachten_seh = new klachten_seh(this.key,
-      SurveyEngine.singleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'), isRequired);
+      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '13'), isRequired);
     this.antibiotica = new antibiotica(this.key, isRequired);
     this.antibiotica_start = new antibiotica_start(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, isRequired);
+    this.ingreep = new ingreep(this.key, isRequired);    
     this.klachten_huishouden = new klachten_huishouden(this.key, isRequired);
     this.klachten_opvang = new klachten_opvang(this.key,
       SurveyEngine.singleChoice.any(this.kind_opvang.key, '1'), isRequired);
@@ -85,7 +85,7 @@ class ControleDef extends SurveyDefinition {
     this.vacc_griep = new vacc_griep(this.key, isRequired);
     this.opleiding_ouder = new opleiding_ouder(this.key, isRequired);
     this.resultaten = new resultaten(this.key, isRequired);
-    this.outtro = new outtro(this.key);
+    this.FinalText = new FinalText(this.key);
   }
 
   buildSurvey() {
@@ -107,6 +107,7 @@ class ControleDef extends SurveyDefinition {
     this.addItem(this.antibiotica.get());
     this.addItem(this.antibiotica_start.get());
     this.addItem(this.ziekenhuis.get());
+    this.addItem(this.ingreep.get());
     this.addItem(this.klachten_huishouden.get());
     this.addItem(this.klachten_opvang.get());
     this.addItem(this.klachten_omgeving.get());
@@ -115,7 +116,7 @@ class ControleDef extends SurveyDefinition {
     this.addItem(this.vacc_griep.get());
     this.addItem(this.opleiding_ouder.get());
     this.addItem(this.resultaten.get());
-    this.addItem(this.outtro.get());
+    this.addItem(this.FinalText.get());
   }
 }
 
@@ -210,7 +211,7 @@ export class demo_geboortejaar extends Item {
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
-        ['nl', 'geboortejaar']
+        ['nl', '']
       ]),
       labelBehindInput: true,
       componentProperties: {
@@ -275,10 +276,13 @@ export class demo_postcode extends Item {
       questionText: new Map([
         ['nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'],
       ]),
+      questionSubText: new Map([
+        ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
+      ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
-        ['nl', '4 cijfers']
+        ['nl', '']
       ]),
       labelBehindInput: true,
       componentProperties: {
@@ -463,35 +467,41 @@ export class medicijnen extends Item {
         {
           key: '3', role: 'option',
           content: new Map([
-            ["nl", "Insuline Onderhoudsantibiotica (dit is antibiotica die uw kind op advies van de dokter langdurigere periode moet slikken)"],
+            ["nl", "Insuline"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Maagzuurremmers"],
+            ["nl", "Onderhoudsantibiotica (dit is antibiotica die uw kind op advies van de dokter langdurigere periode moet slikken)"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Ibuprofen"],
+            ["nl", "Maagzuurremmers"],
           ])
         },
         {
           key: '6', role: 'option',
           content: new Map([
+            ["nl", "Ibuprofen"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
             ["nl", "Inhalatiemedicatie (puffers)"],
           ])
         },
         {
-          key: '7', role: 'input',
+          key: '8', role: 'input',
           content: new Map([
             ["nl", "Andere medicijnen, namelijk:"],
           ])
         },
         {
-          key: '8', role: 'option',
+          key: '9', role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])
@@ -516,6 +526,9 @@ export class kind_oppas extends Item {
       questionText: new Map([
         ["nl", "Ging uw kind de afgelopen 4 weken naar de oppas (bij iemand anders) thuis/gastouder?"],
       ]),
+      questionSubText: new Map([
+        ["nl", "Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
+      ]),
       responseOptions: [
         {
           key: '0', role: 'option',
@@ -526,7 +539,7 @@ export class kind_oppas extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Aantal dagen per week:"],
+            ["nl", "Aantal dag(en) per week:"],
           ])
         },
       ]
@@ -547,7 +560,10 @@ export class kind_opvang extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Ging uw kind de afgelopen 4 weken naar de kinderdagopvang?"],
+        ["nl", "Ging uw kind de afgelopen 4 weken naar de kinderdagopvang/peuterspeelzaal?"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
       ]),
       responseOptions: [
         {
@@ -559,7 +575,7 @@ export class kind_opvang extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Aantal dagen per week:"],
+            ["nl", "Aantal dag(en) per week:"],
           ])
         },
       ]
@@ -582,6 +598,9 @@ export class kind_school extends Item {
       questionText: new Map([
         ["nl", "Ging uw kind de afgelopen 4 weken naar school?"],
       ]),
+      questionSubText: new Map([
+        ["nl", "Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
+      ]),
       responseOptions: [
         {
           key: '0', role: 'option',
@@ -592,7 +611,7 @@ export class kind_school extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Aantal dagen per week:"],
+            ["nl", "Aantal dag(en) per week:"],
           ])
         },
       ]
@@ -867,7 +886,7 @@ export class antibiotica_start extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) }, //Offset checken
+            min: { dtype: 'num', num: 1672580978 }, //01-01-2023
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -905,6 +924,45 @@ export class ziekenhuis extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["nl", "Ja"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+export class ingreep extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'ingreep');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Heeft uw kind de afgelopen 4 weken een ingreep gehad, zoals het verwijderen van de neus- of keelamandelen?"],
+      ]),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {
+          key: '1', role: 'input',
+          content: new Map([
+            ["nl", "Ja, namelijk"],
           ])
         },
         {
@@ -1031,7 +1089,7 @@ export class klachten_opvang extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Indien uw kind naar school/kinderopvang gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
+        ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -1327,7 +1385,7 @@ export class vacc_corona_datum extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) }, //Offset checken
+            min: { dtype: 'num', num: 1609891200 }, //06-01-2021 
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -1468,9 +1526,9 @@ export class resultaten extends Item {
   }
 }
 
-class outtro extends Item {
+class FinalText extends Item {
   constructor(parentKey: string) {
-    super(parentKey, 'outtro');
+    super(parentKey, 'FinalText');
   }
 
   buildItem() {
