@@ -5,8 +5,6 @@ import { SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { Expression } from 'survey-engine/data_types';
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
-import { runInThisContext } from "vm";
-
 
 class CaseDef extends SurveyDefinition {
   intro: intro;
