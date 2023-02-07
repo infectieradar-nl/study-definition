@@ -64,22 +64,23 @@ const hasRecentPositiveTest = () => StudyEngine.or(
   )
 );
 
-const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
-  StudyEngine.or(
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
-      StudyEngine.lt(
-        StudyEngine.timestampWithOffset({ hours: -71 }),
-        StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
-      )),
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
-      StudyEngine.lt(
-        StudyEngine.timestampWithOffset({ hours: -71 }),
-        StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
-      )
+const hasRecentNegativeTest = () => StudyEngine.or(
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
+    StudyEngine.lt(
+      StudyEngine.timestampWithOffset({ hours: -71 }),
+      StudyEngine.getResponseValueAsNum(Weekly.Q1d1NL.key, 'rg.scg.0')
+    )),
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(Weekly.Q1b3NL.key, Weekly.Q1b3NL.optionKeys.negative),
+    StudyEngine.lt(
+      StudyEngine.timestampWithOffset({ hours: -71 }),
+      StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
     )
-  ),
+  )
+);
+
+const hasRecentSymptoms = () => StudyEngine.and(
   StudyEngine.multipleChoice.any(
     Weekly.Q1.QSymptoms.key,
     '3', '5', '6', '7'
@@ -87,7 +88,12 @@ const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
   StudyEngine.lt(
     StudyEngine.timestampWithOffset({ hours: -120 }),
     StudyEngine.getResponseValueAsNum(Weekly.HS.Q3.key, 'rg.0')
-  ),
+  )
+);
+
+const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
+  hasRecentNegativeTest(),
+  hasRecentSymptoms(),
 );
 
 const assignSwabSample = () => StudyEngine.do(
@@ -131,7 +137,26 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     ),
     // else:
     assignSwabNotSelected(),
-  )
+  ),
+  setSelfSwabbingDebugFlags(),
+)
+
+const setSelfSwabbingDebugFlags = () => StudyEngine.do(
+  StudyEngine.if(
+    wasNotSampledRecently(),
+    StudyEngine.participantActions.updateFlag('swDebugNotSampledRecently', 'true'),
+    StudyEngine.participantActions.updateFlag('swDebugNotSampledRecently', 'false'),
+  ),
+  StudyEngine.if(
+    hasRecentNegativeTest(),
+    StudyEngine.participantActions.updateFlag('swDebugRecentNegativeTest', 'true'),
+    StudyEngine.participantActions.updateFlag('swDebugRecentNegativeTest', 'false'),
+  ),
+  StudyEngine.if(
+    hasRecentSymptoms(),
+    StudyEngine.participantActions.updateFlag('swDebugRecentSymptoms', 'true'),
+    StudyEngine.participantActions.updateFlag('swDebugRecentSymptoms', 'false'),
+  ),
 )
 
 const hasSurveyKeyValidUntilSoonerThan = (surveyKey: string, delta: Duration, reference?: number | Expression) => {
