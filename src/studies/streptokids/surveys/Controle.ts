@@ -11,6 +11,7 @@ class ControleDef extends SurveyDefinition {
   demo_geboortejaar: demo_geboortejaar;
   demo_geslacht: demo_geslacht;
   demo_postcode: demo_postcode;
+  opgenomen_igas: opgenomen_igas;
   demo_huish_totaal: demo_huish_totaal;
   demo_huish_kinderen: demo_huish_kinderen;
   aandoeningen: aandoeningen;
@@ -23,6 +24,7 @@ class ControleDef extends SurveyDefinition {
   klachten_seh: klachten_seh;
   antibiotica: antibiotica;
   antibiotica_start: antibiotica_start;
+  antibiotica_stop: antibiotica_stop;
   ziekenhuis: ziekenhuis;
   ingreep: ingreep;
   klachten_huishouden: klachten_huishouden;
@@ -40,7 +42,7 @@ class ControleDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.Controle,
       name: new Map([
-        ["nl", "Vragenlijst Streptokids"],
+        ["nl", "Vragenlijst onderzoek naar Streptokokken A"],
       ]),
       description: new Map([
         ["nl", "Klik op dit formulier om de vragenlijst in te vullen."],
@@ -58,6 +60,7 @@ class ControleDef extends SurveyDefinition {
     this.demo_geboortejaar = new demo_geboortejaar(this.key, isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, isRequired);
     this.demo_postcode = new demo_postcode(this.key, isRequired);
+    this.opgenomen_igas = new opgenomen_igas(this.key, isRequired);
     this.demo_huish_totaal = new demo_huish_totaal(this.key, isRequired);
     this.demo_huish_kinderen = new demo_huish_kinderen(this.key, isRequired);
     this.aandoeningen = new aandoeningen(this.key, isRequired);
@@ -72,6 +75,8 @@ class ControleDef extends SurveyDefinition {
       SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '13'), isRequired);
     this.antibiotica = new antibiotica(this.key, isRequired);
     this.antibiotica_start = new antibiotica_start(this.key,
+      SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
+    this.antibiotica_stop = new antibiotica_stop(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, isRequired);
     this.ingreep = new ingreep(this.key, isRequired);    
@@ -94,6 +99,7 @@ class ControleDef extends SurveyDefinition {
     this.addItem(this.demo_geboortejaar.get());
     this.addItem(this.demo_geslacht.get());
     this.addItem(this.demo_postcode.get());
+    this.addItem(this.opgenomen_igas.get());
     this.addItem(this.demo_huish_totaal.get());
     this.addItem(this.demo_huish_kinderen.get());
     this.addItem(this.aandoeningen.get());
@@ -106,6 +112,7 @@ class ControleDef extends SurveyDefinition {
     this.addItem(this.klachten_seh.get());
     this.addItem(this.antibiotica.get());
     this.addItem(this.antibiotica_start.get());
+    this.addItem(this.antibiotica_stop.get());
     this.addItem(this.ziekenhuis.get());
     this.addItem(this.ingreep.get());
     this.addItem(this.klachten_huishouden.get());
@@ -128,7 +135,7 @@ class intro extends Item {
 
   markdownContent = `
 ## Streptokids onderzoek
-Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld krentenbaard of roodvonk. Soms kunnen mensen in korte tijd ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS’ infectie. Op dit moment zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat kan.
+Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld krentenbaard of roodvonk. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS’ infectie. Op dit moment zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat kan.
 
 ##### **Doel van het onderzoek**
 
@@ -136,7 +143,7 @@ Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS 
 
 ##### **Wat houdt meedoen in?**
 
-Wilt u meedoen aan het onderzoek? Dan stellen wij u een paar vragen over uw kind en zijn/haar omgeving. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig.
+Wilt u nog steeds meedoen aan het onderzoek? Dan stellen wij u een paar vragen over uw kind en zijn/haar omgeving. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig.
 
 ##### **Gebruik van de gegevens van uw kind**
 
@@ -200,24 +207,51 @@ export class demo_geboortejaar extends Item {
   }
 
   buildItem() {
-    return SurveyItems.numericInput({
+    return SurveyItems.dropDown({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat is het geboortejaar van uw kind?'],
+        ["nl", "Wat is het geboortejaar van uw kind?"],
       ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', '']
-      ]),
-      labelBehindInput: true,
-      componentProperties: {
-        min: 2017,
-        max: 2023
-      }
+      responseOptions: [
+        {
+          key: '2017', role: 'option', content: new Map([
+            ["nl", "2017"],
+          ]),
+        },
+        {
+          key: '2018', role: 'option', content: new Map([
+            ["nl", "2018"],
+          ]),
+        },
+        {
+          key: '2019', role: 'option', content: new Map([
+            ["nl", "2019"],
+          ]),
+        },
+        {
+          key: '2020', role: 'option', content: new Map([
+            ["nl", "2020"],
+          ]),
+        },
+        {
+          key: '2021', role: 'option', content: new Map([
+            ["nl", "2021"],
+          ]),
+        },
+        {
+          key: '2022', role: 'option', content: new Map([
+            ["nl", "2022"],
+          ]),
+        },
+        {
+          key: '2023', role: 'option', content: new Map([
+            ["nl", "2023"],
+          ]),
+        },
+      ]
     })
   }
 }
@@ -292,6 +326,47 @@ export class demo_postcode extends Item {
     })
   }
 }
+
+
+export class opgenomen_igas extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'opgenomen_igas');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Is uw kind in het verleden ooit opgenomen in het ziekenhuis voor iGAS?"],
+      ]),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
 
 export class demo_huish_totaal extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -431,6 +506,12 @@ export class aandoeningen extends Item {
             ["nl", "Nee, geen van bovenstaande"],
           ])
         },
+        {
+          key: '11', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -506,6 +587,12 @@ export class medicijnen extends Item {
             ["nl", "Geen van bovenstaande"],
           ])
         },
+        {
+          key: '10', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -537,9 +624,9 @@ export class kind_oppas extends Item {
           ])
         },
         {
-          key: '1', role: 'input',
+          key: '2', role: 'option',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -578,6 +665,12 @@ export class kind_opvang extends Item {
             ["nl", "Aantal dag(en) per week:"],
           ])
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -612,6 +705,12 @@ export class kind_school extends Item {
           key: '1', role: 'input',
           content: new Map([
             ["nl", "Aantal dag(en) per week:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -705,13 +804,25 @@ export class klachten_kind extends Item {
         {
           key: '12', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
-          key: '13', role: 'input',
+          key: '13', role: 'option',
+          content: new Map([
+            ["nl", "Longontsteking"],
+          ])
+        },
+        {
+          key: '14', role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
+          ])
+        },
+        {
+          key: '15', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -779,7 +890,7 @@ export class klachten_huisarts extends Item {
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -819,7 +930,7 @@ export class klachten_seh extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -858,7 +969,7 @@ export class antibiotica extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -893,10 +1004,55 @@ export class antibiotica_start extends Item {
             ["nl", "Kies datum:"],
           ])
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ],
     })
   }
 }
+
+export class antibiotica_stop extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'antibiotica_stop');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Wanneer stopte uw kind met de antibiotica?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'dateInput',
+          optionProps: {
+            min: { dtype: 'num', num: 1672580978 }, //01-01-2023
+            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+          },
+          content: new Map([
+            ["nl", "Kies datum:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
+      ],
+    })
+  }
+}
+
 
 export class ziekenhuis extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -929,7 +1085,7 @@ export class ziekenhuis extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -968,7 +1124,7 @@ export class ingreep extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -1061,13 +1217,25 @@ export class klachten_huishouden extends Item {
         {
           key: '12', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
-          key: '13', role: 'input',
+          key: '13', role: 'option',
+          content: new Map([
+            ["nl", "Longontsteking"],
+          ])
+        },
+        {
+          key: '14', role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
+          ])
+        },
+        {
+          key: '15', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -1162,13 +1330,25 @@ export class klachten_opvang extends Item {
         {
           key: '12', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
-          key: '13', role: 'input',
+          key: '13', role: 'option',
+          content: new Map([
+            ["nl", "Longontsteking"],
+          ])
+        },
+        {
+          key: '14', role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
+          ])
+        },
+        {
+          key: '15', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -1278,13 +1458,25 @@ export class klachten_omgeving extends Item {
         {
           key: '12', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
-          key: '13', role: 'input',
+          key: '13', role: 'option',
+          content: new Map([
+            ["nl", "Longontsteking"],
+          ])
+        },
+        {
+          key: '14', role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
+          ])
+        },
+        {
+          key: '15', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -1360,6 +1552,12 @@ export class vacc_corona extends Item {
             ["nl", "5"],
           ])
         },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -1390,6 +1588,12 @@ export class vacc_corona_datum extends Item {
           },
           content: new Map([
             ["nl", "Kies datum:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ],
@@ -1428,7 +1632,7 @@ export class vacc_griep extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Weet ik niet"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
@@ -1485,7 +1689,7 @@ export class opleiding_ouder extends Item {
         {
           key: '6', role: 'option',
           content: new Map([
-            ["nl", "Dat wil ik niet zeggen"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]
