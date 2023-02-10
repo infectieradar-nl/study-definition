@@ -1,4 +1,4 @@
-import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
+import { Group, Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { surveyKeys } from "../contants";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
@@ -7,9 +7,14 @@ import { UserVerificationQuestion } from "./Case";
 
 class ControleRegistrationDef extends SurveyDefinition {
   Intro: Intro;
-  Age: Age;
   Email: Email;
   Consent: Consent;
+  ChildCount: ChildCount;
+  Kind1: ChildInfoGroup;
+  Kind2: ChildInfoGroup;
+  Kind3: ChildInfoGroup;
+  Kind4: ChildInfoGroup;
+  Kind5: ChildInfoGroup;
   UV: UserVerificationQuestion;
   FinalText: FinalText;
 
@@ -31,18 +36,31 @@ class ControleRegistrationDef extends SurveyDefinition {
     const isRequired = true;
 
     this.Intro = new Intro(this.key);
-    this.Age = new Age(this.key, isRequired);
     this.Email = new Email(this.key, isRequired);
     this.Consent = new Consent(this.key, isRequired);
+
+    this.ChildCount = new ChildCount(this.key, isRequired);
+
+    this.Kind1 = new ChildInfoGroup(this.key, 'kind1', '## **Infos about kind 1**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '1', '2', '3', '4', '5'));
+    this.Kind2 = new ChildInfoGroup(this.key, 'kind2', '## **Infos about kind 2**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '2', '3', '4', '5'));
+    this.Kind3 = new ChildInfoGroup(this.key, 'kind3', '## **Infos about kind 3**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '3', '4', '5'));
+    this.Kind4 = new ChildInfoGroup(this.key, 'kind4', '## **Infos about kind 4**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '4', '5'));
+    this.Kind5 = new ChildInfoGroup(this.key, 'kind5', '## **Infos about kind 5**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '5'));
+
     this.UV = new UserVerificationQuestion(this.key, isRequired)
     this.FinalText = new FinalText(this.key);
   }
 
   buildSurvey() {
     this.addItem(this.Intro.get());
-    this.addItem(this.Age.get());
-    this.addItem(this.Email.get());
     this.addItem(this.Consent.get());
+    this.addItem(this.Email.get());
+    this.addItem(this.ChildCount.get());
+    this.addItem(this.Kind1.get());
+    this.addItem(this.Kind2.get());
+    this.addItem(this.Kind3.get());
+    this.addItem(this.Kind4.get());
+    this.addItem(this.Kind5.get());
     this.addItem(this.UV.get());
     this.addItem(this.FinalText.get());
   }
@@ -77,34 +95,284 @@ Add some text about who should join the study, what will happen when they sign u
   }
 }
 
-class Age extends Item {
+class ChildInfoGroup extends Group {
+  header: header;
+  geboortejaar: geboortejaar;
+  geboortemaand: geboortemaand;
+  geslacht: geslacht;
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Age');
+  constructor(parentKey: string, key: string, headerText: string, isRequired: boolean, condition: Expression) {
+    super(parentKey, key);
+    this.groupEditor.setCondition(condition);
+    this.header = new header(this.key, headerText);
+    this.geboortejaar = new geboortejaar(this.key, isRequired);
+    this.geboortemaand = new geboortemaand(this.key,
+      SurveyEngine.responseHasKeysAny(this.geboortejaar.key, 'rg.ddg', '6', '7'),
+      isRequired);
+    this.geslacht = new geslacht(this.key, isRequired);
+  }
 
+  buildGroup(): void {
+    this.addItem(this.header.get())
+    this.addItem(this.geboortejaar.get())
+    this.addItem(this.geboortemaand.get())
+    this.addItem(this.geslacht.get())
+  }
+}
+
+
+class header extends Item {
+  markdown: string;
+
+  constructor(parentKey: string, text: string) {
+    super(parentKey, 'header');
+    this.markdown = text;
+  }
+
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          className: 'my-n3 mx-n2 mx-sm-n3 bg-white p-2 pb-1 ps-0 pt-3',
+          content: new Map([
+            ["nl", this.markdown],
+          ]),
+        })
+      ]
+    })
+  }
+}
+
+
+class geboortejaar extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'geboortejaar');
     this.isRequired = isRequired;
-    this.condition = condition;
   }
 
   buildItem() {
-    return SurveyItems.numericInput({
+    return SurveyItems.dropDown({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat is de leeftijd van de persoon voor wie je deze melding doet?'],
+        ["nl", "Wat is het geboortejaar van uw kind?"],
       ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', 'jaar']
+      responseOptions: [
+        {
+          key: '1', role: 'option', content: new Map([
+            ["nl", "2017"],
+          ]),
+        },
+        {
+          key: '2', role: 'option', content: new Map([
+            ["nl", "2018"],
+          ]),
+        },
+        {
+          key: '3', role: 'option', content: new Map([
+            ["nl", "2019"],
+          ]),
+        },
+        {
+          key: '4', role: 'option', content: new Map([
+            ["nl", "2020"],
+          ]),
+        },
+        {
+          key: '5', role: 'option', content: new Map([
+            ["nl", "2021"],
+          ]),
+        },
+        {
+          key: '6', role: 'option', content: new Map([
+            ["nl", "2022"],
+          ]),
+        },
+        {
+          key: '7', role: 'option', content: new Map([
+            ["nl", "2023"],
+          ]),
+        },
+      ]
+    })
+  }
+}
+
+
+class ChildCount extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'ChildCount');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.dropDown({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Number of children you want to register"],
       ]),
-      labelBehindInput: true,
-      componentProperties: {
-        min: 0,
-        max: 120
-      }
+      questionSubText: new Map([
+        ["nl", "U kunt dit formulier invullen voor 1 tot 5 kinderen, geboren in of na 2017."],
+      ]),
+
+      responseOptions: [
+        {
+          key: '1', role: 'option', content: new Map([
+            ["nl", "1"],
+          ]),
+        },
+        {
+          key: '2', role: 'option', content: new Map([
+            ["nl", "2"],
+          ]),
+        },
+        {
+          key: '3', role: 'option', content: new Map([
+            ["nl", "3"],
+          ]),
+        },
+        {
+          key: '4', role: 'option', content: new Map([
+            ["nl", "4"],
+          ]),
+        },
+        {
+          key: '5', role: 'option', content: new Map([
+            ["nl", "5"],
+          ]),
+        },
+      ]
+    })
+  }
+}
+
+
+class geboortemaand extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'geboortemaand');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.dropDown({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Wat is de geboortemaand van uw kind?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option', content: new Map([
+            ["nl", "Januari"],
+          ]),
+        },
+        {
+          key: '2', role: 'option', content: new Map([
+            ["nl", "Februari"],
+          ]),
+        },
+        {
+          key: '3', role: 'option', content: new Map([
+            ["nl", "Maart"],
+          ]),
+        },
+        {
+          key: '4', role: 'option', content: new Map([
+            ["nl", "April"],
+          ]),
+        },
+        {
+          key: '5', role: 'option', content: new Map([
+            ["nl", "Mei"],
+          ]),
+        },
+        {
+          key: '6', role: 'option', content: new Map([
+            ["nl", "Juni"],
+          ]),
+        },
+        {
+          key: '7', role: 'option', content: new Map([
+            ["nl", "Juli"],
+          ]),
+        },
+        {
+          key: '8', role: 'option', content: new Map([
+            ["nl", "Augustus"],
+          ]),
+        },
+        {
+          key: '9', role: 'option', content: new Map([
+            ["nl", "September"],
+          ]),
+        },
+        {
+          key: '10', role: 'option', content: new Map([
+            ["nl", "Oktober"],
+          ]),
+        },
+        {
+          key: '11', role: 'option', content: new Map([
+            ["nl", "November"],
+          ]),
+        },
+        {
+          key: '12', role: 'option', content: new Map([
+            ["nl", "December"],
+          ]),
+        },
+      ]
+    })
+  }
+}
+
+export class geslacht extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'geslacht');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Het geslacht van mijn kind is"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Man"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Vrouw"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Anders/wil ik liever niet zeggen"],
+          ])
+        },
+      ]
     })
   }
 }
