@@ -452,27 +452,31 @@ export class demo_huish_totaal extends Item {
   }
 
   buildItem() {
-    return SurveyItems.numericInput({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
+        ["nl", "Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee."],
       ]),
       questionSubText: new Map([
         ["nl", "Met huishouden bedoelen we alle mensen met wie uw kind in één huis woont. Als uw kind in meerdere huishoudens woont, vragen we het huishouden te kiezen waar uw kind het meest woont."],
       ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', '']
-      ]),
-      labelBehindInput: true,
-      componentProperties: {
-        min: 1,
-        max: 99
-      }
+      responseOptions: [
+        {
+          key: '1', role: 'input',
+          content: new Map([
+            ["nl", "Huishouden totaal aantal personen:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen/weet ik niet"],
+          ])
+        },
+      ]
     })
   }
 }
@@ -485,27 +489,32 @@ export class demo_huish_kinderen extends Item {
   }
 
   buildItem() {
-    return SurveyItems.numericInput({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
+        ["nl", "Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee."],
       ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', '']
-      ]),
-      labelBehindInput: true,
-      componentProperties: {
-        min: 1,
-        max: 99
-      }
+      responseOptions: [
+        {
+          key: '1', role: 'input',
+          content: new Map([
+            ["nl", "Huishouden totaal aantal kinderen:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen/weet ik niet"],
+          ])
+        },
+      ]
     })
   }
 }
+
 
 export class aandoeningen extends Item {
   optionKeys = {
@@ -614,11 +623,7 @@ export class aandoeningen extends Item {
 
 
 export class medicijnen extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'medicijnen');
-    this.isRequired = isRequired;
-  }
-  /* optionKeys = {
+   optionKeys = {
      no: '0',
      prednison: '1',
    }
@@ -626,11 +631,11 @@ export class medicijnen extends Item {
    constructor(parentKey: string, isRequired: boolean) {
      super(parentKey, '1');
      this.isRequired = isRequired;
-   }*/
+   }
 
   buildItem() {
 
-    //const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
 
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
@@ -642,72 +647,70 @@ export class medicijnen extends Item {
       ]),
       responseOptions: [
         {
-          //key: this.optionKeys.prednison, role: 'option',
-          key: '1', role: 'option',
-          //disabled: optionDisabled,
+          key: this.optionKeys.prednison, role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Prednison"],
           ])
         },
         {
           key: '2', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere ontstekingsremmers"],
           ])
         },
         {
           key: '3', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Insuline"],
           ])
         },
         {
           key: '4', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Onderhoudsantibiotica (dit is antibiotica die uw kind op advies van de dokter langdurigere periode moet slikken)"],
           ])
         },
         {
           key: '5', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Maagzuurremmers"],
           ])
         },
         {
           key: '6', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ibuprofen"],
           ])
         },
         {
           key: '7', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Inhalatiemedicatie (puffers)"],
           ])
         },
         {
           key: '8', role: 'input',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere medicijnen, namelijk:"],
           ])
         },
         {
-          //key: this.optionKeys.no, role: 'option',
-          key: '0', role: 'option',
+          key: this.optionKeys.no, role: 'option',          
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])
         },
         {
           key: '9', role: 'option',
-          //disabled: optionDisabled,
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -785,7 +788,7 @@ export class kind_opvang extends Item {
           ])
         },
         {
-          key: '1', role: 'input',
+          key: '1', role: 'numberInput',
           content: new Map([
             ["nl", "Aantal dag(en) per week:"],
           ])
@@ -827,7 +830,7 @@ export class kind_school extends Item {
           ])
         },
         {
-          key: '1', role: 'input',
+          key: '1', role: 'numberInput',
           content: new Map([
             ["nl", "Aantal dag(en) per week:"],
           ])
@@ -844,12 +847,20 @@ export class kind_school extends Item {
 }
 
 export class klachten_kind extends Item {
+  optionKeys = {
+    no: '0',
+    roodvonk: '1',
+  }
+
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'klachten_kind');
     this.isRequired = isRequired;
   }
 
   buildItem() {
+
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -861,97 +872,112 @@ export class klachten_kind extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: this.optionKeys.roodvonk, role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Roodvonk"],
           ])
         },
         {
           key: '2', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Krentenbaard (impetigo)"],
           ])
         },
         {
           key: '3', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Waterpokken"],
           ])
         },
         {
           key: '4', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelontsteking"],
           ])
         },
         {
           key: '5', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Neusverkoudheid"],
           ])
         },
         {
           key: '6', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelpijn"],
           ])
         },
         {
           key: '7', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Benauwdheid"],
           ])
         },
         {
           key: '8', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Hoesten"],
           ])
         },
         {
           key: '9', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Koorts (38 graden of meer)"],
           ])
         },
         {
           key: '10', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Schurft (scabies)"],
           ])
         },
         {
           key: '11', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ontstoken wond(je) of huidontsteking"],
           ])
         },
         {
           key: '12', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
           key: '13', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Longontsteking"],
           ])
         },
         {
           key: '14', role: 'input',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
         },
         {
-          key: '0', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
         },
         {
           key: '15', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -1276,12 +1302,20 @@ export class ingreep extends Item {
 }
 
 export class klachten_huishouden extends Item {
+  optionKeys = {
+    no: '0',
+    roodvonk: '1',
+  }
+
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'klachten_huishouden');
     this.isRequired = isRequired;
   }
 
   buildItem() {
+
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -1290,99 +1324,115 @@ export class klachten_huishouden extends Item {
       questionText: new Map([
         ["nl", "Had iemand in uw huishouden in de afgelopen 4 weken last van een van de volgende klachten? Reken hierbij het kind waarvoor u de vragenlijst invult niet mee. (meerdere antwoorden mogelijk)"],
       ]),
+      helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: this.optionKeys.roodvonk, role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Roodvonk"],
           ])
         },
         {
           key: '2', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Krentenbaard (impetigo)"],
           ])
         },
         {
           key: '3', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Waterpokken"],
           ])
         },
         {
           key: '4', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelontsteking"],
           ])
         },
         {
           key: '5', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Neusverkoudheid"],
           ])
         },
         {
           key: '6', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelpijn"],
           ])
         },
         {
           key: '7', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Benauwdheid"],
           ])
         },
         {
           key: '8', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Hoesten"],
           ])
         },
         {
           key: '9', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Koorts (38 graden of meer)"],
           ])
         },
         {
           key: '10', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Schurft (scabies)"],
           ])
         },
         {
           key: '11', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ontstoken wond(je) of huidontsteking"],
           ])
         },
         {
           key: '12', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
           key: '13', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Longontsteking"],
           ])
         },
         {
           key: '14', role: 'input',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
         },
         {
-          key: '0', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
         },
         {
           key: '15', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -1390,7 +1440,25 @@ export class klachten_huishouden extends Item {
       ]
     })
   }
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["nl", "Uitleg roodvonk"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Roodvonk is een kinderziekte die we vooral zien bij kinderen tussen 3 en 8 jaar. Uw kind heeft dan koorts, keelpijn en ruwe (rode) plekjes op de huid, en soms misselijkheid met overgeven. Ook kan de tong rood en bobbelig worden (frambozentong). Als uw kind weer beter wordt, kan de huid vervellen.)"],
+        ]),
+        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+      },
+    ]
+  }
 }
+
+
 
 export class klachten_opvang extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
@@ -1528,12 +1596,20 @@ export class klachten_opvang extends Item {
 }
 
 export class klachten_omgeving extends Item {
+  optionKeys = {
+    no: '0',
+    roodvonk: '1',
+  }
+
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'klachten_omgeving');
     this.isRequired = isRequired;
   }
 
   buildItem() {
+
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -1545,97 +1621,112 @@ export class klachten_omgeving extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: this.optionKeys.roodvonk, role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Roodvonk"],
           ])
         },
         {
           key: '2', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Krentenbaard (impetigo)"],
           ])
         },
         {
           key: '3', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Waterpokken"],
           ])
         },
         {
           key: '4', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelontsteking"],
           ])
         },
         {
           key: '5', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Neusverkoudheid"],
           ])
         },
         {
           key: '6', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Keelpijn"],
           ])
         },
         {
           key: '7', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Benauwdheid"],
           ])
         },
         {
           key: '8', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Hoesten"],
           ])
         },
         {
           key: '9', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Koorts (38 graden of meer)"],
           ])
         },
         {
           key: '10', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Schurft (scabies)"],
           ])
         },
         {
           key: '11', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ontstoken wond(je) of huidontsteking"],
           ])
         },
         {
           key: '12', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Oorontsteking (otitis media)"],
           ])
         },
         {
           key: '13', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Longontsteking"],
           ])
         },
         {
           key: '14', role: 'input',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
         },
         {
-          key: '0', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
         },
         {
           key: '15', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])

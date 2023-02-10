@@ -4,7 +4,8 @@ import { surveyKeys } from "../contants";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { Expression } from 'survey-engine/data_types';
-import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
+import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 
 class CaseDef extends SurveyDefinition {
   intro: intro;
@@ -14,6 +15,7 @@ class CaseDef extends SurveyDefinition {
   osirisnummer: osirisnummer;
   datum_ziek: datum_ziek;
   demo_geboortejaar: demo_geboortejaar;
+  demo_geboortemaand: demo_geboortemaand;
   demo_geslacht: demo_geslacht;
   demo_postcode: demo_postcode;
   demo_huish_totaal: demo_huish_totaal;
@@ -28,6 +30,7 @@ class CaseDef extends SurveyDefinition {
   klachten_seh: klachten_seh;
   antibiotica: antibiotica;
   antibiotica_start: antibiotica_start;
+  antibiotica_stop: antibiotica_stop;
   ziekenhuis: ziekenhuis;
   ingreep: ingreep;
   klachten_huishouden: klachten_huishouden;
@@ -47,7 +50,7 @@ class CaseDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.Case,
       name: new Map([
-        ["nl", "Vragenlijst Streptokids"],
+        ["nl", "Vragenlijst RIVM-onderzoek naar streptokokkeninfecties bij kinderen"],
       ]),
       description: new Map([
         ["nl", "Klik op dit formulier om de vragenlijst in te vullen."],
@@ -69,6 +72,8 @@ class CaseDef extends SurveyDefinition {
     this.osirisnummer = new osirisnummer(this.key, conditionForWantToParticipate, isRequired);
     this.datum_ziek = new datum_ziek(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, conditionForWantToParticipate, isRequired);
+    this.demo_geboortemaand = new demo_geboortemaand(this.key,
+      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '6'), isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, conditionForWantToParticipate, isRequired);
     this.demo_postcode = new demo_postcode(this.key, conditionForWantToParticipate, isRequired);
     this.demo_huish_totaal = new demo_huish_totaal(this.key, conditionForWantToParticipate, isRequired);
@@ -80,12 +85,14 @@ class CaseDef extends SurveyDefinition {
     this.kind_school = new kind_school(this.key, conditionForWantToParticipate, isRequired);
     this.klachten_kind = new klachten_kind(this.key, conditionForWantToParticipate, isRequired);
     this.klachten_huisarts = new klachten_huisarts(this.key,
-      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '13'), isRequired);
+      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '15'), isRequired);
     this.klachten_seh = new klachten_seh(this.key,
-      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '13'), isRequired);
+      SurveyEngine.multipleChoice.any(this.klachten_kind.key, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '15'), isRequired);
     this.antibiotica = new antibiotica(this.key, conditionForWantToParticipate, isRequired);
     this.antibiotica_start = new antibiotica_start(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
+    this.antibiotica_stop = new antibiotica_stop(this.key,
+        SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, conditionForWantToParticipate, isRequired);
     this.ingreep = new ingreep(this.key, conditionForWantToParticipate, isRequired);    
     this.klachten_huishouden = new klachten_huishouden(this.key, conditionForWantToParticipate, isRequired);
@@ -113,6 +120,7 @@ class CaseDef extends SurveyDefinition {
     this.addItem(this.osirisnummer.get());
     this.addItem(this.datum_ziek.get());
     this.addItem(this.demo_geboortejaar.get());
+    this.addItem(this.demo_geboortemaand.get());
     this.addItem(this.demo_geslacht.get());
     this.addItem(this.demo_postcode.get());
     this.addItem(this.demo_huish_totaal.get());
@@ -127,6 +135,7 @@ class CaseDef extends SurveyDefinition {
     this.addItem(this.klachten_seh.get());
     this.addItem(this.antibiotica.get());
     this.addItem(this.antibiotica_start.get());
+    this.addItem(this.antibiotica_stop.get());
     this.addItem(this.ziekenhuis.get());
     this.addItem(this.ingreep.get());
     this.addItem(this.klachten_huishouden.get());
@@ -165,7 +174,7 @@ class intro extends Item {
   Uw kind heeft een invasieve GAS infectie (gehad). Invasieve GAS infecties worden doorgegeven aan de GGD. Dit betekent dat een arts of laboratorium een invasieve GAS infectie meldt bij de GGD als bij iemand deze infectie is vastgesteld. De GGD kan daarna vragen welke personen in contact zijn geweest met de zieke persoon toen die besmettelijk was. De GGD kan deze personen antibiotica geven zodat ze niet ziek worden. De GGD meldt aan het RIVM dat iemand invasieve GAS heeft. Deze melding wordt opgeslagen in het Osiris systeem. In het Osiris systeem staan geen persoonsgegevens zoals naam of adres, maar wel een patiëntnummer. Dit noemen we het Osiris nummer. Als het goed is, heeft u het Osiris nummer van uw kind gekregen van de GGD. Met dit Osiris nummer kunnen wij uw antwoorden op de vragenlijst samenvoegen met de gegevens in het Osiris systeem. De gegevens in het Osiris systeem kunnen het onderzoek helpen. 
   
   ##### **Gebruik van de gegevens van het ziekenhuis**
-  Als uw kind met een invasieve GAS infectie in het ziekenhuis is opgenomen kunt u in sommige ziekenhuizen meedoen aan het COPP-iGAS onderzoek (zie www.infectiekids.nl). Het RIVM werkt samen met het COPP-iGAS onderzoek. De gegevens van het COPP-iGAS onderzoek kunnen dit onderzoek helpen. Wij vragen uw toestemming om de vragenlijst van het RIVM-onderzoek naar streptokokkeninfecties bij kinderen samen te voegen met de gegevens van het COPP-iGAS onderzoek. Als u hiervoor geen toestemming geeft, kunt u nog wel meedoen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen.
+  Als uw kind met een invasieve GAS infectie in het ziekenhuis is opgenomen kunt u in sommige ziekenhuizen meedoen aan het COPP-iGAS onderzoek (zie [*www.infectiekids.nl*](https://infectiekids.nl)). Het RIVM werkt samen met het COPP-iGAS onderzoek. De gegevens van het COPP-iGAS onderzoek kunnen dit onderzoek helpen. Wij vragen uw toestemming om de vragenlijst van het RIVM-onderzoek naar streptokokkeninfecties bij kinderen samen te voegen met de gegevens van het COPP-iGAS onderzoek. Als u hiervoor geen toestemming geeft, kunt u nog wel meedoen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen.
     
   ##### **Gebruik van de gegevens van uw kind als u meedoet**
   Het RIVM zal alleen uw gegevens gebruiken als u hiervoor toestemming geeft. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
@@ -380,7 +389,7 @@ class consent_coppigas extends Item {
     }
   }
   
-
+ 
   export class demo_geboortejaar extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'demo_geboortejaar');
@@ -389,28 +398,137 @@ class consent_coppigas extends Item {
     }
   
     buildItem() {
-      return SurveyItems.numericInput({
+      return SurveyItems.dropDown({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ['nl', 'Wat is het geboortejaar van uw kind?'],
+          ["nl", "Wat is het geboortejaar van uw kind?"],
         ]),
-        titleClassName: 'sticky-top',
-        inputMaxWidth: '80px',
-        inputLabel: new Map([
-          ['nl', '']
-        ]),
-        labelBehindInput: true,
-        componentProperties: {
-          min: 2017,
-          max: 2023
-        }
+        responseOptions: [
+          {
+            key: '1', role: 'option', content: new Map([
+              ["nl", "2017"],
+            ]),
+          },
+          {
+            key: '2', role: 'option', content: new Map([
+              ["nl", "2018"],
+            ]),
+          },
+          {
+            key: '3', role: 'option', content: new Map([
+              ["nl", "2019"],
+            ]),
+          },
+          {
+            key: '4', role: 'option', content: new Map([
+              ["nl", "2020"],
+            ]),
+          },
+          {
+            key: '5', role: 'option', content: new Map([
+              ["nl", "2021"],
+            ]),
+          },
+          {
+            key: '6', role: 'option', content: new Map([
+              ["nl", "2022"],
+            ]),
+          },
+          {
+            key: '7', role: 'option', content: new Map([
+              ["nl", "2023"],
+            ]),
+          },
+        ]
       })
     }
   }
+
+  export class demo_geboortemaand extends Item {
+    constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+      super(parentKey, 'demo_geboortemaand');
+      this.condition = condition;
+      this.isRequired = isRequired;
+    }
   
+    buildItem() {
+      return SurveyItems.dropDown({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: new Map([
+          ["nl", "Wat is de geboortemaand van uw kind?"],
+        ]),
+        responseOptions: [
+          {
+            key: '1', role: 'option', content: new Map([
+              ["nl", "Januari"],
+            ]),
+          },
+          {
+            key: '2', role: 'option', content: new Map([
+              ["nl", "Februari"],
+            ]),
+          },
+          {
+            key: '3', role: 'option', content: new Map([
+              ["nl", "Maart"],
+            ]),
+          },
+          {
+            key: '4', role: 'option', content: new Map([
+              ["nl", "April"],
+            ]),
+          },
+          {
+            key: '5', role: 'option', content: new Map([
+              ["nl", "Mei"],
+            ]),
+          },
+          {
+            key: '6', role: 'option', content: new Map([
+              ["nl", "Juni"],
+            ]),
+          },
+          {
+            key: '7', role: 'option', content: new Map([
+              ["nl", "Juli"],
+            ]),
+          },
+          {
+            key: '8', role: 'option', content: new Map([
+              ["nl", "Augustus"],
+            ]),
+          },
+          {
+            key: '9', role: 'option', content: new Map([
+              ["nl", "September"],
+            ]),
+          },
+          {
+            key: '10', role: 'option', content: new Map([
+              ["nl", "Oktober"],
+            ]),
+          },
+          {
+            key: '11', role: 'option', content: new Map([
+              ["nl", "November"],
+            ]),
+          },
+          {
+            key: '12', role: 'option', content: new Map([
+              ["nl", "December"],
+            ]),
+          },
+        ]
+      })
+    }
+  }
+
   export class demo_geslacht extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'demo_geslacht');
@@ -459,27 +577,53 @@ class consent_coppigas extends Item {
     }
   
     buildItem() {
-      return SurveyItems.numericInput({
+      return SurveyItems.singleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ['nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'],
+          ["nl", "Wat zijn de eerste vier cijfers van je postcode?"],
         ]),
-        questionSubText: new Map([
-          ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
-        ]),
-        titleClassName: 'sticky-top',
-        inputMaxWidth: '80px',
-        inputLabel: new Map([
-          ['nl', '']
-        ]),
-        labelBehindInput: true,
-        componentProperties: {
-          min: 1000,
-          max: 9999
-        }
+        //helpGroupContent: this.getHelpGroupContent(),
+        responseOptions: [
+          {
+            key: '0', role: 'input',
+            // style: [{ key: 'className', value: 'w-100' }],
+            content: new Map([
+              ["nl", "Postcode"],
+            ]),
+            description: new Map([
+              ["nl", "de eerste vier cijfers"],
+            ])
+          },
+          {
+            key: '1', role: 'option',
+            content: new Map([
+              ["nl", "Dit wil ik niet aangeven"],
+            ])
+          },
+        ],
+        customValidations: [
+          {
+            key: 'r2',
+            type: 'hard',
+            rule: expWithArgs('or',
+              expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+              expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+              expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
+            )
+          }
+        ],
+        bottomDisplayCompoments: [
+          {
+            role: 'error',
+            content: generateLocStrings(new Map([
+              ["nl", "Voer de eerste vier cijfers van je postcode in"],
+            ])),
+            displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+          }
+        ]
       })
     }
   }
@@ -492,27 +636,31 @@ class consent_coppigas extends Item {
     }
   
     buildItem() {
-      return SurveyItems.numericInput({
+      return SurveyItems.singleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ['nl', 'Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
+          ["nl", "Uit hoeveel personen bestaat het huishouden van uw kind in totaal? Reken het kind waarvoor u de vragenlijst invult ook mee."],
         ]),
         questionSubText: new Map([
           ["nl", "Met huishouden bedoelen we alle mensen met wie uw kind in één huis woont. Als uw kind in meerdere huishoudens woont, vragen we het huishouden te kiezen waar uw kind het meest woont."],
         ]),
-        titleClassName: 'sticky-top',
-        inputMaxWidth: '80px',
-        inputLabel: new Map([
-          ['nl', '']
-        ]),
-        labelBehindInput: true,
-        componentProperties: {
-          min: 1,
-          max: 99
-        }
+        responseOptions: [
+          {
+            key: '1', role: 'input',
+            content: new Map([
+              ["nl", "Huishouden totaal aantal personen:"],
+            ])
+          },
+          {
+            key: '2', role: 'option',
+            content: new Map([
+              ["nl", "Wil ik niet zeggen/weet ik niet"],
+            ])
+          },
+        ]
       })
     }
   }
@@ -525,186 +673,239 @@ class consent_coppigas extends Item {
       this.isRequired = isRequired;
     }
   
-    buildItem() {
-      return SurveyItems.numericInput({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ['nl', 'Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee.'],
-        ]),
-        titleClassName: 'sticky-top',
-        inputMaxWidth: '80px',
-        inputLabel: new Map([
-          ['nl', '']
-        ]),
-        labelBehindInput: true,
-        componentProperties: {
-          min: 1,
-          max: 99
-        }
-      })
-    }
+ 
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Hoeveel kinderen (18 jaar of jonger) wonen er in totaal in dit huishouden? Reken het kind waarvoor u de vragenlijst invult ook mee."],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'input',
+          content: new Map([
+            ["nl", "Huishouden totaal aantal kinderen:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen/weet ik niet"],
+          ])
+        },
+      ]
+    })
   }
-  
-  export class aandoeningen extends Item {
-    constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-      super(parentKey, 'aandoeningen');
-      this.condition = condition;
-      this.isRequired = isRequired;
-    }
-  
-    buildItem() {
-      return SurveyItems.multipleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ["nl", "Heeft uw kind een van de volgende door een dokter vastgestelde (chronische) aandoening? (meerdere antwoorden mogelijk)"],
-        ]),
-        responseOptions: [
-          {
-            key: '1', role: 'option',
-            content: new Map([
-              ["nl", "Suikerziekte (diabetes mellitus)"],
-            ])
-          },
-          {
-            key: '2', role: 'option',
-            content: new Map([
-              ["nl", "Reuma"],
-            ])
-          },
-          {
-            key: '3', role: 'option',
-            content: new Map([
-              ["nl", "Eczeem"],
-            ])
-          },
-          {
-            key: '4', role: 'option',
-            content: new Map([
-              ["nl", "Psoriasis"],
-            ])
-          },
-          {
-            key: '5', role: 'option',
-            content: new Map([
-              ["nl", "Astma/chronische bronchitis"],
-            ])
-          },
-          {
-            key: '6', role: 'option',
-            content: new Map([
-              ["nl", "Hartaandoening"],
-            ])
-          },
-          {
-            key: '7', role: 'option',
-            content: new Map([
-              ["nl", "Nieraandoening"],
-            ])
-          },
-          {
-            key: '8', role: 'option',
-            content: new Map([
-              ["nl", "Verzwakt afweersysteem door ziekte of behandeling (bijvoorbeeld door een autoimmuunziekte, kankerbehandeling of na een orgaanstransplantatie)"],
-            ])
-          },
-          {
-            key: '9', role: 'option',
-            content: new Map([
-              ["nl", "Immuunstoornis"],
-            ])
-          },
-          {
-            key: '10', role: 'option',
-            content: new Map([
-              ["nl", "Nee, geen van bovenstaande"],
-            ])
-          },
-        ]
-      })
-    }
+}
+
+
+export class aandoeningen extends Item {
+  optionKeys = {
+    no: '0',
+    suiker: '1',
   }
+
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'aandoeningen');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Heeft uw kind een van de volgende door een dokter vastgestelde (chronische) aandoening? (meerdere antwoorden mogelijk)"],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.suiker, role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Suikerziekte (diabetes mellitus)"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Reuma"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Eczeem"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Psoriasis"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Astma/chronische bronchitis"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Hartaandoening"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Nieraandoening"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Verzwakt afweersysteem door ziekte of behandeling (bijvoorbeeld door een autoimmuunziekte, kankerbehandeling of na een orgaanstransplantatie)"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Immuunstoornis"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee, geen van bovenstaande"],
+          ])
+        },
+        {
+          key: '10', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
+      ]
+    })
+  }
+}
   
   export class medicijnen extends Item {
+    optionKeys = {
+      no: '0',
+      prednison: '1',
+    }
+ 
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-      super(parentKey, 'medicijnen');
+      super(parentKey, '1');
       this.condition = condition;
       this.isRequired = isRequired;
     }
-  
-    buildItem() {
-      return SurveyItems.multipleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ["nl", "Heeft uw kind in de 4 weken vooraf ziekenhuisopname elke dag of elke week de volgende medicijnen gebruikt? Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS. (meerdere antwoorden mogelijk)"],
-        ]),
-        responseOptions: [
-          {
-            key: '1', role: 'option',
-            content: new Map([
-              ["nl", "Prednison"],
-            ])
-          },
-          {
-            key: '2', role: 'option',
-            content: new Map([
-              ["nl", "Andere ontstekingsremmers"],
-            ])
-          },
-          {
-            key: '3', role: 'option',
-            content: new Map([
-              ["nl", "Insuline"],
-            ])
-          },
-          {
-            key: '4', role: 'option',
-            content: new Map([
-              ["nl", "Onderhoudsantibiotica (dit is antibiotica die uw kind op advies van de dokter langdurigere periode moet slikken)"],
-            ])
-          },
-          {
-            key: '5', role: 'option',
-            content: new Map([
-              ["nl", "Maagzuurremmers"],
-            ])
-          },
-          {
-            key: '6', role: 'option',
-            content: new Map([
-              ["nl", "Ibuprofen"],
-            ])
-          },
-          {
-            key: '7', role: 'option',
-            content: new Map([
-              ["nl", "Inhalatiemedicatie (puffers)"],
-            ])
-          },
-          {
-            key: '8', role: 'input',
-            content: new Map([
-              ["nl", "Andere medicijnen, namelijk:"],
-            ])
-          },
-          {
-            key: '9', role: 'option',
-            content: new Map([
-              ["nl", "Geen van bovenstaande"],
-            ])
-          },
-        ]
-      })
-    }
-  }
+ 
+   buildItem() {
+ 
+     const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+ 
+     return SurveyItems.multipleChoice({
+       parentKey: this.parentKey,
+       itemKey: this.itemKey,
+       isRequired: this.isRequired,
+       condition: this.condition,
+       questionText: new Map([
+         ["nl", "Heeft uw kind de afgelopen 4 weken elke dag of elke week de volgende medicijnen gebruikt? (meerdere antwoorden mogelijk)"],
+       ]),
+       responseOptions: [
+         {
+           key: this.optionKeys.prednison, role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Prednison"],
+           ])
+         },
+         {
+           key: '2', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Andere ontstekingsremmers"],
+           ])
+         },
+         {
+           key: '3', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Insuline"],
+           ])
+         },
+         {
+           key: '4', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Onderhoudsantibiotica (dit is antibiotica die uw kind op advies van de dokter langdurigere periode moet slikken)"],
+           ])
+         },
+         {
+           key: '5', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Maagzuurremmers"],
+           ])
+         },
+         {
+           key: '6', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Ibuprofen"],
+           ])
+         },
+         {
+           key: '7', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Inhalatiemedicatie (puffers)"],
+           ])
+         },
+         {
+           key: '8', role: 'input',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Andere medicijnen, namelijk:"],
+           ])
+         },
+         {
+           key: this.optionKeys.no, role: 'option',
+           content: new Map([
+             ["nl", "Geen van bovenstaande"],
+           ])
+         },
+         {
+           key: '9', role: 'option',
+           disabled: optionDisabled,
+           content: new Map([
+             ["nl", "Weet ik niet/wil ik niet zeggen"],
+           ])
+         },
+       ]
+     })
+   }
+ }
   
   export class kind_oppas extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
@@ -733,7 +934,7 @@ class consent_coppigas extends Item {
             ])
           },
           {
-            key: '1', role: 'input',
+            key: '1', role: 'numberInput',
             content: new Map([
               ["nl", "Aantal dag(en) per week:"],
             ])
@@ -770,7 +971,7 @@ class consent_coppigas extends Item {
             ])
           },
           {
-            key: '1', role: 'input',
+            key: '1', role: 'numberInput',
             content: new Map([
               ["nl", "Aantal dag(en) per week:"],
             ])
@@ -807,7 +1008,7 @@ class consent_coppigas extends Item {
             ])
           },
           {
-            key: '1', role: 'input',
+            key: '1', role: 'numberInput',
             content: new Map([
               ["nl", "Aantal dag(en) per week:"],
             ])
@@ -818,6 +1019,11 @@ class consent_coppigas extends Item {
   }
   
   export class klachten_kind extends Item {
+    optionKeys = {
+      no: '0',
+      roodvonk: '1',
+    }
+  
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'klachten_kind');
       this.condition = condition;
@@ -825,6 +1031,9 @@ class consent_coppigas extends Item {
     }
   
     buildItem() {
+  
+      const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+    
       return SurveyItems.multipleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
@@ -839,86 +1048,120 @@ class consent_coppigas extends Item {
         helpGroupContent: this.getHelpGroupContent(),
         responseOptions: [
           {
-            key: '1', role: 'option',
+            key: this.optionKeys.roodvonk, role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Roodvonk"],
             ])
           },
           {
             key: '2', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Krentenbaard (impetigo)"],
             ])
           },
           {
             key: '3', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Waterpokken"],
             ])
           },
           {
             key: '4', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelontsteking"],
             ])
           },
           {
             key: '5', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Neusverkoudheid"],
             ])
           },
           {
             key: '6', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelpijn"],
             ])
           },
           {
             key: '7', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Benauwdheid"],
             ])
           },
           {
             key: '8', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Hoesten"],
             ])
           },
           {
             key: '9', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Koorts (38 graden of meer)"],
             ])
           },
           {
             key: '10', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Schurft (scabies)"],
             ])
           },
           {
             key: '11', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Ontstoken wond(je) of huidontsteking"],
             ])
           },
           {
             key: '12', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Oorontsteking (otitis media)"],
             ])
           },
           {
-            key: '13', role: 'input',
+            key: '13', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Longontsteking"],
+            ])
+          },
+          {
+            key: '14', role: 'input',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Anders, namelijk:"],
+            ])
+          },
+          {
+            key: this.optionKeys.no, role: 'option',
+            content: new Map([
+              ["nl", "Nee"],
+            ])
+          },
+          {
+            key: '15', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
       })
     }
+
     getHelpGroupContent() {
       return [
         {
@@ -981,7 +1224,7 @@ class consent_coppigas extends Item {
           {
             key: '4', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1021,7 +1264,7 @@ class consent_coppigas extends Item {
           {
             key: '2', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1064,7 +1307,7 @@ class consent_coppigas extends Item {
           {
             key: '2', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1104,6 +1347,47 @@ export class antibiotica_start extends Item {
   }
 }
 
+
+export class antibiotica_stop extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'antibiotica_stop');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Wanneer stopte uw kind met de antibiotica?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'dateInput',
+          optionProps: {
+            min: { dtype: 'num', num: 1672580978 }, //01-01-2023
+            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+          },
+          content: new Map([
+            ["nl", "Kies datum:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
+      ],
+    })
+  }
+}
+
+
+
   export class ziekenhuis extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'ziekenhuis');
@@ -1136,7 +1420,7 @@ export class antibiotica_start extends Item {
           {
             key: '2', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1179,7 +1463,7 @@ export class antibiotica_start extends Item {
           {
             key: '2', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1188,6 +1472,11 @@ export class antibiotica_start extends Item {
   }
   
   export class klachten_huishouden extends Item {
+    optionKeys = {
+      no: '0',
+      roodvonk: '1',
+    }
+  
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'klachten_huishouden');
       this.condition = condition;
@@ -1195,100 +1484,151 @@ export class antibiotica_start extends Item {
     }
   
     buildItem() {
+  
+      const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+  
       return SurveyItems.multipleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ["nl", "Had iemand in uw huishouden in de 4 weken ziekenhuisopname van uw kind last van een van de volgende klachten? Reken hierbij het kind waarvoor u de vragenlijst invult niet mee. (meerdere antwoorden mogelijk)"],
+          ["nl", "Had iemand in uw huishouden in de afgelopen 4 weken last van een van de volgende klachten? Reken hierbij het kind waarvoor u de vragenlijst invult niet mee. (meerdere antwoorden mogelijk)"],
         ]),
-        questionSubText: new Map([
-          ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
-        ]),
+        helpGroupContent: this.getHelpGroupContent(),
         responseOptions: [
           {
-            key: '1', role: 'option',
+            key: this.optionKeys.roodvonk, role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Roodvonk"],
             ])
           },
           {
             key: '2', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Krentenbaard (impetigo)"],
             ])
           },
           {
             key: '3', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Waterpokken"],
             ])
           },
           {
             key: '4', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelontsteking"],
             ])
           },
           {
             key: '5', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Neusverkoudheid"],
             ])
           },
           {
             key: '6', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelpijn"],
             ])
           },
           {
             key: '7', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Benauwdheid"],
             ])
           },
           {
             key: '8', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Hoesten"],
             ])
           },
           {
             key: '9', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Koorts (38 graden of meer)"],
             ])
           },
           {
             key: '10', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Schurft (scabies)"],
             ])
           },
           {
             key: '11', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Ontstoken wond(je) of huidontsteking"],
             ])
           },
           {
             key: '12', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Oorontsteking (otitis media)"],
             ])
           },
           {
-            key: '13', role: 'input',
+            key: '13', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Longontsteking"],
+            ])
+          },
+          {
+            key: '14', role: 'input',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Anders, namelijk:"],
+            ])
+          },
+          {
+            key: this.optionKeys.no, role: 'option',
+            content: new Map([
+              ["nl", "Nee"],
+            ])
+          },
+          {
+            key: '15', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
       })
     }
+    getHelpGroupContent() {
+      return [
+        {
+          content: new Map([
+            ["nl", "Uitleg roodvonk"],
+          ]),
+          style: [{ key: 'variant', value: 'h5' }],
+        },
+        {
+          content: new Map([
+            ["nl", "Roodvonk is een kinderziekte die we vooral zien bij kinderen tussen 3 en 8 jaar. Uw kind heeft dan koorts, keelpijn en ruwe (rode) plekjes op de huid, en soms misselijkheid met overgeven. Ook kan de tong rood en bobbelig worden (frambozentong). Als uw kind weer beter wordt, kan de huid vervellen.)"],
+          ]),
+          style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+        },
+      ]
+    }
   }
+  
   
   export class klachten_opvang extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
@@ -1304,10 +1644,7 @@ export class antibiotica_start extends Item {
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken voor ziekenhuisopname iemand die last had van: (meerdere antwoorden mogelijk)"],
-        ]),
-        questionSubText: new Map([
-          ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
+          ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
         ]),
         helpGroupContent: this.getHelpGroupContent(),
         responseOptions: [
@@ -1380,13 +1717,31 @@ export class antibiotica_start extends Item {
           {
             key: '12', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Oorontsteking (otitis media)"],
             ])
           },
           {
-            key: '13', role: 'input',
+            key: '13', role: 'option',
+            content: new Map([
+              ["nl", "Longontsteking"],
+            ])
+          },
+          {
+            key: '14', role: 'input',
             content: new Map([
               ["nl", "Anders, namelijk:"],
+            ])
+          },
+          {
+            key: '0', role: 'option',
+            content: new Map([
+              ["nl", "Nee"],
+            ])
+          },
+          {
+            key: '15', role: 'option',
+            content: new Map([
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1411,6 +1766,11 @@ export class antibiotica_start extends Item {
   }
   
   export class klachten_omgeving extends Item {
+    optionKeys = {
+      no: '0',
+      roodvonk: '1',
+    }
+  
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
       super(parentKey, 'klachten_omgeving');
       this.condition = condition;
@@ -1418,95 +1778,128 @@ export class antibiotica_start extends Item {
     }
   
     buildItem() {
+  
+      const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no);
+  
       return SurveyItems.multipleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken voor ziekenhuisopname last van: (meerdere antwoorden mogelijk)"],
-        ]),
-        questionSubText: new Map([
-          ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
+          ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken last van een van de volgende klachten? (meerdere antwoorden mogelijk)"],
         ]),
         helpGroupContent: this.getHelpGroupContent(),
         responseOptions: [
           {
-            key: '1', role: 'option',
+            key: this.optionKeys.roodvonk, role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Roodvonk"],
             ])
           },
           {
             key: '2', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Krentenbaard (impetigo)"],
             ])
           },
           {
             key: '3', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Waterpokken"],
             ])
           },
           {
             key: '4', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelontsteking"],
             ])
           },
           {
             key: '5', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Neusverkoudheid"],
             ])
           },
           {
             key: '6', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Keelpijn"],
             ])
           },
           {
             key: '7', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Benauwdheid"],
             ])
           },
           {
             key: '8', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Hoesten"],
             ])
           },
           {
             key: '9', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Koorts (38 graden of meer)"],
             ])
           },
           {
             key: '10', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Schurft (scabies)"],
             ])
           },
           {
             key: '11', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Ontstoken wond(je) of huidontsteking"],
             ])
           },
           {
             key: '12', role: 'option',
+            disabled: optionDisabled,
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Oorontsteking (otitis media)"],
             ])
           },
           {
-            key: '13', role: 'input',
+            key: '13', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Longontsteking"],
+            ])
+          },
+          {
+            key: '14', role: 'input',
+            disabled: optionDisabled,
             content: new Map([
               ["nl", "Anders, namelijk:"],
+            ])
+          },
+          {
+            key: this.optionKeys.no, role: 'option',
+            content: new Map([
+              ["nl", "Nee"],
+            ])
+          },
+          {
+            key: '15', role: 'option',
+            disabled: optionDisabled,
+            content: new Map([
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
@@ -1652,7 +2045,7 @@ export class antibiotica_start extends Item {
           {
             key: '2', role: 'option',
             content: new Map([
-              ["nl", "Weet ik niet"],
+              ["nl", "Weet ik niet/wil ik niet zeggen"],
             ])
           },
         ]
