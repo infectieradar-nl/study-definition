@@ -59,7 +59,7 @@ class ControleDef extends SurveyDefinition {
     this.intro = new intro(this.key);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, isRequired);
     this.demo_geboortemaand = new demo_geboortemaand(this.key,
-      SurveyEngine.singleChoice.any(this.demo_geboortejaar.key, '6', '7'), isRequired);
+      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '6', '7'), isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, isRequired);
     this.demo_postcode = new demo_postcode(this.key, isRequired);
     this.opgenomen_igas = new opgenomen_igas(this.key, isRequired);
