@@ -8,8 +8,9 @@ import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 
 class CaseDef extends SurveyDefinition {
   intro: intro;
-  consent_streptokids: consent_streptokids;
-  consent_infectiekids: consent_infectiekids;
+  consent_igas: consent_igas;
+  consent_coppigas: consent_coppigas;
+  coppigas_nummer: coppigas_nummer;
   osirisnummer: osirisnummer;
   datum_ziek: datum_ziek;
   demo_geboortejaar: demo_geboortejaar;
@@ -59,11 +60,12 @@ class CaseDef extends SurveyDefinition {
 
     const isRequired = true;
 
-    this.intro = new intro(this.key);
-    this.consent_streptokids = new consent_streptokids(this.key, isRequired);
-    const conditionForWantToParticipate = SurveyEngine.singleChoice.any(this.consent_streptokids.key, '1');
-    this.consent_infectiekids = new consent_infectiekids(this.key, conditionForWantToParticipate, isRequired);
-
+    this.intro = new intro(this.key);     
+    this.consent_igas = new consent_igas(this.key, isRequired);
+    const conditionForWantToParticipate = SurveyEngine.singleChoice.any(this.consent_igas.key, 'acceptBtn');
+    this.consent_coppigas = new consent_coppigas(this.key, conditionForWantToParticipate, isRequired);
+    this.coppigas_nummer = new coppigas_nummer(this.key,
+      SurveyEngine.singleChoice.any(this.consent_igas.key, '1',), isRequired);
     this.osirisnummer = new osirisnummer(this.key, conditionForWantToParticipate, isRequired);
     this.datum_ziek = new datum_ziek(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, conditionForWantToParticipate, isRequired);
@@ -106,9 +108,8 @@ class CaseDef extends SurveyDefinition {
 
   buildSurvey() {
     this.addItem(this.intro.get());
-    this.addItem(this.consent_streptokids.get());
-    this.addItem(this.consent_infectiekids.get());
-
+    this.addItem(this.consent_igas.get());
+    this.addItem(this.consent_coppigas.get());
     this.addItem(this.osirisnummer.get());
     this.addItem(this.datum_ziek.get());
     this.addItem(this.demo_geboortejaar.get());
@@ -137,7 +138,6 @@ class CaseDef extends SurveyDefinition {
     this.addItem(this.opleiding_ouder.get());
     this.addItem(this.resultaten.get());
     this.addItem(this.email.get());
-
     this.addItem(this.UV.get());
     this.addItem(this.FinalText.get());
   }
@@ -151,32 +151,27 @@ class intro extends Item {
   }
 
   markdownContent = `
-  ##### <span className="text-primary">Streptokids</span>
-  
-  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld krentenbaard of roodvonk. Soms kunnen mensen in korte tijd ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS’ infectie. Op dit moment zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat kan.
-  U bent gevraagd door de GGD om mee te doen aan dit onderzoek omdat uw kind een invasieve GAS infectie heeft (gehad). Lees onderstaande informatie rustig door. Beslis daarna pas of u mee wil doen aan het onderzoek. Heeft u extra vragen? Stel ze aan de GGD of aan de RIVM onderzoekers via streptokids@rivm.nl. U kunt er ook eerst over praten met uw partner, vrienden of familie.
+  ##### <span className="text-primary">RIVM-onderzoek naar streptokokkeninfecties bij kinderen</span>
+  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
+  U bent gevraagd door de GGD om mee te doen aan dit onderzoek omdat uw kind een invasieve GAS infectie heeft (gehad). Lees onderstaande informatie rustig door. Beslis daarna pas of u mee wil doen aan het onderzoek. Heeft u extra vragen? Stel ze aan de GGD of aan de RIVM onderzoekers via igasonderzoek@rivm.nl. U kunt er ook eerst over praten met uw partner, vrienden of familie.
   
   ##### **Doel van het onderzoek**
-  Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Dit onderzoek heet het ‘Streptokids onderzoek'. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder ziek worden door een invasieve GAS infectie.
+  Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder vaak ziek worden door een invasieve GAS infectie.
   
   ##### **Wat houdt meedoen in?**
-  Wilt u meedoen aan het Streptokids onderzoek? Dan stellen wij u een paar vragen over uw kind en zijn/haar omgeving, zoals naar het kinderdagverblijf of school gaan. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig. 
+  Wij stellen u een aantal vragen over uw kind en zijn/haar omgeving, zoals naar het kinderdagverblijf of school gaan. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig. 
   
   ##### **Gebruik van de gegevens van de GGD**
-  Uw kind heeft een invasieve GAS infectie (gehad). Invasieve GAS infecties worden doorgegeven aan de GGD. Dit betekent dat een arts of laboratorium een invasieve GAS infectie meldt bij de GGD als bij iemand deze infectie is vastgesteld. De GGD kan daarna vragen welke personen in contact zijn geweest met de zieke persoon toen die besmettelijk was. De GGD kan deze personen antibiotica geven zodat ze niet ziek worden. De GGD meldt aan het RIVM dat iemand invasieve GAS heeft. Deze melding wordt opgeslagen in het Osiris systeem. In het Osiris systeem staan geen persoonsgegevens zoals naam of adres, maar wel een patiëntnummer. Dit noemen we het Osiris nummer. Als het goed is heeft u het Osiris nummer van uw kind gekregen van de GGD. Met dit Osiris nummer kunnen wij uw antwoorden op de Streptokids vragenlijst samenvoegen met de gegevens in het Osiris systeem. De gegevens in het Osiris systeem kunnen het onderzoek helpen. 
+  Uw kind heeft een invasieve GAS infectie (gehad). Invasieve GAS infecties worden doorgegeven aan de GGD. Dit betekent dat een arts of laboratorium een invasieve GAS infectie meldt bij de GGD als bij iemand deze infectie is vastgesteld. De GGD kan daarna vragen welke personen in contact zijn geweest met de zieke persoon toen die besmettelijk was. De GGD kan deze personen antibiotica geven zodat ze niet ziek worden. De GGD meldt aan het RIVM dat iemand invasieve GAS heeft. Deze melding wordt opgeslagen in het Osiris systeem. In het Osiris systeem staan geen persoonsgegevens zoals naam of adres, maar wel een patiëntnummer. Dit noemen we het Osiris nummer. Als het goed is, heeft u het Osiris nummer van uw kind gekregen van de GGD. Met dit Osiris nummer kunnen wij uw antwoorden op de vragenlijst samenvoegen met de gegevens in het Osiris systeem. De gegevens in het Osiris systeem kunnen het onderzoek helpen. 
   
   ##### **Gebruik van de gegevens van het ziekenhuis**
-  Als uw kind met een invasieve GAS infectie in het ziekenhuis heeft gelegen kunt u in sommige ziekenhuizen meedoen aan het infectiekids onderzoek (zie [*www.infectiekids.nl*](www.infectiekids.nl)). Het RIVM werkt samen met het infectiekids onderzoek.  De gegevens van het infectiekids onderzoek kunnen dit onderzoek helpen. Wij vragen u om toestemming om de  de Streptokids vragenlijst samen te voegen met de gegevens van het infectiekids onderzoek. 
-  Het RIVM zal alleen uw gegevens  gebruiken als u hiervoor toestemming geeft. U kunt op elk moment stoppen met het onderzoek en hoeft niet te zeggen waarom. Uw ingevulde vragenlijstgegevens zullen dan verwijderd worden. Als u wilt stoppen, stuur dan een e-mail naar: streptokids@rivm.nl. Meer informatie vindt u in de [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM.
+  Als uw kind met een invasieve GAS infectie in het ziekenhuis is opgenomen kunt u in sommige ziekenhuizen meedoen aan het COPP-iGAS onderzoek (zie www.infectiekids.nl). Het RIVM werkt samen met het COPP-iGAS onderzoek. De gegevens van het COPP-iGAS onderzoek kunnen dit onderzoek helpen. Wij vragen uw toestemming om de vragenlijst van het RIVM-onderzoek naar streptokokkeninfecties bij kinderen samen te voegen met de gegevens van het COPP-iGAS onderzoek. Als u hiervoor geen toestemming geeft, kunt u nog wel meedoen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen.
+    
+  ##### **Gebruik van de gegevens van uw kind als u meedoet**
+  Het RIVM zal alleen uw gegevens gebruiken als u hiervoor toestemming geeft. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
+  Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment stoppen met het onderzoek en uw persoonsgegevens laten verwijderen. Dat kan door een e-mail te sturen naar dit e-mailadres: igasonderzoek@rivm.nl.
   
-  Geef hieronder aan of u toestemming geeft.
-  
-  Ik verklaar dat
-  - Ik de [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM heb gelezen,
-  - Ik genoeg mogelijkheden heb gekregen om vragen te stellen,
-  - Ik weet dat meedoen aan het onderzoek vrijwillig is,
-  - Ik weet dat ik elk moment kan stoppen met dit onderzoek zonder te vertellen waarom
-  - Ik begrijp wat dit wetenschappelijk onderzoek van het RIVM betekent
+  Als u besluit om mee te doen aan dit onderzoek, vragen wij u om [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM te lezen. Na het lezen klikt u onderaan deze brief op akkoord en daarna start de vragenlijst. 
 `
 
   buildItem(): SurveySingleItem {
@@ -196,45 +191,65 @@ class intro extends Item {
 }
 
 
-  
-export class consent_streptokids extends Item {
-  
-  constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'consent_streptokids');
+class consent_igas extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'consent_igas');
+
     this.isRequired = isRequired;
+    this.condition = condition;
   }
-  
-    buildItem() {
-      return SurveyItems.singleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ["nl", "Ik wil meedoen aan dit wetenschappelijk onderzoek van het RIVM naar risicofactoren voor invasieve GAS infectie bij kinderen (Streptokids). Ik geef toestemming aan het RIVM om de gegevens van deze vragenlijst te gebruiken voor het Streptokids onderzoek."],
-        ]),
-        responseOptions: [
-          {
-            key: '0', role: 'option',
-            content: new Map([
-              ["nl", "Nee"],
-            ])
-          },
-          {
-            key: '1', role: 'option',
-            content: new Map([
-              ["nl", "Ja"],
-            ])
-          },
-        ]
-      })
-    }
+
+  buildItem() {
+    return SurveyItems.consent({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Toestemming iGAS onderzoek'],
+      ]),
+      checkBoxLabel: new Map([
+        ["nl", "Toestemming geven"],
+      ]),
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+Ik wil meedoen aan dit wetenschappelijk onderzoek van het RIVM naar risicofactoren voor invasieve GAS infectie bij kinderen en geef toestemming voor het verwerken van mijn gegevens.
+`]]),
+        })
+      ],
+      dialogTitle: new Map([
+        ["nl", "Toestemmingsformulier"],
+      ]),
+      dialogContent: new Map([
+        ["nl", `
+**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
+
+Door hieronder de knop “ik geef toestemming” aan te klikken stemt u in met deelname aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen en gaat u akkoord dat het RIVM uw gegevens voor dit onderzoek zal gebruiken.
+Ook:
+-	Heb ik de informatie over het onderzoek en de privacyverklaring over het gebruiken van de persoonsgegevens door het RIVM goed gelezen en begrepen. Ik kon vragen stellen en indien ik vragen had zijn die voldoende beantwoord. Ik had genoeg tijd om te beslissen of ik meedoe. Als ik nog verdere vragen heb, kan ik contact opnemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl. 
+-	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder een reden te noemen, kan stoppen met het onderzoek en dat ik mijn toestemming voor het gebruiken van mijn persoonsgegevens en/of van mijn kind(eren) kan intrekken. Dit kan door contact op te nemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl. 
+-	Weet ik dat de onderzoeksgegevens tot 10 jaar na het invullen van de vragenlijst worden bewaard. Als ik ervoor kies mijn e-mail adres op te geven weet ik dat deze tot 1 jaar na het einde van het onderzoek bewaard wordt.
+-	Verklaar ik dat ik ouder of voogd ben van het kind over wie de vragenlijst wordt ingevuld. 
+        `]]),
+      acceptBtn: new Map([
+        ["nl", "Ja, ik geef toestemming"],
+      ]),
+      rejectBtn: new Map([
+        ["nl", "Ik doe toch niet mee"],
+      ]),
+    })
   }
-    
-  class consent_infectiekids extends Item {
+}
+
+
+
+class consent_coppigas extends Item {
   
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-    super(parentKey, 'consent_infectiekids');
+    super(parentKey, 'consent_coppigas');
     this.condition = condition;
     this.isRequired = isRequired;
   }
@@ -258,7 +273,7 @@ export class consent_streptokids extends Item {
           {
             key: '1', role: 'input',
             content: new Map([
-              ["nl", "Ja. Ik heb na deelname met de COPP-iGAS een e-mail gekregen met een unieke code. Deze code is: "],
+              ["nl", "Ja"],
             ])
           },
           {
@@ -272,6 +287,36 @@ export class consent_streptokids extends Item {
     }
   }
 
+  export class coppigas_nummer extends Item {
+    constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+      super(parentKey, 'coppigas_nummer');
+      this.condition = condition;
+      this.isRequired = isRequired;
+    }
+  
+    buildItem() {
+      return SurveyItems.textInput({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: new Map([
+          ['nl', 'Ik heb na deelname met de COPP-iGAS een e-mail gekregen met een unieke code. Deze code is:'],
+        ]),
+        titleClassName: 'sticky-top',
+        inputMaxWidth: '160px',
+        inputLabel: new Map([
+          ['nl', '']
+        ]),
+        /*labelBehindInput: true,
+        componentProperties: {
+          min: 10000000,
+          max: 99999999
+        }*/
+      })
+    }
+  }
+  
 
   export class osirisnummer extends Item {
     constructor(parentKey: string, condition: Expression, isRequired: boolean) {
