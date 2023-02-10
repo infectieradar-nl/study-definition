@@ -3,7 +3,8 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { surveyKeys } from "../contants";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
+import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 
 class ControleDef extends SurveyDefinition {
   intro: intro;
@@ -353,31 +354,56 @@ export class demo_postcode extends Item {
   }
 
   buildItem() {
-    return SurveyItems.numericInput({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat zijn de 4 cijfers van de postcode van het adres waar uw kind woont?'],
+        ["nl", "Wat zijn de eerste vier cijfers van je postcode?"],
       ]),
-      questionSubText: new Map([
-        ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
-      ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', '']
-      ]),
-      labelBehindInput: true,
-      componentProperties: {
-        min: 1000,
-        max: 9999
-      }
+      //helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'input',
+          // style: [{ key: 'className', value: 'w-100' }],
+          content: new Map([
+            ["nl", "Postcode"],
+          ]),
+          description: new Map([
+            ["nl", "de eerste vier cijfers"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Dit wil ik niet aangeven"],
+          ])
+        },
+      ],
+      customValidations: [
+        {
+          key: 'r2',
+          type: 'hard',
+          rule: expWithArgs('or',
+            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+            expWithArgs('responseHasKeysAny', this.key, [responseGroupKey, singleChoiceKey].join('.'), '1')
+          )
+        }
+      ],
+      bottomDisplayCompoments: [
+        {
+          role: 'error',
+          content: generateLocStrings(new Map([
+            ["nl", "Voer de eerste vier cijfers van je postcode in"],
+          ])),
+          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+        }
+      ]
     })
   }
 }
-
 
 export class opgenomen_igas extends Item {
   constructor(parentKey: string, isRequired: boolean) {
