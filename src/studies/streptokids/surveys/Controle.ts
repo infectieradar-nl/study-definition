@@ -3,8 +3,8 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { surveyKeys } from "../contants";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { expWithArgs, generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
+import { responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 
 class ControleDef extends SurveyDefinition {
   intro: intro;
@@ -623,15 +623,15 @@ export class aandoeningen extends Item {
 
 
 export class medicijnen extends Item {
-   optionKeys = {
-     no: '0',
-     prednison: '1',
-   }
+  optionKeys = {
+    no: '0',
+    prednison: '1',
+  }
 
-   constructor(parentKey: string, isRequired: boolean) {
-     super(parentKey, '1');
-     this.isRequired = isRequired;
-   }
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, '1');
+    this.isRequired = isRequired;
+  }
 
   buildItem() {
 
@@ -703,7 +703,7 @@ export class medicijnen extends Item {
           ])
         },
         {
-          key: this.optionKeys.no, role: 'option',          
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])
