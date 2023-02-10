@@ -42,10 +42,10 @@ class ControleRegistrationDef extends SurveyDefinition {
     this.ChildCount = new ChildCount(this.key, isRequired);
 
     this.Kind1 = new ChildInfoGroup(this.key, 'kind1', '## **Infos about kind 1**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '1', '2', '3', '4', '5'));
-    this.Kind2 = new ChildInfoGroup(this.key, 'kind2', '<hr/>\n\n## **Infos about kind 2**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '2', '3', '4', '5'));
-    this.Kind3 = new ChildInfoGroup(this.key, 'kind3', '<hr/>\n\n## **Infos about kind 3**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '3', '4', '5'));
-    this.Kind4 = new ChildInfoGroup(this.key, 'kind4', '<hr/>\n\n## **Infos about kind 4**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '4', '5'));
-    this.Kind5 = new ChildInfoGroup(this.key, 'kind5', '<hr/>\n\n## **Infos about kind 5**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '5'));
+    this.Kind2 = new ChildInfoGroup(this.key, 'kind2', '## **Infos about kind 2**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '2', '3', '4', '5'));
+    this.Kind3 = new ChildInfoGroup(this.key, 'kind3', '## **Infos about kind 3**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '3', '4', '5'));
+    this.Kind4 = new ChildInfoGroup(this.key, 'kind4', '## **Infos about kind 4**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '4', '5'));
+    this.Kind5 = new ChildInfoGroup(this.key, 'kind5', '## **Infos about kind 5**', isRequired, SurveyEngine.responseHasKeysAny(this.ChildCount.key, 'rg.ddg', '5'));
 
     this.UV = new UserVerificationQuestion(this.key, isRequired)
     this.FinalText = new FinalText(this.key);
@@ -137,6 +137,7 @@ class header extends Item {
       condition: this.condition,
       content: [
         ComponentGenerators.markdown({
+          className: 'my-n3 mx-n2 mx-sm-n3 bg-white p-2 pb-1 ps-0 pt-3',
           content: new Map([
             ["nl", this.markdown],
           ]),
