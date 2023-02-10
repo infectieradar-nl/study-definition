@@ -9,7 +9,7 @@ import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/
 class ControleDef extends SurveyDefinition {
   intro: intro;
   demo_geboortejaar: demo_geboortejaar;
-  demo_geboortemaand:demo_geboortemaand; 
+  demo_geboortemaand: demo_geboortemaand;
   demo_geslacht: demo_geslacht;
   demo_postcode: demo_postcode;
   opgenomen_igas: opgenomen_igas;
@@ -81,7 +81,7 @@ class ControleDef extends SurveyDefinition {
     this.antibiotica_stop = new antibiotica_stop(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, isRequired);
-    this.ingreep = new ingreep(this.key, isRequired);    
+    this.ingreep = new ingreep(this.key, isRequired);
     this.klachten_huishouden = new klachten_huishouden(this.key, isRequired);
     this.klachten_opvang = new klachten_opvang(this.key,
       SurveyEngine.singleChoice.any(this.kind_opvang.key, '1'), isRequired);
@@ -227,7 +227,7 @@ export class demo_geboortejaar extends Item {
 }
 
 export class demo_geboortemaand extends Item {
-  constructor(parentKey: string,  condition: Expression, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'demo_geboortemaand');
     this.condition = condition;
     this.isRequired = isRequired;
@@ -514,7 +514,7 @@ export class aandoeningen extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, '1');
+    super(parentKey, 'aandoeningen');
     this.isRequired = isRequired;
   }
 
@@ -618,15 +618,15 @@ export class medicijnen extends Item {
     super(parentKey, 'medicijnen');
     this.isRequired = isRequired;
   }
- /* optionKeys = {
-    no: '0',
-    prednison: '1',
-  }
+  /* optionKeys = {
+     no: '0',
+     prednison: '1',
+   }
 
-  constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, '1');
-    this.isRequired = isRequired;
-  }*/
+   constructor(parentKey: string, isRequired: boolean) {
+     super(parentKey, '1');
+     this.isRequired = isRequired;
+   }*/
 
   buildItem() {
 
@@ -743,10 +743,10 @@ export class kind_oppas extends Item {
           ])
         },
         {
-        key: '1', role: 'input',
-        content: new Map([
-          ["nl", "Aantal dag(en) per week:"],
-        ])
+          key: '1', role: 'numberInput',
+          content: new Map([
+            ["nl", "Aantal dag(en) per week:"],
+          ])
         },
         {
           key: '2', role: 'option',
@@ -1744,7 +1744,7 @@ export class vacc_corona_datum extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1609891200 }, //06-01-2021 
+            min: { dtype: 'num', num: 1609891200 }, //06-01-2021
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
