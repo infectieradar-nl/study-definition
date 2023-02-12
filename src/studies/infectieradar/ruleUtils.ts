@@ -44,7 +44,7 @@ const wasNotSampledRecently = () => StudyEngine.or(
   StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingSampledTime.key)),
   StudyEngine.gt(
     StudyEngine.timestampWithOffset({ days: -10 }),
-    StudyEngine.participantState.getParticipantFlagValue(ParticipantFlags.selfSwabbingSampledTime.key)
+    StudyEngine.participantState.getParticipantFlagValueAsNum(ParticipantFlags.selfSwabbingSampledTime.key)
   ),
 );
 
