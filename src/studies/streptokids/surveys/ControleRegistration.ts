@@ -107,7 +107,7 @@ class ChildInfoGroup extends Group {
     this.header = new header(this.key, headerText);
     this.geboortejaar = new geboortejaar(this.key, isRequired);
     this.geboortemaand = new geboortemaand(this.key,
-      SurveyEngine.responseHasKeysAny(this.geboortejaar.key, 'rg.ddg', '6', '7'),
+      SurveyEngine.responseHasKeysAny(this.geboortejaar.key, 'rg.ddg', '2022', '2023'),
       isRequired);
     this.geslacht = new geslacht(this.key, isRequired);
   }
@@ -165,37 +165,37 @@ class geboortejaar extends Item {
       ]),
       responseOptions: [
         {
-          key: '1', role: 'option', content: new Map([
+          key: '2017', role: 'option', content: new Map([
             ["nl", "2017"],
           ]),
         },
         {
-          key: '2', role: 'option', content: new Map([
+          key: '2018', role: 'option', content: new Map([
             ["nl", "2018"],
           ]),
         },
         {
-          key: '3', role: 'option', content: new Map([
+          key: '2019', role: 'option', content: new Map([
             ["nl", "2019"],
           ]),
         },
         {
-          key: '4', role: 'option', content: new Map([
+          key: '2020', role: 'option', content: new Map([
             ["nl", "2020"],
           ]),
         },
         {
-          key: '5', role: 'option', content: new Map([
+          key: '2021', role: 'option', content: new Map([
             ["nl", "2021"],
           ]),
         },
         {
-          key: '6', role: 'option', content: new Map([
+          key: '2022', role: 'option', content: new Map([
             ["nl", "2022"],
           ]),
         },
         {
-          key: '7', role: 'option', content: new Map([
+          key: '2023', role: 'option', content: new Map([
             ["nl", "2023"],
           ]),
         },
