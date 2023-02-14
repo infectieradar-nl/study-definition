@@ -73,7 +73,7 @@ class CaseDef extends SurveyDefinition {
     this.datum_ziek = new datum_ziek(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortemaand = new demo_geboortemaand(this.key,
-      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '6'), isRequired);
+      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '2022'), isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, conditionForWantToParticipate, isRequired);
     this.demo_postcode = new demo_postcode(this.key, conditionForWantToParticipate, isRequired);
     this.demo_huish_totaal = new demo_huish_totaal(this.key, conditionForWantToParticipate, isRequired);
@@ -428,37 +428,37 @@ export class demo_geboortejaar extends Item {
       ]),
       responseOptions: [
         {
-          key: '1', role: 'option', content: new Map([
+          key: '2017', role: 'option', content: new Map([
             ["nl", "2017"],
           ]),
         },
         {
-          key: '2', role: 'option', content: new Map([
+          key: '2018', role: 'option', content: new Map([
             ["nl", "2018"],
           ]),
         },
         {
-          key: '3', role: 'option', content: new Map([
+          key: '2019', role: 'option', content: new Map([
             ["nl", "2019"],
           ]),
         },
         {
-          key: '4', role: 'option', content: new Map([
+          key: '2020', role: 'option', content: new Map([
             ["nl", "2020"],
           ]),
         },
         {
-          key: '5', role: 'option', content: new Map([
+          key: '2021', role: 'option', content: new Map([
             ["nl", "2021"],
           ]),
         },
         {
-          key: '6', role: 'option', content: new Map([
+          key: '2022', role: 'option', content: new Map([
             ["nl", "2022"],
           ]),
         },
         {
-          key: '7', role: 'option', content: new Map([
+          key: '2023', role: 'option', content: new Map([
             ["nl", "2023"],
           ]),
         },
