@@ -146,7 +146,7 @@ Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS 
 Wilt u nog steeds meedoen aan het onderzoek? Dan stellen wij u een aantal vragen over uw kind en zijn/haar omgeving. De antwoorden zullen ons helpen bij het onderzoek. Het invullen van deze vragenlijst duurt ongeveer 10 minuten. Meedoen aan het onderzoek is vrijwillig.
 
 ##### **Gebruik van de gegevens van uw kind**
-Het RIVM mag alleen de gegevens van de vragenlijst gebruiken indien u hiervoor toestemming geeft. In een eerder bericht heeft u al toestemming gegeven om mee te doen aan dit onderzoek, waarvoor hartelijk dank. Door deze vragenlijst in te vullen stemt u in met het gebruiken van de antwoorden voor dit onderzoek. Het RIVM kan door de antwoorden op de vragen niet ontdekken wie de vragenlijst heeft ingevuld. Het e-mail adres dat u heeft gebruikt om u aan te melden wordt apart bewaard en is niet in te zien door de onderzoekers.
+Het RIVM mag alleen de gegevens van de vragenlijst gebruiken indien u hiervoor toestemming geeft. In een eerder bericht heeft u al toestemming gegeven om mee te doen aan dit onderzoek, waarvoor hartelijk dank. Door deze vragenlijst in te vullen stemt u in met het gebruiken van de antwoorden voor dit onderzoek. Het RIVM kan door de antwoorden op de vragen niet ontdekken wie de vragenlijst heeft ingevuld. Het e-mailadres dat u eerder heeft gebruikt om u aan te melden wordt apart bewaard en is niet in te zien door de onderzoekers.
 
 Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment vragen om uw gegevens te laten verwijderen. Dat kan door een e-mail te sturen naar: igasonderzoek@rivm.nl. Meer informatie vindt u in de [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM.
 

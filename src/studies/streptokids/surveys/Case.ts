@@ -164,7 +164,7 @@ class intro extends Item {
   ##### <span className="text-primary">RIVM-onderzoek naar streptokokkeninfecties bij kinderen</span>
   Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
   U bent gevraagd door de GGD om mee te doen aan dit onderzoek omdat uw kind een invasieve GAS infectie heeft (gehad). Lees onderstaande informatie rustig door. Beslis daarna pas of u mee wil doen aan het onderzoek. Heeft u extra vragen? Stel ze aan de GGD of aan de RIVM onderzoekers via igasonderzoek@rivm.nl. U kunt er ook eerst over praten met uw partner, vrienden of familie.
-
+  
   ##### **Doel van het onderzoek**
   Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder vaak ziek worden door een invasieve GAS infectie.
 
@@ -178,10 +178,10 @@ class intro extends Item {
   Als uw kind met een invasieve GAS infectie in het ziekenhuis is opgenomen kunt u in sommige ziekenhuizen meedoen aan het COPP-iGAS onderzoek (zie [*www.infectiekids.nl*](https://infectiekids.nl)). Het RIVM werkt samen met het COPP-iGAS onderzoek. De gegevens van het COPP-iGAS onderzoek kunnen dit onderzoek helpen. Wij vragen uw toestemming om de vragenlijst van het RIVM-onderzoek naar streptokokkeninfecties bij kinderen samen te voegen met de gegevens van het COPP-iGAS onderzoek. Als u hiervoor geen toestemming geeft, kunt u nog wel meedoen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen.
 
   ##### **Gebruik van de gegevens van uw kind als u meedoet**
-  Het RIVM zal alleen uw gegevens gebruiken als u hiervoor toestemming geeft. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
+  Het RIVM zal alleen uw gegevens gebruiken als u geïnformeerde toestemming geeft om deel te nemen aan dit onderzoek. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
   Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment stoppen met het onderzoek en uw persoonsgegevens laten verwijderen. Dat kan door een e-mail te sturen naar dit e-mailadres: igasonderzoek@rivm.nl.
-
-  Als u besluit om mee te doen aan dit onderzoek, vragen wij u om [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM te lezen. Na het lezen klikt u onderaan deze brief op akkoord en daarna start de vragenlijst.
+  
+  Als u besluit om mee te doen aan dit onderzoek, vragen wij u om [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM te lezen. Na het lezen geeft u hieronder toestemming en daarna start de vragenlijst.
 `
 
   buildItem(): SurveySingleItem {
@@ -245,10 +245,10 @@ Ook:
 -	Verklaar ik dat ik ouder of voogd ben van het kind over wie de vragenlijst wordt ingevuld.
         `]]),
       acceptBtn: new Map([
-        ["nl", "Ja, ik geef toestemming"],
+        ["nl", "Ik heb de informatie begrepen en ik wil deelnemen aan het onderzoek."],
       ]),
       rejectBtn: new Map([
-        ["nl", "Ik doe toch niet mee"],
+        ["nl", "Ik doe toch niet mee."],
       ]),
     })
   }
@@ -1423,6 +1423,9 @@ export class ziekenhuis extends Item {
       condition: this.condition,
       questionText: new Map([
         ["nl", "Is uw kind in de 4 weken voor ziekenhuisopname vanwege iGAS, opgenomen geweest in het ziekenhuis voor een andere reden?"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
       ]),
       responseOptions: [
         {
