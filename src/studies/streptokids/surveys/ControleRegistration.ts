@@ -22,13 +22,13 @@ class ControleRegistrationDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.ControleRegistration,
       name: new Map([
-        ["nl", "TODO: Achtergrond informatie"],
+        ["nl", "Registratie als controle"],
       ]),
       description: new Map([
-        ["nl", "TODO: Klik op dit aanmeldingsformulier om je achtergrondinformatie in te vullen."],
+        ["nl", "Klik hier voor informatie en aanmelding RIVM-onderzoek naar streptokokkeninfecties bij kinderen."],
       ]),
       durationText: new Map([
-        ["nl", "TODO: Invullen duurt 5 minuten."],
+        ["nl", "Invullen duurt hooguit 5 minuten."],
       ]),
       availableFor: 'public',
     });
@@ -73,10 +73,32 @@ class Intro extends Item {
   }
 
   markdownContent = `
-##### <span className="text-primary">Streptokids</span>
-### Join as control
-
-Add some text about who should join the study, what will happen when they sign up here, etc.
+  ##### <span className="text-primary">IGASonderzoek</span>
+  ### Informatie en aanmelding RIVM-onderzoek naar streptokokkeninfecties bij kinderen
+  
+  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke ziekte kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
+  
+  Doel van het onderzoek
+  Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infecties zodat kinderen in de toekomst minder vaak ziek worden door een invasieve GAS infectie.
+  
+  Meedoen aan het onderzoek?
+  Heeft u een kind in de leeftijd van 0 tot en met 5 jaar (geboren in of na 2017) en wilt u helpen met dit onderzoek? Dan kunt u zich hier opgeven. 
+  Als u zich opgeeft, dan vragen wij u mogelijk in de komende maanden (uiterlijk in mei 2023) om één keer een vragenlijst in te vullen. Het invullen van de vragenlijst duurt ongeveer 10 minuten en is vrijwillig. We vragen dit aan ouders van kinderen zonder invasieve GAS infectie. Ouders van kinderen met een invasieve GAS infectie worden via hun GGD gevraagd om dezelfde vragenlijst in te vullen.
+  
+  Wilt u meedoen aan het onderzoek? Dan vragen we om de volgende informatie zodat wij uiterlijk in mei 2023 eventueel contact met u op kunnen nemen voor het onderzoek:
+  *	Het geboortejaar van uw kind(eren) en maand indien uw kind geboren is in 2022.
+  *	Het geslacht van uw kind(eren)
+  *	Uw e-mailadres
+  Op dit moment is geen verdere informatie nodig. Deze gegevens worden alleen gebruikt om geïnteresseerden voor ons onderzoek vast te stellen. Deze informatie kunt u in het volgende scherm invullen. U krijgt van ons bericht voor het einde van de studie, ook als u niet bent uitgenodigd om de vragenlijst in te vullen. 
+  
+  Wanneer wordt u uitgenodigd om de vragenlijst in te vullen?
+  Wanneer er een kind ziek wordt door een invasieve GAS infectie, zullen wij een vragenlijst sturen naar ouders van een aantal kinderen van dezelfde leeftijd en hetzelfde geslacht. Daarom weten wij nu nog niet zeker of en wanneer we u de vragenlijst precies zullen sturen. Behalve uw e-mailadres en leeftijd en geslacht en uw kind(eren) vragen we daarom nu geen andere gegevens over u of uw kind. Het e-mailadres waar u zich mee opgeeft, gebruiken we om u tussen nu en eind mei 2023 uit te nodigen voor het invullen van de vragenlijst. Het e-mailadres wordt tot 1 jaar na het einde van het onderzoek bewaard en zal niet worden gebruikt voor andere doelen. 
+   
+  
+  Gebruik van de gegevens van uw kind als u meedoet
+  Als u zich opgeeft wordt u in de toekomst mogelijk gevraagd om een vragenlijst in te vullen. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld naar school of een kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
+  Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment stoppen met het onderzoek en uw persoonsgegevens laten verwijderen. Dat kan door een e-mail te sturen naar dit e-mailadres: igasonderzoek@rivm.nl. 
+  
 `
 
   buildItem(): SurveySingleItem {
@@ -218,7 +240,7 @@ class ChildCount extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Number of children you want to register"],
+        ["nl", "Het aantal kinderen dat u wilt opgeven:"],
       ]),
       questionSubText: new Map([
         ["nl", "U kunt dit formulier invullen voor 1 tot 5 kinderen, geboren in of na 2017."],
@@ -270,7 +292,7 @@ class geboortemaand extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat is de geboortemaand van uw kind?"],
+        ["nl", "Wat is het geboortemaand van uw kind?"],
       ]),
       responseOptions: [
         {
@@ -426,7 +448,7 @@ class Consent extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Aanvullende toestemming zelftest-onderzoek'],
+        ['nl', 'Toestemmingsverklaring IGAS onderzoek'],
       ]),
       checkBoxLabel: new Map([
         ["nl", "Toestemming geven"],
@@ -435,9 +457,8 @@ class Consent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om deel te nemen aan het [zelftest-onderzoek](https://www.infectieradar.nl/about-selfteststudy) moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan.
-Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te lezen.
-`]]),
+            Geef toestemming voor het verwerken van uw gegevens.
+            `]]),
         })
       ],
       dialogTitle: new Map([
@@ -445,21 +466,15 @@ Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te lezen.
       ]),
       dialogContent: new Map([
         ["nl", `
-**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
+        **Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
 
-Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het [zelftest-onderzoek van Infectieradar](https://www.infectieradar.nl/about-selfteststudy) en ga je akkoord dat het RIVM je gegevens voor dit onderzoek zal verwerken.
-
-Het onderzoek is gericht op het in kaart brengen van gezondheidsklachten die kunnen wijzen op infectieziekten, zoals het coronavirus (COVID-19). Dit onderzoek is van belang om na te gaan of het aantal mensen met klachten toe- of afneemt en om de verspreiding van infectieziekten in de gaten te houden. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Infectieradar](/privacy).
-
-Ook:
--	Heb ik de informatie op de website van Infectieradar over het [onderzoek](https://www.infectieradar.nl/about-selfteststudy) en de [privacyverklaring](https://www.infectieradar.nl/privacy) over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
--	Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
--	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming. Na het stopzetten van de deelname zijn alleen nog mijn onderzoeksgegevens en eventueel ingezonden neus- en keelmonsters voor het onderzoek beschikbaar, de onderzoeksgegevens en monsters zijn dan echter niet meer te herleiden tot mij als persoon. Daarnaast gelden de bewaartermijnen, zoals opgegeven in de [privacyverklaring](https://www.infectieradar.nl/privacy), voor mijn overige persoonsgegevens.
--	Weet ik dat de onderzoeksgegevens van mijn eventuele neus- en keelmonster(s) tot 15 jaar na ontvangst bewaard kan worden en later nog voor een ander onderzoek kunnen worden gebruikt. En weet ik dat mijn contactgegevens en accountgegevens 2 jaar na de laatste inlog op Infectieradar of het (zelftest)portaal [GLEAN](https://rivmportal.glean.nl/) en mijn onderzoeksgegevens tot 15 jaar na het invullen van de vragenlijsten worden bewaard en dat onderzoeksgegevens kunnen worden gedeeld met de deelnemers aan het samenwerkingsverband Influenzanet. De onderzoeksresultaten hebben geen bewaartermijn en kunnen dus gepubliceerd blijven.
--	Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord), mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer), mijn onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder andere de eerste 4 cijfers van mijn postcode, mijn geboortejaar en maand, gegevens over mijn gezondheid en zelftest- en neus- en keelmonster-testuitslagen) en mijn eventuele neus- en keelmonster(s) worden verwerkt.
--	Weet ik dat voor het versturen van nieuwe zelftest- en neus- en keelmonster-afnamepakketjes mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer) worden gebruikt.
--	Weet ik dat voor het versturen van de testuitslag van mijn neus- en keelmonster mijn accountgegevens (e-mailadres) en mijn contactgegevens (telefoonnummer) worden gebruikt.
--	Verklaar ik dat ik 16 jaar of ouder ben.
+        Met het klikken op de onderstaande knop “Ik geef toestemming” geeft u geïnformeerde toestemming om deel te nemen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen. Voor de verwerking van deze gegevens heeft het RIVM een grondslag, die volgt uit de AVG en de Wet op het RIVM. 
+        Ook:
+        
+        •	Heb ik de informatie over het onderzoek en de [privacyverklaring] (https://www.rivm.nl/privacy) over het gebruiken van de persoonsgegevens door het RIVM goed gelezen en begrepen. Ik kon vragen stellen en indien ik vragen had zijn die voldoende beantwoord. Ik had genoeg tijd om te beslissen of ik meedoe. Als ik nog verdere vragen heb, kan ik contact opnemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl
+        •	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder een reden te noemen, kan stoppen met het onderzoek en dat ik mijn toestemming voor deelname en/of van mijn kind(eren) kan intrekken. Ik weet dat ik dan ook kan verzoeken om reeds verzamelde gegevens te verwijderen. Dit kan door contact op te nemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl
+        •	Weet ik dat mijn e-mailadres tot 1 jaar na het einde van het onderzoek en de overige onderzoeksgegevens tot 10 jaar na het onderzoek worden bewaard.
+        •	Verklaar ik dat ik ouder of voogd ben van het kind/de kinderen over wie de vragenlijst wordt ingevuld. 
         `]]),
       acceptBtn: new Map([
         ["nl", "Ja, ik geef toestemming"],
@@ -481,7 +496,7 @@ class FinalText extends Item {
     return SurveyItems.surveyEnd(
       this.parentKey,
       new Map([
-        ["nl", "I want to register in the control group."],
+        ["nl", "Ik wil me registreren."],
       ]),
       this.condition,
     )
