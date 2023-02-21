@@ -59,7 +59,7 @@ class ControleDef extends SurveyDefinition {
     this.intro = new intro(this.key);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, isRequired);
     this.demo_geboortemaand = new demo_geboortemaand(this.key,
-      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '2022', '2023'), isRequired);
+      SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '2022'), isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, isRequired);
     this.demo_postcode = new demo_postcode(this.key, isRequired);
     this.opgenomen_igas = new opgenomen_igas(this.key, isRequired);
@@ -137,7 +137,7 @@ class intro extends Item {
 
   markdownContent = `
 ## Vragenlijst RIVM-onderzoek naar streptokokkeninfecties bij kinderen
-Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt. De onderzoekers van het RIVM zouden u daarom een aantal vragen willen stellen.
+Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’ (iGAS). Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt. De onderzoekers van het RIVM zouden u daarom een aantal vragen willen stellen.
 
 ##### **Doel van het onderzoek**
 Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infectie zodat kinderen in de toekomst minder vaak ziek worden door een invasieve GAS infectie.
@@ -214,11 +214,6 @@ export class demo_geboortejaar extends Item {
         {
           key: '2022', role: 'option', content: new Map([
             ["nl", "2022"],
-          ]),
-        },
-        {
-          key: '2023', role: 'option', content: new Map([
-            ["nl", "2023"],
           ]),
         },
       ]
@@ -360,7 +355,10 @@ export class demo_postcode extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat zijn de eerste vier cijfers van je postcode?"],
+        ["nl", "Wat zijn de eerste vier cijfers van uw postcode?"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Als uw kind op meerdere adressen woont, vragen we het adres te kiezen waar uw kind het meest woont."],
       ]),
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -396,7 +394,7 @@ export class demo_postcode extends Item {
         {
           role: 'error',
           content: generateLocStrings(new Map([
-            ["nl", "Voer de eerste vier cijfers van je postcode in"],
+            ["nl", "Voer de eerste vier cijfers van uw postcode in"],
           ])),
           displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
         }
@@ -418,7 +416,7 @@ export class opgenomen_igas extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Is uw kind in het verleden ooit opgenomen in het ziekenhuis voor iGAS?"],
+        ["nl", "Is uw kind in het verleden ooit opgenomen in het ziekenhuis voor invasieve GAS infectie?"],
       ]),
       responseOptions: [
         {
@@ -467,7 +465,7 @@ export class demo_huish_totaal extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Huishouden totaal aantal personen:"],
+            ["nl", "Totaal aantal personen:"],
           ])
         },
         {
@@ -501,7 +499,7 @@ export class demo_huish_kinderen extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Huishouden totaal aantal kinderen:"],
+            ["nl", "Totaal aantal kinderen:"],
           ])
         },
         {
@@ -733,7 +731,7 @@ export class kind_oppas extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Ging uw kind de afgelopen 4 weken naar de oppas (bij iemand anders) thuis/gastouder?"],
+        ["nl", "Ging uw kind de afgelopen 4 weken naar de oppas bij iemand anders thuis/gastouder?"],
       ]),
       questionSubText: new Map([
         ["nl", "Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
@@ -748,8 +746,10 @@ export class kind_oppas extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
+            ["nl", "Ja, aantal dag(en) per week:"],
           ])
+          ,
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
         {
           key: '2', role: 'option',
@@ -790,8 +790,9 @@ export class kind_opvang extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
-          ])
+            ["nl", "Ja, aantal dag(en) per week:"],
+          ]),
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
         {
           key: '2', role: 'option',
@@ -832,8 +833,9 @@ export class kind_school extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
-          ])
+            ["nl", "Ja, aantal dag(en) per week:"],
+          ]),
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
         {
           key: '2', role: 'option',
@@ -1017,7 +1019,7 @@ export class klachten_huisarts extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Is uw kind voor een deze klachten naar de huisarts geweest?"],
+        ["nl", "Is uw kind voor deze klachten naar de huisarts geweest?"],
       ]),
       responseOptions: [
         {
@@ -1069,7 +1071,7 @@ export class klachten_seh extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Is uw kind voor een deze klachten naar de Huisartsenpost of Spoedeisende Hulp geweest?"],
+        ["nl", "Is uw kind voor deze klachten naar de Huisartsenpost of Spoedeisende Hulp geweest?"],
       ]),
       responseOptions: [
         {
@@ -1212,7 +1214,13 @@ export class antibiotica_stop extends Item {
           ])
         },
         {
-          key: '2', role: 'option',
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "De antibioticakuur is nog bezig"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -1474,7 +1482,7 @@ export class klachten_opvang extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
+        ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken iemand met een van de volgende klachten? (meerdere antwoorden mogelijk)"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [

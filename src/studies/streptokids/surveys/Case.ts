@@ -162,7 +162,7 @@ class intro extends Item {
 
   markdownContent = `
   ##### <span className="text-primary">RIVM-onderzoek naar streptokokkeninfecties bij kinderen</span>
-  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
+  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke infectie kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’ (iGAS). Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
   U bent gevraagd door de GGD om mee te doen aan dit onderzoek omdat uw kind een invasieve GAS infectie heeft (gehad). Lees onderstaande informatie rustig door. Beslis daarna pas of u mee wil doen aan het onderzoek. Heeft u extra vragen? Stel ze aan de GGD of aan de RIVM onderzoekers via igasonderzoek@rivm.nl. U kunt er ook eerst over praten met uw partner, vrienden of familie.
   
   ##### **Doel van het onderzoek**
@@ -178,7 +178,7 @@ class intro extends Item {
   Als uw kind met een invasieve GAS infectie in het ziekenhuis is opgenomen kunt u in sommige ziekenhuizen meedoen aan het COPP-iGAS onderzoek (zie [*www.infectiekids.nl*](https://infectiekids.nl)). Het RIVM werkt samen met het COPP-iGAS onderzoek. De gegevens van het COPP-iGAS onderzoek kunnen dit onderzoek helpen. Wij vragen uw toestemming om de vragenlijst van het RIVM-onderzoek naar streptokokkeninfecties bij kinderen samen te voegen met de gegevens van het COPP-iGAS onderzoek. Als u hiervoor geen toestemming geeft, kunt u nog wel meedoen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen.
 
   ##### **Gebruik van de gegevens van uw kind als u meedoet**
-  Het RIVM zal alleen uw gegevens gebruiken als u geïnformeerde toestemming geeft om deel te nemen aan dit onderzoek. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
+  Het RIVM zal alleen uw gegevens gebruiken als u geïnformeerde toestemming geeft om deel te nemen aan dit onderzoek. In de vragenlijst wordt gevraagd naar uw gezin, de gezondheid van uw kind, of uw kind bijvoorbeeld naar school of kinderdagverblijf gaat, en of er mensen ziek waren in de omgeving voordat uw kind ziek werd. De antwoorden op deze vragen zullen tot 10 jaar na het invullen van de vragenlijst worden bewaard.
   Meedoen aan dit onderzoek is vrijwillig en u kunt op ieder moment stoppen met het onderzoek en uw persoonsgegevens laten verwijderen. Dat kan door een e-mail te sturen naar dit e-mailadres: igasonderzoek@rivm.nl.
   
   Als u besluit om mee te doen aan dit onderzoek, vragen wij u om [*privacyverklaring*](https://www.rivm.nl/privacy) van het RIVM te lezen. Na het lezen geeft u hieronder toestemming en daarna start de vragenlijst.
@@ -237,7 +237,7 @@ Ik wil meedoen aan dit wetenschappelijk onderzoek van het RIVM naar risicofactor
         ["nl", `
 **Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
 
-Door hieronder de knop “ik geef toestemming” aan te klikken stemt u in met deelname aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen en gaat u akkoord dat het RIVM uw gegevens voor dit onderzoek zal gebruiken.
+Door hieronder de knop “ik geef toestemming” aan te klikken geef ik geïnformeerde toestemming wat inhoudt dat ik instem met deelname aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen. Voor de verwerking van deze gegevens heeft het RIVM een grondslag, die volgt uit de AVG en de Wet op het RIVM.
 Ook:
 -	Heb ik de informatie over het onderzoek en de privacyverklaring over het gebruiken van de persoonsgegevens door het RIVM goed gelezen en begrepen. Ik kon vragen stellen en indien ik vragen had zijn die voldoende beantwoord. Ik had genoeg tijd om te beslissen of ik meedoe. Als ik nog verdere vragen heb, kan ik contact opnemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl.
 -	Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder een reden te noemen, kan stoppen met het onderzoek en dat ik mijn toestemming voor het gebruiken van mijn persoonsgegevens en/of van mijn kind(eren) kan intrekken. Dit kan door contact op te nemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl.
@@ -271,7 +271,7 @@ class consent_coppigas extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Ik ben gevraagd door het ziekenhuis om mee te doen aan het infectiekids onderzoek (www.infectiekids.nl). Ik geef toestemming om de gegevens van het COPP-iGAS onderzoek samen te voegen met de gegevens van de Streptokids vragenlijst."],
+        ["nl", "Ik ben gevraagd door het ziekenhuis om mee te doen aan het COPP-iGAS onderzoek (www.infectiekids.nl). Ik geef toestemming om de gegevens van het COPP-iGAS onderzoek samen te voegen met de gegevens van de Streptokids vragenlijst."],
       ]),
       responseOptions: [
         {
@@ -332,7 +332,7 @@ export class coppigas_nummer extends Item {
         {
           role: 'error',
           content: generateLocStrings(new Map([
-            ["nl", "TODO: please check your input if the code is correct. Remove any dash or other signs (if relevant) etc,"],
+            ["nl", "De code bestaat uit 4 letters en 5 cijfers."],
           ])),
           displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
         }
@@ -363,7 +363,7 @@ export class osirisnummer extends Item {
       questionText: new Map([
         ['nl', 'Als u van de GGD een Osiris-nummer heeft gekregen voor deze vragenlijst, kun u deze hier invullen:'],
       ]),
-      titleClassName: 'sticky-top',
+      //titleClassName: 'sticky-top',
       inputMaxWidth: '160px',
       inputLabel: new Map([
         ['nl', '8 cijfers']
@@ -455,11 +455,6 @@ export class demo_geboortejaar extends Item {
         {
           key: '2022', role: 'option', content: new Map([
             ["nl", "2022"],
-          ]),
-        },
-        {
-          key: '2023', role: 'option', content: new Map([
-            ["nl", "2023"],
           ]),
         },
       ]
@@ -603,7 +598,7 @@ export class demo_postcode extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat zijn de eerste vier cijfers van je postcode?"],
+        ["nl", "Wat zijn de eerste vier cijfers van uw postcode?"],
       ]),
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -639,7 +634,7 @@ export class demo_postcode extends Item {
         {
           role: 'error',
           content: generateLocStrings(new Map([
-            ["nl", "Voer de eerste vier cijfers van je postcode in"],
+            ["nl", "Voer de eerste vier cijfers van uw postcode in"],
           ])),
           displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
         }
@@ -671,7 +666,7 @@ export class demo_huish_totaal extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Huishouden totaal aantal personen:"],
+            ["nl", "Totaal aantal personen:"],
           ])
         },
         {
@@ -707,7 +702,7 @@ export class demo_huish_kinderen extends Item {
         {
           key: '1', role: 'input',
           content: new Map([
-            ["nl", "Huishouden totaal aantal kinderen:"],
+            ["nl", "Totaal aantal kinderen:"],
           ])
         },
         {
@@ -941,7 +936,7 @@ export class kind_oppas extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Ging uw kind in de 4 weken voor ziekenhuisopname naar de oppas (bij iemand anders) thuis/gastouder? Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
+        ["nl", "Ging uw kind in de 4 weken voor ziekenhuisopname naar de oppas bij iemand anders thuis/gastouder? Indien ja, hoeveel dagen per week? Als het wisselend is, geef dan een gemiddelde aan."],
       ]),
       questionSubText: new Map([
         ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
@@ -956,8 +951,9 @@ export class kind_oppas extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
-          ])
+            ["nl", "Ja, aantal dag(en) per week:"],
+          ]),
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
       ]
     })
@@ -993,8 +989,9 @@ export class kind_opvang extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
-          ])
+            ["nl", "Ja, aantal dag(en) per week:"],
+          ]),
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
       ]
     })
@@ -1030,8 +1027,9 @@ export class kind_school extends Item {
         {
           key: '1', role: 'numberInput',
           content: new Map([
-            ["nl", "Aantal dag(en) per week:"],
-          ])
+            ["nl", "Ja, aantal dag(en) per week:"],
+          ]),
+          optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
       ]
     })
@@ -1214,7 +1212,7 @@ export class klachten_huisarts extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Indien uw kind een of meerdere van bovenstaande klachten had, is uw kind voor een deze klachten naar de huisarts geweest?"],
+        ["nl", "Indien uw kind een of meerdere van bovenstaande klachten had, is uw kind voor deze klachten naar de huisarts geweest?"],
       ]),
       responseOptions: [
         {
@@ -1266,7 +1264,7 @@ export class klachten_seh extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Indien uw kind een of meerdere van bovenstaande klachten had, is uw kind voor een deze klachten naar de Huisartsenpost of Spoedeisende Hulp geweest?"],
+        ["nl", "Indien uw kind een of meerdere van bovenstaande klachten had, is uw kind voor deze klachten naar de Huisartsenpost of Spoedeisende Hulp geweest?"],
       ]),
       responseOptions: [
         {
@@ -1306,7 +1304,7 @@ export class antibiotica extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heeft uw kind de afgelopen 4 weken een antibioticakuur gebruikt? Zo ja, welke?"],
+        ["nl", "Heeft uw kind de afgelopen 4 weken voor ziekenhuisopname een antibioticakuur gebruikt? Zo ja, welke?"],
       ]),
       questionSubText: new Map([
         ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
@@ -1397,6 +1395,12 @@ export class antibiotica_stop extends Item {
         },
         {
           key: '2', role: 'option',
+          content: new Map([
+            ["nl", "De antibioticakuur was nog bezig toen mijn kind ernstig ziek werd"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -1516,7 +1520,10 @@ export class klachten_huishouden extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Had iemand in uw huishouden in de afgelopen 4 weken last van een van de volgende klachten? Reken hierbij het kind waarvoor u de vragenlijst invult niet mee. (meerdere antwoorden mogelijk)"],
+        ["nl", "Had iemand in uw huishouden in de 4 weken voor ziekenhuisopname van uw kind last van een van de volgende klachten? Reken hierbij het kind waarvoor u de vragenlijst invult niet mee. (meerdere antwoorden mogelijk)"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -1667,7 +1674,10 @@ export class klachten_opvang extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken? (meerdere antwoorden mogelijk)"],
+        ["nl", "Indien uw kind naar school/kinderopvang/peuterspeelzaal gaat, was er op de groep of in de klas van uw kind de afgelopen 4 weken voor ziekenhuisopname van uw kind iemand met de volgende klachten? (meerdere antwoorden mogelijk)"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -1810,7 +1820,10 @@ export class klachten_omgeving extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken last van een van de volgende klachten? (meerdere antwoorden mogelijk)"],
+        ["nl", "Had iemand anders in de directe omgeving van uw kind (zoals opa, oma of vriendjes) in de afgelopen 4 weken voor ziekenhuisopname van uw kind last van een van de volgende klachten? (meerdere antwoorden mogelijk)"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Is uw kind niet in het ziekenhuis opgenomen? Beantwoord dan de vraag over de 4 weken voordat uw kind ziek werd door iGAS."],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2183,7 +2196,7 @@ class email extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'Wat is je e-mailadres?'
+        'nl', 'Wat is uw e-mailadres?'
       ]]),
       questionSubText: new Map([
         ["nl", "Uw e-mailadres wordt bewaard totdat de resultaten van het onderzoek bekend zijn. Het wordt niet voor andere doelen gebruikt. Na het versturen van de resultaten van het onderzoek wordt uw e-mailadres verwijderd."],
@@ -2221,7 +2234,7 @@ export class UserVerificationQuestion extends Item {
         ['nl', 'Controlevraag'],
       ]),
       questionSubText: new Map([
-        ['nl', 'Dit is een controlevraag om te bevestigen dat je geen robot bent. Typ het juiste antwoord in het antwoordveld hieronder.'],
+        ['nl', 'Dit is een controlevraag om te bevestigen dat u geen robot bent. Typ het juiste antwoord in het antwoordveld hieronder.'],
       ]),
       responseItemDefs: [
         {
