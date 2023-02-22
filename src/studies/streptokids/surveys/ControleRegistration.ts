@@ -288,7 +288,7 @@ class geboortemaand extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Wat is het geboortemaand van uw kind?"],
+        ["nl", "Wat is de geboortemaand van uw kind?"],
       ]),
       responseOptions: [
         {
@@ -369,7 +369,7 @@ export class geslacht extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Het geslacht van mijn kind is"],
+        ["nl", "Wat is het geslacht van uw kind?"],
       ]),
       responseOptions: [
         {
