@@ -76,13 +76,13 @@ class Intro extends Item {
   ##### <span className="text-primary">IGASonderzoek</span>
   ### Informatie en aanmelding RIVM-onderzoek naar streptokokkeninfecties bij kinderen
   
-  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke ziekte kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’. Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
+  Het Centrum Infectieziektebestrijding van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM) doet onderzoek naar groep A streptokokken bij kinderen. De groep A streptokok (GAS) is een bacterie die een besmettelijke ziekte kan veroorzaken. De meeste infecties door deze bacterie zijn niet ernstig, bijvoorbeeld roodvonk of krentenbaard. Soms kunnen mensen in korte tijd wel ernstig ziek worden door de streptokok. Dit heet een ‘invasieve GAS infectie’ (iGAS). Op dit moment en ook vorig jaar zien we meer kinderen met een invasieve GAS infectie dan normaal. Het RIVM onderzoekt hoe dat komt.
   
   ##### **Doel van het onderzoek**
   Het RIVM onderzoekt welke kinderen een grotere kans hebben op een invasieve GAS infectie. Wij hopen door dit onderzoek meer inzicht te krijgen in invasieve GAS infecties zodat kinderen in de toekomst minder vaak ziek worden door een invasieve GAS infectie.
   
   ##### **Meedoen aan het onderzoek?**
-  Heeft u een kind in de leeftijd van 0 tot en met 5 jaar (geboren in of na 2017) en wilt u helpen met dit onderzoek? Dan kunt u zich hier opgeven. 
+  Heeft u een kind in de leeftijd van 6 maanden tot en met 5 jaar (geboren in of na 2017) en wilt u helpen met dit onderzoek? Dan kunt u zich hier opgeven. 
   Als u zich opgeeft, dan vragen wij u mogelijk in de komende maanden (uiterlijk in mei 2023) om één keer een vragenlijst in te vullen. Het invullen van de vragenlijst duurt ongeveer 10 minuten en is vrijwillig. We vragen dit aan ouders van kinderen zonder invasieve GAS infectie. Ouders van kinderen met een invasieve GAS infectie worden via hun GGD gevraagd om dezelfde vragenlijst in te vullen.
   
   Wilt u meedoen aan het onderzoek? Dan vragen we om de volgende informatie zodat wij uiterlijk in mei 2023 eventueel contact met u op kunnen nemen voor het onderzoek:
@@ -90,10 +90,10 @@ class Intro extends Item {
   *	Het geslacht van uw kind(eren)
   *	Uw e-mailadres
 
-  Op dit moment is geen verdere informatie nodig. Deze gegevens worden alleen gebruikt om geïnteresseerden voor ons onderzoek vast te stellen. Deze informatie kunt u in het volgende scherm invullen. U krijgt van ons bericht voor het einde van de studie, ook als u niet bent uitgenodigd om de vragenlijst in te vullen. 
+  Op dit moment is geen verdere informatie nodig. Deze gegevens worden alleen gebruikt om geïnteresseerden voor ons onderzoek vast te stellen. Deze informatie kunt u hieronder invullen. U krijgt van ons bericht voor het einde van de studie, ook als u niet bent uitgenodigd om de vragenlijst in te vullen. 
   
   ##### **Wanneer wordt u uitgenodigd om de vragenlijst in te vullen?**
-  Wanneer er een kind ziek wordt door een invasieve GAS infectie, zullen wij een vragenlijst sturen naar ouders van een aantal kinderen van dezelfde leeftijd en hetzelfde geslacht. Daarom weten wij nu nog niet zeker of en wanneer we u de vragenlijst precies zullen sturen. Behalve uw e-mailadres en leeftijd en geslacht en uw kind(eren) vragen we daarom nu geen andere gegevens over u of uw kind. Het e-mailadres waar u zich mee opgeeft, gebruiken we om u tussen nu en eind mei 2023 uit te nodigen voor het invullen van de vragenlijst. Het e-mailadres wordt tot 1 jaar na het einde van het onderzoek bewaard en zal niet worden gebruikt voor andere doelen. 
+  Wanneer er een kind ziek wordt door een invasieve GAS infectie, zullen wij een vragenlijst sturen naar ouders van een aantal kinderen van dezelfde leeftijd en hetzelfde geslacht. Daarom weten wij nu nog niet zeker of en wanneer we u de vragenlijst precies zullen sturen. Behalve uw e-mailadres en leeftijd en geslacht van uw kind(eren) vragen we daarom nu geen andere gegevens over u of uw kind. Het e-mailadres waar u zich mee opgeeft, gebruiken we om u tussen nu en eind mei 2023 uit te nodigen voor het invullen van de vragenlijst. Het e-mailadres wordt tot 1 jaar na het einde van het onderzoek bewaard en zal niet worden gebruikt voor andere doelen. 
    
   
   ##### **Gebruik van de gegevens van uw kind als u meedoet**
@@ -464,10 +464,10 @@ Ik wil meedoen aan dit wetenschappelijk onderzoek van het RIVM naar risicofactor
         ["nl", `
 **Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
 
-Met het klikken op de onderstaande knop “Ik geef toestemming” geeft u geïnformeerde toestemming om deel te nemen aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen. Voor de verwerking van deze gegevens heeft het RIVM een grondslag, die volgt uit de AVG en de Wet op het RIVM.
+Door hieronder de knop “ik geef toestemming” aan te klikken geef ik geïnformeerde toestemming wat inhoudt dat ik instem met deelname aan het RIVM-onderzoek naar streptokokkeninfecties bij kinderen. Voor de verwerking van deze gegevens heeft het RIVM een grondslag, die volgt uit de AVG en de Wet op het RIVM.
 Ook:
         
-- Heb ik de informatie over het onderzoek en de [privacyverklaring] (https://www.rivm.nl/privacy) over het gebruiken van de persoonsgegevens door het RIVM goed gelezen en begrepen. Ik kon vragen stellen en indien ik vragen had zijn die voldoende beantwoord. Ik had genoeg tijd om te beslissen of ik meedoe. Als ik nog verdere vragen heb, kan ik contact opnemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl
+- Heb ik de informatie over het onderzoek en de privacyverklaring (https://www.rivm.nl/privacy) over het gebruiken van de persoonsgegevens door het RIVM goed gelezen en begrepen. Ik kon vragen stellen en indien ik vragen had zijn die voldoende beantwoord. Ik had genoeg tijd om te beslissen of ik meedoe. Als ik nog verdere vragen heb, kan ik contact opnemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl
 - Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder een reden te noemen, kan stoppen met het onderzoek en dat ik mijn toestemming voor deelname en/of van mijn kind(eren) kan intrekken. Ik weet dat ik dan ook kan verzoeken om reeds verzamelde gegevens te verwijderen. Dit kan door contact op te nemen met de onderzoekers van het RIVM per e-mail: igasonderzoek@rivm.nl
 - Weet ik dat mijn e-mailadres tot 1 jaar na het einde van het onderzoek en de overige onderzoeksgegevens tot 10 jaar na het onderzoek worden bewaard.
 - Verklaar ik dat ik ouder of voogd ben van het kind/de kinderen over wie de vragenlijst wordt ingevuld. 
