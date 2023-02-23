@@ -79,7 +79,7 @@ class ControleDef extends SurveyDefinition {
     this.antibiotica_start = new antibiotica_start(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.antibiotica_stop = new antibiotica_stop(this.key,
-      SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
+      SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), this.antibiotica_start.key, isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, isRequired);
     this.ingreep = new ingreep(this.key, isRequired);
     this.klachten_huishouden = new klachten_huishouden(this.key, isRequired);
@@ -1187,10 +1187,14 @@ export class antibiotica_start extends Item {
 }
 
 export class antibiotica_stop extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+  antibioticaStartKey: string;
+
+  constructor(parentKey: string, condition: Expression, antibioticaStartKey: string, isRequired?: boolean) {
     super(parentKey, 'antibiotica_stop');
     this.condition = condition;
     this.isRequired = isRequired;
+
+    this.antibioticaStartKey = antibioticaStartKey;
   }
 
   buildItem() {
@@ -1226,6 +1230,23 @@ export class antibiotica_stop extends Item {
           ])
         },
       ],
+      customValidations: [
+        {
+          key: 'v1',
+          type: 'hard',
+          rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, '1'),
+            SurveyEngine.singleChoice.none(this.antibioticaStartKey, '1'),
+            SurveyEngine.logic.and(
+              SurveyEngine.compare.gt(
+                SurveyEngine.singleChoice.getDateValue(this.key, '1'),
+                SurveyEngine.singleChoice.getDateValue(this.antibioticaStartKey, '1'),
+              )
+            )
+          )
+        }
+      ]
+
     })
   }
 }
