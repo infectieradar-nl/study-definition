@@ -13,11 +13,11 @@ class CaseDef extends SurveyDefinition {
   consent_coppigas: consent_coppigas;
   coppigas_nummer: coppigas_nummer;
   osirisnummer: osirisnummer;
-  datum_ziek: datum_ziek;
   demo_geboortejaar: demo_geboortejaar;
   demo_geboortemaand: demo_geboortemaand;
   demo_geslacht: demo_geslacht;
   demo_postcode: demo_postcode;
+  datum_ziek: datum_ziek;
   demo_huish_totaal: demo_huish_totaal;
   demo_huish_kinderen: demo_huish_kinderen;
   aandoeningen: aandoeningen;
@@ -70,12 +70,12 @@ class CaseDef extends SurveyDefinition {
     this.coppigas_nummer = new coppigas_nummer(this.key,
       SurveyEngine.singleChoice.any(this.consent_coppigas.key, '1'), isRequired);
     this.osirisnummer = new osirisnummer(this.key, conditionForWantToParticipate, isRequired);
-    this.datum_ziek = new datum_ziek(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortejaar = new demo_geboortejaar(this.key, conditionForWantToParticipate, isRequired);
     this.demo_geboortemaand = new demo_geboortemaand(this.key,
       SurveyEngine.responseHasKeysAny(this.demo_geboortejaar.key, 'rg.ddg', '2022'), isRequired);
     this.demo_geslacht = new demo_geslacht(this.key, conditionForWantToParticipate, isRequired);
     this.demo_postcode = new demo_postcode(this.key, conditionForWantToParticipate, isRequired);
+    this.datum_ziek = new datum_ziek(this.key, conditionForWantToParticipate, isRequired);
     this.demo_huish_totaal = new demo_huish_totaal(this.key, conditionForWantToParticipate, isRequired);
     this.demo_huish_kinderen = new demo_huish_kinderen(this.key, conditionForWantToParticipate, isRequired);
     this.aandoeningen = new aandoeningen(this.key, conditionForWantToParticipate, isRequired);
@@ -92,7 +92,7 @@ class CaseDef extends SurveyDefinition {
     this.antibiotica_start = new antibiotica_start(this.key,
       SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
     this.antibiotica_stop = new antibiotica_stop(this.key,
-      SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), isRequired);
+        SurveyEngine.singleChoice.any(this.antibiotica.key, '1'), this.antibiotica_start.key, isRequired);
     this.ziekenhuis = new ziekenhuis(this.key, conditionForWantToParticipate, isRequired);
     this.ingreep = new ingreep(this.key, conditionForWantToParticipate, isRequired);
     this.klachten_huishouden = new klachten_huishouden(this.key, conditionForWantToParticipate, isRequired);
@@ -119,11 +119,11 @@ class CaseDef extends SurveyDefinition {
     this.addItem(this.consent_coppigas.get());
     this.addItem(this.coppigas_nummer.get());
     this.addItem(this.osirisnummer.get());
-    this.addItem(this.datum_ziek.get());
     this.addItem(this.demo_geboortejaar.get());
     this.addItem(this.demo_geboortemaand.get());
     this.addItem(this.demo_geslacht.get());
     this.addItem(this.demo_postcode.get());
+    this.addItem(this.datum_ziek.get());
     this.addItem(this.demo_huish_totaal.get());
     this.addItem(this.demo_huish_kinderen.get());
     this.addItem(this.aandoeningen.get());
@@ -377,39 +377,6 @@ export class osirisnummer extends Item {
   }
 }
 
-export class datum_ziek extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'datum_ziek');
-    this.condition = condition;
-    this.isRequired = isRequired;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["nl", "Op welke datum werd uw kind (ongeveer) ziek?"],
-      ]),
-      responseOptions: [
-        {
-          key: '1', role: 'dateInput',
-          optionProps: {
-            min: { dtype: 'num', num: 1672580978 }, //01-01-2023
-            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
-          },
-          content: new Map([
-            ["nl", "Kies datum:"],
-          ])
-        },
-      ],
-    })
-  }
-}
-
-
 export class demo_geboortejaar extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'demo_geboortejaar');
@@ -639,6 +606,44 @@ export class demo_postcode extends Item {
           displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
         }
       ]
+    })
+  }
+}
+
+export class datum_ziek extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'datum_ziek');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Op welke datum werd uw kind (ongeveer) ziek?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'dateInput',
+          optionProps: {
+            min: { dtype: 'num', num: 1672580978 }, //01-01-2023
+            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+          },
+          content: new Map([
+            ["nl", "Kies datum:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen/weet ik niet"],
+          ])
+        },
+      ],
     })
   }
 }
@@ -1276,11 +1281,23 @@ export class klachten_seh extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "Ja, 1-2 keer"],
           ])
         },
         {
           key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Ja, 3-4 keer"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Ja, meer dan 5 keer"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
           content: new Map([
             ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
@@ -1360,6 +1377,12 @@ export class antibiotica_start extends Item {
             ["nl", "Kies datum:"],
           ])
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ],
     })
   }
@@ -1367,10 +1390,13 @@ export class antibiotica_start extends Item {
 
 
 export class antibiotica_stop extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+  antibioticaStartKey: string;
+
+  constructor(parentKey: string, condition: Expression, antibioticaStartKey: string, isRequired?: boolean) {
     super(parentKey, 'antibiotica_stop');
     this.condition = condition;
     this.isRequired = isRequired;
+    this.antibioticaStartKey = antibioticaStartKey;
   }
 
   buildItem() {
@@ -1406,6 +1432,32 @@ export class antibiotica_stop extends Item {
           ])
         },
       ],
+    customValidations: [
+      {
+        key: 'v1',
+        type: 'hard',
+        rule: SurveyEngine.logic.or(
+          SurveyEngine.singleChoice.none(this.key, '1'),
+          SurveyEngine.singleChoice.none(this.antibioticaStartKey, '1'),
+          SurveyEngine.logic.and(
+            SurveyEngine.compare.gt(
+              SurveyEngine.singleChoice.getDateValue(this.key, '1'),
+              SurveyEngine.singleChoice.getDateValue(this.antibioticaStartKey, '1'),
+            )
+          )
+        )
+      }
+    ],
+    bottomDisplayCompoments: [
+      {
+        role: 'error',
+        content: generateLocStrings(new Map([
+          ["nl", "De stopdatum moet na de startdatum zijn"],
+        ])),
+        displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'v1'))
+      }
+    ]
+
     })
   }
 }
@@ -2012,6 +2064,12 @@ export class vacc_corona extends Item {
             ["nl", "5"],
           ])
         },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -2042,6 +2100,12 @@ export class vacc_corona_datum extends Item {
           },
           content: new Map([
             ["nl", "Kies datum:"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ],
@@ -2139,7 +2203,7 @@ export class opleiding_ouder extends Item {
         {
           key: '6', role: 'option',
           content: new Map([
-            ["nl", "Dat wil ik niet zeggen"],
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
           ])
         },
       ]

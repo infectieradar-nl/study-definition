@@ -1218,7 +1218,7 @@ export class antibiotica_stop extends Item {
           ])
         },
         {
-          key: '3', role: 'option',
+          key: '2', role: 'option',
           content: new Map([
             ["nl", "De antibioticakuur is nog bezig"],
           ])
@@ -1244,6 +1244,15 @@ export class antibiotica_stop extends Item {
               )
             )
           )
+        }
+      ],
+      bottomDisplayCompoments: [
+        {
+          role: 'error',
+          content: generateLocStrings(new Map([
+            ["nl", "De stopdatum moet na de startdatum zijn"],
+          ])),
+          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'v1'))
         }
       ]
 
