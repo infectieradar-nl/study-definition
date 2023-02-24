@@ -960,6 +960,12 @@ export class kind_oppas extends Item {
           ]),
           optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -998,6 +1004,12 @@ export class kind_opvang extends Item {
           ]),
           optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
+        },
       ]
     })
   }
@@ -1035,6 +1047,12 @@ export class kind_school extends Item {
             ["nl", "Ja, aantal dag(en) per week:"],
           ]),
           optionProps: { min: 0.5, max: 7, stepSize: 0.5 }
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet/wil ik niet zeggen"],
+          ])
         },
       ]
     })
