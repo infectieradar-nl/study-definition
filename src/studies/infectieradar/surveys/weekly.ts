@@ -1,7 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
-import { Q1NL, Q2NL, Q2aNL, Q2bNL, Q2cNL } from "../questionPools/coronaVaccine";
 import { FinalText, HasSymptomsGroup, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { surveyKeys } from "../contants";
@@ -10,12 +9,6 @@ import { ParticipantFlags } from "../participantFlags";
 class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
-  // vaccination:'
-  Q1NL: Q1NL;
-  Q2NL: Q2NL;
-  Q2aNL: Q2aNL;
-  Q2bNL: Q2bNL;
-  Q2cNL: Q2cNL;
   // TEST:
   Q1aNL: Q1aNL;
   // self-test
@@ -69,26 +62,7 @@ class WeeklyDef extends SurveyDefinition {
     const isRequired = true;
 
     // Initialize/Configure questions here:
-    this.Q1NL = new Q1NL(this.key, true);
-    this.Q2NL = new Q2NL(this.key,
-      SurveyEngine.singleChoice.any(this.Q1NL.key, '1', '2'),
-      isRequired);
-    /*const conditionForVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10', '11');
-    const conditionForNotVaccindated = SurveyEngine.singleChoice.any(this.Q2NL.key, '2',);
-    this.Q2aNL = new Q2aNL(this.key, conditionForVaccindated, true);
-    this.Q2bNL = new Q2bNL(this.key, conditionForVaccindated, true);
-    this.Q2cNL = new Q2cNL(this.key, conditionForNotVaccindated, true);*/
-    this.Q2aNL = new Q2aNL(this.key,
-      SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10', '11'),
-      isRequired);
-    this.Q2bNL = new Q2bNL(this.key,
-      SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10', '11'),
-      isRequired);
-    this.Q2cNL = new Q2cNL(this.key,
-      SurveyEngine.singleChoice.any(this.Q2NL.key, '7', '8', '9', '10', '11'),
-      isRequired);
-
-    this.Q1aNL = new Q1aNL(this.key, true);
+      this.Q1aNL = new Q1aNL(this.key, true);
     const conditionForSelfTest = SurveyEngine.multipleChoice.any(
       this.Q1aNL.key, this.Q1aNL.optionKeys.selfTest
     );
@@ -131,12 +105,6 @@ class WeeklyDef extends SurveyDefinition {
   buildSurvey() {
     // Define order of the questions here:
     this.addItem(this.SelfSwabTemporaryInfo.get());
-
-    this.addItem(this.Q1NL.get());
-    this.addItem(this.Q2NL.get());
-    this.addItem(this.Q2aNL.get());
-    this.addItem(this.Q2bNL.get());
-    this.addItem(this.Q2cNL.get());
 
     this.addItem(this.Q1aNL.get());
     this.addItem(this.Q2title.get());

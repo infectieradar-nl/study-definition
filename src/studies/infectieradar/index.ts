@@ -12,7 +12,6 @@ import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParticipantToSelfSwabbingWithoutCode";
 import { participantMessages } from "./messageConfigs/participantMessages";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
-import { fixLastVaccinationAnswerFlag_rules } from "./customRules/fixLastVaccinationAnswerFlag";
 import { removeDashboardQuestionnaire_rules } from "./customRules/removeDashboardQuestionnaire";
 
 
@@ -37,7 +36,6 @@ export const InfectieradarStudy: Study = {
     reinvitePeopleToIntake_rules,
     updateRetirementFlag_rules,
     inviteToSelfSwabbingWithoutCode_rules,
-    fixLastVaccinationAnswerFlag_rules,
     removeDashboardQuestionnaire_rules
   ]
 }

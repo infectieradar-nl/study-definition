@@ -71,13 +71,7 @@ const handleWeekly = StudyEngine.ifThen(
       ParticipantFlags.hasOnGoingSymptoms.values.no
     )
   ),
-  // vaccination:
-  StudyEngine.if(
-    // if Q2NL answered
-    StudyEngine.hasResponseKey(Weekly.Q2NL.key, 'rg.scg'),
-    // then save timestamp into flag
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
-  ),
+  
   handleSelfSwabbingLogic(),
 )
 
