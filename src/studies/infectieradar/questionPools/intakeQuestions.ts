@@ -3371,8 +3371,8 @@ export class Q25NL extends Item {
         {
           key: '7', role: 'option',
           content: new Map([
-            ["en", "Novovax"],
-            ["nl", "Novovax"],
+            ["en", "Novavax "],
+            ["nl", "Novavax"],
           ])
         },
         {
