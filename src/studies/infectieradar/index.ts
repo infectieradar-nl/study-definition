@@ -13,6 +13,7 @@ import { inviteToSelfSwabbingWithoutCode_rules } from "./customRules/inviteParti
 import { participantMessages } from "./messageConfigs/participantMessages";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { removeDashboardQuestionnaire_rules } from "./customRules/removeDashboardQuestionnaire";
+import { vaccinQuestions } from "./surveys/vaccinQuestions";
 
 
 export const InfectieradarStudy: Study = {
@@ -26,6 +27,7 @@ export const InfectieradarStudy: Study = {
     SwabSample,
     SwabNotSelected,
     QuitSwabbing,
+    vaccinQuestions
   ],
   studyRules: studyRules,
   messageConfigs: [

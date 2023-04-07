@@ -7,6 +7,7 @@ export const surveyKeys = {
   SwabSample: 'SwabSample',
   SwabNotSelected: 'SwabNotSelected',
   QuitSwabbing: 'QuitSwabbing',
+  vaccinQuestions: 'vaccinQuestions',
 }
 
 export const externalServiceNames = {
