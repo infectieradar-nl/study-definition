@@ -2,9 +2,11 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { surveyKeys } from '../contants';
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 
 class vaccinQuestionsSample extends SurveyDefinition {
 
+  IntroText: IntroText;
   covidvaccin: covidvaccin;
   griepvaccin: griepvaccin;
   FinalText: FinalText;
@@ -13,7 +15,7 @@ class vaccinQuestionsSample extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.vaccinQuestions,
       name: new Map([
-        ['nl', 'Vragenlijst vaccinaties sinds 1 september 2022']
+        ['nl', 'Vragenlijst over vaccinaties sinds 1 september']
       ]),
       description: new Map([
         ['nl', 'Klik hier om de vragenlijst over COVID- en griepvaccinatie in te vullen']
@@ -25,6 +27,7 @@ class vaccinQuestionsSample extends SurveyDefinition {
 
     const isRequired = true;
 
+    this.IntroText = new IntroText(this.key);
     this.covidvaccin = new covidvaccin(this.key, isRequired);
       this.griepvaccin = new griepvaccin(this.key, isRequired);
     this.FinalText= new FinalText(this.key);
@@ -32,12 +35,34 @@ class vaccinQuestionsSample extends SurveyDefinition {
 
   buildSurvey() {
     // Define order of the questions here:
+    this.addItem(this.IntroText.get());
     this.addItem(this.covidvaccin.get());
     this.addItem(this.griepvaccin.get());
     this.addItem(this.FinalText.get());
   }
 }
 
+
+class IntroText extends Item {
+  constructor(parentKey: string) {
+    super(parentKey, 'IntroText')
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.text({
+          content: new Map([
+            ["nl", "Het afgelopen seizoen is er iets misgegaan met het uitvragen van vaccinatie-informatie. Om dit te herstellen hebben we twee korte vragen.",
+          ]])
+        }),
+      ]
+    })
+  }
+}
 
 export class covidvaccin extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -52,7 +77,7 @@ export class covidvaccin extends Item {
       isRequired: this.isRequired,
       //condition: this.condition,
       questionText: new Map([
-        ["nl", "Heeft u zich dit seizoen (sinds 1 september 2022) laten vaccineren tegen COVID?"],
+        ["nl", "Heb je je sinds afgelopen 1 september laten vaccineren tegen COVID?"],
       ]),
       responseOptions: [
         {
@@ -68,7 +93,7 @@ export class covidvaccin extends Item {
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
-            ["nl", "Kies datum:"],
+            ["nl", "Ja, op/rond de volgende datum:"],
           ])
         },
         {
@@ -95,7 +120,7 @@ export class griepvaccin extends Item {
       isRequired: this.isRequired,
       //condition: this.condition,
       questionText: new Map([
-        ["nl", "Heeft u zich dit seizoen (sinds 1 september 2022) laten vaccineren tegen griep/influenza?"],
+        ["nl", "Heb je je sinds afgelopen 1 september laten vaccineren tegen griep?"],
       ]),
       responseOptions: [
         {
@@ -111,7 +136,7 @@ export class griepvaccin extends Item {
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
-            ["nl", "Kies datum:"],
+            ["nl", "Ja, op/rond de volgende datum:"],
           ])
         },
         {
