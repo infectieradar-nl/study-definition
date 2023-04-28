@@ -174,6 +174,12 @@ const autoRemoveContactData = StudyEngine.ifThen(
   ),
 )
 
+const handlevaccinQuestions = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(surveyKeys.vaccinQuestions),
+  // THEN:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.vaccinQuestions, 'all'),
+)
+
 
 const submitRules: Expression[] = [
   handleIntake,
@@ -183,6 +189,7 @@ const submitRules: Expression[] = [
   handleSwabSample,
   handleSwabNotSelected,
   handleQuitSwabbing,
+  handlevaccinQuestions
 ];
 
 const timerRules: Expression[] = [
