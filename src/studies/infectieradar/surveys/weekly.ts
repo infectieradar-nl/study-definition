@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1cNL, Q1d1NL, Q1d3NL, Q1dNL, Q1eNL, Q1gNL, Q1hNL, Q1iNL, Q1jNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
+import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title, selftestNow } from "../questionPools/coronaTest";
 import { FinalText, HasSymptomsGroup, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { surveyKeys } from "../contants";
@@ -9,31 +9,28 @@ import { ParticipantFlags } from "../participantFlags";
 class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
+  // symptoms:
+  Q1: SymptomsGroup;
+  HS: HasSymptomsGroup;
+  
   // TEST:
   Q1aNL: Q1aNL;
+  selftestNow : selftestNow;
   // self-test
-  Q2title: Q2title;
+   Q2title: Q2title;
   Q1kNL: Q1kNL;
   Q1b3NL: Q1b3NL;
   Q1d3NL: Q1d3NL;
-  Q1jNL: Q1jNL;
   // nose/throat swab
   Q3title: Q3title;
   Q1d1NL: Q1d1NL;
-  Q1cNL: Q1cNL;
-  Q1eNL: Q1eNL;
   //Q1fNL: Q1fNL;
   Q1gNL: Q1gNL;
-  Q1hNL: Q1hNL;
   Q1b1NL: Q1b1NL;
-  Q1iNL: Q1iNL;
   // blood test
   Q4title: Q4title;
   Q1dNL: Q1dNL;
   Q1b2NL: Q1b2NL;
-  // symptoms:
-  Q1: SymptomsGroup;
-  HS: HasSymptomsGroup;
 
   FinalText: FinalText;
 
@@ -62,7 +59,13 @@ class WeeklyDef extends SurveyDefinition {
     const isRequired = true;
 
     // Initialize/Configure questions here:
-      this.Q1aNL = new Q1aNL(this.key, true);
+    this.Q1 = new SymptomsGroup(this.key);
+
+    const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
+    const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
+    this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
+
+    this.Q1aNL = new Q1aNL(this.key, true);
     const conditionForSelfTest = SurveyEngine.multipleChoice.any(
       this.Q1aNL.key, this.Q1aNL.optionKeys.selfTest
     );
@@ -72,32 +75,30 @@ class WeeklyDef extends SurveyDefinition {
     const conditionForBloodTest = SurveyEngine.multipleChoice.any(
       this.Q1aNL.key, this.Q1aNL.optionKeys.blood
     );
+
+    this.selftestNow = new selftestNow(this.key,
+      SurveyEngine.multipleChoice.any(this.Q1aNL.key, '0'),
+      isRequired);
+ 
     this.Q2title = new Q2title(this.key, conditionForSelfTest);
     this.Q1kNL = new Q1kNL(this.key, conditionForSelfTest, true);
-    this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
+    //this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
+ 
+    this.Q1b3NL = new Q1b3NL(this.key,
+      SurveyEngine.singleChoice.any(this.selftestNow.key, '1'), (this.Q1aNL.key, conditionForSelfTest, true));
+
     const conditionForAnsweredSelfTest = SurveyEngine.singleChoice.any(
       this.Q1b3NL.key, this.Q1b3NL.optionKeys.positive, this.Q1b3NL.optionKeys.negative
     );
     this.Q1d3NL = new Q1d3NL(this.key, conditionForAnsweredSelfTest, true);
-    this.Q1jNL = new Q1jNL(this.key, conditionForSelfTest, true);
     this.Q3title = new Q3title(this.key, conditionForPCR);
     this.Q1d1NL = new Q1d1NL(this.key, conditionForPCR, true);
-    this.Q1cNL = new Q1cNL(this.key, conditionForPCR, true);
-    this.Q1eNL = new Q1eNL(this.key, conditionForPCR, true);
     //this.Q1fNL = new Q1fNL(this.key, conditionForPCR, true);
     this.Q1gNL = new Q1gNL(this.key, conditionForPCR, true);
-    this.Q1hNL = new Q1hNL(this.key, conditionForPCR, true);
     this.Q1b1NL = new Q1b1NL(this.key, conditionForPCR, true);
-    this.Q1iNL = new Q1iNL(this.key, conditionForPCR, true);
     this.Q4title = new Q4title(this.key, conditionForBloodTest);
     this.Q1dNL = new Q1dNL(this.key, conditionForBloodTest, true);
     this.Q1b2NL = new Q1b2NL(this.key, conditionForBloodTest, true);
-
-    this.Q1 = new SymptomsGroup(this.key);
-
-    const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
-    const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
-    this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
 
     this.FinalText = new FinalText(this.key);
   }
@@ -106,30 +107,26 @@ class WeeklyDef extends SurveyDefinition {
     // Define order of the questions here:
     this.addItem(this.SelfSwabTemporaryInfo.get());
 
+    this.addItem(this.Q1.get());
+    this.addItem(this.HS.get());
+
     this.addItem(this.Q1aNL.get());
+    this.addItem(this.selftestNow.get());
     this.addItem(this.Q2title.get());
     this.addItem(this.Q1kNL.get());
     this.addItem(this.Q1b3NL.get());
     this.addItem(this.Q1d3NL.get());
-    this.addItem(this.Q1jNL.get());
 
     this.addItem(this.Q3title.get());
     this.addItem(this.Q1d1NL.get());
-    this.addItem(this.Q1cNL.get());
-    this.addItem(this.Q1eNL.get());
     //this.addItem(this.Q1fNL.get());
     this.addItem(this.Q1gNL.get());
-    this.addItem(this.Q1hNL.get());
     this.addItem(this.Q1b1NL.get());
-    this.addItem(this.Q1iNL.get());
 
     this.addItem(this.Q4title.get());
     this.addItem(this.Q1dNL.get());
-    this.addItem(this.Q1b2NL.get());
+    this.addItem(this.Q1b2NL.get());    
 
-    this.addItem(this.Q1.get());
-    this.addItem(this.HS.get());
-  
     this.addItem(this.FinalText.get());
   }
 }
