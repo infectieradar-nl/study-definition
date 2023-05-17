@@ -138,7 +138,7 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     // else:
     assignSwabNotSelected(),
   ),
-  setSelfSwabbingDebugFlags(),
+  // setSelfSwabbingDebugFlags(),
 )
 
 const setSelfSwabbingDebugFlags = () => StudyEngine.do(
