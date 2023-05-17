@@ -13,9 +13,10 @@ export class Q1aNL extends Item {
     no: '0',
   }
 
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q1aNL');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {

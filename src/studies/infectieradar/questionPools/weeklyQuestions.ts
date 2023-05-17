@@ -78,9 +78,10 @@ export class SymptomsGroup extends Group {
   Title: SymptomsTitle;
   QSymptoms: SymptomsQuestion;
 
-  constructor(parentKey: string) {
+  constructor(parentKey: string, condition?: Expression) {
     super(parentKey, 'q1')
 
+    this.groupEditor.setCondition(condition);
     this.Title = new SymptomsTitle(this.key);
     this.QSymptoms = new SymptomsQuestion(this.key, true);
   }
@@ -2346,3 +2347,43 @@ Meld elke week je klachten. Heb je luchtwegklachten zoals hoesten, verstopte neu
 
 }
 
+export class QWithin24hours extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'QWithin24hours');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      //helpGroupContent: this.getHelpGroupContent(),
+      questionText: new Map([
+        ["nl", "It appears that you filled in a weekly questionnaire in the last 24hrs, what do you want to do?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Report only a test result"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Fill in the full weekly questionnaire"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Nothing, this is a mistake"],
+          ])
+        },
+      ]
+    })
+  }
+}

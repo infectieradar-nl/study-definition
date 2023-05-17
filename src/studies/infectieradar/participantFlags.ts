@@ -16,6 +16,9 @@ export const ParticipantFlags = {
   lastReplyToVaccination: {
     key: 'lastReplyToVaccination',
   },
+  lastWeeklySubmission: {
+    key: 'lastWeeklySubmission',
+  },
   selfSwabbing: {
     key: 'selfSwabbing',
     values: {

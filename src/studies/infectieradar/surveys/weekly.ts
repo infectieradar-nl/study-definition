@@ -1,23 +1,24 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title, selftestNow } from "../questionPools/coronaTest";
-import { FinalText, HasSymptomsGroup, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
-import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
+import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
 
 class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
+  QWithin24hours: QWithin24hours;
+
   // symptoms:
   Q1: SymptomsGroup;
   HS: HasSymptomsGroup;
-  
+
   // TEST:
   Q1aNL: Q1aNL;
-  selftestNow : selftestNow;
+  selftestNow: selftestNow;
   // self-test
-   Q2title: Q2title;
+  Q2title: Q2title;
   Q1kNL: Q1kNL;
   Q1b3NL: Q1b3NL;
   Q1d3NL: Q1d3NL;
@@ -59,13 +60,27 @@ class WeeklyDef extends SurveyDefinition {
     const isRequired = true;
 
     // Initialize/Configure questions here:
-    this.Q1 = new SymptomsGroup(this.key);
+    const isWithin24hours = SurveyEngine.compare.lte(
+      SurveyEngine.timestampWithOffset({ days: -1 }),
+      SurveyEngine.participantFlags.getAsNum(ParticipantFlags.lastWeeklySubmission.key),
+    )
+    this.QWithin24hours = new QWithin24hours(this.key, isWithin24hours, isRequired);
+
+    this.Q1 = new SymptomsGroup(this.key, SurveyEngine.logic.or(
+      SurveyEngine.singleChoice.any(this.QWithin24hours.key, '2'),
+      SurveyEngine.logic.not(isWithin24hours)
+    ));
 
     const hasAnySymptoms = SurveyEngine.multipleChoice.none(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.no);
     const hasFeverCondition = SurveyEngine.multipleChoice.any(this.Q1.QSymptoms.key, this.Q1.QSymptoms.optionKeys.fever);
     this.HS = new HasSymptomsGroup(this.key, hasAnySymptoms, hasFeverCondition);
 
-    this.Q1aNL = new Q1aNL(this.key, true);
+    this.Q1aNL = new Q1aNL(this.key,
+      SurveyEngine.logic.or(
+        SurveyEngine.singleChoice.none(this.QWithin24hours.key, '3'),
+        SurveyEngine.logic.not(isWithin24hours)
+      ),
+      true);
     const conditionForSelfTest = SurveyEngine.multipleChoice.any(
       this.Q1aNL.key, this.Q1aNL.optionKeys.selfTest
     );
@@ -79,11 +94,11 @@ class WeeklyDef extends SurveyDefinition {
     this.selftestNow = new selftestNow(this.key,
       SurveyEngine.multipleChoice.any(this.Q1aNL.key, '0'),
       isRequired);
- 
+
     this.Q2title = new Q2title(this.key, conditionForSelfTest);
     this.Q1kNL = new Q1kNL(this.key, conditionForSelfTest, true);
     //this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
- 
+
     this.Q1b3NL = new Q1b3NL(this.key,
       SurveyEngine.singleChoice.any(this.selftestNow.key, '1'), (this.Q1aNL.key, conditionForSelfTest, true));
 
@@ -106,6 +121,7 @@ class WeeklyDef extends SurveyDefinition {
   buildSurvey() {
     // Define order of the questions here:
     this.addItem(this.SelfSwabTemporaryInfo.get());
+    this.addItem(this.QWithin24hours.get());
 
     this.addItem(this.Q1.get());
     this.addItem(this.HS.get());
@@ -125,7 +141,7 @@ class WeeklyDef extends SurveyDefinition {
 
     this.addItem(this.Q4title.get());
     this.addItem(this.Q1dNL.get());
-    this.addItem(this.Q1b2NL.get());    
+    this.addItem(this.Q1b2NL.get());
 
     this.addItem(this.FinalText.get());
   }

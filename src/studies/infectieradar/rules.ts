@@ -54,7 +54,7 @@ const handleWeekly = StudyEngine.ifThen(
   // then do:
   StudyEngine.participantActions.assignedSurveys.remove(Weekly.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio', StudyEngine.timestampWithOffset({
-    hours: 1,
+    minutes: 5,
   })),
   // Manage flags:
   StudyEngine.if(
@@ -71,7 +71,16 @@ const handleWeekly = StudyEngine.ifThen(
       ParticipantFlags.hasOnGoingSymptoms.values.no
     )
   ),
-  
+  StudyEngine.if(
+    // not submitted by "mistake":
+    StudyEngine.singleChoice.none(
+      Weekly.QWithin24hours.key,
+      '3'
+    ),
+    // then update timestamp of last weekly submission:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.lastWeeklySubmission.key, StudyEngine.timestampWithOffset({ days: 0 })),
+  ),
+
   handleSelfSwabbingLogic(),
 )
 
