@@ -7,6 +7,7 @@ import { surveyKeys } from '../contants';
 
 class SwabNotSelected_Def extends SurveyDefinition {
   Explanation: ExplanationText;
+  RecommendTest: RecommendTest;
 
   constructor(isRequired?: boolean) {
     super({
@@ -25,12 +26,16 @@ class SwabNotSelected_Def extends SurveyDefinition {
 
     // const required = isRequired !== undefined ? isRequired : false;
 
-    this.Explanation = new ExplanationText(this.key)
+    this.Explanation = new ExplanationText(this.key);
+    this.RecommendTest = new RecommendTest(this.key,
+      // TODO: add condition - show only if last weekly indicate no test was done
+    );
 
   }
 
   buildSurvey() {
     this.addItem(this.Explanation.get());
+    this.addItem(this.RecommendTest.get());
   }
 }
 
@@ -51,9 +56,9 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-## Je bent niet geselecteerd, je hoeft niets te doen. 
+## Je bent niet geselecteerd, je hoeft niets te doen.
 
-Dank je wel voor je melding. 
+Dank je wel voor je melding.
 Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster.
 Je hoeft verder niets te doen.
 
@@ -62,6 +67,35 @@ Nogmaals dank voor het melden.
             ],
           ]),
           className: ''
+        })
+      ]
+    })
+  }
+}
+
+class RecommendTest extends Item {
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'RecommendTest');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+## TODO:
+
+you had indicated you have symptoms, but did not do a test.
+`
+            ],
+          ]),
+          className: '',
         })
       ]
     })
