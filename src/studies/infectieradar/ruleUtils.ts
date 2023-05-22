@@ -5,7 +5,6 @@ import { externalServiceNames, surveyKeys } from "./contants";
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { SwabEntry } from "./surveys/swabEntry";
-import { SwabSample } from "./surveys/swabSample";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { Weekly } from "./surveys/weekly";
 
@@ -64,6 +63,8 @@ const hasRecentPositiveTest = () => StudyEngine.or(
   )
 );
 
+/*
+not using this, for now symptoms are enough to be eligible for self - swabbing
 const hasRecentNegativeTest = () => StudyEngine.or(
   StudyEngine.and(
     StudyEngine.singleChoice.any(Weekly.Q1b1NL.key, Weekly.Q1b1NL.optionKeys.negative),
@@ -78,7 +79,7 @@ const hasRecentNegativeTest = () => StudyEngine.or(
       StudyEngine.getResponseValueAsNum(Weekly.Q1d3NL.key, 'rg.scg.0')
     )
   )
-);
+);*/
 
 const hasRecentSymptoms = () => StudyEngine.and(
   StudyEngine.multipleChoice.any(
@@ -91,10 +92,12 @@ const hasRecentSymptoms = () => StudyEngine.and(
   )
 );
 
+/*
+not using this, for now symptoms are enough to be eligible for self-swabbing
 const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
   hasRecentNegativeTest(),
   hasRecentSymptoms(),
-);
+);*/
 
 const assignSwabSample = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabNotSelected, 'all'),
@@ -125,7 +128,7 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
       // ELSE NEGATIVE CASE:
       StudyEngine.if(
         StudyEngine.and(
-          hasRecentNegativeTestAndRecentSymptoms(),
+          hasRecentSymptoms(),
           // Use sampler:
           StudyEngine.externalEventEval(externalServiceNames.samplerIsSelected),
         ),
@@ -138,9 +141,48 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     // else:
     assignSwabNotSelected(),
   ),
+  // Flag participant if had any symptoms in last 5 days:
+  StudyEngine.if(
+    hasRecentSymptoms(),
+    // If true:
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.key,
+      ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.values.true
+    ),
+    // Else:
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.key,
+      ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.values.false
+    )
+  ),
+  // Flag participant if they had no test result in the last weekly:
+  StudyEngine.if(
+    StudyEngine.and(
+      StudyEngine.multipleChoice.any(
+        Weekly.Q1aNL.key,
+        Weekly.Q1aNL.optionKeys.no,
+      ),
+      StudyEngine.singleChoice.any(
+        Weekly.selftestNow.key,
+        Weekly.selftestNow.optionKeys.no,
+      )
+    ),
+    // If true:
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.key,
+      ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.values.true
+    ),
+    // Else:
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.key,
+      ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.values.false
+    )
+  )
   // setSelfSwabbingDebugFlags(),
 )
 
+/*
+not using this, for now symptoms are enough to be eligible for self-swabbing
 const setSelfSwabbingDebugFlags = () => StudyEngine.do(
   StudyEngine.if(
     wasNotSampledRecently(),
@@ -157,7 +199,7 @@ const setSelfSwabbingDebugFlags = () => StudyEngine.do(
     StudyEngine.participantActions.updateFlag('swDebugRecentSymptoms', 'true'),
     StudyEngine.participantActions.updateFlag('swDebugRecentSymptoms', 'false'),
   ),
-)
+)*/
 
 const hasSurveyKeyValidUntilSoonerThan = (surveyKey: string, delta: Duration, reference?: number | Expression) => {
   return StudyEngine.gt(

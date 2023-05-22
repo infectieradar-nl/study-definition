@@ -1,0 +1,7 @@
+{
+  "isLoggedIn": false,
+  "participantFlags": {
+    "selfSwabbingHasNoTestInLastWeekly": "true",
+    "selfSwabbingHasRecentSymptomsInLastWeekly": "true"
+  }
+}

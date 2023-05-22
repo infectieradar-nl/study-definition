@@ -33,6 +33,20 @@ export const ParticipantFlags = {
   selfSwabbingSampledTime: {
     key: 'selfSwabbingSampledTime',
   },
+  selfSwabbingHasNoTestInLastWeekly: {
+    key: 'selfSwabbingHasNoTestInLastWeekly',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
+  },
+  selfSwabbingHasRecentSymptomsInLastWeekly: {
+    key: 'selfSwabbingHasRecentSymptomsInLastWeekly',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
+  },
   selfSwabbingContactData: {
     key: 'contactDataForSelfSwabbing',
     values: {

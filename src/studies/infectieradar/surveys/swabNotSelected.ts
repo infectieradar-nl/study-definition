@@ -1,8 +1,9 @@
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { Expression } from 'survey-engine/data_types';
 import { surveyKeys } from '../contants';
+import { ParticipantFlags } from '../participantFlags';
 
 
 class SwabNotSelected_Def extends SurveyDefinition {
@@ -26,11 +27,26 @@ class SwabNotSelected_Def extends SurveyDefinition {
 
     // const required = isRequired !== undefined ? isRequired : false;
 
-    this.Explanation = new ExplanationText(this.key);
-    this.RecommendTest = new RecommendTest(this.key,
-      // TODO: add condition - show only if last weekly indicate no test was done
+    const hasRecentSymptoms = SurveyEngine.participantFlags.hasKeyAndValue(
+      ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.key, ParticipantFlags.selfSwabbingHasRecentSymptomsInLastWeekly.values.true
     );
 
+    const hasNoRecentTest = SurveyEngine.participantFlags.hasKeyAndValue(
+      ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.key, ParticipantFlags.selfSwabbingHasNoTestInLastWeekly.values.true
+    );
+
+    const hasSymptomsButNoRecentTest = SurveyEngine.logic.and(
+      hasRecentSymptoms,
+      hasNoRecentTest
+    )
+
+    this.Explanation = new ExplanationText(
+      this.key,
+      SurveyEngine.logic.not(hasSymptomsButNoRecentTest)
+    );
+    this.RecommendTest = new RecommendTest(this.key,
+      hasSymptomsButNoRecentTest
+    );
   }
 
   buildSurvey() {

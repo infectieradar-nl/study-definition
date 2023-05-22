@@ -71,6 +71,12 @@ export class Q1aNL extends Item {
 }
 
 export class selftestNow extends Item {
+  optionKeys = {
+    no: '0',
+    yes: '1',
+  }
+
+
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'selftestNow');
     this.isRequired = isRequired;
@@ -89,14 +95,14 @@ export class selftestNow extends Item {
       ]),
       responseOptions: [
         {
-          key: '0', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["en", "No"],
             ["nl", "Nee"],
           ])
         },
         {
-          key: '1', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["en", "Yes"],
             ["nl", "Ja"],
