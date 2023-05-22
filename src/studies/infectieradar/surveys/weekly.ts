@@ -9,14 +9,10 @@ class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
   QWithin24hours: QWithin24hours;
-
-  // symptoms:
-  Q1: SymptomsGroup;
-  HS: HasSymptomsGroup;
-
+  
   // TEST:
   Q1aNL: Q1aNL;
-  selftestNow: selftestNow;
+  //selftestNow: selftestNow;
   // self-test
   Q2title: Q2title;
   Q1kNL: Q1kNL;
@@ -32,6 +28,11 @@ class WeeklyDef extends SurveyDefinition {
   Q4title: Q4title;
   Q1dNL: Q1dNL;
   Q1b2NL: Q1b2NL;
+
+  // symptoms:
+  Q1: SymptomsGroup;
+  HS: HasSymptomsGroup;
+
 
   FinalText: FinalText;
 
@@ -91,9 +92,9 @@ class WeeklyDef extends SurveyDefinition {
       this.Q1aNL.key, this.Q1aNL.optionKeys.blood
     );
 
-    this.selftestNow = new selftestNow(this.key,
-      SurveyEngine.multipleChoice.any(this.Q1aNL.key, '0'),
-      isRequired);
+    //this.selftestNow = new selftestNow(this.key,
+    //  SurveyEngine.multipleChoice.any(this.Q1aNL.key, '0'),
+    //  isRequired);
 
     this.Q2title = new Q2title(this.key, conditionForSelfTest);
     this.Q1kNL = new Q1kNL(this.key, conditionForSelfTest, true);
@@ -123,11 +124,8 @@ class WeeklyDef extends SurveyDefinition {
     this.addItem(this.SelfSwabTemporaryInfo.get());
     this.addItem(this.QWithin24hours.get());
 
-    this.addItem(this.Q1.get());
-    this.addItem(this.HS.get());
-
     this.addItem(this.Q1aNL.get());
-    this.addItem(this.selftestNow.get());
+    //this.addItem(this.selftestNow.get());
     this.addItem(this.Q2title.get());
     this.addItem(this.Q1kNL.get());
     this.addItem(this.Q1b3NL.get());
@@ -142,6 +140,9 @@ class WeeklyDef extends SurveyDefinition {
     this.addItem(this.Q4title.get());
     this.addItem(this.Q1dNL.get());
     this.addItem(this.Q1b2NL.get());
+
+    this.addItem(this.Q1.get());
+    this.addItem(this.HS.get());
 
     this.addItem(this.FinalText.get());
   }
