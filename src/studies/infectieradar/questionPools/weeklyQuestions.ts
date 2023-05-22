@@ -2362,25 +2362,25 @@ export class QWithin24hours extends Item {
       condition: this.condition,
       //helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["nl", "It appears that you filled in a weekly questionnaire in the last 24hrs, what do you want to do?"],
+        ["nl", "Het lijkt erop dat je vandaag al een vragenlijst hebt ingevuld. Wat wil je doen?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Report only a test result"],
+            ["nl", "Ik wil een test-uitslag doorgeven. (opend alleen de test-vraag)"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Fill in the full weekly questionnaire"],
+            ["nl", "Ik wil opnieuw de wekelijkse vragenlijst invullen. (opend de volledige vragenlijst)"],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["nl", "Nothing, this is a mistake"],
+            ["nl", "Ik wil niets doen. Ik wil terug naar het menu."],
           ])
         },
       ]
