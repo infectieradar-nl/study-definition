@@ -70,49 +70,6 @@ export class Q1aNL extends Item {
   }
 }
 
-//export class selftestNow extends Item {
-//  optionKeys = {
-//    no: '0',
-//    yes: '1',
-//  }
-
-
-//  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-//    super(parentKey, 'selftestNow');
-//    this.isRequired = isRequired;
-//    this.condition = condition;
-//  }
-
-//  buildItem() {
-//    return SurveyItems.singleChoice({
-//      parentKey: this.parentKey,
-//     itemKey: this.itemKey,
-//      isRequired: this.isRequired,
-//      condition: this.condition,
-//      questionText: new Map([
-//        ["en", "Is it possible to do the self-test now?"],
-//        ["nl", "Wil/kun je nu een zelftest doen?"],
-//      ]),
-//     responseOptions: [
-//        {
-//          key: this.optionKeys.no, role: 'option',
-//          content: new Map([
-//            ["en", "No"],
-//            ["nl", "Nee"],
-//          ])
-//        },
-//        {
-//          key: this.optionKeys.yes, role: 'option',
-//          content: new Map([
-//            ["en", "Yes"],
-//            ["nl", "Ja"],
-//          ])
-//        },
-//      ]
-//    })
-//  }
-//}
-
 
 export class Q2title extends Item {
   constructor(parentKey: string, condition: Expression) {

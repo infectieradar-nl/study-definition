@@ -157,15 +157,9 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
   ),
   // Flag participant if they had no test result in the last weekly:
   StudyEngine.if(
-    StudyEngine.and(
-      StudyEngine.multipleChoice.any(
-        Weekly.Q1aNL.key,
-        Weekly.Q1aNL.optionKeys.no,
-      ),
-      StudyEngine.singleChoice.any(
-        Weekly.selftestNow.key,
-        Weekly.selftestNow.optionKeys.no,
-      )
+    StudyEngine.multipleChoice.any(
+      Weekly.Q1aNL.key,
+      Weekly.Q1aNL.optionKeys.no,
     ),
     // If true:
     StudyEngine.participantActions.updateFlag(

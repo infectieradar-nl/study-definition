@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title, selftestNow } from "../questionPools/coronaTest";
+import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
@@ -9,10 +9,9 @@ class WeeklyDef extends SurveyDefinition {
   SelfSwabTemporaryInfo: SelfSwabTemporaryInfo;
 
   QWithin24hours: QWithin24hours;
-  
+
   // TEST:
   Q1aNL: Q1aNL;
-  //selftestNow: selftestNow;
   // self-test
   Q2title: Q2title;
   Q1kNL: Q1kNL;
@@ -92,16 +91,9 @@ class WeeklyDef extends SurveyDefinition {
       this.Q1aNL.key, this.Q1aNL.optionKeys.blood
     );
 
-    //this.selftestNow = new selftestNow(this.key,
-    //  SurveyEngine.multipleChoice.any(this.Q1aNL.key, '0'),
-    //  isRequired);
-
     this.Q2title = new Q2title(this.key, conditionForSelfTest);
     this.Q1kNL = new Q1kNL(this.key, conditionForSelfTest, true);
-    //this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
-
-    this.Q1b3NL = new Q1b3NL(this.key,
-      SurveyEngine.singleChoice.any(this.selftestNow.key, '1'), (this.Q1aNL.key, conditionForSelfTest, true));
+    this.Q1b3NL = new Q1b3NL(this.key, conditionForSelfTest, true);
 
     const conditionForAnsweredSelfTest = SurveyEngine.singleChoice.any(
       this.Q1b3NL.key, this.Q1b3NL.optionKeys.positive, this.Q1b3NL.optionKeys.negative
@@ -125,7 +117,6 @@ class WeeklyDef extends SurveyDefinition {
     this.addItem(this.QWithin24hours.get());
 
     this.addItem(this.Q1aNL.get());
-    //this.addItem(this.selftestNow.get());
     this.addItem(this.Q2title.get());
     this.addItem(this.Q1kNL.get());
     this.addItem(this.Q1b3NL.get());
