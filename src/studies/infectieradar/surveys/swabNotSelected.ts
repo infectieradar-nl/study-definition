@@ -105,9 +105,14 @@ class RecommendTest extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-## TODO:
+## ## Doe alsjeblief een coronazelftest. 
 
-you had indicated you have symptoms, but did not do a test.
+Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster, maar we vragen je wel om een coronazelftest te doen. 
+Dit omdat je klachten hebt die duiden op een luchtweginfectie. 
+De uitslag van deze zelftest kan je eenvoudig doorgeven door nogmaals de link in je (wekelijkse) e-mail te klikken. 
+Heb je geen zelftesten meer: bestel dan nieuwe via [GLEAN](https://rivmportal.glean.nl/user/auth).
+
+Nogmaals dank voor het melden.
 `
             ],
           ]),
