@@ -2602,8 +2602,8 @@ export class Q9 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2021/2022)"],
-        ["nl", "Heb je in het afgelopen winterseizoen (2021/2022) een griepprik gehaald?"],
+        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2022/2023)"],
+        ["nl", "Heb je in het afgelopen winterseizoen (2022/2023) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2686,8 +2686,8 @@ export class Q10 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2022/2023)"],
-        ["nl", "Ben je van plan om voor dit griepseizoen (2022/2023) een griepprik te halen?"],
+        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2023/2024)"],
+        ["nl", "Ben je van plan om voor dit griepseizoen (2023/2024) een griepprik te halen?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2779,8 +2779,8 @@ export class Q10b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When were you vaccinated against flu in the season 2022/2023?"],
-        ["nl", "Wanneer ben je dit griepseizoen (2022/2023) gevaccineerd tegen de griep?"],
+        ["en", "When were you vaccinated against flu in the season 2023/2024?"],
+        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen de griep?"],
       ]),
       responseOptions: [
         {
@@ -2975,8 +2975,8 @@ export class Q10d extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2022/2023?"],
-        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2022/2023)?"],
+        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2023/2024?"],
+        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2023/2024)?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -3141,8 +3141,8 @@ export class Q23NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you get a pneumococcal vaccine last winter season (2021/2022)?"],
-        ["nl", "Heb je het afgelopen winterseizoen (2021/2022) een pneumokokkenprik gehaald?"],
+        ["en", "Did you get a pneumococcal vaccine last winter season (2022/2023)?"],
+        ["nl", "Heb je het afgelopen winterseizoen (2022/2023) een pneumokokkenprik gehaald?"],
       ]),
       responseOptions: [
         {

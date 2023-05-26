@@ -1,0 +1,60 @@
+import { SurveyDefinition } from "case-editor-tools/surveys/types";
+import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
+import { Q_CIS,Q12,Q12b, Qvaccin_up} from "../questionPools/intervalQuestions";
+import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
+import { surveyKeys } from "../contants";
+import { ParticipantFlags } from "../participantFlags";
+import { Expression, SurveyItem } from "survey-engine/data_types";
+import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
+import { Item } from "case-editor-tools/surveys/types";
+import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
+import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
+import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import {SurveyItemGenerators} from "case-editor-tools/surveys/utils/question-type-generator";
+
+
+
+class IntervalDef extends SurveyDefinition {
+  Q_CIS: Q_CIS;
+  Qvaccin_up: Qvaccin_up;
+  Q12: Q12;
+  Q12b: Q12b;
+
+  constructor() {
+    super({
+      surveyKey: surveyKeys.intake,
+      name: new Map([
+        ["en", "About You"],
+        ["nl", "Perodieke vragen"],
+      ]),
+      description: new Map([
+        ["en", "This periodic survey focues on long term health outcomes and relevant updates."],
+        ["nl", "Klik op deze periodieke vragenlijst om vragen te beantwoorden over lange termijn klachten, contactpatronen en relevant updates"],
+      ]),
+      durationText: new Map([
+        ["en", "This will take 10 minutes."],
+        ["nl", "Invullen duurt 10 minuten."],
+      ])
+    });
+
+    const isRequired = true;
+
+    this.Q_CIS = new Q_CIS(this.key, isRequired);
+    this.Qvaccin_up = new Qvaccin_up(this.key, isRequired);
+    this.Q12 = new Q12(this.key, isRequired);
+    this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
+    this.Q12b = new Q12b(this.key, SurveyEngine.singleChoice.any(this.Q12.key, '0'), isRequired);
+      }
+
+  buildSurvey() {
+    this.addItem(this.Q_CIS.get());
+    this.addItem(this.Q12.get());
+    this.addItem(this.Q12b.get());
+    this.addItem(this.Qvaccin_up.get());
+  }
+}
+
+export const Interval = new IntervalDef();
