@@ -73,14 +73,15 @@ const handleWeekly = StudyEngine.ifThen(
   ),
   StudyEngine.if(
     // not submitted by "mistake":
-    StudyEngine.singleChoice.none(
-      Weekly.QWithin24hours.key,
-      '3'
-    ),
+    StudyEngine.not(
+      StudyEngine.singleChoice.any(
+        Weekly.QWithin24hours.key,
+        '3'
+      ))
+    ,
     // then update timestamp of last weekly submission:
     StudyEngine.participantActions.updateFlag(ParticipantFlags.lastWeeklySubmission.key, StudyEngine.timestampWithOffset({ days: 0 })),
   ),
-
   handleSelfSwabbingLogic(),
 )
 
