@@ -51,8 +51,6 @@ export class HasSymptomsGroup extends Group {
     this.Q10bNL = new Q10bNL(this.key, conditionForTimeOffwork, true);
     this.Q10cNL = new Q10cNL(this.key, conditionForTimeOffwork, true);
     this.Q11 = new Q11(this.key, true);
-
-
   }
 
   buildGroup() {
