@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
-import { Q_CIS,Q12,Q12b, Qvaccin_up} from "../questionPools/intervalQuestions";
+import { Q12, Q12b, } from "../questionPools/intervalQuestions";
 import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
@@ -13,19 +13,20 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import {SurveyItemGenerators} from "case-editor-tools/surveys/utils/question-type-generator";
+import { ContactGroup } from "../questionPools/contactGroup";
 
 
 
 class IntervalDef extends SurveyDefinition {
-  Q_CIS: Q_CIS;
-  Qvaccin_up: Qvaccin_up;
-  Q12: Q12;
-  Q12b: Q12b;
+  //Q_CIS: Q_CIS;
+  // Qvaccin_up: Qvaccin_up;
+  //Q12: Q12;
+  //Q12b: Q12b;
+  ContactGroup: ContactGroup;
 
   constructor() {
     super({
-      surveyKey: surveyKeys.intake,
+      surveyKey: surveyKeys.interval,
       name: new Map([
         ["en", "About You"],
         ["nl", "Perodieke vragen"],
@@ -42,18 +43,27 @@ class IntervalDef extends SurveyDefinition {
 
     const isRequired = true;
 
-    this.Q_CIS = new Q_CIS(this.key, isRequired);
-    this.Qvaccin_up = new Qvaccin_up(this.key, isRequired);
-    this.Q12 = new Q12(this.key, isRequired);
-    this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
-    this.Q12b = new Q12b(this.key, SurveyEngine.singleChoice.any(this.Q12.key, '0'), isRequired);
-      }
+    // this.Q_CIS = new Q_CIS(this.key, isRequired);
+    // this.Qvaccin_up = new Qvaccin_up(this.key, isRequired);
+    // this.Q12 = new Q12(this.key, isRequired);
+    // this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
+    // this.Q12b = new Q12b(this.key, SurveyEngine.singleChoice.any(this.Q12.key, '0'), isRequired);
+    this.ContactGroup = new ContactGroup(this.key, isRequired);
+
+
+
+
+    this.editor.setPrefillRules([
+      ...this.ContactGroup.getPrefillRules(),
+    ])
+  }
 
   buildSurvey() {
-    this.addItem(this.Q_CIS.get());
-    this.addItem(this.Q12.get());
-    this.addItem(this.Q12b.get());
-    this.addItem(this.Qvaccin_up.get());
+    // this.addItem(this.Q_CIS.get());
+    // this.addItem(this.Q12.get());
+    // this.addItem(this.Q12b.get());
+    // this.addItem(this.Qvaccin_up.get());
+    this.addItem(this.ContactGroup.get());
   }
 }
 

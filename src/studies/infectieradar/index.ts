@@ -15,6 +15,7 @@ import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { removeDashboardQuestionnaire_rules } from "./customRules/removeDashboardQuestionnaire";
 import { vaccinQuestions } from "./surveys/vaccinQuestions";
 import { assignVaccinQuestions_rules } from "./customRules/assignVaccinQuestions";
+import { Interval } from "./surveys/interval";
 
 
 export const InfectieradarStudy: Study = {
@@ -28,7 +29,8 @@ export const InfectieradarStudy: Study = {
     SwabSample,
     SwabNotSelected,
     QuitSwabbing,
-    vaccinQuestions
+    vaccinQuestions,
+    Interval,
   ],
   studyRules: studyRules,
   messageConfigs: [
