@@ -31,7 +31,8 @@ export class ContactGroup extends Group {
     this.ContactMatrixForHome = new ContactMatrix(
       this.key,
       'ContactsHome',
-      new Map([['en', 'Indicate the number of contacts at home (per age category and gender)']]),
+      new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
+               ['nl', 'Geef het aantal contacten thuis aan, per leeftijdscategorie en geslacht']]),
       conditionForHome,
       isRequired
     );
@@ -41,7 +42,8 @@ export class ContactGroup extends Group {
     this.ContactMatrixForWork = new ContactMatrix(
       this.key,
       'ContactsWork',
-      new Map([['en', 'Indicate the number of contacts at work (per age category and gender)']]),
+      new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
+               ['nl', 'Geef het aantal contacten op het werk aan, per leeftijdscategorie en geslacht']]),
       conditionForWork,
       isRequired
     );
@@ -51,7 +53,8 @@ export class ContactGroup extends Group {
     this.ContactMatrixForSchool = new ContactMatrix(
       this.key,
       'ContactsSchool',
-      new Map([['en', 'Indicate the number of contacts at school (per age category and gender)']]),
+      new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
+               ['nl', 'Geef het aantal contacten op school aan, per leeftijdscategorie en geslacht']]),
       conditionForSchool,
       isRequired
     );
@@ -61,7 +64,8 @@ export class ContactGroup extends Group {
     this.ContactMatrixForLeisure = new ContactMatrix(
       this.key,
       'ContactsLeisure',
-      new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)']]),
+      new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
+               ['nl', 'Geef het aantal contacten tijdens vrije tijd aan, per leeftijdscategorie en geslacht']]),
       conditionForLeisure,
       isRequired
     );
@@ -71,7 +75,8 @@ export class ContactGroup extends Group {
     this.ContactMatrixForOther = new ContactMatrix(
       this.key,
       'ContactsOther',
-      new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)']]),
+      new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)'],
+               ['nl', 'Geef het aantal contacten tijdens de overige activiteiten aan, per leeftijdscategorie en geslacht']]),
       conditionForOther,
       isRequired
     );
@@ -155,7 +160,7 @@ class Infos extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", `
+            ["en", `
 The onward transmission of respiratory infections depends on with whom
 you talked, could have talked or whom you touched, actions we refer to
 as a *contact*.
@@ -207,6 +212,24 @@ Household members are defined as all people you live with on a daily
 basis with whom you sleep under the same roof (for example also
 co-residents).`
             ],
+            ["nl", `
+            ### Het begrijpen van de verspreiding van luchtwegbesmettingen
+            Help ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
+            We willen daarom graag weten met hoeveel mensen je gisteren hebt gesproken en/of aangeraakt, of dichtbij bent geweest in dezelfde kamer (binnen 3 meter).
+            Het gaat hierbij alleen om de ontmoetingen waarbij de kans groot was dat je iemand had kunnen besmetten, of een ander jou. 
+            Dit zijn ontmoetingen van tenminste vijf minuten. Ontmoet je vaker dezelfde persoon, dan telt alleen de langste ontmoeting. 
+            We vragen je ook naar het geslacht en de geschatte leeftijd. 
+
+            Voor dit onderzoek delen we de ontmoetingen op per locatie:
+            - Thuis: je woning (bijv. gezinsleden, bezoekers). Let op: Een "huishouden" omvat alle personen die dagelijks dezelfde woonruimte met je delen.
+            - Werk: je werk (bijv. klanten, collega's). Verschil tussen meerdere werkplekken maakt hierin niet uit, werk is werk. 
+            - School: Onderwijsinstellingen (bijv. docenten, klasgenoten).
+            - Vrije tijd: Geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).
+            - Overig: Alle locaties die hierboven niet worden genoemd (bijv. mensen die u ontmoet in het openbaar vervoer).
+            
+            Door deze informatie te verstrekken, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
+  `
+            ],
           ]),
           className: ''
         })
@@ -238,63 +261,63 @@ class ContactMatrix extends Item {
   rowInfos: Array<{ key: string, label: Map<string, string> }> = [
     {
       key: 'r1', label: new Map([
-        ["nl", "0 - 3"],
+        ["nl", "0-3 jaar"],
       ]),
     },
     {
       key: 'r2', label: new Map([
-        ["nl", "3 - 6"],
+        ["nl", "4-6 jaar"],
       ]),
     },
     {
       key: 'r3', label: new Map([
-        ["nl", "7 - 12"],
+        ["nl", "7-12 jaar"],
       ]),
     },
     {
       key: 'r4', label: new Map([
-        ["nl", "13 - 18"],
+        ["nl", "13-18 jaar"],
       ]),
     },
     {
       key: 'r5', label: new Map([
-        ["nl", "19 - 29"],
+        ["nl", "19-29 jaar"],
       ]),
     },
     {
       key: 'r6', label: new Map([
-        ["nl", "30 - 39"],
+        ["nl", "30-39 jaar"],
       ]),
     },
     {
       key: 'r7', label: new Map([
-        ["nl", "40 - 49"],
+        ["nl", "40-49 jaar"],
       ]),
     },
     {
       key: 'r8', label: new Map([
-        ["nl", "50 - 59"],
+        ["nl", "50-59 jaar"],
 
       ]),
     },
     {
       key: 'r9', label: new Map([
-        ["nl", "60 - 69"],
+        ["nl", "60-69 jaar"],
       ]),
     },
     {
       key: 'r10', label: new Map([
-        ["nl", "70 - 79"],
+        ["nl", "70-79 jaar"],
       ]),
     },
     {
       key: 'r11', label: new Map([
-        ["nl", "80 - 89"],
+        ["nl", "80-89 jaar"],
       ]),
     },
     {
       key: 'r12', label: new Map([
-        ["nl", "90+"],
+        ["nl", "90+ jaar"],
       ]),
     },
   ];
@@ -302,12 +325,12 @@ class ContactMatrix extends Item {
   columnInfos: Array<{ key: string, label: Map<string, string> }> = [
     {
       key: 'f', label: new Map([
-        ["nl", "Female"],
+        ["nl", "Vrouw"],
       ]),
     },
     {
       key: 'm', label: new Map([
-        ["nl", "Male"],
+        ["nl", "Man"],
       ]),
     }
   ];
@@ -379,7 +402,7 @@ class ContactMatrix extends Item {
       rows: this.generateRows(),
       dropdownConfig: {
         unselectedLabeL: new Map([
-          ["nl", "Select an option"],
+          ["nl", "Selecteer een optie"],
         ]),
         options: dropdownOptions
       },
@@ -414,19 +437,19 @@ class ProtectionUsage extends Item {
         {
           key: '0', role: 'option',
           content: new Map([
-            ["nl", "No"],
+            ["nl", "Nee"],
           ])
         },
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Yes"],
+            ["nl", "Ja"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "I don't remember"],
+            ["nl", "Dit weet ik niet meer"],
           ])
         },
       ]
@@ -454,25 +477,25 @@ class Q1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Did you have any social contact between yesterday 5am and 5 am today?"],
+        ["nl", "Heb je gisteren iemand ontmoet (zoals we hier onderzoeken)? Zie ook de uitleg hierboven"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Yes"],
+            ["nl", "Ja"],
           ])
         },
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "No"],
+            ["nl", "Nee"],
           ])
         },
         {
           key: this.optionKeys.other, role: 'option',
           content: new Map([
-            ["nl", "I don't want to say"],
+            ["nl", "Dat wil ik liever niet zeggen"],
           ])
         }
       ]
@@ -502,19 +525,19 @@ class Q2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Please select all the settings that apply"],
+        ["nl", "Selecteer alstublieft alle locaties waar je tenminste één ontmoeting hebt gehad"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.home, role: 'option',
           content: new Map([
-            ["nl", "Home"],
+            ["nl", "Thuis"],
           ])
         },
         {
           key: this.optionKeys.work, role: 'option',
           content: new Map([
-            ["nl", "Work"],
+            ["nl", "Werk"],
           ])
         },
         {
@@ -526,13 +549,13 @@ class Q2 extends Item {
         {
           key: this.optionKeys.leisure, role: 'option',
           content: new Map([
-            ["nl", "Leisure"],
+            ["nl", "Vrije tijd"],
           ])
         },
         {
           key: this.optionKeys.other, role: 'option',
           content: new Map([
-            ["nl", "Other"],
+            ["nl", "Overige activiteiten"],
           ])
         }
       ]
@@ -559,34 +582,41 @@ class QFragile extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Did you visit an institute with (many) fragile people between yesterday 5am and 5 am today?"],
+        ["nl", "Heb je gisteren een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige luchtwegklachen bij een besmetting"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "No"],
+            ["nl", "Nee"],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.key, '1', '2', 'other')
         },
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Yes, a care home"],
+            ["nl", "Ja, een verpleeg- of verzorgingstehuis"],
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Ja, een instelling voor begeleid wonen"],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Yes, a hospital"],
+            ["nl", "Ja, een ziekenhuis"],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
         },
         {
           key: 'other', role: 'input',
           content: new Map([
-            ["nl", "Other: "],
+            ["nl", "Anders: "],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
         },
