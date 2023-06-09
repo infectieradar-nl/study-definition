@@ -12,9 +12,70 @@ import { ParticipantFlags } from "../participantFlags";
 //import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 //import { CISexample } from "./images";
 
+// vaccinatie vraag
+export class Qvaccin_up extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'Qvaccin_up');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Heb je je in de laatste 3 maanden laten vaccineren?"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+             
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+            
+          ])
+        },
+        
+      ]
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["nl-be", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "To find out whether the chance of getting flu is different between genders."],
+          ["nl", "Om de informatie over vaccinaties aan te passen."],
+          ["nl-be", "Om te kijken naar verschillen tussen mannen en vrouwen."],
+          ["fr", "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+      },
+    ]
+  }
+}
+
+
 
 //  Question about pregnancy
-
 export class Q12 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
     super(parentKey, 'Q12');
