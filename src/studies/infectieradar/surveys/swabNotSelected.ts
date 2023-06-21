@@ -105,12 +105,14 @@ class RecommendTest extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-## ## Doe alsjeblief een coronazelftest. 
+## Doe alsjeblief een coronazelftest. 
 
 Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster, maar we vragen je wel om een coronazelftest te doen. 
 Dit omdat je klachten hebt die duiden op een luchtweginfectie. 
 De uitslag van deze zelftest kan je eenvoudig doorgeven door nogmaals de link in je (wekelijkse) e-mail te klikken. 
 Heb je geen zelftesten meer: bestel dan nieuwe via [GLEAN](https://rivmportal.glean.nl/user/auth).
+
+De zelftesten met een ten minste houdbaar tot (T.H.T.) datum juli 2023, zijn door het RIVM onderzocht en kunnen ook na juli 2023 gebruikt worden
 
 Nogmaals dank voor het melden.
 `
