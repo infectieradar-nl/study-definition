@@ -216,11 +216,11 @@ co-residents).`
             ### Het begrijpen van de verspreiding van luchtwegbesmettingen
             Help ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
             We willen daarom graag weten met hoeveel mensen je gisteren hebt gesproken en/of aangeraakt, of dichtbij bent geweest in dezelfde kamer (binnen 3 meter).
-            Het gaat hierbij alleen om de ontmoetingen waarbij de kans groot was dat je iemand had kunnen besmetten, of een ander jou. 
-            Dit zijn ontmoetingen van tenminste vijf minuten. Ontmoet je vaker dezelfde persoon, dan telt alleen de langste ontmoeting. 
+            Het gaat hierbij alleen om de contacten waarbij de kans groot was dat je iemand had kunnen besmetten, of een ander jou. 
+            Ontmoet je vaker dezelfde persoon, dan telt alleen de langste ontmoeting. 
             We vragen je ook naar het geslacht en de geschatte leeftijd. 
 
-            Voor dit onderzoek delen we de ontmoetingen op per locatie:
+            Voor dit onderzoek delen we de contacten op per locatie:
             - Thuis: je woning (bijv. gezinsleden, bezoekers). Let op: Een "huishouden" omvat alle personen die dagelijks dezelfde woonruimte met je delen.
             - Werk: je werk (bijv. klanten, collega's). Verschil tussen meerdere werkplekken maakt hierin niet uit, werk is werk. 
             - School: Onderwijsinstellingen (bijv. docenten, klasgenoten).

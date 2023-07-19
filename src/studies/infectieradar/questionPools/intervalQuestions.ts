@@ -13,9 +13,11 @@ import { ParticipantFlags } from "../participantFlags";
 //import { CISexample } from "./images";
 
 // vaccinatie vraag
-export class Qvaccin_up extends Item {
-  constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'Qvaccin_up');
+
+//FLU
+export class Q_flu_vaccine_interval extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_flu_vaccine_interval');
     this.isRequired = isRequired;
   }
 
@@ -26,26 +28,105 @@ export class Qvaccin_up extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je je in de laatste 3 maanden laten vaccineren?"],
+        ["nl", "Heb je dit griepseizoen (2023/2024) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
-          key: '0', role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-             
-          ])
-        },
-        {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "Ja, deze heb ik gehaald"],
+            ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            
+            ["nl", "Nee"],
             
           ])
         },
-        
-      ]
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+         
+          ["nl", "Waarom vragen we dit?"],
+         
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+         
+          ["nl", "We willen de beschermende werking van het vaccin onderzoeken."],
+         
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
+          ["nl", "Zeg ja wanneer je de griepprik hebt gehad. Normaal ontvang je een griepprik in het najaar"],
+          ["fr", "Répondez oui si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
+export class Q_flu_vaccine_datum_interval extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'Q_flu_vaccine_datum_interval');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+       
+        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen de griep?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'dateInput',
+          optionProps: {
+            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+          },
+          content: new Map([
+            
+            ["nl", "Kies datum:"],
+            ["fr", "Sélectionner une date"],
+          ])
+        },
+        {
+          key: '0', role: 'option',
+          content: new Map([
+           
+            ["nl", "Dat weet ik niet (meer)"],
+            ["fr", "Je ne sais pas, je ne m'en souviens plus"],
+          ])
+        },
+      ],
     })
   }
 
@@ -55,23 +136,196 @@ export class Qvaccin_up extends Item {
         content: new Map([
           ["en", "Why are we asking this?"],
           ["nl", "Waarom vragen we dit?"],
-          ["nl-be", "Waarom vragen we dit?"],
           ["fr", "Pourquoi demandons-nous cela?"],
         ]),
         style: [{ key: 'variant', value: 'h5' }],
       },
       {
         content: new Map([
-          ["en", "To find out whether the chance of getting flu is different between genders."],
-          ["nl", "Om de informatie over vaccinaties aan te passen."],
-          ["nl-be", "Om te kijken naar verschillen tussen mannen en vrouwen."],
-          ["fr", "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."],
+          ["en", "Knowing when people are vaccinated tells us how well the vaccination programme is being carried out."],
+          ["nl", "Het weten van de timing van vaccinatie is belangrijk om de effectiviteit te schatten."],
+          ["fr", "Savoir quand les gens sont vaccinés nous permet d'évaluer le succès des campagnes de vaccination."],
         ]),
-        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Please, try and answer as accurately as possible. If you don't know the precise date, please give your best estimate. For instance, you might remember the month, then try and remember if it was at the beginning or the end of the month. Were there any significant events (e.g. a holiday or a birthday) that might help jog your memory?"],
+          ["nl", "Probeer zo goed mogelijk te antwoorden, de exacte datum is niet belangrijk, maar wel of het aan het begin of het eind van de maand was."],
+          ["fr", "Essayez de répondre le plus précisément possible. Si vous ne connaissez pas la date précise, donnez votre meilleure estimation. Par exemple, vous pouvez vous rappeler du mois, puis essayez de vous souvenir si c'était au début ou à la fin du mois. Essayez de vous servir d'événements importants (p. ex. vacances ou anniversaire) pour vous aider à vous rafraîchir la mémoire."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
       },
     ]
   }
 }
+
+
+// COVID
+export class Q_covid_vaccine_interval extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_covid_vaccine_interval');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+       
+        ["nl", "Heb je dit griepseizoen (2023/2024) een coronaprik gehaald?"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+         
+            ["nl", "Ja, deze heb ik gehaald"],
+            ["fr", "Oui"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "No"],
+            ["nl", "Nee"],
+            ["fr", "Non"],
+          ])
+        },
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season, usually in the autumn."],
+          ["nl", "We willen de beschermende werking van het vaccin onderzoeken."],
+          ["fr", "Nous aimerions savoir à quel point la protection par le vaccin fonctionne."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
+          ["nl", "Zeg ja wanneer je de griepprik hebt gehad. Normaal ontvang je een griepprik in het najaar"],
+          ["fr", "Répondez oui si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
+export class Q_covid_vaccine_datum_interval extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'Q_covid_vaccine_datum_interval');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+       
+        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen corona?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'dateInput',
+          optionProps: {
+            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
+          },
+          content: new Map([
+            ["en", "Choose date:"],
+            ["nl", "Kies datum:"],
+            ["fr", "Sélectionner une date"],
+          ])
+        },
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Dat weet ik niet (meer)"],
+            ["fr", "Je ne sais pas, je ne m'en souviens plus"],
+          ])
+        },
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Knowing when people are vaccinated tells us how well the vaccination programme is being carried out."],
+          ["nl", "Het weten van de timing van vaccinatie is belangrijk om de effectiviteit te schatten."],
+          ["fr", "Savoir quand les gens sont vaccinés nous permet d'évaluer le succès des campagnes de vaccination."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Please, try and answer as accurately as possible. If you don't know the precise date, please give your best estimate. For instance, you might remember the month, then try and remember if it was at the beginning or the end of the month. Were there any significant events (e.g. a holiday or a birthday) that might help jog your memory?"],
+          ["nl", "Probeer zo goed mogelijk te antwoorden, de exacte datum is niet belangrijk, maar wel of het aan het begin of het eind van de maand was."],
+          ["fr", "Essayez de répondre le plus précisément possible. Si vous ne connaissez pas la date précise, donnez votre meilleure estimation. Par exemple, vous pouvez vous rappeler du mois, puis essayez de vous souvenir si c'était au début ou à la fin du mois. Essayez de vous servir d'événements importants (p. ex. vacances ou anniversaire) pour vous aider à vous rafraîchir la mémoire."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
 
 
 

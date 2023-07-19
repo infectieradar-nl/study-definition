@@ -14,12 +14,15 @@ import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/r
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ContactGroup } from "../questionPools/contactGroup";
-
+import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
 
 
 class IntervalDef extends SurveyDefinition {
   //Q_CIS: Q_CIS;
-  // Qvaccin_up: Qvaccin_up;
+  Q_flu_vaccine_interval:Q_flu_vaccine_interval;
+  Q_flu_vaccine_datum_interval:Q_flu_vaccine_datum_interval;
+  Q_covid_vaccine_interval:Q_covid_vaccine_interval;
+  Q_covid_vaccine_datum_interval:Q_covid_vaccine_datum_interval;
   //Q12: Q12;
   //Q12b: Q12b;
   ContactGroup: ContactGroup;
@@ -33,7 +36,7 @@ class IntervalDef extends SurveyDefinition {
       ]),
       description: new Map([
         ["en", "This periodic survey focues on long term health outcomes and relevant updates."],
-        ["nl", "Klik op deze periodieke vragenlijst om vragen te beantwoorden over lange termijn klachten, contactpatronen en relevant updates"],
+        ["nl", "Klik op deze periodieke vragenlijst om vragen te beantwoorden over lange termijn klachten, contactpatronen en vaccinatie"],
       ]),
       durationText: new Map([
         ["en", "This will take 10 minutes."],
@@ -44,8 +47,12 @@ class IntervalDef extends SurveyDefinition {
     const isRequired = true;
 
     // this.Q_CIS = new Q_CIS(this.key, isRequired);
-    // this.Qvaccin_up = new Qvaccin_up(this.key, isRequired);
-    // this.Q12 = new Q12(this.key, isRequired);
+    this.Q_flu_vaccine_interval = new Q_flu_vaccine_interval(this.key, isRequired);
+    this.Q_flu_vaccine_datum_interval = new Q_flu_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_flu_vaccine_interval.key, '1'), isRequired);
+    this.Q_covid_vaccine_interval = new Q_covid_vaccine_interval(this.key, isRequired);
+    this.Q_covid_vaccine_datum_interval = new Q_covid_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_covid_vaccine_interval.key, '1'), isRequired);
+    
+    //this.Q12 = new Q12(this.key, isRequired);
     // this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
     // this.Q12b = new Q12b(this.key, SurveyEngine.singleChoice.any(this.Q12.key, '0'), isRequired);
     this.ContactGroup = new ContactGroup(this.key, isRequired);
@@ -60,9 +67,12 @@ class IntervalDef extends SurveyDefinition {
 
   buildSurvey() {
     // this.addItem(this.Q_CIS.get());
-    // this.addItem(this.Q12.get());
+    //this.addItem(this.Q12.get());
     // this.addItem(this.Q12b.get());
-    // this.addItem(this.Qvaccin_up.get());
+    this.addItem(this.Q_flu_vaccine_interval.get());
+    this.addItem(this.Q_flu_vaccine_datum_interval.get());
+    this.addItem(this.Q_covid_vaccine_interval.get());
+    this.addItem(this.Q_covid_vaccine_datum_interval.get());
     this.addItem(this.ContactGroup.get());
   }
 }
