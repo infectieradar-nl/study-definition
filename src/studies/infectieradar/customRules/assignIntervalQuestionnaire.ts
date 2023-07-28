@@ -7,8 +7,11 @@ export const assignIntervalQuestionnaire_rules = {
   name: "assignIntervalQuestionnaire",
   rules: [
     StudyEngine.if(
-      StudyEngine.not(
-        StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.interval)
+      StudyEngine.and(
+        StudyEngine.participantState.hasStudyStatus('active'),
+        StudyEngine.not(
+          StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.interval)
+        ),
       ),
       initialIntervalSurveyAssignment(0),
     ),
