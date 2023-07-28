@@ -6,19 +6,21 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
-import { handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic } from "./ruleUtils";
+import { handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, initialIntervalSurveyAssignment, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 
+const initialIntervalSurveyOffset = 6 // weeks
 
 
 /**
  * Define what should happen, when persons enter the study first time:
  */
 const entryRules: Expression[] = [
-  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal')
+  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal'),
+  initialIntervalSurveyAssignment(initialIntervalSurveyOffset),
 ];
 
 
@@ -190,6 +192,18 @@ const handlevaccinQuestions = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.vaccinQuestions, 'all'),
 )
 
+const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(surveyKeys.interval),
+  // THEN:
+  reassignIntervalSurvey(12)
+)
+
+export const handleIntervalQuestionnaireExpired = () => StudyEngine.ifThen(
+  isSurveyExpired(surveyKeys.interval),
+  // Then:
+  reassignIntervalSurvey(12)
+)
+
 
 const submitRules: Expression[] = [
   handleIntake,
@@ -199,13 +213,15 @@ const submitRules: Expression[] = [
   handleSwabSample,
   handleSwabNotSelected,
   handleQuitSwabbing,
-  handlevaccinQuestions
+  handlevaccinQuestions,
+  handleIntervalQuestionnaireSubmission
 ];
 
 const timerRules: Expression[] = [
   autoRemoveContactData,
   handleExpired_removeSurvey(SwabSample.key),
   handleExpired_removeSurvey(SwabNotSelected.key),
+  handleIntervalQuestionnaireExpired(),
 ]
 
 /**

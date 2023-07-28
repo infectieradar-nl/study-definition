@@ -212,3 +212,90 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(surveyKey, 'all'),
 )
+
+
+const initialAddSurvey = (weeks: number) => StudyEngine.participantActions.assignedSurveys.add(
+  surveyKeys.interval,
+  'immediate',
+  StudyEngine.timestampWithOffset({ days: weeks * 7 }),
+  StudyEngine.timestampWithOffset({ days: (weeks + 4) * 7 })
+)
+
+const intervalAssignmentTempFlag = "intervalAssignmentRng"
+
+const isIntervalFlagEq = (value: number) => StudyEngine.eq(
+  StudyEngine.participantState.getParticipantFlagValueAsNum(intervalAssignmentTempFlag),
+  value
+)
+
+export const initialIntervalSurveyAssignment = (initialIntervalSurveyOffset: number) => StudyEngine.do(
+  StudyEngine.participantActions.updateFlag(
+    intervalAssignmentTempFlag,
+    StudyEngine.generateRandomNumber(1, 12)
+  ),
+  StudyEngine.if(
+    isIntervalFlagEq(1),
+    initialAddSurvey(initialIntervalSurveyOffset),
+    StudyEngine.if(
+      isIntervalFlagEq(2),
+      initialAddSurvey(initialIntervalSurveyOffset + 1),
+      StudyEngine.if(
+        isIntervalFlagEq(3),
+        initialAddSurvey(initialIntervalSurveyOffset + 2),
+        StudyEngine.if(
+          isIntervalFlagEq(4),
+          initialAddSurvey(initialIntervalSurveyOffset + 3),
+          StudyEngine.if(
+            isIntervalFlagEq(5),
+            initialAddSurvey(initialIntervalSurveyOffset + 4),
+            StudyEngine.if(
+              isIntervalFlagEq(6),
+              initialAddSurvey(initialIntervalSurveyOffset + 5),
+              StudyEngine.if(
+                isIntervalFlagEq(7),
+                initialAddSurvey(initialIntervalSurveyOffset + 6),
+                StudyEngine.if(
+                  isIntervalFlagEq(8),
+                  initialAddSurvey(initialIntervalSurveyOffset + 7),
+                  StudyEngine.if(
+                    isIntervalFlagEq(9),
+                    initialAddSurvey(initialIntervalSurveyOffset + 8),
+                    StudyEngine.if(
+                      isIntervalFlagEq(10),
+                      initialAddSurvey(initialIntervalSurveyOffset + 9),
+                      StudyEngine.if(
+                        isIntervalFlagEq(11),
+                        initialAddSurvey(initialIntervalSurveyOffset + 10),
+                        StudyEngine.if(
+                          isIntervalFlagEq(12),
+                          initialAddSurvey(initialIntervalSurveyOffset + 11),
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  ),
+  StudyEngine.participantActions.removeFlag(intervalAssignmentTempFlag),
+)
+
+export const reassignIntervalSurvey = (weeks: number) => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.add(
+    surveyKeys.interval,
+    'immediate',
+    StudyEngine.timestampWithOffset(
+      { days: weeks * 7 },
+      StudyEngine.participantState.getSurveyKeyAssignedFrom(surveyKeys.interval)
+    ),
+    StudyEngine.timestampWithOffset(
+      { days: (weeks + 4) * 7 },
+      StudyEngine.participantState.getSurveyKeyAssignedFrom(surveyKeys.interval)
+    ),
+  ),
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'first')
+)
