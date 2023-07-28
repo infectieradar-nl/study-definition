@@ -16,6 +16,7 @@ import { removeDashboardQuestionnaire_rules } from "./customRules/removeDashboar
 import { vaccinQuestions } from "./surveys/vaccinQuestions";
 import { assignVaccinQuestions_rules } from "./customRules/assignVaccinQuestions";
 import { Interval } from "./surveys/interval";
+import { assignIntervalQuestionnaire_rules } from "./customRules/assignIntervalQuestionnaire";
 
 
 export const InfectieradarStudy: Study = {
@@ -42,6 +43,7 @@ export const InfectieradarStudy: Study = {
     updateRetirementFlag_rules,
     inviteToSelfSwabbingWithoutCode_rules,
     removeDashboardQuestionnaire_rules,
-    assignVaccinQuestions_rules
+    assignVaccinQuestions_rules,
+    assignIntervalQuestionnaire_rules,
   ]
 }
