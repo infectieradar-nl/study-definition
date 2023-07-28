@@ -71,9 +71,9 @@ export class QGender extends Item {
       },
       {
         content: new Map([
-          ["en", "To find out whether the chance of getting flu is different between genders."],
-          ["nl", "Om te kijken naar verschillen tussen mannen en vrouwen."],
-          ["nl-be", "Om te kijken naar verschillen tussen mannen en vrouwen."],
+          ["en", "To find out whether the chance of getting COVID-19 or flu are different between men and women."],
+          ["nl", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
+          ["nl-be", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
           ["fr", "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."],
         ]),
         style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
@@ -421,8 +421,8 @@ export class QMainActivity extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What is your main activity? Assume a normal situation, without any covid measures."],
-        ["nl", "Welke situatie is het meest van toepassing? Ga uit van de normale situatie (dus zonder eventuele coronamaatregelen)."],
+        ["en", "What is your main activity?"],
+        ["nl", "Welke situatie is het meest van toepassing?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -725,8 +725,8 @@ export class Q4cNL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Which of the following descriptions most closely matches with your main occupation? Assume a normal situation, without any covid measures"],
-        ["nl", "Welke omschrijving past het beste bij je dagelijkse werkzaamheden? Ga uit van de normale situatie (dus zonder eventuele coronamaatregelen)."],
+        ["en", "Which of the following descriptions most closely matches with your main occupation?"],
+        ["nl", "Welke omschrijving past het beste bij je dagelijkse werkzaamheden?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -863,8 +863,8 @@ export class Q4cNLb extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Where are you employed in education or childcare? Assume the normal situation (thus without measures against corona)"],
-        ["nl", "Waar werk je in het onderwijs of kinderopvang? Ga uit van de normale situatie (dus zonder coronamaatregelen)."],
+        ["en", "Where are you employed in education or childcare?"],
+        ["nl", "Waar werk je in het onderwijs of kinderopvang?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -948,8 +948,8 @@ export class Q4cNLc extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Where are you employed within health care? Assume the normal situation (thus without measures against the coronavirus)"],
-        ["nl", "Waar werk je in de gezondheidszorg? Ga uit van de normale situatie (dus zonder coronamaatregelen)"],
+        ["en", "Where are you employed within health care?"],
+        ["nl", "Waar werk je in de gezondheidszorg?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -1261,7 +1261,7 @@ export class Q6 extends Item {
     editor.setTitleComponent(
       generateTitleComponent(new Map([
         ["en", "INCLUDING YOU, how many people in each of the following age groups live in your household?"],
-        ["nl", "INCLUSIEF JEZELF: hoeveel personen van de verschillende leeftijdsgroepen wonen er in je huishouden?"],
+        ["nl", "Hoeveel personen van de verschillende leeftijdsgroepen wonen er in je huishouden? (jezelf meegerekend)"],
         ["fr", " VOUS Y COMPRIS, combien de personnes de chaque groupe d'âge suivants vivent dans votre maison?"],
       ]))
     );
@@ -1486,8 +1486,8 @@ export class Q6b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "How many of the children in your household go to school or day-care? Assume a normal situation, without any covid measures"],
-        ["nl", "Hoeveel van de kinderen in je huishouden zitten op school of een kinderdagverblijf (of peuterspeelzaal)? Ga uit van de normale situatie (dus zonder eventuele coronamaatregelen)"],
+        ["en", "How many of the children in your household go to school or day-care?"],
+        ["nl", "Hoeveel van de kinderen in je huishouden zitten op school of een kinderdagverblijf (of peuterspeelzaal)?"],
       ]),
       responseOptions: [
         {
@@ -1592,8 +1592,8 @@ export class Q7b extends Item {
       condition: this.condition,
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", "On a normal day, how much time do you spend on public transport? (Bus, train, tube etc.) Assume a normal situation, without any covid measures"],
-        ["nl", "Hoeveel tijd breng je op een gemiddelde dag door in het openbaar vervoer? Ga uit van de normale situatie (dus zonder eventuele coronamaatregelen)."],
+        ["en", "On a normal day, how much time do you spend on public transport? (Bus, train, tube etc.)"],
+        ["nl", "Hoeveel tijd breng je op een gemiddelde dag door in het openbaar vervoer?"],
       ]),
       responseOptions: [
         {
@@ -1746,127 +1746,6 @@ export class Q20NL extends Item {
         },
       ],
     })
-  }
-}
-
-export class Q20NLb extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'Q20NLb');
-    this.condition = condition;
-    this.isRequired = isRequired;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["en", "Which test has been performed (if different tests are applicable, report the test that was positive first"],
-        ["nl", "Welke test voor het coronavirus is bij je gedaan? (als meerdere testen zijn gedaan vermeld dan de eerste positieve test)"],
-      ]),
-      responseOptions: [
-        {
-          key: '0', role: 'option',
-          content: new Map([
-            ["en", "Bloodtest (antibody test)"],
-            ["nl", "Bloedtest (antistoftest)"],
-          ])
-        },
-        {
-          key: '1', role: 'option',
-          content: new Map([
-            ["en", "Throat/Nose test (PCR)"],
-            ["nl", "Keel-/neuslijmvliestest (PCR/sneltest, geen zelftest)"],
-          ])
-        },
-        {
-          key: '3', role: 'option',
-          content: new Map([
-            ["en", "Selftest"],
-            ["nl", "Zelftest"],
-          ])
-        },
-        {
-          key: '2', role: 'option',
-          content: new Map([
-            ["en", "I can't remember (anymore)"],
-            ["nl", "Dat weet ik niet (meer)"],
-          ])
-        },
-      ],
-    })
-  }
-}
-
-export class Q20NLc extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'Q20NLc');
-    this.condition = condition;
-    this.isRequired = isRequired;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ["en", "When was the test performed? If you can't remember the date, please guess. It should be the day the sample was taken"],
-        ["nl", "Wanneer is de coronatest bij je gedaan? Als je de datum niet meer precies weet mag je deze schatten. Het gaat om de datum dat je bloed is afgenomen, dat een monster is genomen van je keel/neus slijmvlies of dat je een zelftest hebt gedaan."],
-      ]),
-      helpGroupContent: this.getHelpGroupContent(),
-      responseOptions: [
-        {
-          key: '1', role: 'dateInput',
-          optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -101427200) },
-            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
-          },
-          content: new Map([
-            ["en", "Choose date:"],
-            ["nl", "Kies datum:"],
-            ["fr", "Sélectionner une date"],
-          ])
-        },
-      ],
-    })
-  }
-
-  getHelpGroupContent() {
-    return [
-      {
-        content: new Map([
-          ["en", "Why do we ask this question?"],
-          ["nl", "Waarom vragen we dit?"],
-        ]),
-        style: [{ key: 'variant', value: 'h5' }],
-      },
-      {
-        content: new Map([
-          ["en", "The timing of the test is important to interpret the data"],
-          ["nl", "Het weten van de timing van testen is belangrijk om uw gegevens te interpreteren."],
-        ]),
-        style: [{ key: 'variant', value: 'p' }],
-      },
-      {
-        content: new Map([
-          ["en", "How shall you answer this question?"],
-          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
-        ]),
-        style: [{ key: 'variant', value: 'h5' }],
-      },
-      {
-        content: new Map([
-          ["en", "Please, try and answer as accurately as possible. If you don't know the precise date, please give your best estimate. For instance, you might remember the month, then try and remember if it was at the beginning or the end of the month. Were there any significant events (e.g. a holiday or a birthday) that might help jog your memory?"],
-          ["nl", "Probeer zo goed mogelijk te antwoorden, de exacte datum is niet belangrijk, maar wel of het aan het begin of het eind van de maand was."],
-          ["fr", "Essayez de répondre le plus précisément possible. Si vous ne connaissez pas la date précise, donnez votre meilleure estimation. Par exemple, vous pouvez vous rappeler du mois, puis essayez de vous souvenir si c'était au début ou à la fin du mois. Essayez de vous servir d'événements importants (p. ex. vacances ou anniversaire) pour vous aider à vous rafraîchir la mémoire."],
-        ]),
-        style: [{ key: 'variant', value: 'p' }],
-      },
-    ]
   }
 }
 
@@ -2602,8 +2481,8 @@ export class Q9 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2021/2022)"],
-        ["nl", "Heb je in het afgelopen winterseizoen (2021/2022) een griepprik gehaald?"],
+        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2022/2023)"],
+        ["nl", "Heb je in het afgelopen winterseizoen (2022/2023) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2686,8 +2565,8 @@ export class Q10 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2022/2023)"],
-        ["nl", "Ben je van plan om voor dit griepseizoen (2022/2023) een griepprik te halen?"],
+        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2023/2024)"],
+        ["nl", "Ben je van plan om voor dit griepseizoen (2023/2024) een griepprik te halen?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2779,8 +2658,8 @@ export class Q10b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When were you vaccinated against flu in the season 2022/2023?"],
-        ["nl", "Wanneer ben je dit griepseizoen (2022/2023) gevaccineerd tegen de griep?"],
+        ["en", "When were you vaccinated against flu in the season 2023/2024?"],
+        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen de griep?"],
       ]),
       responseOptions: [
         {
@@ -2975,8 +2854,8 @@ export class Q10d extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2022/2023?"],
-        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2022/2023)?"],
+        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2023/2024?"],
+        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2023/2024)?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -3141,8 +3020,8 @@ export class Q23NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you get a pneumococcal vaccine last winter season (2021/2022)?"],
-        ["nl", "Heb je het afgelopen winterseizoen (2021/2022) een pneumokokkenprik gehaald?"],
+        ["en", "Did you get a pneumococcal vaccine last winter season (2022/2023)?"],
+        ["nl", "Heb je het afgelopen winterseizoen (2022/2023) een pneumokokkenprik gehaald?"],
       ]),
       responseOptions: [
         {
@@ -3171,9 +3050,10 @@ export class Q23NL extends Item {
   }
 }
 
-export class Q24NL extends Item {
+
+export class qNL_covidvac_lastseason extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
-    super(parentKey, 'Q24NL');
+    super(parentKey, 'qNL_covidvac_lastseason');
     this.isRequired = isRequired;
   }
 
@@ -3183,82 +3063,163 @@ export class Q24NL extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", "Did you receive a corona vaccination?"],
-        ["nl", "Ben je gevaccineerd tegen het coronavirus?"],
+        ["en", "Did you receive a corona vaccin during the last autumn/winter season? (2022/2023)"],
+        ["nl", "Heb je afgelopen najaar (2022/2023) een coronaprik gehaald?"],
       ]),
+      helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
-                /*{
-                    key: '0', role: 'option',
-                    content: new Map([
-                        ["en", "Yes"],
-                        ["nl", "Ja"],
-                    ])
-                },
-                */{
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "Yes"],
+            ["nl", "Ja"],
+            ["fr", "Oui"],
+          ])
+        },
+        {
           key: '1', role: 'option',
           content: new Map([
             ["en", "No"],
             ["nl", "Nee"],
-          ])
-        },
-        {
-          key: '3', role: 'option',
-          content: new Map([
-            ["en", "Yes, I received one vaccination but I'm not fully vaccinated"],
-            ["nl", "Ja, ik heb één vaccinatie tegen het coronavirus ontvangen maar de basisserie niet afgerond"],
-          ])
-        },
-        {
-          key: '4', role: 'option',
-          content: new Map([
-            ["en", "Yes, I'm fully vaccinated"],
-            ["nl", "Ja, ik heb de basisserie afgerond"],
-          ])
-        },
-        {
-          key: '5', role: 'option',
-          content: new Map([
-            ["en", "Yes, I'm fully vaccinated and I received the first booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en één herhaalprik ontvangen"],
-          ])
-        },
-        {
-          key: '6', role: 'option',
-          content: new Map([
-            ["en", "Yes, I'm fully vaccinated and I received the second booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond, en twee herhaalprikken ontvangen"],
-          ])
-        },
-        {
-          key: '7', role: 'option',
-          content: new Map([
-            ["en", "Yes, I'm fully vaccinated and I received the third booster"],
-            ["nl", "Ja, ik heb de basisserie afgerond en drie herhaalprikken ontvangen "],
+            ["fr", "Non"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "I can't remember (anymore)"],
+            ["en", "I don't know"],
             ["nl", "Dat weet ik niet (meer)"],
+            ["fr", "Je ne sais pas"],
           ])
         },
       ],
     })
   }
+
   getHelpGroupContent() {
     return [
       {
         content: new Map([
-          ["nl", "Wat betekent basisserie afgerond?"],
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
         ]),
         style: [{ key: 'variant', value: 'h5' }],
       },
       {
         content: new Map([
-          ["nl", "Als je de basisserie van vaccinaties tegen Corona hebt afgerond kan dit op verschillende manieren, namelijk: 1 vaccin met Janssen; OF 1 vaccin met moderna/pfizer/astraZeneca en een doorgemaakte Corona infectie; OF 2 vaccins met moderna/pfizer/astraZeneca; OF 3x Moderna/Pfizer/AsteraZenica (voor immuungecompromitteerde)."],
+          ["en", "We would like to be able to work out how much protection the vaccine gives. We would also like to find out if there is some protection from vaccines received in previous years."],
+          ["nl", "We willen de beschermende werking van het vaccin onderzoeken."],
+          ["fr", "Nous aimerions savoir à quel point la protection par le vaccin fonctionne. Nous aimerions aussi savoir si il y a une certaine protection par les vaccins reçus au cours des années précédentes."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season."],
+          ["nl", "Zeg ja wanneer je de coronaprik hebt gehad."],
+          ["fr", "Répondez oui si vous avez été vacciné cette saison. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
+export class qNL_covidvac_curseason extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'qNL_covidvac_curseason');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "Are you planning to receive a corona vaccine this autumn/winter season? (2023/2024)"],
+        ["nl", "Ben je van plan om voor dit najaar (2023/2024) een coronaprik te halen?"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "Yes, I'm planning to"],
+            ["nl", "Ja, dit ben ik van plan"],
+            ["fr", "Oui"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "Yes, I have got one"],
+            ["nl", "Ja, deze heb ik al gehaald"],
+            ["fr", "Non"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "No"],
+            ["nl", "Nee"],
+            ["fr", "Non"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "I don't know (yet)"],
+            ["nl", "Dat weet ik (nog) niet"],
+            ["fr", "Je ne sais pas"],
+          ])
+        },
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season, usually in the autumn."],
+          ["nl", "We willen de beschermende werking van het vaccin onderzoeken."],
+          ["fr", "Nous aimerions savoir à quel point la protection par le vaccin fonctionne."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
+          ["nl", "Zeg ja wanneer je van plan bent om de coronaprik te nemen."],
+          ["fr", "Répondez oui si vous avez été vacciné cette saison. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
         ]),
         style: [{ key: 'variant', value: 'p' }],
       },
@@ -3267,9 +3228,9 @@ export class Q24NL extends Item {
 }
 
 
-export class Q24NLb extends Item {
+export class qNL_covidvac_date extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'Q24NLb');
+    super(parentKey, 'qNL_covidvac_date');
     this.condition = condition;
     this.isRequired = isRequired;
   }
@@ -3281,19 +3242,20 @@ export class Q24NLb extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When did you receive your last corona vaccination?"],
-        ["nl", "Wat is (ongeveer) de datum van je laatste vaccinatie tegen het coronavirus?"],
+        ["en", "When were you vaccinated against corona in the season 2023/2024?"],
+        ["nl", "Wanneer ben je dit najaar (2023/2024) gevaccineerd tegen corona?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1609891200 },
+            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
             ["en", "Choose date:"],
             ["nl", "Kies datum:"],
+            ["fr", "Sélectionner une date"],
           ])
         },
         {
@@ -3301,6 +3263,7 @@ export class Q24NLb extends Item {
           content: new Map([
             ["en", "I don't know/can't remember"],
             ["nl", "Dat weet ik niet (meer)"],
+            ["fr", "Je ne sais pas, je ne m'en souviens plus"],
           ])
         },
       ],
@@ -3308,99 +3271,289 @@ export class Q24NLb extends Item {
   }
 }
 
-export class Q25NL extends Item {
+export class qNL_covidvac_reason extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'Q25NL');
+    super(parentKey, 'qNL_covidvac_reason');
     this.condition = condition;
     this.isRequired = isRequired;
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Which vaccin did you receive?"],
-        ["nl", "Met welk vaccin ben je gevaccineerd?"],
+        ["en", "What were your reasons for getting a corona vaccination this year?"],
+        ["nl", "Wat zijn voor jou de belangrijkste redenen om dit najaar een coronaprik te halen?"],
       ]),
+      topDisplayCompoments: [
+        ComponentGenerators.text({
+          className: "mb-2",
+          content: new Map([
+            ['en', 'Select all options that apply'],
+            ["nl", "Meerdere antwoorden mogelijk"],
+          ])
+        })
+      ],
       responseOptions: [
         {
-          key: '1', role: 'option',
+          key: '0', role: 'option',
           content: new Map([
-            ["en", "BioNTech/Pfizer"],
-            ["nl", "BioNTech/Pfizer"],
+            ["en", "I belong to a risk group (e.g, pregnant, over 65, underlying health condition, etc)"],
+            ["nl", "Ik behoor tot een risicogroep (zwanger, 60 jaar of ouder, chronische ziekte)"],
+            ["fr", "Je fais partie d'un groupe à risque (p. ex. femmes enceintes, plus de 65 ans, état de santé créant un prédisposition, etc.)"],
           ])
         },
         {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "Vaccination decreases my risk of getting corona"],
+            ["nl", "Vaccinatie voorkomt dat ikzelf corona krijg"],
+            ["fr", " La vaccination diminue mon risque de contracter la corona"],
+          ])
+        }, {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "Moderna"],
-            ["nl", "Moderna"],
+            ["en", "Vaccination decreases the risk of spreading corona to others"],
+            ["nl", "Vaccinatie voorkomt dat ik het coronavirus verspreid naar andere mensen"],
+            ["fr", " La vaccination diminue le risque de propager la grippe à d'autres"],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "AstraZeneca"],
-            ["nl", "AstraZeneca"],
+            ["en", "My doctor recommended it"],
+            ["nl", "Mijn huisarts heeft me de coronaprik aangeraden"],
+            ["fr", "Mon médecin me l'a recommandé"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["en", "CureVac"],
-            ["nl", "CureVac"],
+            ["en", "It was recommended in my workplace/school"],
+            ["nl", "De coronaprik werd aangeboden op mijn werk/op school"],
+            ["fr", " Il a été recommandé sur mon lieu de travail / à l'école"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["en", "Janssen"],
-            ["nl", "Janssen"],
+            ["en", "The vaccine was readily available and vaccine administration was convenient"],
+            ["nl", "De coronaprik is voor mij makkelijk beschikbaar"],
+            ["fr", " Le vaccin était disponible et l'administration du vaccin était pratique"],
           ])
         },
         {
           key: '6', role: 'option',
           content: new Map([
-            ["en", "Sanofi"],
-            ["nl", "Sanofi"],
+            ["en", "The vaccine was free (no cost)"],
+            ["nl", "De coronaprik was gratis"],
+            ["fr", "Le vaccin était gratuit"],
           ])
         },
         {
           key: '7', role: 'option',
           content: new Map([
-            ["en", "Novavax "],
-            ["nl", "Novavax"],
+            ["en", "I don't want to miss work/school"],
+            ["nl", "Ik wil deze winter geen werk/school missen"],
+            ["fr", " Je ne veux pas manquer le travail / l'école"],
           ])
-        },
-        {
+        }, {
           key: '8', role: 'option',
           content: new Map([
-            ["en", "A combination of different brands"],
-            ["nl", "Een combinatie van verschillende merken"],
+            ["en", "I always get the vaccine"],
+            ["nl", "Ik haal de coronaprik altijd"],
+            ["fr", "Je me fais systématiquement vacciner"],
           ])
-        },
-        {
-          key: '9', role: 'option',
-          content: new Map([
-            ["en", "Other"],
-            ["nl", "Anders"],
-          ])
-        },
-
-        {
+        }, {
           key: '10', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
-            ["nl", "Dat weet ik niet (meer)"],
+            ["en", "I try to protect myself against infections, because of the circulation of the coronavirus"],
+            ["nl", "Ik ben probeer mezelf te beschermen tegen infecties vanwege het coronavirus"],
+            ["fr", "Je me fais systématiquement vacciner"],
+          ])
+        }, {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "Other reason(s)"],
+            ["nl", "Andere reden"],
+            ["fr", "Autres raisons"],
           ])
         },
       ],
     })
   }
 }
+
+export class qNL_covidvac_not_reason extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'qNL_covidvac_not_reason');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "What were your reasons for NOT getting a corona vaccination in the autumn/winter season 2023/2024?"],
+        ["nl", "Wat is de reden waarom je je niet laat vaccineren tegen corona in het komende het najaar?"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      topDisplayCompoments: [
+        ComponentGenerators.text({
+          className: "mb-2",
+          content: new Map([
+            ['en', 'Select all options that apply'],
+            ["nl", "Meerdere antwoorden mogelijk"],
+          ])
+        })
+      ],
+      responseOptions: [
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "I don't belong to a risk group"],
+            ["nl", "Ik behoor niet tot een risicogroep"],
+            ["fr", "Je ne fais pas partie d'un groupe à risque"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "It is better to build your own natural immunity against corona"],
+            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen corona."],
+            ["fr", "Il est préférable de développer sa propre immunité naturelle contre la corona"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "I doubt that the corona vaccine is effective"],
+            ["nl", "Ik twijfel aan de effectiviteit van het coronavaccin"],
+            ["fr", "Je doute que le vaccin contre corona soit efficace"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "Corona is a minor illness"],
+            ["nl", "Corona is slechts een milde ziekte"],
+            ["fr", " Corona est une maladie bénigne"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "I don't think I am likely to get corona"],
+            ["nl", "Ik acht de kans klein dat ik corona krijg"],
+            ["fr", "Je ne pense pas être susceptible de contracter corona"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["en", "I believe that influenza vaccine can cause corona"],
+            ["nl", "Ik geloof dat het vaccin ook corona kan veroorzaken"],
+            ["fr", " Je crois que le vaccin antigrippal peut causer corona"],
+          ])
+        }, {
+          key: '8', role: 'option',
+          content: new Map([
+            ["en", "I am worried that the vaccine is not safe or will cause illness or other adverse events"],
+            ["nl", "Ik ben bang dat het vaccin niet veilig is en me juist ziek maakt of andere neveneffecten heeft"],
+            ["fr", "Je pense que le vaccin n'est pas sûr ou qu'il peut causer d'autres maladies ou effets indésirables"],
+          ])
+        }, {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "I don't like having vaccinations"],
+            ["nl", "Ik hou niet van het krijgen van vaccinaties"],
+            ["fr", "Je n'aime pas me faire vacciner"],
+          ])
+        }, {
+          key: '10', role: 'option',
+          content: new Map([
+            ["en", "The vaccine is not readily available to me"],
+            ["nl", "Het is niet makkelijk om gevaccineerd te worden"],
+            ["fr", " Le vaccin n'est pas facilement disponible pour moi"],
+          ])
+        }, {
+          key: '11', role: 'option',
+          content: new Map([
+            ["en", "The vaccine is not free of charge"],
+            ["nl", "Ik moet betalen voor een griepvaccinatie, het is niet gratis"],
+            ["fr", " Le vaccin n'est pas gratuit"],
+          ])
+        }, {
+          key: '12', role: 'option',
+          content: new Map([
+            ["en", "No particular reason"],
+            ["nl", "Geen speciale reden"],
+            ["fr", " Aucune raison particulière"],
+          ])
+        }, {
+          key: '13', role: 'option',
+          content: new Map([
+            ["en", "Although my doctor recommend a corona vaccine, I do not get one"],
+            ["nl", "Hoewel mijn huisarts het corona adviseert, neem ik het niet"],
+            ["fr", " Bien que mon médecin me l'ait recommandé, je ne me suis pas fait vacciner"],
+          ])
+        }, {
+          key: '14', role: 'option',
+          content: new Map([
+            ["en", "Other reason(s)"],
+            ["nl", "Andere reden"],
+            ["fr", "Autre(s) raison(s)"],
+          ])
+        },
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "We would like to know why some people get vaccinated and others do not."],
+          ["nl", "We willen graag onderzoeken waarom sommige mensen zich wel laten vaccineren en anderen niet."],
+          ["fr", "Nous aimerions savoir pourquoi certaines personnes se font vacciner et d'autres pas."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe moet ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Tick all those reasons that were important in your decision."],
+          ["nl", "Geef alle redenen aan die een rol speelden in de beslissing."],
+          ["fr", "Cochez toutes les raisons qui ont influencé votre décision."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
 
 export class Q26NL extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
