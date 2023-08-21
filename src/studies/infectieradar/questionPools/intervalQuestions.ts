@@ -508,248 +508,277 @@ class q1_2 extends Item {
   }
 }
 
+export class Q_CIS extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_CIS');
+    this.isRequired = isRequired;
+  }
 
-//CIS fatigue and CIS concentration
-/*export const Q_CIS = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-  const itemKey = keyOverride ? keyOverride : 'CIS';
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Vermoeidheid"],
+      ]),
+      //TODO: CIS image
+      questionSubText: new Map([
+        ["nl", "Op deze pagina staan 8 uitspraken waarmee je kunt aangeven hoe je jezelf de laatste twee weken hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:"],
+      ]),
+      scaleOptions: [
+        {
+          key: '1', content: new Map([
+            ["nl", "ja, dat klopt"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", ""],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", ""],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", ""],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", ""],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", ""],
+          ])
+        },
+        {
+          key: '7', content: new Map([
+            ["nl", "nee, dat klopt niet"],
+          ])
+        }, 
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Ik voel me moe."],
+          ])
+        },
+        {
+          key: 'b', content: new Map([
+            ["nl", "Nadenken kost me moeite."],
+          ])
+        },
+        {
+          key: 'c', content: new Map([
+            ["nl", "Lichamelijk voel ik me uitgeput."],
+          ])
+        },
+        {
+          key: 'd', content: new Map([
+            ["nl", "Ik voel me fit."],
+          ])
+        },
+        {
+          key: 'e', content: new Map([
+            ["nl", "Als ik ergens mee bezig ben, kan ik mijn gedachten er goed bijhouden."],
+          ])
+        },
+        {
+          key: 'f', content: new Map([
+            ["nl", "Ik voel me slap."],
+          ])
+        },
+        {
+          key: 'g', content: new Map([
+            ["nl", "Ik kan me goed concentreren."],
+          ])
+        },
+        {
+          key: 'h', content: new Map([
+            ["nl", "Ik voel me uitgerust."],
+          ])
+        },
+        {
+          key: 'i', content: new Map([
+            ["nl", "Het kost me moeite ergens mijn aandacht bij te houden."],
+          ])
+        },
+        {
+          key: 'j', content: new Map([
+            ["nl", "Lichamelijk voel ik me in een slechte conditie."],
+          ])
+        },
+        {
+          key: 'k', content: new Map([
+            ["nl", "Ik ben snel moe."],
+          ])
+        },
+        {
+          key: 'l', content: new Map([
+            ["nl", "Mijn gedachten dwalen makkelijk af"],
+          ])
+        },
+        {
+          key: 'm', content: new Map([
+            ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
+          ])
+        },
+      ],
+    })
+  }
+}
 
-  const imageContent = `
-<img src="https://longcovid.rivm.nl/assets/images/CISquestion.jpg" width="70%"/>
-`
 
-  return SurveyItemGenerators.simpleLikertGroup({
-    parentKey: parentKey,
-    itemKey: itemKey,
-    isRequired: isRequired,
-    questionText: new Map([
-      ["nl", "Vermoeidheid"],
-    ]),
-    topDisplayCompoments: [
+export class Q_mMRC extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_mMRC');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Kortademigheid"],
+      ]),
+      questionSubText: new Map([
+        ["nl", "Welke van de onderstaande uitspraken is voor jou op dit moment het meest van toepassing?"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "Ik word alleen kortademig bij zware inspanning."],
+            ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            
+            ["nl", "Ik word alleen kortademig als ik me moet haasten op vlak terrein of als ik tegen een lichte helling oploop."],
+            
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Door mijn kortademigheid loop ik op vlak terrein langzamer dan andere mensen van mijn leeftijd of moet ik stoppen om op adem te komen als ik mijn eigen tempo loop."],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "Na ongeveer 100 meter lopen op vlak terrein moet ik na een paar minuten stoppen om op adem te komen."],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben te kortademig om het huis uit te gaan, of ik ben kortademig tijdens het aan- of uitkleden."],
+          ])
+        },
+      ],
+    })
+  }
+
+   getHelpGroupContent() {
+    return [
       {
-        role: 'text',
-        style: [{ key: 'variant', value: 'p' }],
-        content: generateLocStrings(new Map([
-          ["nl", "Op deze pagina staan 8 uitspraken waarmee je kunt aangeven hoe je jezelf de laatste twee weken hebt gevoeld."],
-        ]))
-      },
-
-      {
-        role: 'text',
-        style: [{ key: 'variant', value: 'p' }],
-        content: generateLocStrings(new Map([
-          ["nl", "Klik hieronder aan welk van de antwoorden het meest overeenkomt met jouw gevoel."],
-        ]))
-      },
-      {
-        role: 'text',
-        style: [{ key: 'variant', value: 'p' }],
-        content: generateLocStrings(new Map([
-          ["nl", "Bijvoorbeeld als je je wel wat slap voelt, maar niet zo erg slap, kun je een van de vakjes aanklikken die in de buurt staan van de antwoordmogelijkheid 'ja, dat klopt'. Dus bijvoorbeeld als volgt:"],
-        ]))
-      },
-      ComponentGenerators.markdown({
         content: new Map([
-          ['nl', imageContent]
-        ])
-      }),
-      {
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
-        content: generateLocStrings(new Map([
-          ["nl", "1 = ja, dat klopt, 7 = nee, dat klopt niet"],
-        ]))
+         
+          ["nl", "Waarom vragen we dit?"],
+         
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
       },
       {
-        role: 'text',
+        content: new Map([
+         
+          ["nl", "We willen de beschermende werking van het vaccin onderzoeken."],
+         
+        ]),
         style: [{ key: 'variant', value: 'p' }],
-        content: generateLocStrings(new Map([
-          ["nl", "Vink hieronder aan welk van de antwoorden het meest overeenkomt met je gevoel."],
-        ]))
       },
-    ],
-    scaleOptions: [
       {
-        key: '1', content: new Map([
-          ["nl", "1 ja dat klopt"],
-        ])
-      }, {
-        key: '2', content: new Map([
-          ["nl", "2"],
-        ])
-      }, {
-        key: '3', content: new Map([
-          ["nl", "3"],
-        ])
-      }, {
-        key: '4', content: new Map([
-          ["nl", "4"],
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment dois-je répondre?"],
         ]),
-      }, {
-        key: '5', content: new Map([
-          ["nl", "5"],
-        ])
-      }, {
-        key: '6', content: new Map([
-          ["nl", "6"],
-        ])
-      }, {
-        key: '7', content: new Map([
-          ["nl", "7 nee dat klopt niet"],
-        ])
-      }
-    ],
-    rows: [
+        style: [{ key: 'variant', value: 'h5' }],
+      },
       {
-        key: 'a', content: new Map([
-          ["nl", "Ik voel me moe"],
+        content: new Map([
+          ["en", "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
+          ["nl", "Zeg ja wanneer je de griepprik hebt gehad. Normaal ontvang je een griepprik in het najaar"],
+          ["fr", "Répondez oui si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
         ]),
-      },
-      {
-        key: 'b', content: new Map([
-          ["nl", "Nadenken kost me moeite"],
-        ]),
-      },
-      {
-        key: 'c', content: new Map([
-          ["nl", "Lichamelijk voel ik me uitgeput"],
-        ])
-      },
-      {
-        key: 'd', content: new Map([
-          ["nl", "Ik voel me fit"],
-        ])
-      },
-      {
-        key: 'e', content: new Map([
-          ["nl", "Als ik ergens mee bezig ben, kan ik mijn gedachten er goed bijhouden"],
-        ]),
-      },
-      {
-        key: 'f', content: new Map([
-          ["nl", "Ik voel me slap"],
-        ])
-      },
-      {
-        key: 'g', content: new Map([
-          ["nl", "Het kost me moeite ergens mijn aandacht bij te houden"],
-        ])
-      },
-      {
-        key: 'h', content: new Map([
-          ["nl", "Lichamelijk voel ik me in een slechte conditie"],
-        ])
-      },
-      {
-        key: 'i', content: new Map([
-          ["nl", "Ik ben gauw moe"],
-        ])
-      },
-      {
-        key: 'j', content: new Map([
-          ["nl", "Mijn gedachten dwalen gemakkelijk af"],
-        ]),
-      },
-      {
-        key: 'k', content: new Map([
-          ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
-        ])
+        style: [{ key: 'variant', value: 'p' }],
       },
     ]
-  });
+ }
 }
 
-//mMRC
-export const Q_mMRC = (parentKey: string, condition?: Expression, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-  const itemKey = keyOverride ? keyOverride : 'mMRC';
-  return SurveyItemGenerators.singleChoice({
-    condition: condition,
-    parentKey: parentKey,
-    itemKey: itemKey,
-    isRequired: isRequired,
-    questionText: new Map([
-      ["nl", "Kortademigheid"],
-    ]),
-    questionSubText: new Map([
-      ["nl", "Welke van de onderstaande uitspraken is voor jou op dit moment het meest van toepassing?"],
-    ]),
-    responseOptions: [{
-      key: '1', role: 'option',
-      content: new Map([
-        ["nl", "Ik word alleen kortademig bij zware inspanning."],
-      ])
-    },
-    {
-      key: '2', role: 'option',
-      content: new Map([
-        ["nl", "Ik word alleen kortademig als ik me moet haasten op vlak terrein of als ik tegen een lichte helling oploop."],
-      ])
-    },
-    {
-      key: '3', role: 'option',
-      content: new Map([
-        ["nl", "Door mijn kortademigheid loop ik op vlak terrein langzamer dan andere mensen van mijn leeftijd of moet ik stoppen om op adem te komen als ik mijn eigen tempo loop."],
-      ])
-    },
-    {
-      key: '4', role: 'option',
-      content: new Map([
-        ["nl", "Na ongeveer 100 meter lopen op vlak terrein moet ik na een paar minuten stoppen om op adem te komen."],
-      ])
-    },
-    {
-      key: '5', role: 'option',
-      content: new Map([
-        ["nl", "Ik ben te kortademig om het huis uit te gaan, of ik ben kortademig tijdens het aan- of uitkleden."],
-      ])
-    },
-    ],
-  })
-}
 
-//Zelf-gerapporteerde LC
-export const Q_langdurige_klachten = (parentKey: string, isRequired?: boolean, condition?: Expression, keyOverride?: string): SurveyItem => {
-  const itemKey = keyOverride ? keyOverride : 'Q11';
+//Zelf-gerapporteerde post-infection symptoms
+export class Q_longsymptoms extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_longsymptoms');
+    this.isRequired = isRequired;
+  }
 
-  return SurveyItemGenerators.singleChoice({
-    parentKey: parentKey,
-    itemKey: itemKey,
-    condition: condition,
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
     questionText: new Map([
-      ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door het coronavirus komen?"],
+      ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door een infectieziekte komen?"],
     ]),
     responseOptions: [
       {
-        key: 'nee', role: 'option',
+        key: '1', role: 'option',
         content: new Map([
           ["nl", "Nee"],
         ])
       },
       {
-        key: 'ja_beetje', role: 'option',
+        key: '2', role: 'option',
         content: new Map([
-          ["nl", "Ja, nog een beetje klachten door het coronavirus"],
+          ["nl", "Ja, nog een beetje klachten door een infectieziekte."],
         ])
       },
       {
-        key: 'ja_veel', role: 'option',
+        key: '3', role: 'option',
         content: new Map([
-          ["nl", "Ja, nog veel klachten door het coronavirus"],
+          ["nl", "Ja, nog veel klachten door een infectieziekte."],
         ])
       },
       {
-        key: 'ja_zeerveel', role: 'option',
+        key: '4', role: 'option',
         content: new Map([
-          ["nl", "Ja, nog zeer veel klachten door het coronavirus"],
+          ["nl", "Ja, nog zeer veel klachten door een infectieziekte."],
         ])
       },
       {
-        key: 'notanymore', role: 'option',
+        key: '5', role: 'option',
         content: new Map([
-          ["nl", "Nee, niet meer"],
-        ])
-      }
-    ],
-    isRequired: isRequired,
-  });
+          ["nl", "Nee, nu niet meer."],
+          ])
+        },
+      ],
+    })
+  }
 }
-*/
+
+
+
