@@ -1,4 +1,4 @@
-import { Expression, SurveyItem } from "survey-engine/data_types";
+import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { Item } from "case-editor-tools/surveys/types";
@@ -11,6 +11,35 @@ import { ParticipantFlags } from "../participantFlags";
 
 //import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 //import { CISexample } from "./images";
+
+// Algemene info vragenlijst
+export class IntervalTemporaryInfo extends Item {
+  constructor(parentKey: string, condition: Expression) {
+    super(parentKey, 'IntervalTemporaryInfo');
+    this.condition = condition;
+  }
+
+  markdownContent = `
+In deze vragenlijst die we om de drie maanden stellen vragen we naar lange termijn klachten, vaccinatie en contacten.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+        })
+      ]
+    })
+  }
+
+}
+
 
 // vaccinatie vraag
 

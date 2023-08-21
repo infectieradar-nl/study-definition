@@ -32,7 +32,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsHome',
       new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-               ['nl', 'Geef het aantal contacten thuis aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef het aantal personen waarmee je THUIS contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
       conditionForHome,
       isRequired
     );
@@ -43,7 +43,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsWork',
       new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
-               ['nl', 'Geef het aantal contacten op het werk aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef het aantal personen waarmee je op het WERK contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
       conditionForWork,
       isRequired
     );
@@ -54,7 +54,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsSchool',
       new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
-               ['nl', 'Geef het aantal contacten op school aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef het aantal personen waarmee je op SCHOOL contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
       conditionForSchool,
       isRequired
     );
@@ -65,7 +65,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsLeisure',
       new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-               ['nl', 'Geef het aantal contacten tijdens vrije tijd aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef het aantal personen waarmee je tijdens je VRIJE TIJD contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
       conditionForLeisure,
       isRequired
     );
@@ -76,7 +76,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsOther',
       new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)'],
-               ['nl', 'Geef het aantal contacten tijdens de overige activiteiten aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef het aantal personen waarmee je tijdens de OVERIGE ACTIVITEITEN hebt gehad aan, per leeftijdscategorie en geslacht']]),
       conditionForOther,
       isRequired
     );
@@ -212,9 +212,7 @@ Household members are defined as all people you live with on a daily
 basis with whom you sleep under the same roof (for example also
 co-residents).`
             ],
-            ["nl", `
-            ### Het begrijpen van de verspreiding van luchtwegbesmettingen
-            Help ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
+            ["nl", `Help ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
             We willen daarom graag weten met hoeveel mensen je gisteren hebt gesproken en/of aangeraakt, of dichtbij bent geweest in dezelfde kamer (binnen 3 meter).
             Het gaat hierbij alleen om de contacten waarbij de kans groot was dat je iemand had kunnen besmetten, of een ander jou. 
             Ontmoet je vaker dezelfde persoon, dan telt alleen de langste ontmoeting. 
@@ -227,8 +225,7 @@ co-residents).`
             - Vrije tijd: Geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).
             - Overig: Alle locaties die hierboven niet worden genoemd (bijv. mensen die u ontmoet in het openbaar vervoer).
             
-            Door deze informatie te verstrekken, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
-  `
+            Door deze informatie te verstrekken, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.`
             ],
           ]),
           className: ''
@@ -477,7 +474,7 @@ class Q1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je gisteren iemand ontmoet (zoals we hier onderzoeken)? Zie ook de uitleg hierboven"],
+        ["nl", "Heb je gisteren met tenminste één ander persoon contact gehad (zoals we hier onderzoeken)? Zie ook de uitleg hierboven"],
       ]),
       responseOptions: [
         {
@@ -525,7 +522,7 @@ class Q2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Selecteer alstublieft alle locaties waar je tenminste één ontmoeting hebt gehad"],
+        ["nl", "Selecteer alstublieft alle locaties waar je tenminste met één persoon contact hebt gehad"],
       ]),
       responseOptions: [
         {
@@ -582,7 +579,7 @@ class QFragile extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je gisteren een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige luchtwegklachen bij een besmetting"],
+        ["nl", "Heb je gisteren een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige luchtwegklachten bij een besmetting)"],
       ]),
       responseOptions: [
         {

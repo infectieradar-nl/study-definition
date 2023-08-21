@@ -4,7 +4,7 @@ import { Q12, Q12b, Q_CIS, Q_longsymptoms, Q_mMRC, } from "../questionPools/inte
 import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
-import { Expression, SurveyItem } from "survey-engine/data_types";
+import { Expression, SurveyItem, SurveySingleItem} from "survey-engine/data_types";
 import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { Item } from "case-editor-tools/surveys/types";
@@ -14,11 +14,12 @@ import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/r
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ContactGroup } from "../questionPools/contactGroup";
-import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
+import { IntervalTemporaryInfo, Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
 
 
 class IntervalDef extends SurveyDefinition {
   //Q_CIS: Q_CIS;
+  Intro:Intro;
   Q_flu_vaccine_interval:Q_flu_vaccine_interval;
   Q_flu_vaccine_datum_interval:Q_flu_vaccine_datum_interval;
   Q_covid_vaccine_interval:Q_covid_vaccine_interval;
@@ -50,6 +51,7 @@ class IntervalDef extends SurveyDefinition {
     const isRequired = true;
 
     // this.Q_CIS = new Q_CIS(this.key, isRequired);
+    this.Intro = new Intro(this.key);
     this.Q_flu_vaccine_interval = new Q_flu_vaccine_interval(this.key, isRequired);
     this.Q_flu_vaccine_datum_interval = new Q_flu_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_flu_vaccine_interval.key, '1'), isRequired);
     this.Q_covid_vaccine_interval = new Q_covid_vaccine_interval(this.key, isRequired);
@@ -75,15 +77,50 @@ class IntervalDef extends SurveyDefinition {
     // this.addItem(this.Q_CIS.get());
     //this.addItem(this.Q12.get());
     // this.addItem(this.Q12b.get());
+    this.addItem(this.Intro.get());
     this.addItem(this.Q_flu_vaccine_interval.get());
     this.addItem(this.Q_flu_vaccine_datum_interval.get());
     this.addItem(this.Q_covid_vaccine_interval.get());
     this.addItem(this.Q_covid_vaccine_datum_interval.get());
-    this.addItem(this.ContactGroup.get());
+    this.addPageBreak();
     this.addItem(this.Q_CIS.get())
     this.addItem(this.Q_mMRC.get())
     this.addItem(this.Q_longsymptoms.get())
+    this.addPageBreak();
+    this.addItem(this.ContactGroup.get());
+    
+  }
+
+  
+
+}
+
+
+class Intro extends Item {
+  constructor(parentKey: string) {
+    super(parentKey, 'Intro');
+  }
+
+  markdownContent = `
+## Periodieke vragenlijst
+Deze vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+        })
+      ]
+    })
   }
 }
+
 
 export const Interval = new IntervalDef();
