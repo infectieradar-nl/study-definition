@@ -32,7 +32,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsHome',
       new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-               ['nl', 'Geef het aantal personen waarmee je THUIS contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)']]),
       conditionForHome,
       isRequired
     );
@@ -43,7 +43,8 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsWork',
       new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
-               ['nl', 'Geef het aantal personen waarmee je op het WERK contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)'
+               ]]),
       conditionForWork,
       isRequired
     );
@@ -54,7 +55,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsSchool',
       new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
-               ['nl', 'Geef het aantal personen waarmee je op SCHOOL contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = Onderwijsinstellingen (bijv. docenten, klasgenoten)']]),
       conditionForSchool,
       isRequired
     );
@@ -65,7 +66,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsLeisure',
       new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-               ['nl', 'Geef het aantal personen waarmee je tijdens je VRIJE TIJD contact hebt gehad aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = Geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).']]),
       conditionForLeisure,
       isRequired
     );
@@ -76,7 +77,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsOther',
       new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)'],
-               ['nl', 'Geef het aantal personen waarmee je tijdens de OVERIGE ACTIVITEITEN hebt gehad aan, per leeftijdscategorie en geslacht']]),
+               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens OVERTIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = Alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
       conditionForOther,
       isRequired
     );
@@ -212,20 +213,8 @@ Household members are defined as all people you live with on a daily
 basis with whom you sleep under the same roof (for example also
 co-residents).`
             ],
-            ["nl", `Help ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
-            We willen daarom graag weten met hoeveel mensen je gisteren hebt gesproken en/of aangeraakt, of dichtbij bent geweest in dezelfde kamer (binnen 3 meter).
-            Het gaat hierbij alleen om de contacten waarbij de kans groot was dat je iemand had kunnen besmetten, of een ander jou. 
-            Ontmoet je vaker dezelfde persoon, dan telt alleen de langste ontmoeting. 
-            We vragen je ook naar het geslacht en de geschatte leeftijd. 
-
-            Voor dit onderzoek delen we de contacten op per locatie:
-            - Thuis: je woning (bijv. gezinsleden, bezoekers). Let op: Een "huishouden" omvat alle personen die dagelijks dezelfde woonruimte met je delen.
-            - Werk: je werk (bijv. klanten, collega's). Verschil tussen meerdere werkplekken maakt hierin niet uit, werk is werk. 
-            - School: Onderwijsinstellingen (bijv. docenten, klasgenoten).
-            - Vrije tijd: Geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).
-            - Overig: Alle locaties die hierboven niet worden genoemd (bijv. mensen die u ontmoet in het openbaar vervoer).
-            
-            Door deze informatie te verstrekken, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.`
+            ["nl", `                        
+            Door informatie te delen over de plek, leeftijd en geslacht van personen met wie je spreekt, aanraakt of dichtbij bent, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.`
             ],
           ]),
           className: ''
@@ -474,19 +463,19 @@ class Q1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je gisteren met tenminste één ander persoon contact gehad (zoals we hier onderzoeken)? Zie ook de uitleg hierboven"],
+        ["nl", "Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "Ja, ik heb met tenminste één ander persoon gesproken en/of aangeraakt, of ben dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)"],
           ])
         },
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "Nee"],
+            ["nl", "Nee, ik heb met niemand gesproken en/of aangeraakt, en ik ben NIET dichtbij iemand anders geweest in dezelfde kamer (binnen 3 meter)"],
           ])
         },
         {
@@ -515,6 +504,7 @@ class Q2 extends Item {
     this.condition = condition;
   }
 
+
   buildItem(): SurveySingleItem {
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
@@ -522,37 +512,37 @@ class Q2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Selecteer alstublieft alle locaties waar je tenminste met één persoon contact hebt gehad"],
+        ["nl", "Selecteer alstublieft alle plekken/momenten waar je tenminste met één persoon hebt gesproken en/of aangeraakt, of dichtbij bent geweest in dezelfde kamer (binnen 3 meter)?"],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.home, role: 'option',
           content: new Map([
-            ["nl", "Thuis"],
+            ["nl", "Thuis: je woning (bijv. gezinsleden, bezoekers)."],
           ])
         },
         {
           key: this.optionKeys.work, role: 'option',
           content: new Map([
-            ["nl", "Werk"],
+            ["nl", "Werk: je werk (bijv. klanten, collega's)"],
           ])
         },
         {
           key: this.optionKeys.school, role: 'option',
           content: new Map([
-            ["nl", "School"],
+            ["nl", "School: Onderwijsinstellingen (bijv. docenten, klasgenoten)"],
           ])
         },
         {
           key: this.optionKeys.leisure, role: 'option',
           content: new Map([
-            ["nl", "Vrije tijd"],
+            ["nl", "Vrije tijd: : Geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis)."],
           ])
         },
         {
           key: this.optionKeys.other, role: 'option',
           content: new Map([
-            ["nl", "Overige activiteiten"],
+            ["nl", "Overige activiteiten: Alle locaties die hierboven niet worden genoemd (bijv. mensen die u ontmoet in het openbaar vervoer)."],
           ])
         }
       ]

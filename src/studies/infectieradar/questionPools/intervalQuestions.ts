@@ -12,34 +12,6 @@ import { ParticipantFlags } from "../participantFlags";
 //import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 //import { CISexample } from "./images";
 
-// Algemene info vragenlijst
-export class IntervalTemporaryInfo extends Item {
-  constructor(parentKey: string, condition: Expression) {
-    super(parentKey, 'IntervalTemporaryInfo');
-    this.condition = condition;
-  }
-
-  markdownContent = `
-In deze vragenlijst die we om de drie maanden stellen vragen we naar lange termijn klachten, vaccinatie en contacten.
-`
-
-  buildItem(): SurveySingleItem {
-    return SurveyItems.display({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      condition: this.condition,
-      content: [
-        ComponentGenerators.markdown({
-          content: new Map([
-            ["nl", this.markdownContent],
-          ]),
-        })
-      ]
-    })
-  }
-
-}
-
 
 // vaccinatie vraag
 
@@ -71,7 +43,7 @@ export class Q_flu_vaccine_interval extends Item {
           key: '2', role: 'option',
           content: new Map([
             
-            ["nl", "Nee"],
+            ["nl", "Nee, deze heb ik niet gehaald."],
             
           ])
         },
@@ -229,7 +201,7 @@ export class Q_covid_vaccine_interval extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "No"],
-            ["nl", "Nee"],
+            ["nl", "Nee, deze heb ik niet gehaald."],
             ["fr", "Non"],
           ])
         },
@@ -266,7 +238,7 @@ export class Q_covid_vaccine_interval extends Item {
       {
         content: new Map([
           ["en", "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
-          ["nl", "Zeg ja wanneer je de griepprik hebt gehad. Normaal ontvang je een griepprik in het najaar"],
+          ["nl", "Zeg ja wanneer je de coronaprik hebt gehad. Normaal ontvang je een coronoaprik in het najaar"],
           ["fr", "Répondez oui si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."],
         ]),
         style: [{ key: 'variant', value: 'p' }],

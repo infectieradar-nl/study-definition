@@ -14,7 +14,7 @@ import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/r
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ContactGroup } from "../questionPools/contactGroup";
-import { IntervalTemporaryInfo, Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
+import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
 
 
 class IntervalDef extends SurveyDefinition {
@@ -103,7 +103,15 @@ class Intro extends Item {
 
   markdownContent = `
 ## Periodieke vragenlijst
-Deze vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+Deze vragenlijst stellen we niet vaker dan vier keer per jaar. 
+De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+
+Tijdens de corona pandemie werden lange termijn klachten en contact-patronen op een andere manier onderzocht 
+en was er geen reden om deze ook mee te nemen in Infectieradar. 
+Nu de pandemie is afgelopen en de andere onderzoeken zijn gestopt nemen we dit over in Infectieradar. 
+We onderzoeken of de corona infecties die nu nog plaatsvinden ook lijden tot lange termijn klachten. 
+En ook of andere luchtwegbesmettingen lijden tot lange termijn klachten. 
+En we onderzoeken hoe onze contacten met anderen zijn en veranderen in de eerste jaren na de pandemie.
 `
 
   buildItem(): SurveySingleItem {
