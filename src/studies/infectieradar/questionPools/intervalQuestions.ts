@@ -43,7 +43,7 @@ export class Q_flu_vaccine_interval extends Item {
           key: '2', role: 'option',
           content: new Map([
             
-            ["nl", "Nee, deze heb ik niet gehaald."],
+            ["nl", "Nee, deze heb ik (nog) niet gehaald."],
             
           ])
         },
@@ -201,7 +201,7 @@ export class Q_covid_vaccine_interval extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "No"],
-            ["nl", "Nee, deze heb ik niet gehaald."],
+            ["nl", "Nee, deze heb ik (nog) niet gehaald."],
             ["fr", "Non"],
           ])
         },
@@ -523,11 +523,11 @@ export class Q_CIS extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Vermoeidheid"],
+        ["nl", "Vermoeidheid en concentratie"],
       ]),
       //TODO: CIS image
       questionSubText: new Map([
-        ["nl", "Op deze pagina staan 8 uitspraken waarmee je kunt aangeven hoe je jezelf de laatste twee weken hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:"],
+        ["nl", "Hieronder staan 13 uitspraken waarmee je kunt aangeven hoe je jezelf de laatste twee weken hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:"],
       ]),
       scaleOptions: [
         {

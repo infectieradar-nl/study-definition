@@ -26,6 +26,7 @@ class IntervalDef extends SurveyDefinition {
   Q_covid_vaccine_datum_interval:Q_covid_vaccine_datum_interval;
   //Q12: Q12;
   //Q12b: Q12b;
+  Intro_long:Intro_long;
   Q_CIS:Q_CIS;
   Q_mMRC:Q_mMRC;
   Q_longsymptoms:Q_longsymptoms
@@ -56,6 +57,7 @@ class IntervalDef extends SurveyDefinition {
     this.Q_flu_vaccine_datum_interval = new Q_flu_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_flu_vaccine_interval.key, '1'), isRequired);
     this.Q_covid_vaccine_interval = new Q_covid_vaccine_interval(this.key, isRequired);
     this.Q_covid_vaccine_datum_interval = new Q_covid_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_covid_vaccine_interval.key, '1'), isRequired);
+    this.Intro_long = new Intro_long(this.key);
     this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Q_mMRC = new Q_mMRC(this.key, isRequired);
     this.Q_longsymptoms = new Q_longsymptoms(this.key, isRequired);
@@ -83,6 +85,7 @@ class IntervalDef extends SurveyDefinition {
     this.addItem(this.Q_covid_vaccine_interval.get());
     this.addItem(this.Q_covid_vaccine_datum_interval.get());
     this.addPageBreak();
+    this.addItem(this.Intro_long.get());
     this.addItem(this.Q_CIS.get())
     this.addItem(this.Q_mMRC.get())
     this.addItem(this.Q_longsymptoms.get())
@@ -90,8 +93,6 @@ class IntervalDef extends SurveyDefinition {
     this.addItem(this.ContactGroup.get());
     
   }
-
-  
 
 }
 
@@ -103,15 +104,8 @@ class Intro extends Item {
 
   markdownContent = `
 ## Periodieke vragenlijst
-Deze vragenlijst stellen we niet vaker dan vier keer per jaar. 
+Deze vragenlijst stellen we vier keer per jaar. 
 De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
-
-Tijdens de corona pandemie werden lange termijn klachten en contact-patronen op een andere manier onderzocht 
-en was er geen reden om deze ook mee te nemen in Infectieradar. 
-Nu de pandemie is afgelopen en de andere onderzoeken zijn gestopt nemen we dit over in Infectieradar. 
-We onderzoeken of de corona infecties die nu nog plaatsvinden ook lijden tot lange termijn klachten. 
-En ook of andere luchtwegbesmettingen lijden tot lange termijn klachten. 
-En we onderzoeken hoe onze contacten met anderen zijn en veranderen in de eerste jaren na de pandemie.
 `
 
   buildItem(): SurveySingleItem {
@@ -129,6 +123,38 @@ En we onderzoeken hoe onze contacten met anderen zijn en veranderen in de eerste
     })
   }
 }
+
+
+class Intro_long extends Item {
+  constructor(parentKey: string) {
+    super(parentKey, 'Intro_long');
+  }
+
+  markdownContent = `
+## Lange termijn klachten na een besmetting met corona, griep of een andere infectie
+We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid. 
+Dit zijn typische klachten waar je last van kunt blijven houden na een besmetting. 
+Maar je kan deze klachten ook krijgen door een andere reden. 
+Daarom is het belangrijk dat we dit onderzoeken.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+        })
+      ]
+    })
+  }
+}
+
+
 
 
 export const Interval = new IntervalDef();

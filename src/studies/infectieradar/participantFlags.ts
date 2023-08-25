@@ -55,5 +55,12 @@ export const ParticipantFlags = {
       autoDeleted: 'auto-deleted'
     },
   },
+  SexFlag: {
+    key: 'SexFlag',
+    values: {
+      female: '1',
+      nofemale: '0'
+      },
+  }
 }
 
