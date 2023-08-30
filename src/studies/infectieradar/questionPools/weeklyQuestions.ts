@@ -2376,13 +2376,13 @@ export class QWithin24hours extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Ik wil een test-uitslag doorgeven. (opend alleen de test-vraag)"],
+            ["nl", "Ik wil een test-uitslag doorgeven. (Open alleen de test-vraag.)"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Ik wil opnieuw de wekelijkse vragenlijst invullen. (opend de volledige vragenlijst)"],
+            ["nl", "Ik wil opnieuw de wekelijkse vragenlijst invullen. (Open de volledige vragenlijst.)"],
           ])
         },
         {
