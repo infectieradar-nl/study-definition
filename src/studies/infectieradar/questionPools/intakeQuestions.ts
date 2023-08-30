@@ -23,8 +23,8 @@ export class QGender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What is your gender?"],
-        ["nl", "Wat is je geslacht?"],
+        ["en", "What is your sex?"],
+        ["nl", "Wat is je geslacht geregistreerd bij geboorte?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -75,7 +75,19 @@ export class QGender extends Item {
           ["nl", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
           ["nl-be", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
           ["fr", "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."],
+        ]),      
+        style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Geen vragen over genderidentiteit"],
         ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Genderinclusieviteit vinden wij belangrijk, maar omdat dit bijzondere persoongegevens zijn en wij deze gegevens niet gebruiken voor ons onderzoek vragen we het niet uit."],
+        ]),      
         style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
       },
     ]
@@ -410,7 +422,7 @@ export class Q22NL extends Item {
 
 export class QMainActivity extends Item {
   constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'Q4');
+    super(parentKey, 'QMainActivity');
     this.isRequired = isRequired;
   }
 
@@ -741,7 +753,7 @@ export class Q4cNL extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["en", "I have a job in wich I am in close contact with others ('contactberoep') (for example hairdresser)"],
-            ["nl", "Ik heb een contactberoep (bijvoorbeeld kapper, schoonheidsspecialist)"],
+            ["nl", "Ik heb een niet-medische contactberoep buiten het onderwijs (kapper, schooheidspecialist, rijinstructeur, masseur)"],
           ])
         },
         {
@@ -1135,7 +1147,7 @@ export class Q4d extends Item {
 }
 
 export class Q5 extends Item {
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'Q5');
     this.isRequired = isRequired;
   }
@@ -1149,7 +1161,7 @@ export class Q5 extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without covid measures)?"],
-        ["nl", "Heb je tijdens een gemiddelde dag (dus zonder coronamaatregelen) contact met:"],
+        ["nl", "Heb je tijdens een gemiddelde dag contact met:"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -1247,10 +1259,117 @@ export class Q5 extends Item {
   }
 }
 
+export class house_total extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'house_total');
+    this.isRequired = isRequired;
+  }
+
+    buildItem() {
+      return SurveyItems.singleChoice({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: new Map([
+          ["en", "How many housemates do you have?"],
+          ["nl", "Hoeveel huisgenoten heb je? (reken jezelf NIET mee)"],
+        ]),
+        helpGroupContent: this.getHelpGroupContent(),
+        responseOptions: [
+          {
+            key: '0', role: 'option',
+            content: new Map([
+              ["en", "None"],
+              ["nl", "Ik heb geen huisgenoten"],
+            ])
+          },
+          {
+            key: '1', role: 'option',
+            content: new Map([
+              ["en", "1"],
+            ])
+          },
+          {
+            key: '2', role: 'option',
+            content: new Map([
+              ["en", "2"],
+            ])
+          },
+          {
+            key: '3', role: 'option',
+            content: new Map([
+              ["en", "3"],
+            ])
+          },
+          {
+            key: '4', role: 'option',
+            content: new Map([
+              ["en", "4"],
+            ])
+          },
+          {
+            key: '5', role: 'option',
+            content: new Map([
+              ["en", "5"],
+            ])
+          },
+          {
+            key: '6', role: 'option',
+            content: new Map([
+              ["en", "6"],
+            ])
+          },
+          {
+            key: '7', role: 'option',
+            content: new Map([
+              ["en", "7"],
+            ])
+          },
+          {
+            key: '8', role: 'option',
+            content: new Map([
+              ["en", "8"],
+            ])
+          },
+          {
+            key: '99', role: 'option',
+            content: new Map([
+              ["en", "More than 8 housmates"],
+              ["nl", "Ik heb meer dan 8 huisgenoten"],
+            ])
+          },
+        ],
+      })
+    }
+  
+    getHelpGroupContent() {
+      return [
+        {
+          content: new Map([
+            ["en", "Why are we asking this?"],
+            ["nl", "Waarom vragen we dit?"],
+            ["fr", "Pourquoi demandons-nous cela?"],
+          ]),
+          style: [{ key: 'variant', value: 'h5' }],
+        },
+        {
+          content: new Map([
+            ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
+            ["nl", "De samenstelling van het huishouden kan invloed hebben op het risico van infectie, dit willen we graag onderzoeken."],
+            ["fr", "Les membres des ménages les plus grands, ou ceux possédant des enfants, peuvent être plus susceptibles d'attraper la grippe que les autres."],
+          ]),
+          style: [{ key: 'variant', value: 'p' }],
+        },
+      ]
+    }
+  }
+  
 export class Q6 extends Item {
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q6');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1260,13 +1379,12 @@ export class Q6 extends Item {
     });
     editor.setTitleComponent(
       generateTitleComponent(new Map([
-        ["en", "INCLUDING YOU, how many people in each of the following age groups live in your household?"],
-        ["nl", "Hoeveel personen van de verschillende leeftijdsgroepen wonen er in je huishouden? (jezelf meegerekend)"],
-        ["fr", " VOUS Y COMPRIS, combien de personnes de chaque groupe d'âge suivants vivent dans votre maison?"],
+        ["en", "What is (are) your housemate(s) age group(s)?"],
+        ["nl", "Geef hieronder aan in welke leeftijdsgroep je huisgenoot valt (/huisgenoten vallen)."],
       ]))
     );
 
-    editor.setHelpGroupComponent(
+  /*  editor.setHelpGroupComponent(
       generateHelpGroupComponent([
         {
           content: new Map([
@@ -1285,7 +1403,7 @@ export class Q6 extends Item {
           style: [{ key: 'variant', value: 'p' }],
         },
       ])
-    );
+    );*/
 
     const ddg: ResponseRowCell = {
       key: 'col2', role: 'dropDownGroup',
@@ -1370,20 +1488,6 @@ export class Q6 extends Item {
           { ...ddg }
         ],
       },
-      //       {
-      //            key: '2', role: 'responseRow',
-      //            cells: [
-      //                {
-      //                    key: 'l', role: 'label',
-      //                    content: new Map([
-      //                        ["en", "5 - 18 years"],
-      //                        ["nl", "5 - 18 jaar"],
-      //                        ["fr", "5 - 18 ans"],
-      //                    ])
-      //                },
-      //                { ...ddg }
-      //            ],
-      //        },
       {
         key: '6', role: 'responseRow',
         cells: [
@@ -1469,7 +1573,7 @@ export class Q6 extends Item {
 }
 
 export class Q6b extends Item {
-  constructor(parentKey: string, conditionKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, conditionKey: string, isRequired: boolean) {
     super(parentKey, 'Q6b');
     this.condition = expWithArgs('or',
       expWithArgs('responseHasOnlyKeysOtherThan', conditionKey, [responseGroupKey, matrixKey, '1', 'col2'].join('.'), '0'),
@@ -2823,8 +2927,8 @@ export class Q10c extends Item {
         }, {
           key: '10', role: 'option',
           content: new Map([
-            ["en", "I try to protect myself against infections, because of the circulation of the pandemic coronavirus"],
-            ["nl", "Ik ben probeer mezelf te beschermen tegen infecties vanwege het pandemische coronavirus"],
+            ["en", "I try to protect myself against infections, because of the circulation of the coronavirus"],
+            ["nl", "Ik ben probeer mezelf te beschermen tegen infecties vanwege het coronavirus"],
             ["fr", "Je me fais systématiquement vacciner"],
           ])
         }, {
@@ -3444,7 +3548,7 @@ export class qNL_covidvac_not_reason extends Item {
           content: new Map([
             ["en", "Corona is a minor illness"],
             ["nl", "Corona is slechts een milde ziekte"],
-            ["fr", " Corona est une maladie bénigne"],
+            ["fr", "Corona est une maladie bénigne"],
           ])
         },
         {
