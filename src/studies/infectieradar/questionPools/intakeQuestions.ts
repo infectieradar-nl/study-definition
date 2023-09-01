@@ -2769,21 +2769,17 @@ export class Q10b extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            min: { dtype: 'num', num: 1693551208 }, //2023-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
-            ["en", "Choose date:"],
-            ["nl", "Kies datum:"],
-            ["fr", "Sélectionner une date"],
+            ["nl", "Ja, op/rond de volgende datum:"],
           ])
         },
         {
-          key: '0', role: 'option',
+          key: '2', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
             ["nl", "Dat weet ik niet (meer)"],
-            ["fr", "Je ne sais pas, je ne m'en souviens plus"],
           ])
         },
       ],
@@ -3353,21 +3349,17 @@ export class qNL_covidvac_date extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            min: { dtype: 'num', num: 1693551208 }, //2023-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
-            ["en", "Choose date:"],
-            ["nl", "Kies datum:"],
-            ["fr", "Sélectionner une date"],
+            ["nl", "Ja, op/rond de volgende datum:"],
           ])
         },
         {
-          key: '0', role: 'option',
+          key: '2', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
             ["nl", "Dat weet ik niet (meer)"],
-            ["fr", "Je ne sais pas, je ne m'en souviens plus"],
           ])
         },
       ],
