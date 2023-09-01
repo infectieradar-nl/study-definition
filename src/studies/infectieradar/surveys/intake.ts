@@ -85,7 +85,7 @@ class IntakeDef extends SurveyDefinition {
     this.Q5 = new Q5(this.key, isRequired);
     this.house_total = new house_total(this.key, isRequired);
     this.Q6 = new Q6(this.key, 
-      SurveyEngine.singleChoice.any(this.house_total.key, '1', '2', '3', '4', '5', '7', '8', '99'), 
+      SurveyEngine.singleChoice.any(this.house_total.key, '1', '2', '3', '4', '5', '6', '7', '8', '99'), 
       isRequired);
     this.Q6b = new Q6b(this.key, this.Q6.key, isRequired);
     this.Q7b = new Q7b(this.key, isRequired);
