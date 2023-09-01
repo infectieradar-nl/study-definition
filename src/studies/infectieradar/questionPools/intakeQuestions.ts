@@ -75,7 +75,7 @@ export class QGender extends Item {
           ["nl", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
           ["nl-be", "Om te kijken of er verschil is tussen mannen en vrouwen bij het krijgen van COVID-19 of griep."],
           ["fr", "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."],
-        ]),      
+        ]),
         style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
       },
       {
@@ -87,7 +87,7 @@ export class QGender extends Item {
       {
         content: new Map([
           ["nl", "Genderinclusieviteit vinden wij belangrijk, maar omdat dit bijzondere persoongegevens zijn en wij deze gegevens niet gebruiken voor ons onderzoek vragen we het niet uit."],
-        ]),      
+        ]),
         style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
       },
     ]
@@ -1265,106 +1265,106 @@ export class house_total extends Item {
     this.isRequired = isRequired;
   }
 
-    buildItem() {
-      return SurveyItems.singleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ["en", "How many housemates do you have?"],
-          ["nl", "Hoeveel huisgenoten heb je? (reken jezelf NIET mee)"],
-        ]),
-        helpGroupContent: this.getHelpGroupContent(),
-        responseOptions: [
-          {
-            key: '0', role: 'option',
-            content: new Map([
-              ["en", "None"],
-              ["nl", "Ik heb geen huisgenoten"],
-            ])
-          },
-          {
-            key: '1', role: 'option',
-            content: new Map([
-              ["en", "1"],
-            ])
-          },
-          {
-            key: '2', role: 'option',
-            content: new Map([
-              ["en", "2"],
-            ])
-          },
-          {
-            key: '3', role: 'option',
-            content: new Map([
-              ["en", "3"],
-            ])
-          },
-          {
-            key: '4', role: 'option',
-            content: new Map([
-              ["en", "4"],
-            ])
-          },
-          {
-            key: '5', role: 'option',
-            content: new Map([
-              ["en", "5"],
-            ])
-          },
-          {
-            key: '6', role: 'option',
-            content: new Map([
-              ["en", "6"],
-            ])
-          },
-          {
-            key: '7', role: 'option',
-            content: new Map([
-              ["en", "7"],
-            ])
-          },
-          {
-            key: '8', role: 'option',
-            content: new Map([
-              ["en", "8"],
-            ])
-          },
-          {
-            key: '99', role: 'option',
-            content: new Map([
-              ["en", "More than 8 housmates"],
-              ["nl", "Ik heb meer dan 8 huisgenoten"],
-            ])
-          },
-        ],
-      })
-    }
-  
-    getHelpGroupContent() {
-      return [
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "How many housemates do you have?"],
+        ["nl", "Hoeveel huisgenoten heb je? (reken jezelf NIET mee)"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
         {
+          key: '0', role: 'option',
           content: new Map([
-            ["en", "Why are we asking this?"],
-            ["nl", "Waarom vragen we dit?"],
-            ["fr", "Pourquoi demandons-nous cela?"],
-          ]),
-          style: [{ key: 'variant', value: 'h5' }],
+            ["en", "None"],
+            ["nl", "Ik heb geen huisgenoten"],
+          ])
         },
         {
+          key: '1', role: 'option',
           content: new Map([
-            ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
-            ["nl", "De samenstelling van het huishouden kan invloed hebben op het risico van infectie, dit willen we graag onderzoeken."],
-            ["fr", "Les membres des ménages les plus grands, ou ceux possédant des enfants, peuvent être plus susceptibles d'attraper la grippe que les autres."],
-          ]),
-          style: [{ key: 'variant', value: 'p' }],
+            ["en", "1"],
+          ])
         },
-      ]
-    }
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "2"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "3"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "4"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "5"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "6"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["en", "7"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["en", "8"],
+          ])
+        },
+        {
+          key: '99', role: 'option',
+          content: new Map([
+            ["en", "More than 8 housmates"],
+            ["nl", "Ik heb meer dan 8 huisgenoten"],
+          ])
+        },
+      ],
+    })
   }
-  
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
+          ["nl", "De samenstelling van het huishouden kan invloed hebben op het risico van infectie, dit willen we graag onderzoeken."],
+          ["fr", "Les membres des ménages les plus grands, ou ceux possédant des enfants, peuvent être plus susceptibles d'attraper la grippe que les autres."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
+
 export class Q6 extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q6');
@@ -1377,6 +1377,7 @@ export class Q6 extends Item {
       isGroup: false,
       itemKey: this.key,
     });
+    editor.setCondition(this.condition);
     editor.setTitleComponent(
       generateTitleComponent(new Map([
         ["en", "What is (are) your housemate(s) age group(s)?"],
@@ -1384,26 +1385,26 @@ export class Q6 extends Item {
       ]))
     );
 
-  /*  editor.setHelpGroupComponent(
-      generateHelpGroupComponent([
-        {
-          content: new Map([
-            ["en", "Why are we asking this?"],
-            ["nl", "Waarom vragen we dit?"],
-            ["fr", "Pourquoi demandons-nous cela?"],
-          ]),
-          style: [{ key: 'variant', value: 'h5' }],
-        },
-        {
-          content: new Map([
-            ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
-            ["nl", "De samenstelling van het huishouden kan invloed hebben op het risico van infectie, dit willen we graag onderzoeken."],
-            ["fr", "Les membres des ménages les plus grands, ou ceux possédant des enfants, peuvent être plus susceptibles d'attraper la grippe que les autres."],
-          ]),
-          style: [{ key: 'variant', value: 'p' }],
-        },
-      ])
-    );*/
+    /*  editor.setHelpGroupComponent(
+        generateHelpGroupComponent([
+          {
+            content: new Map([
+              ["en", "Why are we asking this?"],
+              ["nl", "Waarom vragen we dit?"],
+              ["fr", "Pourquoi demandons-nous cela?"],
+            ]),
+            style: [{ key: 'variant', value: 'h5' }],
+          },
+          {
+            content: new Map([
+              ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
+              ["nl", "De samenstelling van het huishouden kan invloed hebben op het risico van infectie, dit willen we graag onderzoeken."],
+              ["fr", "Les membres des ménages les plus grands, ou ceux possédant des enfants, peuvent être plus susceptibles d'attraper la grippe que les autres."],
+            ]),
+            style: [{ key: 'variant', value: 'p' }],
+          },
+        ])
+      );*/
 
     const ddg: ResponseRowCell = {
       key: 'col2', role: 'dropDownGroup',
