@@ -17,9 +17,10 @@ import { cisImagineInline } from "./cisImagineInline";
 
 //FLU
 export class Q_flu_vaccine_interval extends Item {
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
     super(parentKey, 'Q_flu_vaccine_interval');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -172,9 +173,10 @@ export class Q_flu_vaccine_datum_interval extends Item {
 
 // COVID
 export class Q_covid_vaccine_interval extends Item {
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
     super(parentKey, 'Q_covid_vaccine_interval');
     this.isRequired = isRequired;
+    this.condition = condition;
   }
 
   buildItem() {

@@ -11,6 +11,7 @@ import { externalServiceNames, messageTypes, reports, surveyKeys } from "./conta
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
+import { Interval } from "./surveys/interval";
 
 const initialIntervalSurveyOffset = 6 // weeks
 
@@ -49,6 +50,18 @@ const handleIntake = StudyEngine.ifThen(
 
   // Set vaccination flag with current time, so that weekly survey can use the value:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
+
+  // Set seasonal vaccination flags:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.Q10.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.no),
+  ),
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.qNL_covidvac_curseason.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.yes),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.no),
+  ),
 
   // Set gender flag:
   StudyEngine.if(
@@ -209,7 +222,29 @@ const handlevaccinQuestions = StudyEngine.ifThen(
 const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(surveyKeys.interval),
   // THEN:
-  reassignIntervalSurvey(12)
+  reassignIntervalSurvey(12),
+
+  // handle seasonal vaccination flags:
+  StudyEngine.if(
+    // if has any response:
+    StudyEngine.hasResponseKey(Interval.Q_flu_vaccine_interval.key, 'rg.scg'),
+    // then update flag:
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Interval.Q_flu_vaccine_interval.key, "1"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.no),
+    ),
+  ),
+  StudyEngine.if(
+    // if has any response:
+    StudyEngine.hasResponseKey(Interval.Q_covid_vaccine_interval.key, 'rg.scg'),
+    // then update flag:
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Intake.qNL_covidvac_curseason.key, "1"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.yes),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.no),
+    ),
+  ),
 )
 
 export const handleIntervalQuestionnaireExpired = () => StudyEngine.ifThen(

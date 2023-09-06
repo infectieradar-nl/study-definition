@@ -55,6 +55,20 @@ export const ParticipantFlags = {
       autoDeleted: 'auto-deleted'
     },
   },
+  seasonalFluVaccine: {
+    key: 'seasonalFluVaccine',
+    values: {
+      yes: 'yes',
+      no: 'no',
+    }
+  },
+  seasonalCovidVaccine: {
+    key: 'seasonalCovidVaccine',
+    values: {
+      yes: 'yes',
+      no: 'no',
+    }
+  },
   gender: {
     key: 'gender',
     values: {

@@ -4,7 +4,7 @@ import { Q12, Q12b, Q_CIS, Q_longsymptoms, Q_mMRC, } from "../questionPools/inte
 import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
-import { Expression, SurveyItem, SurveySingleItem} from "survey-engine/data_types";
+import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { Item } from "case-editor-tools/surveys/types";
@@ -14,22 +14,22 @@ import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/r
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ContactGroup } from "../questionPools/contactGroup";
-import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval} from "../questionPools/intervalQuestions";
+import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval } from "../questionPools/intervalQuestions";
 
 
 class IntervalDef extends SurveyDefinition {
   //Q_CIS: Q_CIS;
-  Intro:Intro;
-  Q_flu_vaccine_interval:Q_flu_vaccine_interval;
-  Q_flu_vaccine_datum_interval:Q_flu_vaccine_datum_interval;
-  Q_covid_vaccine_interval:Q_covid_vaccine_interval;
-  Q_covid_vaccine_datum_interval:Q_covid_vaccine_datum_interval;
+  Intro: Intro;
+  Q_flu_vaccine_interval: Q_flu_vaccine_interval;
+  Q_flu_vaccine_datum_interval: Q_flu_vaccine_datum_interval;
+  Q_covid_vaccine_interval: Q_covid_vaccine_interval;
+  Q_covid_vaccine_datum_interval: Q_covid_vaccine_datum_interval;
   //Q12: Q12;
   //Q12b: Q12b;
-  Intro_long:Intro_long;
-  Q_CIS:Q_CIS;
-  Q_mMRC:Q_mMRC;
-  Q_longsymptoms:Q_longsymptoms
+  Intro_long: Intro_long;
+  Q_CIS: Q_CIS;
+  Q_mMRC: Q_mMRC;
+  Q_longsymptoms: Q_longsymptoms
   ContactGroup: ContactGroup;
 
   constructor() {
@@ -53,9 +53,22 @@ class IntervalDef extends SurveyDefinition {
 
     // this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Intro = new Intro(this.key);
-    this.Q_flu_vaccine_interval = new Q_flu_vaccine_interval(this.key, isRequired);
+    this.Q_flu_vaccine_interval = new Q_flu_vaccine_interval(
+      this.key,
+      isRequired,
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes)
+      )
+    );
     this.Q_flu_vaccine_datum_interval = new Q_flu_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_flu_vaccine_interval.key, '1'), isRequired);
-    this.Q_covid_vaccine_interval = new Q_covid_vaccine_interval(this.key, isRequired);
+
+    this.Q_covid_vaccine_interval = new Q_covid_vaccine_interval(
+      this.key,
+      isRequired,
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.yes)
+      )
+    );
     this.Q_covid_vaccine_datum_interval = new Q_covid_vaccine_datum_interval(this.key, SurveyEngine.singleChoice.any(this.Q_covid_vaccine_interval.key, '1'), isRequired);
     this.Intro_long = new Intro_long(this.key);
     this.Q_CIS = new Q_CIS(this.key, isRequired);
@@ -91,7 +104,7 @@ class IntervalDef extends SurveyDefinition {
     this.addItem(this.Q_longsymptoms.get())
     this.addPageBreak();
     this.addItem(this.ContactGroup.get());
-    
+
   }
 
 }
@@ -104,7 +117,7 @@ class Intro extends Item {
 
   markdownContent = `
 ## Periodieke vragenlijst
-Deze vragenlijst stellen we vier keer per jaar. 
+Deze vragenlijst stellen we vier keer per jaar.
 De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
 `
 
@@ -132,9 +145,9 @@ class Intro_long extends Item {
 
   markdownContent = `
 ## Lange termijn klachten na een besmetting met corona, griep of een andere infectie
-We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid. 
-Dit zijn typische klachten waar je last van kunt blijven houden na een besmetting. 
-Maar je kan deze klachten ook krijgen door een andere reden. 
+We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid.
+Dit zijn typische klachten waar je last van kunt blijven houden na een besmetting.
+Maar je kan deze klachten ook krijgen door een andere reden.
 Daarom is het belangrijk dat we dit onderzoeken.
 `
 
