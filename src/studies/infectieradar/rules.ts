@@ -49,6 +49,20 @@ const handleIntake = StudyEngine.ifThen(
 
   // Set vaccination flag with current time, so that weekly survey can use the value:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
+
+  // Set gender flag:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.QGender.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.female),
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Intake.QGender.key, "0"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.male),
+      StudyEngine.if(
+        StudyEngine.singleChoice.any(Intake.QGender.key, "2"),
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.other),
+      )
+    )
+  )
 )
 
 const handleWeekly = StudyEngine.ifThen(

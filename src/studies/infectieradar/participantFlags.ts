@@ -55,12 +55,13 @@ export const ParticipantFlags = {
       autoDeleted: 'auto-deleted'
     },
   },
-  SexFlag: {
-    key: 'SexFlag',
+  gender: {
+    key: 'gender',
     values: {
-      female: '1',
-      nofemale: '0'
-      },
+      female: 'female',
+      male: 'male',
+      other: 'other',
+    },
   }
 }
 
