@@ -133,7 +133,7 @@ class SymptomsQuestion extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Did you have any general symptoms such as"],
-        ["nl", "Geef alsjeblieft aan of je geen of tenminste één van de volgende klachten hebt gehad in de afgelopen week (chronische klachten hoeven hier niet gemeld te worden)"],
+        ["nl", "Geef alsjeblieft aan of je geen of tenminste één van de volgende klachten hebt gehad in de afgelopen week (klachten die je al een lange tijd hebt hoeven hier niet gemeld te worden)"],
       ]),
       responseOptions: [
         {
@@ -1707,6 +1707,16 @@ class Q9 extends Item {
           ])
         },
         {
+          key: '10',
+          role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '0', '6'),
+          content: new Map([
+            ["en", "Nasal spray"],
+            ["nl", "Ja, neusspray tegen verkoudheidsklachten"],
+
+          ])
+        },
+        {
           key: this.optionKeys.antivirals,
           role: 'option',
           disabled: SurveyEngine.multipleChoice.any(this.key, '0', '6'),
@@ -2203,8 +2213,8 @@ class Q11 extends Item {
       condition: this.condition,
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", "What do you think is causing your symptoms?"],
-        ["nl", "Heb je zelf enig idee waar je klachten vandaan komen?"],
+        ["en", "What do you think is the main reason causing your symptoms?"],
+        ["nl", "Wat is volgens jou de belangrijkste reden van je klachten??"],
       ]),
       responseOptions: [
         {
@@ -2234,7 +2244,7 @@ class Q11 extends Item {
         {
           key: '6', role: 'option',
           content: new Map([
-            ["en", "Ashtma"],
+            ["en", "Asthma"],
             ["nl", "Ja, ik heb last van astma"],
             ["fr", "Asthme"],
           ])
@@ -2249,9 +2259,9 @@ class Q11 extends Item {
         {
           key: '9', role: 'option',
           content: new Map([
-            ["en", "Coronavirus (COVID-19)"],
-            ["nl", "Ja, het coronavirus (COVID-19, longcovid)"],
-            ["fr", "Coronavirus (COVID-19)"],
+            ["en", "Coronavirus or corona-like illness"],
+            ["nl", "Ja, ik heb corona, of corona-achtige verschijnselen"],
+            ["fr", "Coronavirus"],
           ])
         },
         {
@@ -2366,13 +2376,13 @@ export class QWithin24hours extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Ik wil een test-uitslag doorgeven. (opent alleen de test-vraag)"],
+            ["nl", "Ik wil een test-uitslag doorgeven. (Open alleen de test-vraag.)"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Ik wil opnieuw de wekelijkse vragenlijst invullen. (opent de volledige vragenlijst)"],
+            ["nl", "Ik wil opnieuw de wekelijkse vragenlijst invullen. (Open de volledige vragenlijst.)"],
           ])
         },
         {

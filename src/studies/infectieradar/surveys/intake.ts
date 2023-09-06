@@ -1,6 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q20NLb, Q20NLc, Q21NL, Q22NL, Q23NL, Q24NL, Q24NLb, Q25NL, Q26NL, Q4b1NL, Q4b2NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, FinalText, SelfSwabInvite } from "../questionPools/intakeQuestions";
+import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q21NL, Q22NL, Q23NL, Q26NL, Q4b1NL, Q4b2NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, house_total, Q6, Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, qNL_covidvac_lastseason, qNL_covidvac_curseason, qNL_covidvac_date, qNL_covidvac_reason, qNL_covidvac_not_reason, FinalText, SelfSwabInvite } from "../questionPools/intakeQuestions";
 import { surveyKeys } from "../contants";
 
 class IntakeDef extends SurveyDefinition {
@@ -17,12 +17,11 @@ class IntakeDef extends SurveyDefinition {
   Q4cNLc: Q4cNLc;
   Q4d: Q4d;
   Q5: Q5;
+  house_total: house_total;
   Q6: Q6;
   Q6b: Q6b;
   Q7b: Q7b;
   Q20NL: Q20NL;
-  Q20NLb: Q20NLb;
-  Q20NLc: Q20NLc;
   Q11: Q11;
   Q12: Q12;
   Q12b: Q12b;
@@ -37,9 +36,11 @@ class IntakeDef extends SurveyDefinition {
   Q10c: Q10c;
   Q10d: Q10d;
   Q23NL: Q23NL;
-  Q24NL: Q24NL;
-  Q24NLb: Q24NLb;
-  Q25NL: Q25NL;
+  qNL_covidvac_lastseason: qNL_covidvac_lastseason;
+  qNL_covidvac_curseason: qNL_covidvac_curseason;
+  qNL_covidvac_date: qNL_covidvac_date;
+  qNL_covidvac_reason: qNL_covidvac_reason;
+  qNL_covidvac_not_reason:  qNL_covidvac_not_reason;
   Q26NL: Q26NL;
   SelfSwabInvite: SelfSwabInvite;
   FinalText: FinalText;
@@ -82,13 +83,14 @@ class IntakeDef extends SurveyDefinition {
     this.Q4cNLc = new Q4cNLc(this.key, SurveyEngine.singleChoice.any(this.Q4cNL.key, '0'), isRequired);
     this.Q4d = new Q4d(this.key, isRequired);
     this.Q5 = new Q5(this.key, isRequired);
-    this.Q6 = new Q6(this.key, isRequired);
+    this.house_total = new house_total(this.key, isRequired);
+    this.Q6 = new Q6(this.key, 
+      SurveyEngine.singleChoice.any(this.house_total.key, '1', '2', '3', '4', '5', '6', '7', '8', '99'), 
+      isRequired);
     this.Q6b = new Q6b(this.key, this.Q6.key, isRequired);
     this.Q7b = new Q7b(this.key, isRequired);
     this.Q20NL = new Q20NL(this.key, isRequired);
     const conditionCovid = SurveyEngine.singleChoice.any(this.Q20NL.key, '5', '6');
-    this.Q20NLb = new Q20NLb(this.key, conditionCovid, isRequired);
-    this.Q20NLc = new Q20NLc(this.key, conditionCovid, isRequired);
     this.Q11 = new Q11(this.key, isRequired);
     this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
     this.Q12b = new Q12b(this.key, SurveyEngine.singleChoice.any(this.Q12.key, '0'), isRequired);
@@ -103,11 +105,11 @@ class IntakeDef extends SurveyDefinition {
     this.Q10c = new Q10c(this.key, SurveyEngine.singleChoice.any(this.Q10.key, '0', '1'), isRequired);
     this.Q10d = new Q10d(this.key, SurveyEngine.singleChoice.any(this.Q10.key, '2'), isRequired);
     this.Q23NL = new Q23NL(this.key, isRequired);
-    this.Q24NL = new Q24NL(this.key, isRequired);
-    this.Q24NLb = new Q24NLb(this.key, SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6', '7'), isRequired);
-    this.Q25NL = new Q25NL(this.key,
-      SurveyEngine.singleChoice.any(this.Q24NL.key, '3', '4', '5', '6', '7'),
-      isRequired);
+    this.qNL_covidvac_lastseason = new qNL_covidvac_lastseason(this.key, isRequired);
+    this.qNL_covidvac_curseason = new qNL_covidvac_curseason(this.key, isRequired);
+    this.qNL_covidvac_date = new qNL_covidvac_date(this.key, SurveyEngine.singleChoice.any(this.qNL_covidvac_curseason.key, '1'), isRequired);
+    this.qNL_covidvac_reason = new qNL_covidvac_reason(this.key, SurveyEngine.singleChoice.any(this.qNL_covidvac_curseason.key, '0', '1'), isRequired);
+    this.qNL_covidvac_not_reason = new qNL_covidvac_not_reason(this.key, SurveyEngine.singleChoice.any(this.qNL_covidvac_curseason.key, '2'), isRequired);
     this.Q26NL = new Q26NL(this.key, isRequired);
     this.SelfSwabInvite = new SelfSwabInvite(this.key, true);
     this.FinalText = new FinalText(this.key);
@@ -128,12 +130,11 @@ class IntakeDef extends SurveyDefinition {
     this.addItem(this.Q4cNLc.get());
     this.addItem(this.Q4d.get());
     this.addItem(this.Q5.get());
+    this.addItem(this.house_total.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q6b.get());
     this.addItem(this.Q7b.get());
     this.addItem(this.Q20NL.get());
-    this.addItem(this.Q20NLb.get());
-    this.addItem(this.Q20NLc.get());
     this.addItem(this.Q11.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q12b.get());
@@ -148,9 +149,11 @@ class IntakeDef extends SurveyDefinition {
     this.addItem(this.Q10c.get());
     this.addItem(this.Q10d.get());
     this.addItem(this.Q23NL.get());
-    this.addItem(this.Q24NL.get());
-    this.addItem(this.Q24NLb.get());
-    this.addItem(this.Q25NL.get());
+    this.addItem(this.qNL_covidvac_lastseason.get())
+    this.addItem(this.qNL_covidvac_curseason.get())
+    this.addItem(this.qNL_covidvac_date.get())
+    this.addItem(this.qNL_covidvac_reason.get())
+    this.addItem(this.qNL_covidvac_not_reason.get())
     this.addItem(this.Q26NL.get());
     this.addItem(this.FinalText.get());
   }

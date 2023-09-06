@@ -411,6 +411,13 @@ export class Q1gNL extends Item {
             ["nl", "Dat weet ik niet meer"],
           ])
         },
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "Self-test (Infectieradar self swab study)"],
+            ["nl", "Zelftest gedaan op verzoek van het Infectieradaronderzoek"],
+          ])
+        },
       ]
     })
   }
