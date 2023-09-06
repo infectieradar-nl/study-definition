@@ -17,6 +17,7 @@ import { vaccinQuestions } from "./surveys/vaccinQuestions";
 import { assignVaccinQuestions_rules } from "./customRules/assignVaccinQuestions";
 import { Interval } from "./surveys/interval";
 import { assignIntervalQuestionnaire_rules } from "./customRules/assignIntervalQuestionnaire";
+import { resetSeasonalVaccinationFlags_rules } from "./customRules/resetSeasonalVaccinationFlags";
 
 
 export const InfectieradarStudy: Study = {
@@ -45,5 +46,6 @@ export const InfectieradarStudy: Study = {
     removeDashboardQuestionnaire_rules,
     assignVaccinQuestions_rules,
     assignIntervalQuestionnaire_rules,
+    resetSeasonalVaccinationFlags_rules,
   ]
 }
