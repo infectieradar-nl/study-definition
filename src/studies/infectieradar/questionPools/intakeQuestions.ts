@@ -2981,7 +2981,7 @@ export class Q10d extends Item {
           key: '3', role: 'option',
           content: new Map([
             ["en", "It is better to build your own natural immunity against influenza"],
-            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen griep."],
+            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen griep"],
             ["fr", "Il est préférable de développer sa propre immunité naturelle contre la grippe"],
           ])
         },
@@ -3524,7 +3524,7 @@ export class qNL_covidvac_not_reason extends Item {
           key: '3', role: 'option',
           content: new Map([
             ["en", "It is better to build your own natural immunity against corona"],
-            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen corona."],
+            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen corona"],
             ["fr", "Il est préférable de développer sa propre immunité naturelle contre la corona"],
           ])
         },
@@ -3598,7 +3598,7 @@ export class qNL_covidvac_not_reason extends Item {
           key: '13', role: 'option',
           content: new Map([
             ["en", "Although my doctor recommend a corona vaccine, I do not get one"],
-            ["nl", "Hoewel mijn huisarts het corona adviseert, neem ik het niet"],
+            ["nl", "Hoewel mijn huisarts het coronavaccin adviseert, neem ik het niet"],
             ["fr", " Bien que mon médecin me l'ait recommandé, je ne me suis pas fait vacciner"],
           ])
         }, {
