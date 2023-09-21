@@ -1259,9 +1259,9 @@ export class Q5 extends Item {
   }
 }
 
-export class house_total extends Item {
+export class qNL_house_total extends Item {
   constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'house_total');
+    super(parentKey, 'qNL_house_total');
     this.isRequired = isRequired;
   }
 
@@ -1365,9 +1365,9 @@ export class house_total extends Item {
   }
 }
 
-export class Q6 extends Item {
+export class qNL_house_agegroup extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
-    super(parentKey, 'Q6');
+    super(parentKey, 'qNL_house_agegroup');
     this.isRequired = isRequired;
     this.condition = condition;
   }
@@ -2925,7 +2925,7 @@ export class Q10c extends Item {
           key: '10', role: 'option',
           content: new Map([
             ["en", "I try to protect myself against infections, because of the circulation of the coronavirus"],
-            ["nl", "Ik ben probeer mezelf te beschermen tegen infecties vanwege het coronavirus"],
+            ["nl", "Ik probeer mezelf te beschermen tegen infecties vanwege COVID-19"],
             ["fr", "Je me fais systématiquement vacciner"],
           ])
         }, {
@@ -2981,7 +2981,7 @@ export class Q10d extends Item {
           key: '3', role: 'option',
           content: new Map([
             ["en", "It is better to build your own natural immunity against influenza"],
-            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen griep."],
+            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen griep"],
             ["fr", "Il est préférable de développer sa propre immunité naturelle contre la grippe"],
           ])
         },
@@ -3468,7 +3468,7 @@ export class qNL_covidvac_reason extends Item {
           key: '10', role: 'option',
           content: new Map([
             ["en", "I try to protect myself against infections, because of the circulation of the coronavirus"],
-            ["nl", "Ik ben probeer mezelf te beschermen tegen infecties vanwege het coronavirus"],
+            ["nl", "Ik probeer mezelf te beschermen tegen infecties vanwege het griepvirus"],
             ["fr", "Je me fais systématiquement vacciner"],
           ])
         }, {
@@ -3499,7 +3499,7 @@ export class qNL_covidvac_not_reason extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "What were your reasons for NOT getting a corona vaccination in the autumn/winter season 2023/2024?"],
-        ["nl", "Wat is de reden waarom je je niet laat vaccineren tegen corona in het komende het najaar?"],
+        ["nl", "Wat is de reden waarom je je NIET laat vaccineren tegen corona in het komende het najaar?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -3524,7 +3524,7 @@ export class qNL_covidvac_not_reason extends Item {
           key: '3', role: 'option',
           content: new Map([
             ["en", "It is better to build your own natural immunity against corona"],
-            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen corona."],
+            ["nl", "Het is beter om je eigen immuniteit op te bouwen tegen corona"],
             ["fr", "Il est préférable de développer sa propre immunité naturelle contre la corona"],
           ])
         },
@@ -3598,7 +3598,7 @@ export class qNL_covidvac_not_reason extends Item {
           key: '13', role: 'option',
           content: new Map([
             ["en", "Although my doctor recommend a corona vaccine, I do not get one"],
-            ["nl", "Hoewel mijn huisarts het corona adviseert, neem ik het niet"],
+            ["nl", "Hoewel mijn huisarts het coronavaccin adviseert, neem ik het niet"],
             ["fr", " Bien que mon médecin me l'ait recommandé, je ne me suis pas fait vacciner"],
           ])
         }, {

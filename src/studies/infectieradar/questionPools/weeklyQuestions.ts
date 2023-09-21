@@ -318,6 +318,13 @@ class SymptomsQuestion extends Item {
             ["nl", "Huiduitslag"],
           ])
         },
+        {
+          key: '23', role: 'input',
+          content: new Map([
+            ["en", "Other, namely:"],
+            ["nl", "Anders, namelijk"],
+          ]),
+        },
       ],
     })
   }
@@ -402,7 +409,7 @@ class Q2 extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "I don't know/can't remember"],
-            ["nl", "Ik weet het niet (meer)."],
+            ["nl", "Ik weet het niet (meer)"],
           ])
         },
       ],
@@ -682,7 +689,7 @@ class Q5 extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "I don't know/can't remember"],
-            ["nl", "Ik weet dit niet (meer)."],
+            ["nl", "Ik weet dit niet (meer)"],
             ["fr", "Je ne sais pas / je ne m'en souviens plus"],
           ])
         },
@@ -809,7 +816,7 @@ class QFeverStart extends Item {
           key: '0', role: 'option',
           content: new Map([
             ["en", "I don't know/can't rember"],
-            ["nl", "Ik weet het niet (meer)."],
+            ["nl", "Ik weet het niet (meer)"],
             ["fr", "Je ne sais pas / je ne m'en souviens plus"],
           ])
         },
@@ -1100,7 +1107,7 @@ class QHighestTemp extends Item {
           key: '7', role: 'option',
           content: new Map([
             ["en", "I don't know/can't remember"],
-            ["nl", "Dat weet ik niet (meer)."],
+            ["nl", "Dat weet ik niet (meer)"],
             ["fr", "Je ne sais pas / je ne m'en souviens plus"],
           ])
         },
@@ -1893,7 +1900,7 @@ class Q9b extends Item {
           key: '7', role: 'option',
           content: new Map([
             ["en", "I don't know/can't remember"],
-            ["nl", "Dat weet ik niet (meer)."],
+            ["nl", "Dat weet ik niet (meer)"],
             ["fr", "Je ne sais pas / je ne m'en souviens plus"],
           ])
         },
