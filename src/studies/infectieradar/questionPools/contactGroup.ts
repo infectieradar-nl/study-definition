@@ -33,7 +33,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsHome',
       new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)']]),
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)']]),
       conditionForHome,
       isRequired
     );
@@ -44,8 +44,8 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsWork',
       new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
-               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)'
-               ]]),
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)'
+      ]]),
       conditionForWork,
       isRequired
     );
@@ -56,7 +56,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsSchool',
       new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
-               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)']]),
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)']]),
       conditionForSchool,
       isRequired
     );
@@ -67,7 +67,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsLeisure',
       new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).']]),
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).']]),
       conditionForLeisure,
       isRequired
     );
@@ -78,7 +78,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsOther',
       new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)'],
-               ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
       conditionForOther,
       isRequired
     );
@@ -151,7 +151,7 @@ class Intro extends Item {
     super(parentKey, 'Intro');
   }
 
-   buildItem(): SurveySingleItem {
+  buildItem(): SurveySingleItem {
     return SurveyItems.display({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -160,9 +160,9 @@ class Intro extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-            ## Periodieke vragenlijst
-            Deze vragenlijst stellen we vier keer per jaar. 
-            De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+## Periodieke vragenlijst
+Deze vragenlijst stellen we vier keer per jaar.
+De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
             `],
           ]),
         })
@@ -184,7 +184,7 @@ class Infos extends Item {
 ## Contact-patronen
 Door informatie te delen over de plek, leeftijd en geslacht van personen met wie je spreekt of dichtbij bent, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
 `
- buildItem(): SurveySingleItem {
+  buildItem(): SurveySingleItem {
     return SurveyItems.display({
       parentKey: this.parentKey,
       itemKey: this.itemKey,

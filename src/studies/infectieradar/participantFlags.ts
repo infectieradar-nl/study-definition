@@ -76,6 +76,24 @@ export const ParticipantFlags = {
       male: 'male',
       other: 'other',
     },
+  },
+  intervalGroup: {
+    key: 'intervalGroup',
+    // value is a random number
+  },
+  intervalHidePregnancyQ: {
+    key: 'intervalHidePregnancyQ',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
+  },
+  intervalHideVaccinationQ: {
+    key: 'intervalHidePregnancyQ',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
   }
 }
 

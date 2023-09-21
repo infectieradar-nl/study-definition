@@ -6,22 +6,36 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
-import { handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, initialIntervalSurveyAssignment, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
+import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { Interval } from "./surveys/interval";
 
-const initialIntervalSurveyOffset = 6 // weeks
-
+const quarterSwithOffset = 2 // weeks
 
 /**
  * Define what should happen, when persons enter the study first time:
  */
 const entryRules: Expression[] = [
   StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal'),
-  initialIntervalSurveyAssignment(initialIntervalSurveyOffset),
+  StudyEngine.if(
+    isCurrentISOWeekSmallerThan(14, quarterSwithOffset),
+    assignIntervalSurveyForQ2(),
+    // else:
+    StudyEngine.if(
+      isCurrentISOWeekSmallerThan(27, quarterSwithOffset),
+      assignIntervalSurveyForQ3(),
+      // else:
+      StudyEngine.if(
+        isCurrentISOWeekSmallerThan(40, quarterSwithOffset),
+        assignIntervalSurveyForQ4(),
+        // else:
+        assignIntervalSurveyForQ1(),
+      )
+    )
+  )
 ];
 
 
@@ -39,8 +53,14 @@ const handleIntake = StudyEngine.ifThen(
     ),
     StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio')
   ),
+
   StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
-  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal', StudyEngine.timestampWithOffset({ years: 1 })),
+  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal',
+    StudyEngine.getTsForNextISOWeek(
+      23,
+      StudyEngine.timestampWithOffset({ days: 4 * 7 })
+    )
+  ),
 
   StudyEngine.if(
     StudyEngine.singleChoice.any(Intake.QMainActivity.key, "7"),
@@ -222,7 +242,7 @@ const handlevaccinQuestions = StudyEngine.ifThen(
 const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(surveyKeys.interval),
   // THEN:
-  reassignIntervalSurvey(12),
+  reassignIntervalSurvey(),
 
   // handle seasonal vaccination flags:
   StudyEngine.if(
@@ -250,7 +270,7 @@ const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
 export const handleIntervalQuestionnaireExpired = () => StudyEngine.ifThen(
   isSurveyExpired(surveyKeys.interval),
   // Then:
-  reassignIntervalSurvey(12)
+  reassignIntervalSurvey()
 )
 
 
