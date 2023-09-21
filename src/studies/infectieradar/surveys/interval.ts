@@ -51,6 +51,21 @@ class IntervalDef extends SurveyDefinition {
 
     const isRequired = true;
 
+    const showVaccinationQ = SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.intervalHideVaccinationQ.key,
+        ParticipantFlags.intervalHideVaccinationQ.values.true
+      )
+    )
+
+    const showPregnancyQ = SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.intervalHidePregnancyQ.key,
+        ParticipantFlags.intervalHidePregnancyQ.values.true
+      )
+    )
+
+
     // this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Intro = new Intro(this.key);
     this.Q_flu_vaccine_interval = new Q_flu_vaccine_interval(
