@@ -318,6 +318,13 @@ class SymptomsQuestion extends Item {
             ["nl", "Huiduitslag"],
           ])
         },
+        {
+          key: '23', role: 'input',
+          content: new Map([
+            ["en", "Other, namely:"],
+            ["nl", "Anders, namelijk"],
+          ]),
+        },
       ],
     })
   }
