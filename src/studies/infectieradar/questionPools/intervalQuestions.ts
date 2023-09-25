@@ -116,7 +116,7 @@ export class Q_flu_vaccine_datum_interval extends Item {
           },
           content: new Map([
 
-            ["nl", "Kies datum:"],
+            ["nl", "Kies datum (als je de datum niet meer precies weet mag je deze schatten):"],
             ["fr", "Sélectionner une date"],
           ])
         },
@@ -275,7 +275,7 @@ export class Q_covid_vaccine_datum_interval extends Item {
           },
           content: new Map([
             ["en", "Choose date:"],
-            ["nl", "Kies datum:"],
+            ["nl", "Kies datum (als je de datum niet meer precies weet mag je deze schatten):"],
             ["fr", "Sélectionner une date"],
           ])
         },
@@ -475,9 +475,9 @@ export class Q12b extends Item {
   }
 }
 
-class q1_2 extends Item {
+export class Q_healthrank extends Item {
   constructor(parentKey: string, isRequired: boolean) {
-    super(parentKey, 'q1_2');
+    super(parentKey, 'Q_healthrank');
     this.isRequired = isRequired;
   }
 
@@ -490,7 +490,7 @@ class q1_2 extends Item {
       //helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
         ["en", "On a scale from 0 to 100, how good or bad was your health last week because of the symptoms?"],
-        ["nl", "Hoe goed of slecht was je gezondheid, in de afgelopen week, door je gemelde klachten?"],
+        ["nl", "Hoe goed of slecht was je gezondheid de afgelopen week?"],
       ]),
       questionSubText: new Map([
         ["en", "The scale goes from 0 to 100, 100 means the best health status you can imagine and 0 means the worst health status you can imagine."],
@@ -525,12 +525,12 @@ export class Q_CIS extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Vermoeidheid en concentratie"],
+        ["nl", "Vermoeidheid en concentratie afgelopen twee weken"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", `Hieronder staan 13 uitspraken waarmee je kunt aangeven hoe je jezelf de laatste twee weken hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:
+            ["nl", `Hieronder staan 13 uitspraken waarmee je kunt aangeven hoe je jezelf **de laatste twee weken** hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:
 
 ${cisImagineInline}
 
@@ -629,12 +629,12 @@ ${cisImagineInline}
         },
         {
           key: 'l', content: new Map([
-            ["nl", "Mijn gedachten dwalen makkelijk af"],
+            ["nl", "Mijn gedachten dwalen makkelijk af."],
           ])
         },
         {
           key: 'm', content: new Map([
-            ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
+            ["nl", "Lichamelijk voel ik me in een uitstekende conditie."],
           ])
         },
       ],
@@ -720,7 +720,7 @@ export class Q_longsymptoms extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "Nee"],
+            ["nl", "Nee, dat heb ik nooit gehad."],
           ])
         },
         {

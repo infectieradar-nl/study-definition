@@ -14,7 +14,7 @@ import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/r
 import { SurveyItems, SurveyEngine } from "case-editor-tools/surveys";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ContactGroup } from "../questionPools/contactGroup";
-import { Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval } from "../questionPools/intervalQuestions";
+import { Q_healthrank, Q_flu_vaccine_interval, Q_flu_vaccine_datum_interval, Q_covid_vaccine_interval, Q_covid_vaccine_datum_interval } from "../questionPools/intervalQuestions";
 
 
 class IntervalDef extends SurveyDefinition {
@@ -30,6 +30,7 @@ class IntervalDef extends SurveyDefinition {
   Q_CIS: Q_CIS;
   Q_mMRC: Q_mMRC;
   Q_longsymptoms: Q_longsymptoms
+  Q_healthrank: Q_healthrank;
   ContactGroup: ContactGroup;
 
   constructor() {
@@ -37,11 +38,11 @@ class IntervalDef extends SurveyDefinition {
       surveyKey: surveyKeys.interval,
       name: new Map([
         ["en", "About You"],
-        ["nl", "Perodieke vragen"],
+        ["nl", "Extra vragenlijst (vier keer per jaar)"],
       ]),
       description: new Map([
         ["en", "This periodic survey focues on long term health outcomes and relevant updates."],
-        ["nl", "Klik op deze periodieke vragenlijst om vragen te beantwoorden over lange termijn klachten, contactpatronen en vaccinatie"],
+        ["nl", "Klik op deze vragenlijst om vragen te beantwoorden over lange termijn klachten en de overdracht van luchtweginfecties. Vul deze alsjeblieft ook in als je geen klachten had."],
       ]),
       durationText: new Map([
         ["en", "This will take 10 minutes."],
@@ -89,6 +90,7 @@ class IntervalDef extends SurveyDefinition {
     this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Q_mMRC = new Q_mMRC(this.key, isRequired);
     this.Q_longsymptoms = new Q_longsymptoms(this.key, isRequired);
+    this.Q_healthrank = new Q_healthrank(this.key, isRequired);
 
     //this.Q12 = new Q12(this.key, isRequired);
     // this.Q12 = new Q12(this.key, SurveyEngine.singleChoice.any(this.QGender.key, '1'), isRequired);
@@ -117,6 +119,7 @@ class IntervalDef extends SurveyDefinition {
     this.addItem(this.Q_CIS.get())
     this.addItem(this.Q_mMRC.get())
     this.addItem(this.Q_longsymptoms.get())
+    this.addItem(this.Q_healthrank.get())
     this.addPageBreak();
     this.addItem(this.ContactGroup.get());
 
@@ -131,9 +134,9 @@ class Intro extends Item {
   }
 
   markdownContent = `
-## Periodieke vragenlijst
-Deze vragenlijst stellen we vier keer per jaar.
-De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+## Extra vragenlijst
+Deze vragenlijst stellen we vier keer per jaar, ook als je **geen** klachten hebt.
+De vragenlijst gaat over lange termijn klachten en de overdracht van luchtweginfecties.
 `
 
   buildItem(): SurveySingleItem {

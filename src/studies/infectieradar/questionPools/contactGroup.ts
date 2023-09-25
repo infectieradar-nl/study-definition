@@ -6,9 +6,9 @@ import { Expression, SurveySingleItem, Validation } from "survey-engine/data_typ
 
 export class ContactGroup extends Group {
   Infos: Infos;
-  Intro: Intro;
   Q1: Q1;
   Q2: Q2;
+  Instruct_contact:Instruct_contact;
   ContactMatrixForHome: ContactMatrix;
   ContactMatrixForWork: ContactMatrix;
   ContactMatrixForSchool: ContactMatrix;
@@ -24,9 +24,11 @@ export class ContactGroup extends Group {
 
     // Initialize/Configure questions here:
     this.Infos = new Infos(this.key);
-    this.Intro = new Intro(this.key);
     this.Q1 = new Q1(this.key, isRequired);
     this.Q2 = new Q2(this.key, SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes), isRequired);
+    
+    const conditionForInstruct = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+    this.Instruct_contact = new Instruct_contact(this.key, conditionForInstruct);
 
     const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
     this.ContactMatrixForHome = new ContactMatrix(
@@ -88,9 +90,10 @@ export class ContactGroup extends Group {
 
   buildGroup() {
     this.addItem(this.Infos.get());
-    this.addItem(this.Intro.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
+    this.addPageBreak();
+    this.addItem(this.Instruct_contact.get());
     this.addPageBreak();
     this.addItem(this.ContactMatrixForHome.get());
     this.addPageBreak();
@@ -162,7 +165,7 @@ class Intro extends Item {
             ["nl", `
 ## Periodieke vragenlijst
 Deze vragenlijst stellen we vier keer per jaar.
-De vragenlijst gaat over vaccinatie, lange termijn klachten en contact-patronen.
+De vragenlijst gaat over vaccinatie, lange termijn klachten en de overdracht van luchtweginfecties.
             `],
           ]),
         })
@@ -181,8 +184,8 @@ class Infos extends Item {
   }
 
   markdownContent = `
-## Contact-patronen
-Door informatie te delen over de plek, leeftijd en geslacht van personen met wie je spreekt of dichtbij bent, helpt je ons om de verspreiding van luchtwegbesmettingen beter te begrijpen en te voorspellen.
+## Overdracht luchtweginfecties
+Door informatie te delen over de plek, leeftijd en geslacht van personen met wie je spreekt of dichtbij bent, help je ons om de overdracht van luchtweginfecties beter te begrijpen en te voorspellen.
 `
   buildItem(): SurveySingleItem {
     return SurveyItems.display({
@@ -200,6 +203,36 @@ Door informatie te delen over de plek, leeftijd en geslacht van personen met wie
     })
   }
 }
+
+
+class Instruct_contact extends Item {
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'Instruct_contact');
+    this.condition = condition;
+  }
+
+  markdownContent = `
+## Instructie
+Per plek vragen we nu naar het aantal personen per geslacht en leeftijdscategorie. 
+Als er personen zijn die je op meerdere plekken in wilt vullen, vul deze alleen in op de plek met het langst durende contact. Bijvoorbeeld gezinsleden of huisgenoten die je thuis maar ook op een andere plek hebt gesproken vallen dan (waarschijnlijk) alleen onder thuis.
+`
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 const dropdownOptions = [
   { key: '0', label: new Map([["nl", "0"],]), },
@@ -412,7 +445,7 @@ class ProtectionUsage extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Dit weet ik niet meer"],
+            ["nl", "Dit weet ik niet meer."],
           ])
         },
       ]
@@ -446,13 +479,13 @@ class Q1 extends Item {
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik heb met tenminste één ander persoon gesproken en/of aangeraakt, of ben dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)"],
+            ["nl", "Ja, ik heb met tenminste één ander persoon gesproken en/of aangeraakt, of ben dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)."],
           ])
         },
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "Nee, ik heb met niemand gesproken en/of aangeraakt, en ik ben NIET dichtbij iemand anders geweest in dezelfde kamer (binnen 3 meter)"],
+            ["nl", "Nee, ik heb met niemand gesproken en/of aangeraakt, en ik ben NIET dichtbij iemand anders geweest in dezelfde kamer (binnen 3 meter)."],
           ])
         },
         {
