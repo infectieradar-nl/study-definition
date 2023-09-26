@@ -529,6 +529,7 @@ export class Q_CIS extends Item {
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
+          className: 'border-bottom mb-3 pb-2',
           content: new Map([
             ["nl", `Hieronder staan 13 uitspraken waarmee je kunt aangeven hoe je jezelf **de laatste twee weken** hebt gevoeld. Je kunt elke vraag beantwoorden door in één van de zeven hokjes een kruisje te zetten. De plaats van het kruisje geeft aan in welke mate je vindt dat de uitspraak op jou van toepassing is. Wanneer je vindt dat het antwoord niet 'ja, dat klopt', maar ook niet 'nee, dat klopt niet' is, zet dan een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld zo:
 

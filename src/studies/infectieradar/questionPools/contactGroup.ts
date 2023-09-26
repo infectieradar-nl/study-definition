@@ -8,7 +8,7 @@ export class ContactGroup extends Group {
   Infos: Infos;
   Q1: Q1;
   Q2: Q2;
-  Instruct_contact:Instruct_contact;
+  Instruct_contact: Instruct_contact;
   ContactMatrixForHome: ContactMatrix;
   ContactMatrixForWork: ContactMatrix;
   ContactMatrixForSchool: ContactMatrix;
@@ -26,8 +26,9 @@ export class ContactGroup extends Group {
     this.Infos = new Infos(this.key);
     this.Q1 = new Q1(this.key, isRequired);
     this.Q2 = new Q2(this.key, SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes), isRequired);
-    
-    const conditionForInstruct = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+
+    const conditionForInstruct = SurveyEngine.compare.gt(SurveyEngine.multipleChoice.selectionCount(this.Q2.key), 1);
+
     this.Instruct_contact = new Instruct_contact(this.key, conditionForInstruct);
 
     const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
@@ -213,7 +214,7 @@ class Instruct_contact extends Item {
 
   markdownContent = `
 ## Instructie
-Per plek vragen we nu naar het aantal personen per geslacht en leeftijdscategorie. 
+Per plek vragen we nu naar het aantal personen per geslacht en leeftijdscategorie.
 Als er personen zijn die je op meerdere plekken in wilt vullen, vul deze alleen in op de plek met het langst durende contact. Bijvoorbeeld gezinsleden of huisgenoten die je thuis maar ook op een andere plek hebt gesproken vallen dan (waarschijnlijk) alleen onder thuis.
 `
   buildItem(): SurveySingleItem {
@@ -612,6 +613,7 @@ class QFragile extends Item {
         },
         {
           key: 'other', role: 'input',
+          style: [{ key: 'maxLength', value: '160' }],
           content: new Map([
             ["nl", "Anders: "],
           ]),
