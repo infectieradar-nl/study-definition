@@ -328,7 +328,7 @@ export const reassignIntervalSurvey = () => StudyEngine.do(
 export const assignIntervalSurveyForQ1 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHidePregnancyQ.key,
-    ParticipantFlags.intervalHidePregnancyQ.values.true
+    ParticipantFlags.intervalHidePregnancyQ.values.false
   ),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHideVaccinationQ.key,
@@ -346,7 +346,7 @@ export const assignIntervalSurveyForQ1 = () => StudyEngine.do(
 export const assignIntervalSurveyForQ2 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHidePregnancyQ.key,
-    ParticipantFlags.intervalHidePregnancyQ.values.false
+    ParticipantFlags.intervalHidePregnancyQ.values.true
   ),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHideVaccinationQ.key,
@@ -364,7 +364,7 @@ export const assignIntervalSurveyForQ2 = () => StudyEngine.do(
 export const assignIntervalSurveyForQ3 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHidePregnancyQ.key,
-    ParticipantFlags.intervalHidePregnancyQ.values.true
+    ParticipantFlags.intervalHidePregnancyQ.values.false
   ),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHideVaccinationQ.key,
@@ -382,11 +382,11 @@ export const assignIntervalSurveyForQ3 = () => StudyEngine.do(
 export const assignIntervalSurveyForQ4 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHidePregnancyQ.key,
-    ParticipantFlags.intervalHidePregnancyQ.values.false
+    ParticipantFlags.intervalHidePregnancyQ.values.true
   ),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHideVaccinationQ.key,
-    ParticipantFlags.intervalHideVaccinationQ.values.true
+    ParticipantFlags.intervalHideVaccinationQ.values.false
   ),
 
   // remove old instances of interval survey:
