@@ -25,8 +25,6 @@ export const updateSexFlag_rules = {
           ParticipantFlags.gender.values.other
         )
       )
-
-
     )
   ]
 }
