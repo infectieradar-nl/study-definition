@@ -320,6 +320,7 @@ class SymptomsQuestion extends Item {
         },
         {
           key: '23', role: 'input',
+          style: [{ key: 'maxLength', value: '160' }],
           content: new Map([
             ["en", "Other, namely:"],
             ["nl", "Anders, namelijk"],
@@ -1162,7 +1163,7 @@ class ContactGroup extends Group {
 
     this.Q7 = new Q7(this.key, true);
     this.Q7a = new Q7a(this.key, SurveyEngine.multipleChoice.any(this.Q7.key, this.Q7.optionKeys.gp), true);
-    this.Q7b = new Q7b(this.key, SurveyEngine.multipleChoice.none(this.key, '0', '5'), this.Q7.key, true);
+    this.Q7b = new Q7b(this.key, SurveyEngine.multipleChoice.none(this.Q7.key, '0', '5'), this.Q7.key, true);
   }
 
   buildGroup() {
@@ -1425,9 +1426,7 @@ class Q7b extends Item {
       ])
     );
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
+    editor.addDisplayComponent({
       role: 'text',
       content: generateLocStrings(
         new Map([
@@ -1435,7 +1434,10 @@ class Q7b extends Item {
           ['nl', 'Selecteer het juiste aantal dagen'],
           ["fr", "sélectionnez toutes les options applicables"],
         ])),
-    }, rg?.key);
+    })
+    // RESPONSE PART
+    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+
     const ddOptions: ResponseRowCell = {
       key: 'col1', role: 'dropDownGroup', items: [
         {
