@@ -320,6 +320,7 @@ class SymptomsQuestion extends Item {
         },
         {
           key: '23', role: 'input',
+          disabled: optionDisabled,
           style: [{ key: 'maxLength', value: '160' }],
           content: new Map([
             ["en", "Other, namely:"],
