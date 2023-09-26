@@ -1,8 +1,8 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { surveyKeys } from "../contants";
-import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, isCurrentISOWeekSmallerThan } from "../ruleUtils";
+import { assignIntervalSurvey, assignIntervalSurveyForQ4 } from "../ruleUtils";
+import { ParticipantFlags } from "../participantFlags";
 
-const quarterSwithOffset = 0;
 
 export const assignIntervalQuestionnaire_rules = {
   name: "assignIntervalQuestionnaire",
@@ -14,21 +14,22 @@ export const assignIntervalQuestionnaire_rules = {
           StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.interval)
         ),
       ),
-      StudyEngine.if(
-        isCurrentISOWeekSmallerThan(14, quarterSwithOffset),
-        assignIntervalSurveyForQ2(),
-        // else:
-        StudyEngine.if(
-          isCurrentISOWeekSmallerThan(27, quarterSwithOffset),
-          assignIntervalSurveyForQ3(),
-          // else:
-          StudyEngine.if(
-            isCurrentISOWeekSmallerThan(40, quarterSwithOffset),
-            assignIntervalSurveyForQ4(),
-            // else:
-            assignIntervalSurveyForQ1(),
-          )
-        )
+      StudyEngine.do(
+        StudyEngine.participantActions.updateFlag(
+          ParticipantFlags.intervalHidePregnancyQ.key,
+          ParticipantFlags.intervalHidePregnancyQ.values.true
+        ),
+        StudyEngine.participantActions.updateFlag(
+          ParticipantFlags.intervalHideVaccinationQ.key,
+          ParticipantFlags.intervalHideVaccinationQ.values.false
+        ),
+
+        // remove old instances of interval survey:
+        StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+        assignIntervalSurvey(
+          StudyEngine.getTsForNextISOWeek(40, 1693559081)
+        ),
       )
     ),
   ]

@@ -240,7 +240,7 @@ const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
   )
 )
 
-const assignIntervalSurvey = (reference: Expression) => StudyEngine.do(
+export const assignIntervalSurvey = (reference: Expression) => StudyEngine.do(
   ensureIntervalSurveyGroup(),
   StudyEngine.if(
     isIntervalFlagEq(1),
