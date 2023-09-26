@@ -247,17 +247,17 @@ const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
   // handle seasonal vaccination flags:
   StudyEngine.if(
     // if has any response:
-    StudyEngine.hasResponseKey(Interval.Q_flu_vaccine_interval.key, 'rg.scg'),
+    StudyEngine.hasResponseKey(Interval.VaccineGroup.Q_flu_vaccine_interval.key, 'rg.scg'),
     // then update flag:
     StudyEngine.if(
-      StudyEngine.singleChoice.any(Interval.Q_flu_vaccine_interval.key, "1"),
+      StudyEngine.singleChoice.any(Interval.VaccineGroup.Q_flu_vaccine_interval.key, "1"),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.no),
     ),
   ),
   StudyEngine.if(
     // if has any response:
-    StudyEngine.hasResponseKey(Interval.Q_covid_vaccine_interval.key, 'rg.scg'),
+    StudyEngine.hasResponseKey(Interval.VaccineGroup.Q_covid_vaccine_interval.key, 'rg.scg'),
     // then update flag:
     StudyEngine.if(
       StudyEngine.singleChoice.any(Intake.qNL_covidvac_curseason.key, "1"),

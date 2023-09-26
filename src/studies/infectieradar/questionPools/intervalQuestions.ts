@@ -334,7 +334,7 @@ export class Q_covid_vaccine_datum_interval extends Item {
 
 //  Question about pregnancy
 export class Q12 extends Item {
-  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q12');
     this.condition = condition;
     this.isRequired = isRequired;
