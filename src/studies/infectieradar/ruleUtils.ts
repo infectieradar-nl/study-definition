@@ -218,7 +218,7 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
  */
 const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number) => StudyEngine.participantActions.assignedSurveys.add(
   surveyKeys.interval,
-  'immediate',
+  'normal',
   StudyEngine.timestampWithOffset({ days: offsetWeeks * 7 }, reference),
   StudyEngine.timestampWithOffset({ days: (offsetWeeks + 4) * 7 }, reference),
 )
