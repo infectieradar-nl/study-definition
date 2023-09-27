@@ -106,8 +106,8 @@ export class QBirthdate extends Item {
     // QUESTION TEXT
     editor.setTitleComponent(
       generateTitleComponent(new Map([
-        ["en", "What is your date of birth (month and year)?"],
-        ["nl", "Wanneer ben je geboren (maand en jaar)?"],
+        ["en", "What is your date of birth (year and month)?"],
+        ["nl", "Wanneer ben je geboren (jaar en maand)?"],
       ]))
     );
 
