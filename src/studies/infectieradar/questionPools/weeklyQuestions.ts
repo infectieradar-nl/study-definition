@@ -805,7 +805,7 @@ class QFeverStart extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: -21427200 }) },
+            min: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: -2592000 }) }, 
             max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: 0 }) },
           },
           content: new Map([
