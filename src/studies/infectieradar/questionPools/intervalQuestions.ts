@@ -535,7 +535,7 @@ export class Q_CIS extends Item {
 
 ${cisImagineInline}
 
-`]
+**Klik hieronder je keuze aan:**`]
           ])
         })
       ],
@@ -715,7 +715,7 @@ export class Q_longsymptoms extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door een infectieziekte komen?"],
+        ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door een infectieziekte komen (bijvoorbeeld door een virus of bacterie)?"],
       ]),
       responseOptions: [
         {
@@ -727,27 +727,28 @@ export class Q_longsymptoms extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "Ja, nog een beetje klachten door een infectieziekte."],
+            ["nl", "Nee, wel gehad, maar nu niet meer."],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["nl", "Ja, nog veel klachten door een infectieziekte."],
+            ["nl", "Ja, nog een beetje klachten door een infectieziekte."],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Ja, nog zeer veel klachten door een infectieziekte."],
+            ["nl", "Ja, nog veel klachten door een infectieziekte."],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["nl", "Nee, nu niet meer."],
+            ["nl", "Ja, nog zeer veel klachten door een infectieziekte."],
           ])
         },
+        
       ],
     })
   }

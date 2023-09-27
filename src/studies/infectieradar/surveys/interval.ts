@@ -120,7 +120,8 @@ class Intro_long extends Item {
 We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid.
 Dit zijn typische klachten waar je last van kunt blijven houden na een besmetting.
 Maar je kan deze klachten ook krijgen door een andere reden.
-Daarom is het belangrijk dat we dit onderzoeken.
+Daarom is het belangrijk dat we dit onderzoeken. 
+Het maakt voor de vragen hieronder niet uit of jezelf wel of geen besmetting hebt gehad.
 `
 
   buildItem(): SurveySingleItem {
