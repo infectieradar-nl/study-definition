@@ -754,5 +754,71 @@ export class Q_longsymptoms extends Item {
   }
 }
 
+//Oorzaak van zelf-gerapporteerde post-infection symptoms
+export class Q_longsymptoms_condition extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
+    super(parentKey, 'Q_longsymptoms_condition');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Door welke infectieziekte denk je dat je langdurige gezondheidsklachten hebt?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "COVID-19 (Long COVID / Post-COVID"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Ziekte van Lyme"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Ziekte van Pfeiffer (Epstein-Barr virus)"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "Gordelroos / waterpokken"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "Q-koorts"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Polio"],
+          ])
+        },
+        {
+          key: '7', role: 'input',
+          content: new Map([
+            ["nl", "Anders, namelijk ..."],
+          ])
+        },
+        
+      ],
+    })
+  }
+}
+
 
 
