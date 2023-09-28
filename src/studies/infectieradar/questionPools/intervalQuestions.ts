@@ -775,7 +775,7 @@ export class Q_longsymptoms_condition extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "COVID-19 (Long COVID / Post-COVID"],
+            ["nl", "COVID-19 (Long COVID / Post-COVID)"],
           ])
         },
         {
@@ -793,7 +793,7 @@ export class Q_longsymptoms_condition extends Item {
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "Gordelroos / waterpokken"],
+            ["nl", "Gordelroos / Waterpokken"],
           ])
         },
         {
@@ -811,7 +811,7 @@ export class Q_longsymptoms_condition extends Item {
         {
           key: '7', role: 'input',
           content: new Map([
-            ["nl", "Anders, namelijk ..."],
+            ["nl", "Anders, namelijk"],
           ])
         },
         
