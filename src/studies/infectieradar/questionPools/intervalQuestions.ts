@@ -111,7 +111,7 @@ export class Q_flu_vaccine_datum_interval extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            min: { dtype: 'num', num: 1693551208 },
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -270,7 +270,7 @@ export class Q_covid_vaccine_datum_interval extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+            min: { dtype: 'num', num: 1693551208 },
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -810,6 +810,7 @@ export class Q_longsymptoms_condition extends Item {
         },
         {
           key: '7', role: 'input',
+          style: [{ key: 'maxLength', value: '160' }],
           content: new Map([
             ["nl", "Anders, namelijk"],
           ])
