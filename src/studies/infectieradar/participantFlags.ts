@@ -55,5 +55,45 @@ export const ParticipantFlags = {
       autoDeleted: 'auto-deleted'
     },
   },
+  seasonalFluVaccine: {
+    key: 'seasonalFluVaccine',
+    values: {
+      yes: 'yes',
+      no: 'no',
+    }
+  },
+  seasonalCovidVaccine: {
+    key: 'seasonalCovidVaccine',
+    values: {
+      yes: 'yes',
+      no: 'no',
+    }
+  },
+  gender: {
+    key: 'gender',
+    values: {
+      female: 'female',
+      male: 'male',
+      other: 'other',
+    },
+  },
+  intervalGroup: {
+    key: 'intervalGroup',
+    // value is a random number
+  },
+  intervalHidePregnancyQ: {
+    key: 'intervalHidePregnancyQ',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
+  },
+  intervalHideVaccinationQ: {
+    key: 'intervalHidePregnancyQ',
+    values: {
+      true: 'true',
+      false: 'false',
+    }
+  }
 }
 

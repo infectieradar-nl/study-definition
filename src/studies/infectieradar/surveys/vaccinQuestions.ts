@@ -1,4 +1,4 @@
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { surveyKeys } from '../contants';
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
@@ -29,8 +29,8 @@ class vaccinQuestionsSample extends SurveyDefinition {
 
     this.IntroText = new IntroText(this.key);
     this.covidvaccin = new covidvaccin(this.key, isRequired);
-      this.griepvaccin = new griepvaccin(this.key, isRequired);
-    this.FinalText= new FinalText(this.key);
+    this.griepvaccin = new griepvaccin(this.key, isRequired);
+    this.FinalText = new FinalText(this.key);
   }
 
   buildSurvey() {
@@ -57,7 +57,7 @@ class IntroText extends Item {
         ComponentGenerators.text({
           content: new Map([
             ["nl", "Het afgelopen seizoen is er iets misgegaan met het uitvragen van vaccinatie-informatie. Om dit te herstellen hebben we twee korte vragen.",
-          ]])
+            ]])
         }),
       ]
     })
@@ -102,7 +102,7 @@ export class covidvaccin extends Item {
             ["nl", "Dat weet ik niet (meer)"],
           ])
         },
-      ],            
+      ],
     })
   }
 }
@@ -145,7 +145,7 @@ export class griepvaccin extends Item {
             ["nl", "Dat weet ik niet (meer)"],
           ])
         },
-      ],            
+      ],
     })
   }
 }

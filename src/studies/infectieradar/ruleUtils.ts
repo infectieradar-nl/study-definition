@@ -212,3 +212,188 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(surveyKey, 'all'),
 )
+
+/**
+ * Interval survey methods:
+ */
+const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number) => StudyEngine.participantActions.assignedSurveys.add(
+  surveyKeys.interval,
+  'normal',
+  StudyEngine.timestampWithOffset({ days: offsetWeeks * 7 }, reference),
+  StudyEngine.timestampWithOffset({ days: (offsetWeeks + 4) * 7 }, reference),
+)
+
+const isIntervalFlagEq = (value: number) => StudyEngine.eq(
+  StudyEngine.participantState.getParticipantFlagValueAsNum(
+    ParticipantFlags.intervalGroup.key
+  ),
+  value
+)
+
+const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
+  StudyEngine.not(
+    StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.intervalGroup.key)
+  ),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalGroup.key,
+    StudyEngine.generateRandomNumber(1, 12)
+  )
+)
+
+export const assignIntervalSurvey = (reference: Expression) => StudyEngine.do(
+  ensureIntervalSurveyGroup(),
+  StudyEngine.if(
+    isIntervalFlagEq(1),
+    addIntervalSurveyWithOffset(reference, 0),
+    StudyEngine.if(
+      isIntervalFlagEq(2),
+      addIntervalSurveyWithOffset(reference, 1),
+      StudyEngine.if(
+        isIntervalFlagEq(3),
+        addIntervalSurveyWithOffset(reference, 2),
+        StudyEngine.if(
+          isIntervalFlagEq(4),
+          addIntervalSurveyWithOffset(reference, 3),
+          StudyEngine.if(
+            isIntervalFlagEq(5),
+            addIntervalSurveyWithOffset(reference, 4),
+            StudyEngine.if(
+              isIntervalFlagEq(6),
+              addIntervalSurveyWithOffset(reference, 5),
+              StudyEngine.if(
+                isIntervalFlagEq(7),
+                addIntervalSurveyWithOffset(reference, 6),
+                StudyEngine.if(
+                  isIntervalFlagEq(8),
+                  addIntervalSurveyWithOffset(reference, 7),
+                  StudyEngine.if(
+                    isIntervalFlagEq(9),
+                    addIntervalSurveyWithOffset(reference, 8),
+                    StudyEngine.if(
+                      isIntervalFlagEq(10),
+                      addIntervalSurveyWithOffset(reference, 9),
+                      StudyEngine.if(
+                        isIntervalFlagEq(11),
+                        addIntervalSurveyWithOffset(reference, 10),
+                        addIntervalSurveyWithOffset(reference, 11),
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+export const isCurrentISOWeekSmallerThan = (week: number, offsetWeeks: number) => {
+  return StudyEngine.lt(
+    StudyEngine.getISOWeekForTs(StudyEngine.timestampWithOffset({ days: offsetWeeks * 7 })),
+    week
+  )
+}
+
+
+const isCurrentIntervalStartISOWeekSmallerThan = (week: number) => {
+  return StudyEngine.lt(
+    StudyEngine.getISOWeekForTs(
+      StudyEngine.participantState.getSurveyKeyAssignedFrom(surveyKeys.interval)
+    ),
+    week
+  )
+}
+
+export const reassignIntervalSurvey = () => StudyEngine.do(
+  StudyEngine.if(
+    isCurrentIntervalStartISOWeekSmallerThan(14),
+    assignIntervalSurveyForQ2(),
+    // else:
+    StudyEngine.if(
+      isCurrentIntervalStartISOWeekSmallerThan(27),
+      assignIntervalSurveyForQ3(),
+      // else:
+      StudyEngine.if(
+        isCurrentIntervalStartISOWeekSmallerThan(40),
+        assignIntervalSurveyForQ4(),
+        // else:
+        assignIntervalSurveyForQ1(),
+      )
+    )
+  )
+)
+
+export const assignIntervalSurveyForQ1 = () => StudyEngine.do(
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHidePregnancyQ.key,
+    ParticipantFlags.intervalHidePregnancyQ.values.false
+  ),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHideVaccinationQ.key,
+    ParticipantFlags.intervalHideVaccinationQ.values.false
+  ),
+
+  // remove old instances of interval survey:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+  assignIntervalSurvey(
+    StudyEngine.getTsForNextISOWeek(1)
+  ),
+)
+
+export const assignIntervalSurveyForQ2 = () => StudyEngine.do(
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHidePregnancyQ.key,
+    ParticipantFlags.intervalHidePregnancyQ.values.true
+  ),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHideVaccinationQ.key,
+    ParticipantFlags.intervalHideVaccinationQ.values.true
+  ),
+
+  // remove old instances of interval survey:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+  assignIntervalSurvey(
+    StudyEngine.getTsForNextISOWeek(14)
+  ),
+)
+
+export const assignIntervalSurveyForQ3 = () => StudyEngine.do(
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHidePregnancyQ.key,
+    ParticipantFlags.intervalHidePregnancyQ.values.false
+  ),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHideVaccinationQ.key,
+    ParticipantFlags.intervalHideVaccinationQ.values.true
+  ),
+
+  // remove old instances of interval survey:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+  assignIntervalSurvey(
+    StudyEngine.getTsForNextISOWeek(27)
+  ),
+)
+
+export const assignIntervalSurveyForQ4 = () => StudyEngine.do(
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHidePregnancyQ.key,
+    ParticipantFlags.intervalHidePregnancyQ.values.true
+  ),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.intervalHideVaccinationQ.key,
+    ParticipantFlags.intervalHideVaccinationQ.values.false
+  ),
+
+  // remove old instances of interval survey:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+  assignIntervalSurvey(
+    StudyEngine.getTsForNextISOWeek(40)
+  ),
+)
+

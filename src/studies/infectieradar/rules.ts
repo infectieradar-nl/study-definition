@@ -6,19 +6,36 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
-import { handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic } from "./ruleUtils";
+import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
+import { Interval } from "./surveys/interval";
 
-
+const quarterSwithOffset = 2 // weeks
 
 /**
  * Define what should happen, when persons enter the study first time:
  */
 const entryRules: Expression[] = [
-  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal')
+  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal'),
+  StudyEngine.if(
+    isCurrentISOWeekSmallerThan(14, quarterSwithOffset),
+    assignIntervalSurveyForQ2(),
+    // else:
+    StudyEngine.if(
+      isCurrentISOWeekSmallerThan(27, quarterSwithOffset),
+      assignIntervalSurveyForQ3(),
+      // else:
+      StudyEngine.if(
+        isCurrentISOWeekSmallerThan(40, quarterSwithOffset),
+        assignIntervalSurveyForQ4(),
+        // else:
+        assignIntervalSurveyForQ1(),
+      )
+    )
+  )
 ];
 
 
@@ -36,8 +53,14 @@ const handleIntake = StudyEngine.ifThen(
     ),
     StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio')
   ),
+
   StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
-  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal', StudyEngine.timestampWithOffset({ years: 1 })),
+  StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal',
+    StudyEngine.getTsForNextISOWeek(
+      23,
+      StudyEngine.timestampWithOffset({ days: 4 * 7 })
+    )
+  ),
 
   StudyEngine.if(
     StudyEngine.singleChoice.any(Intake.QMainActivity.key, "7"),
@@ -47,6 +70,32 @@ const handleIntake = StudyEngine.ifThen(
 
   // Set vaccination flag with current time, so that weekly survey can use the value:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.lastReplyToVaccination.key, StudyEngine.timestampWithOffset({ days: 0 })),
+
+  // Set seasonal vaccination flags:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.Q10.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.no),
+  ),
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.qNL_covidvac_curseason.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.yes),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.no),
+  ),
+
+  // Set gender flag:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Intake.QGender.key, "1"),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.female),
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Intake.QGender.key, "0"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.male),
+      StudyEngine.if(
+        StudyEngine.singleChoice.any(Intake.QGender.key, "2"),
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.gender.key, ParticipantFlags.gender.values.other),
+      )
+    )
+  )
 )
 
 const handleWeekly = StudyEngine.ifThen(
@@ -190,6 +239,40 @@ const handlevaccinQuestions = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.vaccinQuestions, 'all'),
 )
 
+const handleIntervalQuestionnaireSubmission = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey(surveyKeys.interval),
+  // THEN:
+  reassignIntervalSurvey(),
+
+  // handle seasonal vaccination flags:
+  StudyEngine.if(
+    // if has any response:
+    StudyEngine.hasResponseKey(Interval.VaccineGroup.Q_flu_vaccine_interval.key, 'rg.scg'),
+    // then update flag:
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Interval.VaccineGroup.Q_flu_vaccine_interval.key, "1"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.yes),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalFluVaccine.key, ParticipantFlags.seasonalFluVaccine.values.no),
+    ),
+  ),
+  StudyEngine.if(
+    // if has any response:
+    StudyEngine.hasResponseKey(Interval.VaccineGroup.Q_covid_vaccine_interval.key, 'rg.scg'),
+    // then update flag:
+    StudyEngine.if(
+      StudyEngine.singleChoice.any(Intake.qNL_covidvac_curseason.key, "1"),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.yes),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.seasonalCovidVaccine.key, ParticipantFlags.seasonalCovidVaccine.values.no),
+    ),
+  ),
+)
+
+export const handleIntervalQuestionnaireExpired = () => StudyEngine.ifThen(
+  isSurveyExpired(surveyKeys.interval),
+  // Then:
+  reassignIntervalSurvey()
+)
+
 
 const submitRules: Expression[] = [
   handleIntake,
@@ -199,13 +282,15 @@ const submitRules: Expression[] = [
   handleSwabSample,
   handleSwabNotSelected,
   handleQuitSwabbing,
-  handlevaccinQuestions
+  handlevaccinQuestions,
+  handleIntervalQuestionnaireSubmission
 ];
 
 const timerRules: Expression[] = [
   autoRemoveContactData,
   handleExpired_removeSurvey(SwabSample.key),
   handleExpired_removeSurvey(SwabNotSelected.key),
+  handleIntervalQuestionnaireExpired(),
 ]
 
 /**

@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.12.tgz#e3bfea80e31523fde4292a6118f19ffa24fd6f65"
   integrity sha512-vzLe5NaNMjIE3mcddFVGlAXN1LEWueUsMsOJWaT6wWMJGyljHAWHznqfnKUQWGzu7TLPrGvWdNAsvQYW+C0xtw==
 
-case-editor-tools@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.5.1.tgz#fac3d702a0182cd380aaf1e231a9c1d6c0c9815b"
-  integrity sha512-uDc8Stgzcqv8U/E+G0phaQkKwGE1Xof9ctBnMhxdQp0cdnK/dQfIbPBZ9TZsvOqJintrQU7YuZVmASKKWxJILQ==
+case-editor-tools@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.6.4.tgz#fa8635cc24d639daba3d7c5ebac332603dcbeda2"
+  integrity sha512-h1/r6AY5H0VEPkaudHR74rnp43lHTrkdPp2gG8uCjbH/MFvXW36cQdjpPynl8jBt6/qnPAmOOSaWFy0e0eGzEA==
   dependencies:
     survey-engine "^1.2.0"
 
