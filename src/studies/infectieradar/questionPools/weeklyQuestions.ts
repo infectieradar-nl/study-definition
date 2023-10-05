@@ -2224,22 +2224,22 @@ class Q11 extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
         ["en", "What do you think is the main reason causing your symptoms?"],
-        ["nl", "Wat is volgens jou de belangrijkste reden van je klachten??"],
+        ["nl", "Wat is volgens jou de belangrijkste reden van je klachten?"],
       ]),
       responseOptions: [
         {
           key: '0', role: 'option',
           content: new Map([
             ["en", "Flu or flu-like illness"],
-            ["nl", "Ja, ik heb griep, of griepachtige verschijnselen"],
-            ["fr", " Grippe ou syndrome pseudo-grippal"],
+            ["nl", "Ik heb griep, of griepachtige verschijnselen"],
+            ["fr", "Grippe ou syndrome pseudo-grippal"],
           ])
         },
         {
           key: '1', role: 'option',
           content: new Map([
             ["en", "Common cold"],
-            ["nl", "Ja, ik ben verkouden"],
+            ["nl", "Ik ben verkouden"],
             ["fr", "Rhume / refroidissement"],
           ])
         },
@@ -2247,22 +2247,22 @@ class Q11 extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "Allergy/hay fever"],
-            ["nl", "Ja ik heb last van een allergie/ hooikoorts"],
-            ["fr", " Allergie / rhume des foins"],
+            ["nl", "Ik heb last van een allergie/ hooikoorts"],
+            ["fr", "Allergie / rhume des foins"],
           ])
         },
         {
           key: '6', role: 'option',
           content: new Map([
             ["en", "Asthma"],
-            ["nl", "Ja, ik heb last van astma"],
+            ["nl", "Ik heb last van astma"],
             ["fr", "Asthme"],
           ])
         }, {
           key: '3', role: 'option',
           content: new Map([
             ["en", "Gastroenteritis/gastric flu"],
-            ["nl", "Ja, ik heb maag-darmklachten of buikgriep"],
+            ["nl", "Ik heb maag-darmklachten of buikgriep"],
             ["fr", "Gastro-entérite / grippe intestinale"],
           ])
         },
@@ -2270,29 +2270,29 @@ class Q11 extends Item {
           key: '9', role: 'option',
           content: new Map([
             ["en", "Coronavirus or corona-like illness"],
-            ["nl", "Ja, ik heb corona, of corona-achtige verschijnselen"],
+            ["nl", "Ik heb corona, of corona-achtige verschijnselen"],
             ["fr", "Coronavirus"],
           ])
         },
         {
           key: '10', role: 'option',
           content: new Map([
-            ["en", "Yes, because I got vaccinated"],
-            ["nl", "Ja, ik heb een vaccinatie gehad die de klachten heeft veroorzaakt"],
+            ["en", "Because I got vaccinated"],
+            ["nl", "Ik heb een vaccinatie gehad die de klachten heeft veroorzaakt"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
             ["en", "Other"],
-            ["nl", "Ja, ik heb een andere ziekte of reden die de klachten hebben veroorzaakt"],
+            ["nl", "Ik heb een andere ziekte of reden die de klachten hebben veroorzaakt"],
             ["fr", "Autre"],
           ])
         }, {
           key: '5', role: 'option',
           content: new Map([
             ["en", "I don't know"],
-            ["nl", "Nee, ik heb geen idee"],
+            ["nl", "Ik heb geen idee"],
             ["fr", "Je ne sais pas"],
           ])
         },
