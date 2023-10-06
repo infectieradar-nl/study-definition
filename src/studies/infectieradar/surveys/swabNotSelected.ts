@@ -105,7 +105,7 @@ class RecommendTest extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-## Doe alsjeblief een coronazelftest. 
+## Doe alsjeblieft een coronazelftest. 
 
 Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster, maar we vragen je wel om een coronazelftest te doen. 
 Dit omdat je klachten hebt die duiden op een luchtweginfectie. 
