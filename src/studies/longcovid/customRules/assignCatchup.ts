@@ -20,7 +20,7 @@ const assignSurveyFromStudyStart = (
 }
 
 
-export const assignT15Retroactively_rules = {
+export const assignCatchupRetroactively_rules = {
   name: "assignCatchupRetroactively",
   rules: [
     StudyEngine.ifThen(

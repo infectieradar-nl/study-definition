@@ -1,6 +1,6 @@
 import { Study } from "case-editor-tools/types/study";
 import { assignT15Retroactively_rules } from "./customRules/assignT15";
-import { assignCatchupRetroactively_rules } from "./customRules/assignStopContinue";
+import { assignCatchupRetroactively_rules } from "./customRules/assignCatchup";
 import { flagFinishedParticipants_rules, cleanUpT0FromFinishedParticipants_rules } from "./customRules/flagFinishedParticipants";
 import { inviteToExternalStudy_rules } from "./customRules/inviteToExternalStudy";
 import { flagcatchupParticipants_rules } from "./customRules/flagCathupParticipants";
