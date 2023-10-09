@@ -1,72 +1,51 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 
-// Assing the flag Get_Catch_up to participants that have T9, but not T12 
-export const flagcatchupParticipants_rules = {
-    name: "flagcatchupParticipants",
+export const flagFinishedParticipants_rules = {
+    name: "flagFinishedParticipants",
     rules: [
-        // Condition 1, participant answerd yes on T12.DEM.extend_FU
         StudyEngine.if(
-            
-             // If The participant missed a qeustionaire:
-             StudyEngine.and(
-             StudyEngine(StudyEngine.participantState.hasParticipantFlagKey('expired')
-             )),
- 
- 
-             // can we also use studyexpression.checkSurveyResponsekey(surveykeys, T9)
-             //StudyEngine.and(StudyEngine.participantState.hasParticipantFlagKey('T9')),
-             StudyEngine.and(
-             StudyEngine.participantActions.checkSurveyResponsekey('T0')),
-
-
-            StudyEngine.not(
+            // If:
+            StudyEngine.and(
                 StudyEngine.checkConditionForOldResponses(
-                StudyEngine.singleChoice.any(
-                  'T12.DEM.extend_FU', 'ja'
+                    StudyEngine.singleChoice.any('T12.TEST.Q11', 'nee', 'ja', 'notanymore'),
+                    "any", "T12"
                 ),
-                'any', 'T12'
-              ),
-            )
-
-
-    
-
-        ),
+                StudyEngine.not(
+                    StudyEngine.checkConditionForOldResponses(
+                        StudyEngine.singleChoice.any('T12.DEM.extend_FU', 'ja'),
+                        "any", "T12"
+                    ),
+                )
+            ),
             // Then:
-            StudyEngine.do(StudyEngine.participantActions.updateFlag('GetCatchup'),
+            StudyEngine.do(
+                StudyEngine.participantActions.updateFlag('debug', 'shouldHaveFinished_A'),
             )
+        ),
+        StudyEngine.if(
+            StudyEngine.and(
+                StudyEngine.checkConditionForOldResponses(
+                    StudyEngine.singleChoice.any('T12c.TEST.Q11', 'nee', 'ja', 'notanymore'),
+                    "any", "T12c"
+                ),
+                StudyEngine.not(
+                    StudyEngine.checkConditionForOldResponses(
+                        StudyEngine.singleChoice.any('T12c.DEM.extend_FU', 'ja'),
+                        "any", "T12c"
+                    ),
+                )
+            ),
+            // Then:
+            StudyEngine.do(
+                StudyEngine.participantActions.updateFlag('debug', 'shouldHaveFinished_C'),
+            )
+        )
     ]
 }
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// is this needed for us????
-export const cleanUpT0FromcatchupParticipants_rules = {
-    name: "cleanUpT0FromcatchupParticipants",
+export const cleanUpT0FromFinishedParticipants_rules = {
+    name: "cleanUpT0FromFinishedParticipants",
     rules: [
         StudyEngine.if(
             StudyEngine.participantState.hasParticipantFlagKeyAndValue('debug', 'shouldHaveFinished_A'),
