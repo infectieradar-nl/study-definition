@@ -1,6 +1,6 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
-const flagKey = 'T15fixApplied';
+const flagKey = 'GetCatchup';
 
 const timestampFromStudyStart = (daysDelta: number) => {
   return StudyEngine.timestampWithOffset(
@@ -21,31 +21,24 @@ const assignSurveyFromStudyStart = (
 
 
 export const assignT15Retroactively_rules = {
-  name: "assignT15Retroactively",
+  name: "assignCatchupRetroactively",
   rules: [
     StudyEngine.ifThen(
-      // IF extendFU == ja
-      StudyEngine.and(
-        StudyEngine.checkConditionForOldResponses(
-          StudyEngine.singleChoice.any(
-            'T12.DEM.extend_FU', 'ja'
-          ),
-          'any', 'T12'
-        ),
-        StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKey(flagKey))
-      ),
-      // MAKE SURE WE HAVE ONLY ONE T15:
-      StudyEngine.participantActions.assignedSurveys.remove('T15', 'all'),
-      // ASSIGN T15 from study start:
-      assignSurveyFromStudyStart('T15', "prio", 450, 42),
-      // REMOVE exitFlag
-      StudyEngine.participantActions.removeFlag('exitStatus'),
+      // IF has flag catch-up
+      StudyEngine.if(StudyEngine.participantState.hasParticipantFlagKey(flagKey)),
+      // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+      assignSurveyFromStudyStart('Tstopcontinue', "prio", 360, 360),
       // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
       StudyEngine.participantActions.updateFlag(
-        flagKey,
+        'catchupassigned',
         StudyEngine.timestampWithOffset({ days: 0 })
       )
     )
 
   ]
 }
+
+
+
+
+
