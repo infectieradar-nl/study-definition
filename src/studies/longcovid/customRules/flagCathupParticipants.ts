@@ -1,7 +1,7 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 
-// Assing the flag Get_Catch_up to participants that have T9, but not T12
+
 export const flagcatchupParticipants_rules = {
   name: "flagcatchupParticipants",
   rules: [
@@ -10,12 +10,18 @@ export const flagcatchupParticipants_rules = {
       StudyEngine.and(
         // If The participant missed a qeustionaire:
         StudyEngine.participantState.hasParticipantFlagKey('expired'),
-        // If they started the study:
-        StudyEngine.participantState.lastSubmissionDateOlderThan(
-          StudyEngine.timestampWithOffset({ days: 0 }),
-          'T0'
+        // Assing the flag Get_Catch_up to participants that have T9, but not T12
+        StudyEngine.or(
+          StudyEngine.participantState.lastSubmissionDateOlderThan(
+            StudyEngine.timestampWithOffset({ days: 0 }),
+            'T9'
+          ),
+          StudyEngine.participantState.lastSubmissionDateOlderThan(
+            StudyEngine.timestampWithOffset({ days: 0 }),
+            'T9c'
+          ),
         ),
-        // If participant answerd yes on T12.DEM.extend_FU
+        // If participant didn't answer yes on T12.DEM.extend_FU
         StudyEngine.not(
           StudyEngine.checkConditionForOldResponses(
             StudyEngine.singleChoice.any(
