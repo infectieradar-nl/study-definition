@@ -236,7 +236,7 @@ const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
   ),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalGroup.key,
-    StudyEngine.generateRandomNumber(1, 12)
+    StudyEngine.generateRandomNumber(1, 13)
   )
 )
 
@@ -275,7 +275,11 @@ export const assignIntervalSurvey = (reference: Expression) => StudyEngine.do(
                       StudyEngine.if(
                         isIntervalFlagEq(11),
                         addIntervalSurveyWithOffset(reference, 10),
-                        addIntervalSurveyWithOffset(reference, 11),
+                        StudyEngine.if(
+                          isIntervalFlagEq(12),
+                          addIntervalSurveyWithOffset(reference, 11),
+                          addIntervalSurveyWithOffset(reference, 12),
+                        )
                       )
                     )
                   )
