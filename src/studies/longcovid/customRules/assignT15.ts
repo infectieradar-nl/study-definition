@@ -20,8 +20,8 @@ const assignSurveyFromStudyStart = (
 }
 
 
-export const assignT15Retroactively_rules = {
-  name: "assignT15Retroactively",
+export const assignT15_rules = {
+  name: "assignT15",
   rules: [
     StudyEngine.ifThen(
       // IF extendFU == ja
