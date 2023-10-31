@@ -557,6 +557,8 @@ class Q3 extends Item {
   }
 }
 
+
+
 class Q4 extends Item {
   optionKeys = {
     stillIll: '2'
@@ -2403,5 +2405,136 @@ export class QWithin24hours extends Item {
         },
       ]
     })
+  }
+}
+
+
+
+class Q_origin_infect extends Item {
+  
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'Q_origin_infect');
+
+    this.isRequired = isRequired;
+    this.condition = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.no);
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      helpGroupContent: this.getHelpGroupContent(),
+      questionText: new Map([
+        ["en", ""],
+        ["nl", "Weet je ook waar je de infectie mogelijk bent opgelopen?"],
+      ]),
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "Yes"],
+            ["nl", "Nee, geen idee"],
+
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "No"],
+            ["nl", "Ja, opgelopen in het buitenland"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, thuis opgelopen door een gezinslid of huisgenoot"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, thuis opgelopen door iemand die op bezoek was"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, op het werk opgelopen (= je werk bijv. klanten, collega's)"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, op school opgelopen (= onderwijsinstellingen bijv. docenten, klasgenoten"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, tijdens een activiteit in mijn vrije tijd (geplande activiteiten met anderen bijv. mensen die je ontmoet in een café, wandeling, sport(school) of bij iemand anders thuis)"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Ja, maar niet op een plek die hierboven is genoemd (bijv. mensen die je ontmoet in het openbaar vervoer of winkel)"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["en", "I don't know/can't remember"],
+            ["nl", "Wil ik niet aangeven"],
+          ])
+        }
+      ],
+    })
+  }
+
+  getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "To make filling out the rest of the survey quicker for you."],
+          ["nl", "Om te bepalen of je klachten worden veroorzaakt door (mogelijk) een nieuwe of dezelfde infectie als de vorige keer."],
+          ["fr", "Afin que vous puissiez remplir le reste de l'enquête plus rapidement."],
+          ["nl-be", "Om het invullen van de rest van de vragenlijst te versnellen."],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["en", "How should I answer it?"],
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ["fr", "Comment devez-vous répondre?"],
+          ["nl-be", "Hoe moet ik deze vraag beantwoorden?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["en", "If you believe that the symptoms you have reported today are caused by the same bout of illness as your previous symptoms, please tick “yes”."],
+          ["nl", "Als je denkt dat de klachten die je vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'"],
+          ["fr", "Si vous pensez que les symptômes que vous avez déclarés aujourd'hui sont causés par le même épisode de maladie que vos symptômes précédents, s'il vous plaît cochez «oui» . Pour gagner du temps, nous avons rempli les informations que vous nous avez déjà fournies sur votre maladie.  S'il vous plaît, vérifiez qu'elles sont toujours correctes ou faites les modifications nécessaires si, par exemple, vous avez consulté un médecin ou pris plus de temps hors travail depuis la dernière fois que vous avez répondu au questionnaire."],
+          ["nl-be", "Als u denkt dat de klachten die u vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'. Sommige antwoorden zijn dan alvast ingevuld op basis van de antwoorden van vorige keer. Kunt u controleren of deze nog steeds kloppen? Bijvoorbeeld of u nu wel naar de huisarts bent geweest of niet naar het werk bent geweest."],
+        ]),
+      },
+    ]
   }
 }
