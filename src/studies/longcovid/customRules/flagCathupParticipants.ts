@@ -9,7 +9,7 @@ export const flagcatchupParticipants_rules = {
       // condition:
       StudyEngine.and(
         // If The participant missed a qeustionaire:
-        StudyEngine.participantState.hasParticipantFlagKey('expired'),
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('exitStatus', 'expired'),
         // Assing the flag Get_Catch_up to participants that have T9, but not T12
         StudyEngine.or(
           StudyEngine.participantState.lastSubmissionDateOlderThan(
