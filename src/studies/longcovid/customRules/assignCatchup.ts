@@ -45,32 +45,35 @@ export const assignCatchupAdult_rules = {
   name: "assignCatchupA",
   rules: [
     StudyEngine.if(
-     //condition
-     StudyEngine.participantState.hasParticipantFlagKey(flagKey),
-     //Is an Adult
-     StudyEngine.and(
-      StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'A'),
+      //condition
+      StudyEngine.and(
+        // should get catchup:
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('noCatchup', 'GetCatchup'),
+        // and Is an Adult:
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'A'),
+        // and has not been assigned catchup before:
+        StudyEngine.not(
+          StudyEngine.participantState.hasSurveyKeyAssigned('Tstopcontinue'),
+        ),
+        // For acceptance environment:
+        StudyEngine.not(
+          StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -14 }))
+        )
       ),
       //then
-     StudyEngine.do(
-      // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
-      assignSurveyFromStudyStart('Tstopcontinue', "prio", 360, 360),
-      // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
-      StudyEngine.participantActions.updateFlag(
-        'catchupassigned',
-        StudyEngine.timestampWithOffset({ days: 0 })
-      ),
+      StudyEngine.do(
+        // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+        StudyEngine.participantActions.assignedSurveys.add(
+          'Tstopcontinue',
+          'prio',
+        ),
+        // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
+        StudyEngine.participantActions.updateFlag(
+          'catchupassigned',
+          StudyEngine.timestampWithOffset({ days: 0 })
+        ),
       )
-
-
-
-
-
-
-     ) 
-    
-    
-
+    )
   ]
 }
 
@@ -80,21 +83,21 @@ export const assignCatchupChild_rules = {
   name: "assignCatchupC",
   rules: [
     StudyEngine.if(
-     //condition
-     StudyEngine.participantState.hasParticipantFlagKey(flagKey),
-     //its a child
-     StudyEngine.and(
-     StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'C'),
-     ),
-     //then
-     StudyEngine.do(
-     // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
-     assignSurveyFromStudyStart('Tstopcontinuec', "prio", 360, 360),
-     // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
-     StudyEngine.participantActions.updateFlag(
-        'catchupassigned',
-        StudyEngine.timestampWithOffset({ days: 0 })
+      //condition
+      StudyEngine.participantState.hasParticipantFlagKey(flagKey),
+      //its a child
+      StudyEngine.and(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'C'),
       ),
+      //then
+      StudyEngine.do(
+        // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+        assignSurveyFromStudyStart('Tstopcontinuec', "prio", 360, 360),
+        // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
+        StudyEngine.participantActions.updateFlag(
+          'catchupassigned',
+          StudyEngine.timestampWithOffset({ days: 0 })
+        ),
       )
 
 
@@ -102,9 +105,9 @@ export const assignCatchupChild_rules = {
 
 
 
-     ) 
-    
-    
+    )
+
+
 
   ]
 }
