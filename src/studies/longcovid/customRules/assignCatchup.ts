@@ -40,5 +40,71 @@ export const assignCatchupRetroactively_rules = {
 
 
 
+///Example of function that selects only adult participants//
+export const assignCatchupAdult_rules = {
+  name: "assignCatchupA",
+  rules: [
+    StudyEngine.if(
+     //condition
+     StudyEngine.participantState.hasParticipantFlagKey(flagKey),
+     //Is an Adult
+     StudyEngine.and(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'A'),
+      ),
+      //then
+     StudyEngine.do(
+      // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+      assignSurveyFromStudyStart('Tstopcontinue', "prio", 360, 360),
+      // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
+      StudyEngine.participantActions.updateFlag(
+        'catchupassigned',
+        StudyEngine.timestampWithOffset({ days: 0 })
+      ),
+      )
 
 
+
+
+
+
+     ) 
+    
+    
+
+  ]
+}
+
+
+///Example of function that selects only adult participants
+export const assignCatchupChild_rules = {
+  name: "assignCatchupC",
+  rules: [
+    StudyEngine.if(
+     //condition
+     StudyEngine.participantState.hasParticipantFlagKey(flagKey),
+     //its a child
+     StudyEngine.and(
+     StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'C'),
+     ),
+     //then
+     StudyEngine.do(
+     // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+     assignSurveyFromStudyStart('Tstopcontinuec', "prio", 360, 360),
+     // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
+     StudyEngine.participantActions.updateFlag(
+        'catchupassigned',
+        StudyEngine.timestampWithOffset({ days: 0 })
+      ),
+      )
+
+
+
+
+
+
+     ) 
+    
+    
+
+  ]
+}
