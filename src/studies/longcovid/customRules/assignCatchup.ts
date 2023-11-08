@@ -20,29 +20,29 @@ const assignSurveyFromStudyStart = (
 }
 
 
-export const assignCatchupRetroactively_rules = {
-  name: "assignCatchup",
-  rules: [
-    StudyEngine.ifThen(
+//export const assignCatchupRetroactively_rules = {
+  //name: "assignCatchup",
+  //rules: [
+    //StudyEngine.ifThen(
       // IF has flag catch-up
-      StudyEngine.participantState.hasParticipantFlagKey(flagKey),
+      //StudyEngine.participantState.hasParticipantFlagKey(flagKey),
       // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
-      assignSurveyFromStudyStart('Tstopcontinue', "prio", 360, 360),
+      //assignSurveyFromStudyStart('Tstopcontinue', "prio", 360, 360),
       // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
-      StudyEngine.participantActions.updateFlag(
-        'catchupassigned',
-        StudyEngine.timestampWithOffset({ days: 0 })
-      )
-    )
+      //StudyEngine.participantActions.updateFlag(
+        //'catchupassigned',
+        //StudyEngine.timestampWithOffset({ days: 0 })
+      //)
+    //)
 
-  ]
-}
+  //]
+//}
 
 
 
-///Example of function that selects only adult participants//
-export const assignCatchupAdult_rules = {
-  name: "assignCatchupA",
+///Working version of function that selects only adult participants//
+export const assignCatchupRetroactively_rules = {
+  name: "assignCatchup_WV",
   rules: [
     StudyEngine.if(
       //condition
@@ -67,6 +67,7 @@ export const assignCatchupAdult_rules = {
           'Tstopcontinue',
           'prio',
         ),
+        // Assign a message 
         StudyEngine.participantActions.messages.add('Tstopcontinue', StudyEngine.timestampWithOffset({ days: 0 })),
         // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
         StudyEngine.participantActions.updateFlag(
@@ -78,37 +79,3 @@ export const assignCatchupAdult_rules = {
   ]
 }
 
-
-///Example of function that selects only adult participants
-export const assignCatchupChild_rules = {
-  name: "assignCatchupC",
-  rules: [
-    StudyEngine.if(
-      //condition
-      StudyEngine.participantState.hasParticipantFlagKey(flagKey),
-      //its a child
-      StudyEngine.and(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'C'),
-      ),
-      //then
-      StudyEngine.do(
-        // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
-        assignSurveyFromStudyStart('Tstopcontinuec', "prio", 360, 360),
-        // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
-        StudyEngine.participantActions.updateFlag(
-          'catchupassigned',
-          StudyEngine.timestampWithOffset({ days: 0 })
-        ),
-      )
-
-
-
-
-
-
-    )
-
-
-
-  ]
-}
