@@ -67,6 +67,7 @@ export const assignCatchupAdult_rules = {
           'Tstopcontinue',
           'prio',
         ),
+        StudyEngine.participantActions.messages.add('Tstopcontinue', StudyEngine.timestampWithOffset({ days: 0 })),
         // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
         StudyEngine.participantActions.updateFlag(
           'catchupassigned',
