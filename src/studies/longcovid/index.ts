@@ -7,6 +7,7 @@ import { inviteToExternalStudy_rules } from "./customRules/inviteToExternalStudy
 import { flagcatchupParticipants_rules } from "./customRules/flagCathupParticipants";
 import { resetcatchupParticipants_rules } from "./customRules/ResetCatchupFlag";
 import { addExitStatusFlagExpired_rules } from "./customRules/addExitStatusFlagExpired";
+import { flagcatchupParticipants_Troubleshooting_rules } from "./customRules/flagCathupParticipants_Troubleshooting";
 
 export const LongCovidStudy: Study = {
   studyKey: 'longcovid',
@@ -23,6 +24,7 @@ export const LongCovidStudy: Study = {
     // assignCatchupRetroactivelyTEST_rules,
     flagcatchupParticipants_rules,
     addExitStatusFlagExpired_rules,
-    resetcatchupParticipants_rules
+    resetcatchupParticipants_rules,
+    flagcatchupParticipants_Troubleshooting_rules
   ]
 }
