@@ -1,6 +1,7 @@
 import { Study } from "case-editor-tools/types/study";
 import { assignT15_rules } from "./customRules/assignT15";
 import { assignCatchupRetroactively_rules } from "./customRules/assignCatchup";
+import { assignCatchupRetroactivelyc_rules } from "./customRules/assignCatchup_c";
 // import { assignCatchupRetroactivelyTEST_rules } from "./customRules/assignCatchupTEST";
 import { flagFinishedParticipants_rules, cleanUpT0FromFinishedParticipants_rules } from "./customRules/flagFinishedParticipants";
 import { inviteToExternalStudy_rules } from "./customRules/inviteToExternalStudy";
@@ -25,6 +26,7 @@ export const LongCovidStudy: Study = {
     flagcatchupParticipants_rules,
     addExitStatusFlagExpired_rules,
     resetcatchupParticipants_rules,
-    flagcatchupParticipants_Troubleshooting_rules
+    flagcatchupParticipants_Troubleshooting_rules,
+    assignCatchupRetroactivelyc_rules
   ]
 }
