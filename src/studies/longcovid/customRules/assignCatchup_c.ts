@@ -20,20 +20,42 @@ const assignSurveyFromStudyStart = (
 }
 
 
-export const assignCatchupRetroactively_rules = {
-  name: "assignCatchup",
+///Working version of function that selects only adult participants//
+export const assignCatchupRetroactivelyc_rules = {
+  name: "assignCatchup_WVc",
   rules: [
-    StudyEngine.ifThen(
-      // IF has flag catch-up
-      StudyEngine.participantState.hasParticipantFlagKey(flagKey),
-      // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
-      assignSurveyFromStudyStart('Tstopcontinuec', "prio", 360, 360),
-      // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
-      StudyEngine.participantActions.updateFlag(
-        'catchupassigned',
-        StudyEngine.timestampWithOffset({ days: 0 })
+    StudyEngine.if(
+      //condition
+      StudyEngine.and(
+        // should get catchup:
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('noCatchup', 'GetCatchup'),
+        // and Is an Child:
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'C'),
+        // and has not been assigned catchup before:
+        StudyEngine.not(
+          StudyEngine.participantState.hasSurveyKeyAssigned('Tstopcontinuec'),
+        ),
+        // For acceptance environment:
+        StudyEngine.not(
+          StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -14 }))
+        )
+      ),
+      //then
+      StudyEngine.do(
+        // ASSIGN Catch-up from study start: //we want to let it stay open for quite some time
+        StudyEngine.participantActions.assignedSurveys.add(
+          'Tstopcontinuec',
+          'prio',
+        ),
+        // Assign a message 
+        StudyEngine.participantActions.messages.add('Tstopcontinuec', StudyEngine.timestampWithOffset({ days: 0 })),
+        // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
+        StudyEngine.participantActions.updateFlag(
+          'catchupassigned',
+          StudyEngine.timestampWithOffset({ days: 0 })
+        ),
       )
     )
-
   ]
 }
+
