@@ -25,6 +25,7 @@ export class HasSymptomsGroup extends Group {
   Q10bNL: Q10bNL;
   Q10cNL: Q10cNL;
   Q11: Q11;
+  Q_origin_infect: Q_origin_infect;
 
 
 
@@ -51,6 +52,15 @@ export class HasSymptomsGroup extends Group {
     this.Q10bNL = new Q10bNL(this.key, conditionForTimeOffwork, true);
     this.Q10cNL = new Q10cNL(this.key, conditionForTimeOffwork, true);
     this.Q11 = new Q11(this.key, true);
+
+
+    const conditionForOriginInfect = SurveyEngine.logic.or(
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes),
+      ),
+      SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionsKey.no),
+    )
+    this.Q_origin_infect = new Q_origin_infect(this.key, true, conditionForOriginInfect);
   }
 
   buildGroup() {
@@ -67,8 +77,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q10bNL.get());
     this.addItem(this.Q10cNL.get());
     this.addItem(this.Q11.get());
-
-
+    this.addItem(this.Q_origin_infect.get());
   }
 }
 
@@ -807,7 +816,7 @@ class QFeverStart extends Item {
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: -2592000 }) }, 
+            min: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: -2592000 }) },
             max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({ seconds: 0 }) },
           },
           content: new Map([
@@ -2411,12 +2420,12 @@ export class QWithin24hours extends Item {
 
 
 class Q_origin_infect extends Item {
-  
-  constructor(parentKey: string, isRequired: boolean) {
+
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'Q_origin_infect');
 
     this.isRequired = isRequired;
-    this.condition = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.no);
+    this.condition = condition;
   }
 
   buildItem() {
