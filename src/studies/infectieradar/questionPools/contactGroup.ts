@@ -243,11 +243,12 @@ const dropdownOptions = [
   { key: '4', label: new Map([["nl", "4"],]), },
   { key: '5', label: new Map([["nl", "5"],]), },
   { key: '6', label: new Map([["nl", "6"],]), },
-  { key: '7', label: new Map([["nl", "7"],]), },
-  { key: '8', label: new Map([["nl", "8"],]), },
-  { key: '9', label: new Map([["nl", "9"],]), },
-  { key: '10', label: new Map([["nl", "10"],]), },
-  { key: '10+', label: new Map([["nl", "10+"],]), },
+  { key: '8', label: new Map([["nl", "7-9"],]), },
+  { key: '12', label: new Map([["nl", "10-14"],]), },
+  { key: '17', label: new Map([["nl", "15-19"],]), },
+  { key: '25', label: new Map([["nl", "20-30"],]), },
+  { key: '40', label: new Map([["nl", "31-49"],]), },
+  { key: '50+', label: new Map([["nl", "50+"],]), },
 ];
 
 
@@ -547,13 +548,13 @@ class Q2 extends Item {
         {
           key: this.optionKeys.leisure, role: 'option',
           content: new Map([
-            ["nl", "Vrije tijd: geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis)."],
+            ["nl", "Vrije tijd: geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, wandeling, sport(school) of bij iemand anders thuis)."],
           ])
         },
         {
           key: this.optionKeys.other, role: 'option',
           content: new Map([
-            ["nl", "Overige activiteiten: alle locaties die hierboven niet worden genoemd (bijv. mensen die je ontmoet in het openbaar vervoer)."],
+            ["nl", "Overige activiteiten: alle locaties die hierboven niet worden genoemd (bijv. mensen die je ontmoet in het openbaar vervoer of winkel)."],
           ])
         }
       ]
@@ -588,7 +589,7 @@ class QFragile extends Item {
           content: new Map([
             ["nl", "Nee"],
           ]),
-          disabled: SurveyEngine.multipleChoice.any(this.key, '1', '2', 'other')
+          disabled: SurveyEngine.multipleChoice.any(this.key, '1', '2','3','4','5','other')
         },
         {
           key: '1', role: 'option',
@@ -608,6 +609,20 @@ class QFragile extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["nl", "Ja, een ziekenhuis"],
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "Ja, een zorginstelling anders dan een ziekenhuis (bijvoorbeeld huisarts, fysiotherapeut, vaccinatiekliniek)"],
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "Ja, een hospice"],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
         },
