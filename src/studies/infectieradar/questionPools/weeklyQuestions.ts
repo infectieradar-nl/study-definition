@@ -26,11 +26,15 @@ export class HasSymptomsGroup extends Group {
   Q10cNL: Q10cNL;
   Q11: Q11;
   Q_origin_infect: Q_origin_infect;
-
+  QOriginInfectSource: QOriginInfectSource;
+  QOriginInfectSourceGender: QOriginInfectSourceGender;
+  QOriginInfectSourceAgegroup: QOriginInfectSourceAgegroup;
 
 
   constructor(parentKey: string, groupCondition: Expression, hasFeverCondition: Expression) {
     super(parentKey, 'HS');
+
+    const isRequired = true;
 
     this.groupEditor.setCondition(groupCondition);
 
@@ -53,16 +57,21 @@ export class HasSymptomsGroup extends Group {
     this.Q10cNL = new Q10cNL(this.key, conditionForTimeOffwork, true);
     this.Q11 = new Q11(this.key, true);
 
-
     const conditionForOriginInfect = SurveyEngine.logic.or(
       SurveyEngine.logic.not(
         SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes),
       ),
       SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionsKey.no),
     )
+
     this.Q_origin_infect = new Q_origin_infect(this.key, true, conditionForOriginInfect);
+    this.QOriginInfectSource = new QOriginInfectSource(this.key, SurveyEngine.singleChoice.any(this.Q_origin_infect.key, '2', '3', '4', '5', '6', '7', '8'), isRequired);
+    this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key,'1'), isRequired);
+    this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
+
   }
 
+  
   buildGroup() {
     this.addItem(this.q1_2.get());
     this.addItem(this.Q2.get());
@@ -78,6 +87,9 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q10cNL.get());
     this.addItem(this.Q11.get());
     this.addItem(this.Q_origin_infect.get());
+    this.addItem(this.QOriginInfectSource.get());
+    this.addItem(this.QOriginInfectSourceGender.get());
+    this.addItem(this.QOriginInfectSourceAgegroup.get());
   }
 }
 
@@ -2436,71 +2448,70 @@ class Q_origin_infect extends Item {
       condition: this.condition,
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", ""],
+        ["en", "Do you also know where you may have contracted the infection?"],
         ["nl", "Weet je ook waar je de infectie mogelijk bent opgelopen?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
-            ["en", "Yes"],
+            ["en", "I don't know"],
             ["nl", "Nee, geen idee"],
-
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "No"],
+            ["en", "Yes, abroad"],
             ["nl", "Ja, opgelopen in het buitenland"],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, at home by a family member or roommate"],
             ["nl", "Ja, thuis opgelopen door een gezinslid of huisgenoot"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, at home by someone who was visiting"],
             ["nl", "Ja, thuis opgelopen door iemand die op bezoek was"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, at work"],
             ["nl", "Ja, op het werk opgelopen (= je werk bijv. klanten, collega's)"],
           ])
         },
         {
           key: '6', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, at school"],
             ["nl", "Ja, op school opgelopen (= onderwijsinstellingen bijv. docenten, klasgenoten"],
           ])
         },
         {
           key: '7', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, during an activity in my spare time"],
             ["nl", "Ja, tijdens een activiteit in mijn vrije tijd (geplande activiteiten met anderen bijv. mensen die je ontmoet in een café, wandeling, sport(school) of bij iemand anders thuis)"],
           ])
         },
         {
           key: '8', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "Yes, but not in a place mentioned above (e.g. people in the public transport or in shops)"],
             ["nl", "Ja, maar niet op een plek die hierboven is genoemd (bijv. mensen die je ontmoet in het openbaar vervoer of winkel)"],
           ])
         },
         {
           key: '9', role: 'option',
           content: new Map([
-            ["en", "I don't know/can't remember"],
+            ["en", "I don't want to point it out"],
             ["nl", "Wil ik niet aangeven"],
           ])
         }
@@ -2545,5 +2556,161 @@ class Q_origin_infect extends Item {
         ]),
       },
     ]
+  }
+}
+
+export class QOriginInfectSource extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'QOriginInfectSource');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "Do you also know the gender and age range of the possible source?"],
+        ["nl", "Weet je ook het geslacht en leeftijdsgroep van de mogelijke bron?"],
+      ]),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "No, I don't know"],
+            ["nl", "Nee, geen idee"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "Yes"],
+            ["nl", "Ja"],
+          ])
+        }, {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "I don't want to point it out"],
+            ["nl", "Wil ik niet aangeven"],
+          ])
+        }, 
+      ],
+    })
+  }
+}
+
+
+export class QOriginInfectSourceGender extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'QOriginInfectSourceGender');
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    // QUESTION TEXT
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "Gender?"],
+        ["nl", "Wat is het geslacht van deze persoon?"],
+      ]),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          content: new Map([
+            ["en", "Male"],
+            ["nl", "Man"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["en", "Female"],
+            ["nl", "Vrouw"],
+          ])
+        }, 
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "Other/I don't want to point it out"],
+            ["nl", "Overig/Wil ik niet aangeven"],
+          ])
+        }, 
+      ],
+    })
+  }
+}
+
+
+export class QOriginInfectSourceAgegroup extends Item {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
+    super(parentKey, 'QOriginInfectSourceAgegroup');
+    this.isRequired = isRequired;
+    this.condition = condition;    
+  }
+
+  buildItem() {
+    // QUESTION TEXT
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["en", "Age group?"],
+        ["nl", "In welke leeftijdsgroep valt deze persoon? (een schatting is ook goed)"],
+      ]),
+      responseOptions: [
+        {
+          key: 'l', role: 'option',
+          content: new Map([
+            ["en", "0 - 4 years"],
+            ["nl", "0 - 4 jaar"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["en", "5 - 12 years"],
+            ["nl", "5 - 12 jaar"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "13 - 18 years"],
+            ["nl", "13 - 18 jaar"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["en", "19 - 44 years"],
+            ["nl", "19 - 44 jaar"],
+          ])
+        },
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["en", "45 - 64 years"],
+            ["nl", "45 - 64 jaar"],
+          ])
+        },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "65+"],
+            ["nl", "65 of ouder"],
+          ])
+        },
+      ],
+    })
   }
 }
