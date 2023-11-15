@@ -18,6 +18,12 @@ export class HasSymptomsGroup extends Group {
   Q4: Q4;
   Q5: Q5;
   FeverGroup: FeverGroup; // Q6 fever group
+  
+  Q_origin_infect: Q_origin_infect;
+  QOriginInfectSource: QOriginInfectSource;
+  QOriginInfectSourceGender: QOriginInfectSourceGender;
+  QOriginInfectSourceAgegroup: QOriginInfectSourceAgegroup;
+  
   ContactGroup: ContactGroup; // contact
   Q9: Q9;
   Q9b: Q9b;
@@ -25,10 +31,7 @@ export class HasSymptomsGroup extends Group {
   Q10bNL: Q10bNL;
   Q10cNL: Q10cNL;
   Q11: Q11;
-  Q_origin_infect: Q_origin_infect;
-  QOriginInfectSource: QOriginInfectSource;
-  QOriginInfectSourceGender: QOriginInfectSourceGender;
-  QOriginInfectSourceAgegroup: QOriginInfectSourceAgegroup;
+ 
 
 
   constructor(parentKey: string, groupCondition: Expression, hasFeverCondition: Expression) {
@@ -48,6 +51,18 @@ export class HasSymptomsGroup extends Group {
     this.Q4 = new Q4(this.key, this.Q3.key, true);
     this.Q5 = new Q5(this.key, true);
     this.FeverGroup = new FeverGroup(this.key, hasFeverCondition);
+    
+    const conditionForOriginInfect = SurveyEngine.logic.or(
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes),
+      ),
+      SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionsKey.no),
+    )
+    this.Q_origin_infect = new Q_origin_infect(this.key, true, conditionForOriginInfect);
+    this.QOriginInfectSource = new QOriginInfectSource(this.key, SurveyEngine.singleChoice.any(this.Q_origin_infect.key, '2', '3', '4', '5', '6', '7', '8'), isRequired);
+    this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key,'1'), isRequired);
+    this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
+
     this.ContactGroup = new ContactGroup(this.key);
     this.Q9 = new Q9(this.key, true);
     this.Q9b = new Q9b(this.key, SurveyEngine.multipleChoice.any(this.Q9.key, this.Q9.optionKeys.antivirals), true);
@@ -57,18 +72,8 @@ export class HasSymptomsGroup extends Group {
     this.Q10cNL = new Q10cNL(this.key, conditionForTimeOffwork, true);
     this.Q11 = new Q11(this.key, true);
 
-    const conditionForOriginInfect = SurveyEngine.logic.or(
-      SurveyEngine.logic.not(
-        SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes),
-      ),
-      SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionsKey.no),
-    )
 
-    this.Q_origin_infect = new Q_origin_infect(this.key, true, conditionForOriginInfect);
-    this.QOriginInfectSource = new QOriginInfectSource(this.key, SurveyEngine.singleChoice.any(this.Q_origin_infect.key, '2', '3', '4', '5', '6', '7', '8'), isRequired);
-    this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key,'1'), isRequired);
-    this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
-
+   
   }
 
   
@@ -79,6 +84,12 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.FeverGroup.get());
+    
+    this.addItem(this.Q_origin_infect.get());
+    this.addItem(this.QOriginInfectSource.get());
+    this.addItem(this.QOriginInfectSourceGender.get());
+    this.addItem(this.QOriginInfectSourceAgegroup.get());
+
     this.addItem(this.ContactGroup.get());
     this.addItem(this.Q9.get());
     this.addItem(this.Q9b.get());
@@ -86,10 +97,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q10bNL.get());
     this.addItem(this.Q10cNL.get());
     this.addItem(this.Q11.get());
-    this.addItem(this.Q_origin_infect.get());
-    this.addItem(this.QOriginInfectSource.get());
-    this.addItem(this.QOriginInfectSourceGender.get());
-    this.addItem(this.QOriginInfectSourceAgegroup.get());
+   
   }
 }
 
@@ -2491,7 +2499,7 @@ class Q_origin_infect extends Item {
           key: '6', role: 'option',
           content: new Map([
             ["en", "Yes, at school"],
-            ["nl", "Ja, op school opgelopen (= onderwijsinstellingen bijv. docenten, klasgenoten"],
+            ["nl", "Ja, op school opgelopen (= onderwijsinstellingen bijv. docenten, klasgenoten)"],
           ])
         },
         {
@@ -2532,9 +2540,9 @@ class Q_origin_infect extends Item {
       {
         content: new Map([
           ["en", "To make filling out the rest of the survey quicker for you."],
-          ["nl", "Om te bepalen of je klachten worden veroorzaakt door (mogelijk) een nieuwe of dezelfde infectie als de vorige keer."],
+          ["nl", "Om meer te weten te komen over de transmissie van infecties."],
           ["fr", "Afin que vous puissiez remplir le reste de l'enquête plus rapidement."],
-          ["nl-be", "Om het invullen van de rest van de vragenlijst te versnellen."],
+          ["nl-be", "Om meer te weten te komen over de transmissie van infecties."],
         ]),
         style: [{ key: 'variant', value: 'p' }],
       },
@@ -2550,7 +2558,7 @@ class Q_origin_infect extends Item {
       {
         content: new Map([
           ["en", "If you believe that the symptoms you have reported today are caused by the same bout of illness as your previous symptoms, please tick “yes”."],
-          ["nl", "Als je denkt dat de klachten die je vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'"],
+          ["nl", "Geef aan waar je denkt dat je de infectie hebt opgelopen'"],
           ["fr", "Si vous pensez que les symptômes que vous avez déclarés aujourd'hui sont causés par le même épisode de maladie que vos symptômes précédents, s'il vous plaît cochez «oui» . Pour gagner du temps, nous avons rempli les informations que vous nous avez déjà fournies sur votre maladie.  S'il vous plaît, vérifiez qu'elles sont toujours correctes ou faites les modifications nécessaires si, par exemple, vous avez consulté un médecin ou pris plus de temps hors travail depuis la dernière fois que vous avez répondu au questionnaire."],
           ["nl-be", "Als u denkt dat de klachten die u vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'. Sommige antwoorden zijn dan alvast ingevuld op basis van de antwoorden van vorige keer. Kunt u controleren of deze nog steeds kloppen? Bijvoorbeeld of u nu wel naar de huisarts bent geweest of niet naar het werk bent geweest."],
         ]),
@@ -2573,8 +2581,8 @@ export class QOriginInfectSource extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Do you also know the gender and age range of the possible source?"],
-        ["nl", "Weet je ook het geslacht en leeftijdsgroep van de mogelijke bron?"],
+        ["en", "Do you also know the gender and/or age range of the possible source?"],
+        ["nl", "Weet je ook iets over het geslacht en/of de leeftijdsgroep(en) van de mogelijke bron(nen)?"],
       ]),
       responseOptions: [
         {
@@ -2588,7 +2596,7 @@ export class QOriginInfectSource extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["en", "Yes"],
-            ["nl", "Ja"],
+            ["nl", "Ja, weet ik"],
           ])
         }, {
           key: '2', role: 'option',
@@ -2619,28 +2627,35 @@ export class QOriginInfectSourceGender extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Gender?"],
-        ["nl", "Wat is het geslacht van deze persoon?"],
+        ["nl", "Wat is het geslacht van de mogelijke bron(nen)?"],
       ]),
       responseOptions: [
         {
-          key: '0', role: 'option',
+          key: '1', role: 'option',
           content: new Map([
             ["en", "Male"],
-            ["nl", "Man"],
+            ["nl", "Man(nen)"],
           ])
         },
         {
-          key: '1', role: 'option',
+          key: '2', role: 'option',
           content: new Map([
             ["en", "Female"],
-            ["nl", "Vrouw"],
+            ["nl", "Vrouw(en)"],
           ])
-        }, 
+        },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "Other/I don't want to point it out"],
-            ["nl", "Overig/Wil ik niet aangeven"],
+            ["en", "I don't know"],
+            ["nl", "Weet ik niet"],
+          ])
+        },  
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["en", "I don't want to indicate"],
+            ["nl", "Wil ik niet aangeven"],
           ])
         }, 
       ],
@@ -2658,59 +2673,121 @@ export class QOriginInfectSourceAgegroup extends Item {
 
   buildItem() {
     // QUESTION TEXT
-    return SurveyItems.singleChoice({
+    return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
         ["en", "Age group?"],
-        ["nl", "In welke leeftijdsgroep valt deze persoon? (een schatting is ook goed)"],
+        ["nl", "In welke leeftijdsgroep(en) valt/vallen de mogelijke bron(nen)? (een schatting is ook goed)"],
       ]),
       responseOptions: [
         {
-          key: 'l', role: 'option',
+          key: '1', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
           content: new Map([
-            ["en", "0 - 4 years"],
-            ["nl", "0 - 4 jaar"],
+            ["en", "0 - 3 years"],
+            ["nl", "0 - 3 jaar"],
           ])
         },
         {
           key: '2', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
           content: new Map([
-            ["en", "5 - 12 years"],
-            ["nl", "5 - 12 jaar"],
+            ["en", "4 - 6 years"],
+            ["nl", "4 - 6 jaar"],
           ])
         },
         {
           key: '3', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "7 - 12 years"],
+            ["nl", "7 - 12 jaar"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
           content: new Map([
             ["en", "13 - 18 years"],
             ["nl", "13 - 18 jaar"],
           ])
         },
         {
-          key: '4', role: 'option',
-          content: new Map([
-            ["en", "19 - 44 years"],
-            ["nl", "19 - 44 jaar"],
-          ])
-        },
-        {
           key: '5', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
           content: new Map([
-            ["en", "45 - 64 years"],
-            ["nl", "45 - 64 jaar"],
+            ["en", "19 - 29 years"],
+            ["nl", "19 - 29 jaar"],
           ])
         },
         {
           key: '6', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
           content: new Map([
-            ["en", "65+"],
-            ["nl", "65 of ouder"],
+            ["en", "30 - 39 years"],
+            ["nl", "30 - 39 jaar"],
+          ])
+        },
+        {
+          key: '7', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "40 - 49 years"],
+            ["nl", "40 - 49 jaar"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "50 - 59 years"],
+            ["nl", "50 - 59 jaar"],
+          ])
+        },
+        {
+          key: '9', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "60 - 69 years"],
+            ["nl", "60 - 69 jaar"],
+          ])
+        },
+        {
+          key: '10', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "70 - 79 years"],
+            ["nl", "70 - 79 jaar"],
+          ])
+        },
+        {
+          key: '11', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "80 - 89 years"],
+            ["nl", "80 - 89 jaar"],
+          ])
+        },
+        {
+          key: '12', role: 'option',
+          disabled: SurveyEngine.multipleChoice.any(this.key, '13'),
+          content: new Map([
+            ["en", "90+ years"],
+            ["nl", "90+ jaar"],
+          ])
+        },
+        {
+          key: '13', role: 'option',
+          content: new Map([
+            ["en", "I don't want to indicate"],
+            ["nl", "Wil ik niet aangeven"],
           ])
         },
       ],
     })
   }
 }
+
