@@ -2519,7 +2519,7 @@ class Q_origin_infect extends Item {
         {
           key: '9', role: 'option',
           content: new Map([
-            ["en", "I don't want to point it out"],
+            ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
           ])
         }
@@ -2582,7 +2582,7 @@ export class QOriginInfectSource extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Do you also know the gender and/or age range of the possible source?"],
-        ["nl", "Weet je ook iets over het geslacht en/of de leeftijdsgroep(en) van de mogelijke bron(nen)?"],
+        ["nl", "Weet je ook iets over het geslacht en/of de leeftijdsgroep van de mogelijke bron?"],
       ]),
       responseOptions: [
         {
@@ -2601,7 +2601,7 @@ export class QOriginInfectSource extends Item {
         }, {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "I don't want to point it out"],
+            ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
           ])
         }, 
@@ -2626,36 +2626,36 @@ export class QOriginInfectSourceGender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Gender?"],
-        ["nl", "Wat is het geslacht van de mogelijke bron(nen)?"],
+        ["en", "What is the gender?"],
+        ["nl", "Wat is het geslacht van de mogelijke bron?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
             ["en", "Male"],
-            ["nl", "Man(nen)"],
+            ["nl", "Man)"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
             ["en", "Female"],
-            ["nl", "Vrouw(en)"],
+            ["nl", "Vrouw"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "I don't know"],
-            ["nl", "Weet ik niet"],
+            ["en", "Male and female"],
+            ["nl", "Zowel mannen als vrouwen"],
           ])
         },  
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "I don't want to indicate"],
-            ["nl", "Wil ik niet aangeven"],
+            ["en", "I don't know/I don't want to indicate"],
+            ["nl", "Weet ik niet/Wil ik niet aangeven"],
           ])
         }, 
       ],
@@ -2679,8 +2679,8 @@ export class QOriginInfectSourceAgegroup extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Age group?"],
-        ["nl", "In welke leeftijdsgroep(en) valt/vallen de mogelijke bron(nen)? (een schatting is ook goed)"],
+        ["en", "Which age group?"],
+        ["nl", "In welke leeftijdsgroep valt de mogelijke bron? (een schatting is ook goed)"],
       ]),
       responseOptions: [
         {
