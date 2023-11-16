@@ -1228,8 +1228,12 @@ class Q7 extends Item {
       condition: this.condition,
       questionText: new Map([
         ["en", "Because of your symptoms, did you VISIT (see face to face) any medical services?"],
-        ["nl", "Heb je een arts gezien of gesproken vanwege je klachten? En zo ja, waar? (meerdere antwoorden mogelijk)"],
+        ["nl", "Heb je een arts gezien of gesproken vanwege je klachten? En zo ja, waar?"],
         ["fr", "En raison de vos symptômes, avez-vous rendu visite (en personne) à des services médicaux ?"],
+      ]),
+      questionSubText: new Map([
+        ["en", "Select all options that apply"],
+        ["nl", "Meerdere antwoorden mogelijk"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -1697,15 +1701,10 @@ class Q9 extends Item {
         ["en", "Did you take medication for these symptoms?"],
         ["nl", "Heb je vanwege je klachten medicijnen gebruikt? En zo ja, welke?"],
       ]),
-      topDisplayCompoments: [
-        ComponentGenerators.text({
-          className: "mb-1",
-          content: new Map([
-            ['en', 'Select all options that apply'],
-            ['nl', 'Meerdere antwoorden mogelijk'],
-          ])
-        })
-      ],
+      questionSubText: new Map([
+        ["en", "Select all options that apply"],
+        ["nl", "Meerdere antwoorden mogelijk"],
+      ]),
       responseOptions: [
         {
           key: '0',
