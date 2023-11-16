@@ -2647,15 +2647,15 @@ export class QOriginInfectSourceGender extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "Both (multiple sources different gender)"],
-            ["nl", "Beide (bij meerdere bronnen niet van hetzelfde geslacht)"],
+            ["en", "Multiple sources different gender"],
+            ["nl", "Meerdere mogelijke bronnen, niet van hetzelfde geslacht"],
           ])
         },  
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "I don't know / I don't want to indicate"],
-            ["nl", "Weet ik niet / wil ik niet aangeven"],
+            ["en", "I don't want to indicate"],
+            ["nl", "Wil ik niet aangeven"],
           ])
         }, 
       ],
@@ -2684,7 +2684,7 @@ export class QOriginInfectSourceAgegroup extends Item {
       ]),
       questionSubText: new Map([
         ["en", "Select all options that apply"],
-        ["nl", "Meerdere antwoorden mogelijk (bij meerdere bronnen niet van dezelfde leeftijdsgroep)"],
+        ["nl", "Meerdere antwoorden mogelijk, bij meerdere mogelijke bronnen of onduidelijke leeftijdsgroep"],
       ]),
       responseOptions: [
         {
