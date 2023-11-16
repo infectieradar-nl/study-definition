@@ -2457,7 +2457,7 @@ class Q_origin_infect extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
         ["en", "Do you also know where you may have contracted the infection?"],
-        ["nl", "Weet je ook waar je de infectie mogelijk bent opgelopen?"],
+        ["nl", "Weet je ook waar je de infectie mogelijk hebt opgelopen?"],
       ]),
       responseOptions: [
         {
@@ -2634,7 +2634,7 @@ export class QOriginInfectSourceGender extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["en", "Male"],
-            ["nl", "Man)"],
+            ["nl", "Man"],
           ])
         },
         {
@@ -2647,15 +2647,15 @@ export class QOriginInfectSourceGender extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "Male and female"],
-            ["nl", "Zowel mannen als vrouwen"],
+            ["en", "Both (multiple sources different gender)"],
+            ["nl", "Beide (bij meerdere bronnen niet van hetzelfde geslacht)"],
           ])
         },  
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "I don't know/I don't want to indicate"],
-            ["nl", "Weet ik niet/Wil ik niet aangeven"],
+            ["en", "I don't know / I don't want to indicate"],
+            ["nl", "Weet ik niet / wil ik niet aangeven"],
           ])
         }, 
       ],
@@ -2681,6 +2681,10 @@ export class QOriginInfectSourceAgegroup extends Item {
       questionText: new Map([
         ["en", "Which age group?"],
         ["nl", "In welke leeftijdsgroep valt de mogelijke bron? (een schatting is ook goed)"],
+      ]),
+      questionSubText: new Map([
+        ["en", "Select all options that apply"],
+        ["nl", "Meerdere antwoorden mogelijk (bij meerdere bronnen niet van dezelfde leeftijdsgroep)"],
       ]),
       responseOptions: [
         {
