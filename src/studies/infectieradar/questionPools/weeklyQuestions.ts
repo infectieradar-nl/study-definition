@@ -2644,14 +2644,14 @@ export class QOriginInfectSourceGender extends Item {
           ])
         },
         {
-          key: '2', role: 'option',
+          key: '3', role: 'option',
           content: new Map([
             ["en", "Multiple sources different gender"],
             ["nl", "Meerdere mogelijke bronnen, niet van hetzelfde geslacht"],
           ])
         },  
         {
-          key: '3', role: 'option',
+          key: '4', role: 'option',
           content: new Map([
             ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
