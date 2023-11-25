@@ -2580,8 +2580,8 @@ export class QOriginInfectSource extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Do you also know the gender and/or age range of the possible source?"],
-        ["nl", "Weet je ook iets over het geslacht en/of de leeftijdsgroep van de mogelijke bron?"],
+        ["en", "Do you also know the gender and/or age range of the possible source or sources?"],
+        ["nl", "Weet je ook iets over het geslacht en/of de leeftijdsgroep van de mogelijke bron of bronnen?"],
       ]),
       responseOptions: [
         {
@@ -2595,7 +2595,7 @@ export class QOriginInfectSource extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["en", "Yes"],
-            ["nl", "Ja, weet ik"],
+            ["nl", "Ja"],
           ])
         }, {
           key: '2', role: 'option',
@@ -2646,8 +2646,8 @@ export class QOriginInfectSourceGender extends Item {
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "Multiple sources different gender"],
-            ["nl", "Meerdere mogelijke bronnen, niet van hetzelfde geslacht"],
+            ["en", "Not clear, multiple possible sources"],
+            ["nl", "Onduidelijk welk geslacht, meerdere mogelijke bronnen"],
           ])
         },  
         {
