@@ -8,6 +8,14 @@ export const flagcatchupParticipants_Troubleshooting_rules = {
       StudyEngine.if(
         // condition:
         StudyEngine.and(
+          //Does not have the Getcathup alrdy assigned
+          StudyEngine.not(
+            StudyEngine.participantState.hasParticipantFlagKeyAndValue('noCatchup', 'GetCatchup')
+          ),
+          //Does not have the Getcathup alrdy assigned
+          StudyEngine.not(
+            StudyEngine.participantState.hasParticipantFlagKeyAndValue('noCatchup', 'NoCatchup')
+          ),
           // If The participant missed a qeustionaire:
           StudyEngine.participantState.hasParticipantFlagKeyAndValue('exitStatus', 'expired'),
           // Assing the flag Get_Catch_up to participants that have T0, but not T12
