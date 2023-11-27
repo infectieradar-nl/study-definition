@@ -47,18 +47,19 @@ export const assignCatchupRetroactively_rules = {
     StudyEngine.if(
       //condition
       StudyEngine.and(
+        // and has not been assigned catchup before:
+        StudyEngine.not(
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue('Gotcatchup', 'Gotcatchup'),
+          //StudyEngine.participantState.hasSurveyKeyAssigned('Tstopcontinue'),
+        ),
         // should get catchup:
         StudyEngine.participantState.hasParticipantFlagKeyAndValue('noCatchup', 'GetCatchup'),
         // and Is an Adult:
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'A'),
-        // and has not been assigned catchup before:
-        StudyEngine.not(
-          StudyEngine.participantState.hasSurveyKeyAssigned('Tstopcontinue'),
-        ),
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue('surveyCategory', 'A')
         // For acceptance environment:
-        StudyEngine.not(
-          StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -14 }))
-        )
+        //StudyEngine.not(
+         // StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -14 }))
+        //)
       ),
       //then
       StudyEngine.do(
@@ -68,12 +69,16 @@ export const assignCatchupRetroactively_rules = {
           'prio',
         ),
         // Assign a message 
-        StudyEngine.participantActions.messages.add('Tstopcontinue', StudyEngine.timestampWithOffset({ days: 0 })),
+        //StudyEngine.participantActions.messages.add('Tstopcontinue', StudyEngine.timestampWithOffset({ days: 0 })),
         // FLAG PARTICIPANT TO BE ABLE TO FIND THEM LATER IF NEEDED:
         StudyEngine.participantActions.updateFlag(
           'catchupassigned',
           StudyEngine.timestampWithOffset({ days: 0 })
         ),
+        //Adds FLAG TO SIGNAL TO THE 
+        StudyEngine.participantActions.updateFlag(
+          'Gotcatchup', 'Gotcatchup'
+        )
       )
     )
   ]
