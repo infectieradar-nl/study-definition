@@ -594,7 +594,7 @@ export class Q4b1NL extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "Not applicable"],
-            ["nl", "Niet van toepassing"],
+            ["nl", "Niet van toepassing, er is geen andere plaats/plek"],
           ])
         },
       ],
@@ -677,47 +677,55 @@ export class Q4b2NL extends Item {
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
+          key: '6', role: 'option',
+          content: new Map([
+            ["en", "less than 1 day"],
+            ["nl", "minder dan 1 dag per week"],
+          ])
+        },
+        {
           key: '0', role: 'option',
           content: new Map([
-            ["en", "1"],
-            ["nl", "1"],
+            ["en", "1 day"],
+            ["nl", "1 dag"],
           ])
         },
         {
           key: '1', role: 'option',
           content: new Map([
-            ["en", "2"],
-            ["nl", "2"],
+            ["en", "2 days"],
+            ["nl", "2 dagen"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "3"],
-            ["nl", "3"],
+            ["en", "3 days"],
+            ["nl", "3 dagen"],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["en", "4"],
-            ["nl", "4"],
+            ["en", "4 days"],
+            ["nl", "4 dagen"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["en", "5"],
-            ["nl", "5"],
+            ["en", "5 days"],
+            ["nl", "5 dagen"],
           ])
         },
         {
           key: '5', role: 'option',
           content: new Map([
-            ["en", "More than 5"],
-            ["nl", "Meer dan 5"],
+            ["en", "More than 5 days"],
+            ["nl", "Meer dan 5 dagen"],
           ])
         },
+        
       ],
     })
   }
@@ -3584,7 +3592,7 @@ export class qNL_covidvac_not_reason extends Item {
           key: '11', role: 'option',
           content: new Map([
             ["en", "The vaccine is not free of charge"],
-            ["nl", "Ik moet betalen voor een griepvaccinatie, het is niet gratis"],
+            ["nl", "Ik moet betalen voor een coronavaccinatie, het is niet gratis"],
             ["fr", " Le vaccin n'est pas gratuit"],
           ])
         }, {
