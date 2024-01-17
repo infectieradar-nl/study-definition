@@ -28,7 +28,7 @@ class SwabEntryDef extends SurveyDefinition {
         ["nl", "Aanmelden voor het zelftest-onderzoek in Infectieradar"],
       ]),
       description: new Map([
-        ["en", "Clcik here to participate in selftests"],
+        ["en", "Click here to participate in selftests"],
         ["nl", "Klik hier om deel te nemen het zelftest-onderzoek."],
       ]),
       durationText: new Map([

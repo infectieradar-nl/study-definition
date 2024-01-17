@@ -17,7 +17,7 @@ class QuitSwabbing_Def extends SurveyDefinition {
         ['nl', 'Intrekken toestemming voor deelname aan het zelftest-onderzoek']
       ]),
       description: new Map([
-        ['nl', 'Klink hier om je toestemming in te trekken voor het bewaren van contact- en laboratoriumgevens']
+        ['nl', 'Klik hier om je toestemming in te trekken voor het bewaren van contact- en laboratoriumgevens']
       ]),
       durationText: new Map([
         ['nl', 'Invullen duurt minder dan 1 minuut']
