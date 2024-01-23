@@ -2521,6 +2521,13 @@ class Q_origin_infect extends Item {
             ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
           ])
+        },
+        {
+          key: '10', role: 'option',
+          content: new Map([
+            ["en", "Not applicable, the symptoms are not related to an infection"],
+            ["nl", "Niet van toepassing, de klachten worden niet veroorzaakt door een infectie"],
+          ])
         }
       ],
     })
@@ -2557,7 +2564,7 @@ class Q_origin_infect extends Item {
       {
         content: new Map([
           ["en", "If you believe that the symptoms you have reported today are caused by the same bout of illness as your previous symptoms, please tick “yes”."],
-          ["nl", "Geef aan waar je denkt dat je de infectie hebt opgelopen'"],
+          ["nl", "Geef aan waar je denkt dat je de infectie hebt opgelopen"],
           ["fr", "Si vous pensez que les symptômes que vous avez déclarés aujourd'hui sont causés par le même épisode de maladie que vos symptômes précédents, s'il vous plaît cochez «oui» . Pour gagner du temps, nous avons rempli les informations que vous nous avez déjà fournies sur votre maladie.  S'il vous plaît, vérifiez qu'elles sont toujours correctes ou faites les modifications nécessaires si, par exemple, vous avez consulté un médecin ou pris plus de temps hors travail depuis la dernière fois que vous avez répondu au questionnaire."],
           ["nl-be", "Als u denkt dat de klachten die u vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'. Sommige antwoorden zijn dan alvast ingevuld op basis van de antwoorden van vorige keer. Kunt u controleren of deze nog steeds kloppen? Bijvoorbeeld of u nu wel naar de huisarts bent geweest of niet naar het werk bent geweest."],
         ]),
