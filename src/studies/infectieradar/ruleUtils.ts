@@ -111,6 +111,8 @@ const assignSwabNotSelected = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
 )
 
+const selfSwabbingReportKey = 'selfSwabbing'
+
 export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
   // If part of the cohort ->
   StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -118,29 +120,63 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     ParticipantFlags.selfSwabbing.values.active,
   ),
   // Then do following:
+  StudyEngine.participantActions.reports.init(selfSwabbingReportKey),
   StudyEngine.if(
     wasNotSampledRecently(),
     // If true:
     StudyEngine.if(
-      hasRecentPositiveTest(),
-      // THEN POSITIVE CASE:
-      assignSwabSample(),
-      // ELSE NEGATIVE CASE:
-      StudyEngine.if(
-        StudyEngine.and(
-          hasRecentSymptoms(),
-          // Use sampler:
+      hasRecentSymptoms(),
+      // If true:
+      StudyEngine.do(
+        StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'ILI', 'true'),
+        StudyEngine.if(
           StudyEngine.externalEventEval(externalServiceNames.samplerIsSelected),
+          // If true:
+          StudyEngine.do(
+            StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'selected'),
+            assignSwabSample(),
+          ),
+          // Else:
+          StudyEngine.do(
+            StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'not selected'),
+            StudyEngine.if(
+              hasRecentPositiveTest(),
+              // THEN POSITIVE CASE:
+              StudyEngine.do(
+                assignSwabSample(),
+                StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'true'),
+              ),
+              StudyEngine.do(
+                assignSwabNotSelected(),
+                StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'false'),
+              )
+
+            ),
+          ),
+        )
+      ),
+      // Else:
+      StudyEngine.do(
+        StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'ILI', 'false'),
+        StudyEngine.if(
+          hasRecentPositiveTest(),
+          // THEN POSITIVE CASE:
+          StudyEngine.do(
+            assignSwabSample(),
+            StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'true'),
+          ),
+          StudyEngine.do(
+            assignSwabNotSelected(),
+            StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'false'),
+          )
+
         ),
-        // sampled:
-        assignSwabSample(),
-        // else:
-        assignSwabNotSelected(),
       )
     ),
     // else:
     assignSwabNotSelected(),
   ),
+
   // Flag participant if had any symptoms in last 5 days:
   StudyEngine.if(
     hasRecentSymptoms(),
