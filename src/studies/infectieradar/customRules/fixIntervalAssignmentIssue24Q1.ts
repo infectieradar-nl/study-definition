@@ -23,7 +23,10 @@ export const fixIntervalAssingmentIssue24Q1_rules = {
           1711929600, // 1st of April 2024 (to avoid expiration rule activiting accidentally now)
         ),
         // run assignment for Q1 again which should respect the assignment group of the participant
-        assignIntervalSurveyForQ1()
+        assignIntervalSurveyForQ1(),
+        // add a flag to indicate that the assignment was fixed: (for debugging purposes only, not used in any rules)
+        StudyEngine.participantActions.updateFlag('intervalAssignmentFixed', '24Q1')
+
       )
     )
   ]
