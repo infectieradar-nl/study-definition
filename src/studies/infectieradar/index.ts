@@ -20,7 +20,7 @@ import { assignIntervalQuestionnaire_rules } from "./customRules/assignIntervalQ
 import { resetSeasonalVaccinationFlags_rules } from "./customRules/resetSeasonalVaccinationFlags";
 import { removeIntervaleQuestionnaire_rules } from "./customRules/removeIntervalQuestionnaire";
 import { updateSexFlag_rules } from "./customRules/addSexFlag";
-import { redistributeIntervalQ_rules } from "./customRules/redistributeIntervalQ";
+import { fixIntervalAssingmentIssue24Q1_rules } from "./customRules/fixIntervalAssignmentIssue24Q1";
 
 
 export const InfectieradarStudy: Study = {
@@ -52,6 +52,6 @@ export const InfectieradarStudy: Study = {
     removeIntervaleQuestionnaire_rules,
     updateSexFlag_rules,
     resetSeasonalVaccinationFlags_rules,
-    redistributeIntervalQ_rules,
+    fixIntervalAssingmentIssue24Q1_rules,
   ]
 }
