@@ -252,21 +252,21 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
 /**
  * Interval survey methods:
  */
-const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number) => StudyEngine.participantActions.assignedSurveys.add(
+export const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number, expiresInWeeks: number = 4) => StudyEngine.participantActions.assignedSurveys.add(
   surveyKeys.interval,
   'normal',
   StudyEngine.timestampWithOffset({ days: offsetWeeks * 7 }, reference),
-  StudyEngine.timestampWithOffset({ days: (offsetWeeks + 4) * 7 }, reference),
+  StudyEngine.timestampWithOffset({ days: (offsetWeeks + expiresInWeeks) * 7 }, reference),
 )
 
-const isIntervalFlagEq = (value: number) => StudyEngine.eq(
+export const isIntervalFlagEq = (value: number) => StudyEngine.eq(
   StudyEngine.participantState.getParticipantFlagValueAsNum(
     ParticipantFlags.intervalGroup.key
   ),
   value
 )
 
-const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
+export const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
   StudyEngine.not(
     StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.intervalGroup.key)
   ),
@@ -367,7 +367,7 @@ export const reassignIntervalSurvey = () => StudyEngine.do(
 
 const temporaryFlagKeyForIntervalStart = 'lastIntervalStart';
 
-const saveLastIntervalStartAsFlag = () => StudyEngine.if(
+export const saveLastIntervalStartAsFlag = () => StudyEngine.if(
   StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.interval),
   StudyEngine.participantActions.updateFlag(
     temporaryFlagKeyForIntervalStart,
@@ -381,9 +381,9 @@ const saveLastIntervalStartAsFlag = () => StudyEngine.if(
   )
 )
 
-const getLastIntervalStartFromFlags = () => StudyEngine.participantState.getParticipantFlagValueAsNum(temporaryFlagKeyForIntervalStart)
+export const getLastIntervalStartFromFlags = () => StudyEngine.participantState.getParticipantFlagValueAsNum(temporaryFlagKeyForIntervalStart)
 
-const deleteLastIntervalStartFlag = () => StudyEngine.participantActions.removeFlag(temporaryFlagKeyForIntervalStart)
+export const deleteLastIntervalStartFlag = () => StudyEngine.participantActions.removeFlag(temporaryFlagKeyForIntervalStart)
 
 const reassignIntervalFromWeek = (week: number) => StudyEngine.do(
   saveLastIntervalStartAsFlag(),
