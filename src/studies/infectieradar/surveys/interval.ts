@@ -116,12 +116,12 @@ class Intro_long extends Item {
   }
 
   markdownContent = `
-## Lange termijn klachten na een besmetting met corona, griep of een andere infectie
+## Vermoeidheid, concentratieproblemen en kortademigheid
 We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid.
-Dit zijn typische klachten waar je last van kunt blijven houden na een besmetting.
+Dit zijn klachten waar je last van kunt blijven houden na een besmetting.
 Maar je kan deze klachten ook krijgen door een andere reden.
-Daarom is het belangrijk dat we dit onderzoeken. 
-Het maakt voor de vragen hieronder niet uit of jezelf wel of geen besmetting hebt gehad.
+Het maakt voor de vragen hieronder niet uit of je wel of geen besmetting hebt gehad. 
+Ook maakt het niet of je de klachten hebt door een andere reden. 
 `
 
   buildItem(): SurveySingleItem {
