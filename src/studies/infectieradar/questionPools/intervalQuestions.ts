@@ -489,7 +489,7 @@ export class Q_healthrank extends Item {
       condition: this.condition,
       //helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ["en", "On a scale from 0 to 100, how good or bad was your health last week because of the symptoms?"],
+        ["en", "On a scale from 0 to 100, how good or bad was your health last week?"],
         ["nl", "Hoe goed of slecht was je gezondheid de afgelopen week?"],
       ]),
       questionSubText: new Map([
@@ -715,7 +715,7 @@ export class Q_longsymptoms extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door een infectieziekte komen (bijvoorbeeld door een virus of bacterie)?"],
+        ["nl", "Heb je op dit moment langdurige gezondheidsklachten waarvan je denkt dat deze deels of geheel door een infectieziekte besmetting komen (bijvoorbeeld door een virus of bacterie)?"],
       ]),
       responseOptions: [
         {
@@ -748,6 +748,12 @@ export class Q_longsymptoms extends Item {
             ["nl", "Ja, nog zeer veel klachten door een infectieziekte."],
           ])
         },
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Ik heb wel klachten, maar die komen door een andere reden dan een infectieziekte besmetting."],
+          ])
+        },
         
       ],
     })
@@ -763,7 +769,7 @@ export class Q_longsymptoms_condition extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -806,6 +812,12 @@ export class Q_longsymptoms_condition extends Item {
           key: '6', role: 'option',
           content: new Map([
             ["nl", "Polio"],
+          ])
+        },
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["nl", "Griep (Influenzavirus)"],
           ])
         },
         {
