@@ -30,22 +30,24 @@ export class Q_flu_vaccine_interval extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je dit griepseizoen (2023/2024) een griepprik gehaald?"],
+        ["nl", "Heb je dit griepseizoen (2024/2025) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
+            ["en", "Yes"],
             ["nl", "Ja, deze heb ik gehaald"],
+            ["fr", "Oui"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-
-            ["nl", "Nee, deze heb ik (nog) niet gehaald."],
-
+            ["en", "No"],
+            ["nl", "Nee, deze heb ik (nog) niet gehaald"],
+            ["fr", "Non"],
           ])
         },
       ],
@@ -104,18 +106,17 @@ export class Q_flu_vaccine_datum_interval extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-
-        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen de griep?"],
+        ["nl", "Wanneer ben je dit griepseizoen (2024/2025) gevaccineerd tegen de griep?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1693551208 },
+            min: { dtype: 'num', num: 1725141601 }, //2024-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
-
+            ["en", "Choose date:"],
             ["nl", "Kies datum (als je de datum niet meer precies weet mag je deze schatten):"],
             ["fr", "Sélectionner une date"],
           ])
@@ -123,7 +124,7 @@ export class Q_flu_vaccine_datum_interval extends Item {
         {
           key: '0', role: 'option',
           content: new Map([
-
+            ["en", "I don't know/can't remember"],
             ["nl", "Dat weet ik niet (meer)"],
             ["fr", "Je ne sais pas, je ne m'en souviens plus"],
           ])
@@ -186,15 +187,14 @@ export class Q_covid_vaccine_interval extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-
-        ["nl", "Heb je dit griepseizoen (2023/2024) een coronaprik gehaald?"],
+        ["nl", "Heb je dit griepseizoen (2024/2025) een coronaprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
-
+            ["en", "Yes"],
             ["nl", "Ja, deze heb ik gehaald"],
             ["fr", "Oui"],
           ])
@@ -203,7 +203,7 @@ export class Q_covid_vaccine_interval extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "No"],
-            ["nl", "Nee, deze heb ik (nog) niet gehaald."],
+            ["nl", "Nee, deze heb ik (nog) niet gehaald"],
             ["fr", "Non"],
           ])
         },
@@ -264,13 +264,13 @@ export class Q_covid_vaccine_datum_interval extends Item {
       condition: this.condition,
       questionText: new Map([
 
-        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen corona?"],
+        ["nl", "Wanneer ben je dit griepseizoen (2024/2025) gevaccineerd tegen corona?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1693551208 },
+            min: { dtype: 'num', num: 1725141601 }, //2024-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([

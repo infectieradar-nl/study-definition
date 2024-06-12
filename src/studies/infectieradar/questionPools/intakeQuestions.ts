@@ -33,8 +33,6 @@ export class QGender extends Item {
           content: new Map([
             ["en", "Male"],
             ["nl", "Man"],
-            ["nl-be", "Man"],
-            ["fr", "Homme"],
           ])
         },
         {
@@ -42,18 +40,15 @@ export class QGender extends Item {
           content: new Map([
             ["en", "Female"],
             ["nl", "Vrouw"],
-            ["nl-be", "Vrouw"],
-            ["fr", "Femme"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["en", "Other"],
-            ["nl", "Anders"],
-            ["nl-be", "Anders"],
-          ])
-        },
+          ["en", "Other"],
+          ["nl", "Anders"],
+        ])
+        },          
       ]
     })
   }
@@ -1076,7 +1071,7 @@ export class Q4d extends Item {
           key: '1', role: 'option',
           content: new Map([
             ["en", "GCSE's, levels, CSEs or equivalent"],
-            ["nl", "MAVO of VMBO"],
+            ["nl", "MAVO, VMBO of vergelijkbaar niveau"],
             ["fr", "Scolarité obligatoire"],
           ])
         },
@@ -1084,7 +1079,7 @@ export class Q4d extends Item {
           key: '2', role: 'option',
           content: new Map([
             ["en", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)"],
-            ["nl", "HAVO, VWO, of MBO"],
+            ["nl", "HAVO, VWO, MBO of vergelijkbaar niveau"],
             ["fr", "Maturité fédérale, maturité professionnelle"],
           ])
         },
@@ -1092,7 +1087,7 @@ export class Q4d extends Item {
           key: '3', role: 'option',
           content: new Map([
             ["en", "Batchelors Degree (BA, BSc) or equivalent"],
-            ["nl", "HBO of WO Bachelor"],
+            ["nl", "HBO, WO Bachelor of vergelijkbaar niveau"],
             ["fr", "Diplôme de Bachelor ou équivalent"],
           ])
         },
@@ -1100,7 +1095,7 @@ export class Q4d extends Item {
           key: '4', role: 'option',
           content: new Map([
             ["en", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)"],
-            ["nl", "WO master of PhD (doctor)"],
+            ["nl", "WO master, PhD (doctor) of vergelijkbaar niveau"],
             ["fr", "Diplôme de Master ou équivalent, PhD, doctorat en médecine (MD)"],
           ])
         },
@@ -2594,8 +2589,8 @@ export class Q9 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you receive a flu vaccine during the last autumn/winter season? (2022/2023)"],
-        ["nl", "Heb je in het afgelopen winterseizoen (2022/2023) een griepprik gehaald?"],
+        ["en", "Did you receive a flu vaccine during the last autumn/winter season (2023/2024)?"],
+        ["nl", "Heb je in het vorige winterseizoen (2023/2024) een griepprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2678,8 +2673,8 @@ export class Q10 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Are you planning to receive a flu vaccine this autumn/winter season? (2023/2024)"],
-        ["nl", "Ben je van plan om voor dit griepseizoen (2023/2024) een griepprik te halen?"],
+        ["en", "Are you planning to receive a flu vaccine this autumn/winter season (2024/2025)?"],
+        ["nl", "Ben je van plan om voor het winterseizoen (2024/2025) een griepprik te halen?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -2771,14 +2766,14 @@ export class Q10b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When were you vaccinated against flu in the season 2023/2024?"],
-        ["nl", "Wanneer ben je dit griepseizoen (2023/2024) gevaccineerd tegen de griep?"],
+        ["en", "When were you vaccinated against flu in the season (2024/2025)?"],
+        ["nl", "Wanneer ben je voor het winterseizoen (2024/2025) gevaccineerd tegen de griep?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1693551208 }, //2023-09-01
+            min: { dtype: 'num', num: 1725141601 }, //2024-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -2847,8 +2842,8 @@ export class Q10c extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for getting a seasonal influenza vaccination this year?"],
-        ["nl", "Wat zijn voor jou de belangrijkste redenen om dit jaar een griepprik te halen?"],
+        ["en", "What were your reasons for getting a seasonal influenza vaccination this year (2024/2025)?"],
+        ["nl", "Wat zijn voor jou de belangrijkste redenen om voor het winterseizoen (2024/2025) WEL een griepprik te halen?"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.text({
@@ -2963,8 +2958,8 @@ export class Q10d extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2023/2024?"],
-        ["nl", "Wat is de reden waarom je jezelf niet laat vaccineren in het komende griepseizoen (2023/2024)?"],
+        ["en", "What were your reasons for NOT getting a seasonal influenza vaccination in season (2024/2025)?"],
+        ["nl", "Wat is de reden waarom je jezelf NIET tegen griep laat vaccineren voor het winterseizoen (2024/2025)?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
@@ -3129,8 +3124,8 @@ export class Q23NL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you get a pneumococcal vaccine last winter season (2022/2023)?"],
-        ["nl", "Heb je het afgelopen winterseizoen (2022/2023) een pneumokokkenprik gehaald?"],
+        ["en", "Did you get a pneumococcal vaccine last winter season (2023/2024)?"],
+        ["nl", "Heb je het vorige winterseizoen (2023/2024) een pneumokokkenprik gehaald?"],
       ]),
       responseOptions: [
         {
@@ -3173,8 +3168,8 @@ export class qNL_covidvac_lastseason extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Did you receive a corona vaccin during the last autumn/winter season? (2022/2023)"],
-        ["nl", "Heb je afgelopen najaar (2022/2023) een coronaprik gehaald?"],
+        ["en", "Did you receive a corona vaccin during the last autumn/winter season (2023/2024)?"],
+        ["nl", "Heb je het vorige winterseizoen (2023/2024) een coronaprik gehaald?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -3257,8 +3252,8 @@ export class qNL_covidvac_curseason extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "Are you planning to receive a corona vaccine this autumn/winter season? (2023/2024)"],
-        ["nl", "Ben je van plan om voor dit najaar (2023/2024) een coronaprik te halen?"],
+        ["en", "Are you planning to receive a corona vaccine this autumn/winter season (2024/2025)?"],
+        ["nl", "Ben je van plan om voor het winterseizoen (2024/2025) een coronaprik te halen?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
@@ -3351,14 +3346,14 @@ export class qNL_covidvac_date extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "When were you vaccinated against corona in the season 2023/2024?"],
-        ["nl", "Wanneer ben je dit najaar (2023/2024) gevaccineerd tegen corona?"],
+        ["en", "When were you vaccinated against corona in the season (2024/2025)?"],
+        ["nl", "Wanneer ben je voor het winterseizoen (2024/2025) gevaccineerd tegen corona?"],
       ]),
       responseOptions: [
         {
           key: '1', role: 'dateInput',
           optionProps: {
-            min: { dtype: 'num', num: 1693551208 }, //2023-09-01
+            min: { dtype: 'num', num: 1725141601 }, //2024-09-01
             max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
           },
           content: new Map([
@@ -3390,8 +3385,8 @@ export class qNL_covidvac_reason extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for getting a corona vaccination this year?"],
-        ["nl", "Wat zijn voor jou de belangrijkste redenen om dit najaar een coronaprik te halen?"],
+        ["en", "What were your reasons for getting a corona vaccination this year (2024/2025)?"],
+        ["nl", "Wat zijn voor jou de belangrijkste redenen om voor het winterseizoen (2024/2025) WEL een coronaprik te halen?"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.text({
@@ -3506,8 +3501,8 @@ export class qNL_covidvac_not_reason extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["en", "What were your reasons for NOT getting a corona vaccination in the autumn/winter season 2023/2024?"],
-        ["nl", "Wat is de reden waarom je je NIET laat vaccineren tegen corona in het komende het najaar?"],
+        ["en", "What were your reasons for NOT getting a corona vaccination in the autumn/winter season (2024/2025)?"],
+        ["nl", "Wat is de reden waarom je je NIET laat vaccineren tegen corona voor het winterseizoen (2024/2025)?"],
       ]),
       helpGroupContent: this.getHelpGroupContent(),
       topDisplayCompoments: [
