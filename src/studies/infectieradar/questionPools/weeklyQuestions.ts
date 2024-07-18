@@ -236,6 +236,14 @@ class SymptomsQuestion extends Item {
           ])
         },
         {
+          key: '24', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["en", "Earache"],
+            ["nl", "Oorpijn"],
+          ])
+        },
+        {
           key: '9', role: 'option',
           disabled: optionDisabled,
           content: new Map([
@@ -1185,6 +1193,303 @@ class QHighestTemp extends Item {
   }
 }
 
+
+class AdviceGroup extends Group {
+  QAdvice1: Qadvice1;
+  QAdvice2: Qadvice2;
+
+  constructor(parentKey: string) {
+    super(parentKey,'advice')
+
+    this.QAdvice1 = new QAdvice1(this.key, true);
+    //this.QAdvice2 = new QAdvice2(this.key, SurveyEngine.multipleChoice.any(this.QAdvice1.key, this.QAdvice1.optionKeys.gp), true);
+    this.QAdvice2 = new QAdvice2(this.key, SurveyEngine.multipleChoice.none(this.QAdvice1.key, '0'), this.QAdvice1.key, true);
+  }
+
+  buildGroup() {
+    this.addItem(this.QAdvice1.get());
+    this.addItem(this.QAdvice2.get());
+   // this.addItem(this.Q7b.get());
+  }
+
+}
+
+
+class Qadvice1 extends Item {
+  
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'Qadvice1');
+
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(
+      this.key,
+      '0'    )
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", "Heb je vanwege je klachten informatie opgezocht? En zo ja, waar?"],
+        ]),
+      questionSubText: new Map([
+        ["en", "Select all options that apply"],
+        ["nl", "Meerdere antwoorden mogelijk"],
+      ]),
+      helpGroupContent: this.getHelpGroupContent(),
+      responseOptions: [
+        {
+          key: '0', role: 'option',
+          disabled: SurveyEngine.multipleChoice.none(
+            this.key,
+            '0'
+          ),
+          content: new Map([
+            ["nl", "Nee, ik heb geen informatie opgezocht"],
+          ])
+        },
+        {
+          key: '1', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ja, ik heb informatie opgezocht via het internet (websites/zoekfuncties, zoals Google, Bing, etc.)"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ja, ik heb informatie opgezocht via chatbots (Artificiële Intelligentie, ChatGPT, Gemini, Siri, etc.)"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ja, ik heb informatie opgezocht in boeken en/of tijdschriften"],
+          ])
+        },
+        {
+          key: '4', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ja, ik heb informatie gezocht via familie/vrienden/collega’s/buren/kennissen"],
+         ])
+        },
+      ],
+    })
+  }
+
+  private getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+          ["en", "Why are we asking this?"],
+          ["nl", "Waarom vragen we dit?"],
+          ["fr", "Pourquoi demandons-nous cela ?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Om uit te zoeken hoe mensen informatie zoeken. En hoe dit over tijd veranderd"],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Selecteer alle relevante bronnen van informatie die u heeft gebruikt"],
+       ]),
+      },
+    ]
+  }
+}
+
+
+class Qadvice2 extends Item {
+  Qadvice1key: string;
+
+  constructor(parentKey: string, condition: Expression, Qadvice1key: string, isRequired: boolean) {
+    super(parentKey, 'Qadvice2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+    this.Qadvice1key = Qadvice1key;
+  }
+
+  buildItem() {
+    const itemKey = this.key;
+    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
+
+    // QUESTION TEXT
+    editor.setTitleComponent(
+      generateTitleComponent(new Map([
+        ["nl", "Hoe tevreden was je met de informatie?"],
+        ]))
+    );
+
+    // CONDITION
+    editor.setCondition(this.condition);
+
+    // INFO POPUP
+    editor.setHelpGroupComponent(
+      generateHelpGroupComponent([
+        {
+          content: new Map([
+            
+            ["nl", "Waarom vragen we dit?"],
+           
+          ]),
+          style: [{ key: 'variant', value: 'h5' }],
+        },
+        {
+          content: new Map([
+            ["nl", "Om uit te zoeken hoe nuttig de information was."],
+            ]),
+          style: [{ key: 'variant', value: 'p' }],
+        },
+        {
+          content: new Map([
+            ["nl", "Hoe zal ik deze vraag beantwoorden?"],
+          ]),
+          style: [{ key: 'variant', value: 'h5' }],
+        },
+        {
+          content: new Map([
+            ["nl", "Geef aan hoe tevreden je was met de informatie."],
+          ]),
+        },
+      ])
+    );
+
+    editor.addDisplayComponent({
+      role: 'text',
+      content: generateLocStrings(
+        new Map([
+          ['nl', 'Selecteer hoe tevreden je was met de informatie?'],
+        ])),
+    })
+    // RESPONSE PART
+    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+
+    const ddOptions: ResponseRowCell = {
+      key: 'col1', role: 'dropDownGroup', items: [
+        {
+          key: '0', role: 'option', content: new Map([
+            ["nl", "Zeer ontevreden"],
+          ]),
+        },
+        {
+          key: '1', role: 'option', content: new Map([
+            ["nl", "Ontevreden"],
+          ]),
+        },
+        {
+          key: '2', role: 'option', content: new Map([
+            ["nl", "Neutraal"],
+          ]),
+        },
+        {
+          key: '3', role: 'option', content: new Map([
+            ["nl", "Tevreden"],
+          ]),
+        },
+        {
+          key: '4', role: 'option', content: new Map([
+            ["nl", "Zeer tevreden"],
+          ]),
+        },
+      ]
+    };
+
+    const rg_inner = initMatrixQuestion(matrixKey, [
+      {
+        key: 'header', role: 'headerRow', cells: [
+          {
+            key: 'col0', role: 'text', content: new Map([
+              ["nl", "Informatiebron"],
+            ]),
+          },
+          {
+            key: 'col1', role: 'text'
+          },
+        ]
+      },
+      {
+        key: 'r1', role: 'responseRow', cells: [
+          {
+            key: 'col0', role: 'label', content: new Map([
+              ["nl", "Internet/zoekmachine"],
+            ]),
+          },
+          { ...ddOptions }
+        ],
+        displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '1'),
+      },
+      {
+        key: 'r2', role: 'responseRow', cells: [
+          {
+            key: 'col0', role: 'label', content: new Map([
+              ["nl", "Chatbot (Artificiële Intelligentie, ChatGPT, Gemini, Siri, etc.)"],
+            ]),
+          },
+          { ...ddOptions }
+        ],
+        displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '2'),
+      },
+      {
+        key: 'r3', role: 'responseRow', cells: [
+          {
+            key: 'col0', role: 'label', content: new Map([
+              ["nl", "Boek en/of tijdschrift"],
+            ]),
+          },
+          { ...ddOptions }
+        ],
+        displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '3'),
+      },
+      {
+        key: 'r4', role: 'responseRow', cells: [
+          {
+            key: 'col0', role: 'label', content: new Map([
+              ["nl", "familie/vrienden/collega’s/buren/kennissen"],
+            ]),
+          },
+          { ...ddOptions }
+        ],
+        displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '4'),
+      },
+    ]);
+    editor.addExistingResponseComponent(rg_inner, rg?.key);
+
+    // VALIDATIONs
+    if (this.isRequired) {
+      editor.addValidation({
+        key: 'r1',
+        type: 'hard',
+        rule: SurveyEngine.hasResponse(this.key, 'rg')
+      });
+    }
+
+    return editor.getItem();
+  }
+}
+
+
+
+
+
+
 class ContactGroup extends Group {
   Q7: Q7;
   Q7a: Q7a;
@@ -1204,6 +1509,7 @@ class ContactGroup extends Group {
     this.addItem(this.Q7b.get());
   }
 }
+
 
 class Q7 extends Item {
   optionKeys = {
