@@ -24,6 +24,7 @@ export class HasSymptomsGroup extends Group {
   QOriginInfectSourceGender: QOriginInfectSourceGender;
   QOriginInfectSourceAgegroup: QOriginInfectSourceAgegroup;
   
+  AdviceGroup: AdviceGroup; //healthcare seeking behavior
   ContactGroup: ContactGroup; // contact
   Q9: Q9;
   Q9b: Q9b;
@@ -63,6 +64,8 @@ export class HasSymptomsGroup extends Group {
     this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key,'1'), isRequired);
     this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
 
+    
+    this.AdviceGroup = new AdviceGroup(this.key);
     this.ContactGroup = new ContactGroup(this.key);
     this.Q9 = new Q9(this.key, true);
     this.Q9b = new Q9b(this.key, SurveyEngine.multipleChoice.any(this.Q9.key, this.Q9.optionKeys.antivirals), true);
@@ -90,6 +93,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.QOriginInfectSourceGender.get());
     this.addItem(this.QOriginInfectSourceAgegroup.get());
 
+    this.addItem(this.AdviceGroup.get());
     this.addItem(this.ContactGroup.get());
     this.addItem(this.Q9.get());
     this.addItem(this.Q9b.get());
@@ -1201,9 +1205,9 @@ class AdviceGroup extends Group {
   constructor(parentKey: string) {
     super(parentKey,'advice')
 
-    this.QAdvice1 = new QAdvice1(this.key, true);
+    this.QAdvice1 = new Qadvice1(this.key, true);
     //this.QAdvice2 = new QAdvice2(this.key, SurveyEngine.multipleChoice.any(this.QAdvice1.key, this.QAdvice1.optionKeys.gp), true);
-    this.QAdvice2 = new QAdvice2(this.key, SurveyEngine.multipleChoice.none(this.QAdvice1.key, '0'), this.QAdvice1.key, true);
+    this.QAdvice2 = new Qadvice2(this.key, SurveyEngine.multipleChoice.none(this.QAdvice1.key, '0'), this.QAdvice1.key, true);
   }
 
   buildGroup() {
@@ -1296,7 +1300,7 @@ class Qadvice1 extends Item {
       },
       {
         content: new Map([
-          ["nl", "Om uit te zoeken hoe mensen informatie zoeken. En hoe dit over tijd veranderd"],
+          ["nl", "Om uit te zoeken hoe mensen informatie zoeken. En hoe dit over tijd verandert."],
         ]),
         style: [{ key: 'variant', value: 'p' }],
       },
@@ -1308,7 +1312,7 @@ class Qadvice1 extends Item {
       },
       {
         content: new Map([
-          ["nl", "Selecteer alle relevante bronnen van informatie die u heeft gebruikt"],
+          ["nl", "Selecteer alle relevante bronnen van informatie die u heeft gebruikt."],
        ]),
       },
     ]
@@ -1354,7 +1358,7 @@ class Qadvice2 extends Item {
         },
         {
           content: new Map([
-            ["nl", "Om uit te zoeken hoe nuttig de information was."],
+            ["nl", "Om uit te zoeken hoe nuttig de informatie was."],
             ]),
           style: [{ key: 'variant', value: 'p' }],
         },
@@ -1462,7 +1466,7 @@ class Qadvice2 extends Item {
         key: 'r4', role: 'responseRow', cells: [
           {
             key: 'col0', role: 'label', content: new Map([
-              ["nl", "familie/vrienden/collega’s/buren/kennissen"],
+              ["nl", "Familie/vrienden/collega’s/buren/kennissen"],
             ]),
           },
           { ...ddOptions }
