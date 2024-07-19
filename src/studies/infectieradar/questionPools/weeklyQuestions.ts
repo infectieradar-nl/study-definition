@@ -1260,7 +1260,7 @@ class Qadvice1 extends Item {
           key: '1', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ja, ik heb informatie opgezocht via het internet (websites/zoekfuncties, zoals Google, Bing, etc.)"],
+            ["nl", "Ja, ik heb informatie opgezocht via het internet (zoekmachine/websites, zoals Google, Thuisarts, etc.)"],
           ])
         },
         {
@@ -1274,14 +1274,14 @@ class Qadvice1 extends Item {
           key: '3', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ja, ik heb informatie opgezocht in boeken en/of tijdschriften"],
+            ["nl", "Ja, ik heb informatie opgezocht in boeken, tijdschrift en/of krant"],
           ])
         },
         {
           key: '4', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ja, ik heb informatie gezocht via familie/vrienden/collega’s/buren/kennissen"],
+            ["nl", "Ja, ik heb informatie gezocht gevraagd aan familie/vrienden/collega’s/buren/kennissen"],
          ])
         },
       ],
@@ -1312,7 +1312,7 @@ class Qadvice1 extends Item {
       },
       {
         content: new Map([
-          ["nl", "Selecteer alle relevante bronnen van informatie die u heeft gebruikt."],
+          ["nl", "Selecteer alle relevante bronnen van informatie die je hebt gebruikt."],
        ]),
       },
     ]
@@ -1433,7 +1433,7 @@ class Qadvice2 extends Item {
         key: 'r1', role: 'responseRow', cells: [
           {
             key: 'col0', role: 'label', content: new Map([
-              ["nl", "Internet/zoekmachine"],
+              ["nl", "Zoekmachine/websites (zoals Google, Thuisarts, etc.)"],
             ]),
           },
           { ...ddOptions }
@@ -1455,7 +1455,7 @@ class Qadvice2 extends Item {
         key: 'r3', role: 'responseRow', cells: [
           {
             key: 'col0', role: 'label', content: new Map([
-              ["nl", "Boek en/of tijdschrift"],
+              ["nl", "Boeken, tijdschrift en/of krant"],
             ]),
           },
           { ...ddOptions }
