@@ -458,12 +458,15 @@ class ProtectionUsage extends Item {
 
 
 class Q1 extends Item {
+  
+  date = new Date();
+  
   optionKeys = {
     yes: '1',
     no: '0',
     other: '3',
   };
-
+ 
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'Q1');
     this.isRequired = isRequired;
@@ -478,7 +481,7 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            ['nl', `Heb je gisteren ( `],
           ])
         },
         {
@@ -488,7 +491,7 @@ class Q1 extends Item {
         },
         {
           content: new Map([
-            ['nl', `?`],
+            ['nl', `) met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
           ])
         },
       ],
