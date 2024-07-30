@@ -644,16 +644,16 @@ class QFragile extends Item {
 class ContactMatrix_other extends Item {
   qText: Map<string, string> | (StyledTextComponentProp | DateDisplayComponentProp)[];
   rowInfos: Array<{ key: string, label: Map<string, string> }> = [
-    { key: 'r1', label: new Map([["nl", "0-3 jaar"],]), },
-    { key: 'r2', label: new Map([["nl", "4-12 jaar"],]), },
-    { key: 'r4', label: new Map([["nl", "13-18 jaar"],]), },
-    { key: 'r5', label: new Map([["nl", "19-39 jaar"],]), },
-    { key: 'r6', label: new Map([["nl", "40-59 jaar"],]), },
-    { key: 'r7', label: new Map([["nl", "60-79 jaar"],]), },
-    { key: 'r8', label: new Map([["nl", "80+ jaar"],]), },
+    { key: 'ro1', label: new Map([["nl", "0-3 jaar"],]), },
+    { key: 'ro2', label: new Map([["nl", "4-12 jaar"],]), },
+    { key: 'ro3', label: new Map([["nl", "13-18 jaar"],]), },
+    { key: 'ro4', label: new Map([["nl", "19-39 jaar"],]), },
+    { key: 'ro5', label: new Map([["nl", "40-59 jaar"],]), },
+    { key: 'ro6', label: new Map([["nl", "60-79 jaar"],]), },
+    { key: 'ro7', label: new Map([["nl", "80+ jaar"],]), },
     ];
   columnInfos: Array<{ key: string, label: Map<string, string> }> = [
-    { key: 'mf', label: new Map([["nl", "Personen"],]), },
+    { key: 'mf', label: new Map([["nl", "Aantal personen"],]), },
   ];
   constructor(parentKey: string, itemKey: string, qText: Map<string, string> | (StyledTextComponentProp | DateDisplayComponentProp)[], condition: Expression, isRequired?: boolean) {
     super(parentKey, itemKey);
