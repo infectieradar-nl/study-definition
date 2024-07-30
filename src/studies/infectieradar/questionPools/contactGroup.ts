@@ -13,7 +13,7 @@ export class ContactGroup extends Group {
   ContactMatrixForWork: ContactMatrix;
   ContactMatrixForSchool: ContactMatrix;
   ContactMatrixForLeisure: ContactMatrix;
-  ContactMatrixForOther: ContactMatrix;
+  ContactMatrixForOther: ContactMatrix_other;
   QFragile: QFragile;
 
 
@@ -77,11 +77,11 @@ export class ContactGroup extends Group {
 
     /// OTHER
     const conditionForOther = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.other);
-    this.ContactMatrixForOther = new ContactMatrix(
+    this.ContactMatrixForOther = new ContactMatrix_other(
       this.key,
       'ContactsOther',
-      new Map([['en', 'Indicate the number of contacts during other activities (per age category and gender)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
+      new Map([['en', 'Indicate the number of contacts during other activities (per age category)'],
+      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
       conditionForOther,
       isRequired
     );
@@ -143,9 +143,9 @@ export class ContactGroup extends Group {
       ...this.ContactMatrixForOther.rowInfos.map(rowInfo => { return rowInfo.key; }).map(key =>
         StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.ContactMatrixForOther.key, `rg.rm.${key}-${this.ContactMatrixForOther.columnInfos[0].key}`, '0')
       ),
-      ...this.ContactMatrixForOther.rowInfos.map(rowInfo => { return rowInfo.key; }).map(key =>
-        StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.ContactMatrixForOther.key, `rg.rm.${key}-${this.ContactMatrixForOther.columnInfos[1].key}`, '0')
-      ),
+      //...this.ContactMatrixForOther.rowInfos.map(rowInfo => { return rowInfo.key; }).map(key =>
+      //  StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.ContactMatrixForOther.key, `rg.rm.${key}-${this.ContactMatrixForOther.columnInfos[1].key}`, '0')
+      //),
     ];
   }
 }
@@ -635,6 +635,78 @@ class QFragile extends Item {
           disabled: SurveyEngine.multipleChoice.any(this.key, this.optionKeys.no)
         },
       ]
+    })
+  }
+}
+
+
+class ContactMatrix_other extends Item {
+  qText: Map<string, string> | (StyledTextComponentProp | DateDisplayComponentProp)[];
+  rowInfos: Array<{ key: string, label: Map<string, string> }> = [
+    { key: 'r1', label: new Map([["nl", "0-3 jaar"],]), },
+    { key: 'r2', label: new Map([["nl", "4-12 jaar"],]), },
+    { key: 'r4', label: new Map([["nl", "13-18 jaar"],]), },
+    { key: 'r5', label: new Map([["nl", "19-39 jaar"],]), },
+    { key: 'r6', label: new Map([["nl", "40-59 jaar"],]), },
+    { key: 'r7', label: new Map([["nl", "60-79 jaar"],]), },
+    { key: 'r8', label: new Map([["nl", "80+ jaar"],]), },
+    ];
+  columnInfos: Array<{ key: string, label: Map<string, string> }> = [
+    { key: 'mf', label: new Map([["nl", "Personen"],]), },
+  ];
+  constructor(parentKey: string, itemKey: string, qText: Map<string, string> | (StyledTextComponentProp | DateDisplayComponentProp)[], condition: Expression, isRequired?: boolean) {
+    super(parentKey, itemKey);
+    this.isRequired = isRequired;
+    this.condition = condition;
+    this.qText = qText;
+  }
+  generateRows() {
+    const rowCategories = this.rowInfos.map(row => {
+      return { key: row.key, role: 'row', label: row.label, }
+    });
+    const rows: any[] = [];
+    rowCategories.forEach(row => {
+      rows.push(row);
+    })
+    return rows;
+  }
+  validationRules(): Validation[] {
+    return [
+      {
+        key: 'v1',
+        type: 'hard',
+        // at least one value is not 0
+        rule: SurveyEngine.logic.or(
+          ...this.rowInfos.map(row => {
+            return SurveyEngine.logic.not(
+              SurveyEngine.compare.eq(
+                SurveyEngine.getResponseValueAsStr(this.key, `rg.rm.${row.key}-${this.columnInfos[0].key}`),
+                '0'
+              )
+            )
+          })
+        )
+      }
+    ];
+  }
+  buildItem(): SurveySingleItem {
+    return SurveyItems.responsiveMatrix({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.qText,
+      responseType: 'dropdown',
+      breakpoint: 'sm',
+      columns: this.columnInfos,
+      rows: this.generateRows(),
+      dropdownConfig: {
+        unselectedLabeL: new Map([
+          ["nl", "Selecteer een optie"],
+        ]),
+        options: dropdownOptions
+      },
+      customValidations: this.validationRules(),
     })
   }
 }
