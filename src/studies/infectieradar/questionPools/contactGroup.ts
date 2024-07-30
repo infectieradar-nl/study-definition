@@ -35,8 +35,21 @@ export class ContactGroup extends Group {
     this.ContactMatrixForHome = new ContactMatrix(
       this.key,
       'ContactsHome',
-      new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)']]),
+      //new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
+      //['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren ]]),
+      new Map([
+        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op `],
+      ])
+      {
+      date: SurveyEngine.timestampWithOffset({ days: -1 }),
+      dateFormat: 'EEEE (dd.MM)',
+      languageCodes: ['nl']
+      },
+      {
+      content: new Map([
+        ['nl', `THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`],
+      ])
+      },  
       conditionForHome,
       isRequired
     );
@@ -481,24 +494,21 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren ( `],
+            ['nl', `Heb je gisteren, `],
           ])
         },
         {
           date: SurveyEngine.timestampWithOffset({ days: -1 }),
-          dateFormat: 'EEEE (dd.MM.)',
+          dateFormat: 'EEEE (dd.MM)',
           languageCodes: ['nl']
         },
         {
           content: new Map([
-            ['nl', `) met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            ['nl', `, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
           ])
         },
       ],
                  
-     // new Map([
-     //   ["nl", "Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?"],
-     // ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
