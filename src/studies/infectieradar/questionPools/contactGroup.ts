@@ -469,15 +469,33 @@ class Q1 extends Item {
     this.isRequired = isRequired;
   }
 
-  buildItem(): SurveySingleItem {
+    buildItem(): SurveySingleItem {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ["nl", "Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?"],
-      ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -1 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        },
+      ],
+                 
+     // new Map([
+     //   ["nl", "Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?"],
+     // ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
