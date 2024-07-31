@@ -5,6 +5,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { Expression, SurveySingleItem, Validation } from "survey-engine/data_types";
 
 export class ContactGroup extends Group {
+
   Infos: Infos;
   Q1: Q1;
   Q2: Q2;
@@ -15,44 +16,59 @@ export class ContactGroup extends Group {
   ContactMatrixForLeisure: ContactMatrix;
   ContactMatrixForOther: ContactMatrix_other;
   QFragile: QFragile;
+ 
+      
 
+      constructor(parentKey: string, isRequired: boolean, groupCondition?: Expression) {
+      super(parentKey, 'Contact')
+      this.groupEditor.setCondition(groupCondition)
+               
+   
+      // Initialize/Configure questions here:
+      this.Infos = new Infos(this.key);
+      this.Q1 = new Q1(this.key, isRequired);
+      this.Q2 = new Q2(this.key, SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes), isRequired);
+   
+      const conditionForInstruct = SurveyEngine.compare.gt(SurveyEngine.multipleChoice.selectionCount(this.Q2.key), 1);
+   
+      this.Instruct_contact = new Instruct_contact(this.key, conditionForInstruct);
+   
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() - 1); 
 
-  constructor(parentKey: string, isRequired: boolean, groupCondition?: Expression) {
-    super(parentKey, 'Contact')
-    this.groupEditor.setCondition(groupCondition);
+      const formattedDate = currentDate.toLocaleDateString( 'nl-NL', {
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+      });
 
+      const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
+      this.ContactMatrixForHome = new ContactMatrix(
+        this.key,
+        'ContactsHome',
+        new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
+        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
+        ]]),
+        conditionForHome,
+        isRequired
+      );
 
-    // Initialize/Configure questions here:
-    this.Infos = new Infos(this.key);
-    this.Q1 = new Q1(this.key, isRequired);
-    this.Q2 = new Q2(this.key, SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes), isRequired);
+        /*new Map([
+          ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op `],
+        ]), 
+        {
+        date: SurveyEngine.timestampWithOffset({ days: -1 }),
+        dateFormat: 'EEEE (dd.MM)',
+        languageCodes: ['nl']
+        },
+        {
+        content: new Map([
+          ['nl', `THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`]])
+          ,conditionForHome,
+          isRequired
+        },  
+      );*/
 
-    const conditionForInstruct = SurveyEngine.compare.gt(SurveyEngine.multipleChoice.selectionCount(this.Q2.key), 1);
-
-    this.Instruct_contact = new Instruct_contact(this.key, conditionForInstruct);
-
-    const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
-    this.ContactMatrixForHome = new ContactMatrix(
-      this.key,
-      'ContactsHome',
-      //new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-      //['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren ]]),
-      new Map([
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op `],
-      ])
-      {
-      date: SurveyEngine.timestampWithOffset({ days: -1 }),
-      dateFormat: 'EEEE (dd.MM)',
-      languageCodes: ['nl']
-      },
-      {
-      content: new Map([
-        ['nl', `THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`],
-      ])
-      },  
-      conditionForHome,
-      isRequired
-    );
 
     /// WORK
     const conditionForWork = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.work);
@@ -60,7 +76,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsWork',
       new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)'
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)`
       ]]),
       conditionForWork,
       isRequired
@@ -72,7 +88,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsSchool',
       new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)']]),
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`]]),
       conditionForSchool,
       isRequired
     );
@@ -83,7 +99,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsLeisure',
       new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).']]),
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`]]),
       conditionForLeisure,
       isRequired
     );
@@ -94,7 +110,7 @@ export class ContactGroup extends Group {
       this.key,
       'ContactsOther',
       new Map([['en', 'Indicate the number of contacts during other activities (per age category)'],
-      ['nl', 'Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).']]),
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je op ${formattedDate} tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).`]]),
       conditionForOther,
       isRequired
     );
@@ -472,8 +488,8 @@ class ProtectionUsage extends Item {
 
 class Q1 extends Item {
   
-  date = new Date();
-  
+  currentDate: Date;
+  formattedDate: string;
   optionKeys = {
     yes: '1',
     no: '0',
@@ -483,8 +499,15 @@ class Q1 extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'Q1');
     this.isRequired = isRequired;
+    this.currentDate = new Date();
+    this.currentDate.setDate(this.currentDate.getDate() - 1); 
+    this.formattedDate = this.currentDate.toLocaleDateString( 'nl-NL', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+    });
   }
-
+  
     buildItem(): SurveySingleItem {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
@@ -494,17 +517,7 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren, `],
-          ])
-        },
-        {
-          date: SurveyEngine.timestampWithOffset({ days: -1 }),
-          dateFormat: 'EEEE (dd.MM)',
-          languageCodes: ['nl']
-        },
-        {
-          content: new Map([
-            ['nl', `, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            ['nl', `Heb je gisteren, ${this.formattedDate}, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
           ])
         },
       ],
@@ -596,14 +609,23 @@ class Q2 extends Item {
 
 
 class QFragile extends Item {
+
+  currentDate: Date;
+  formattedDate: string;
   optionKeys = {
     no: '0',
   };
-
+ 
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'QFragile');
     this.isRequired = isRequired;
-    // this.condition = condition;
+    this.currentDate = new Date();
+    this.currentDate.setDate(this.currentDate.getDate() - 1); 
+    this.formattedDate = this.currentDate.toLocaleDateString( 'nl-NL', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+    });
   }
 
   buildItem(): SurveySingleItem {
@@ -613,7 +635,7 @@ class QFragile extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", "Heb je gisteren een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)"],
+        ["nl", `Heb je gisteren, ${this.formattedDate}, een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
       ]),
       responseOptions: [
         {
