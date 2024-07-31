@@ -1281,7 +1281,7 @@ class Qadvice1 extends Item {
           key: '4', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ja, ik heb informatie gezocht gevraagd aan familie/vrienden/collega’s/buren/kennissen"],
+            ["nl", "Ja, ik heb informatie gevraagd aan familie/vrienden/collega’s/buren/kennissen"],
          ])
         },
       ],
