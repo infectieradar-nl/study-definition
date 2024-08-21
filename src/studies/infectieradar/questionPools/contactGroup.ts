@@ -17,7 +17,7 @@ export class ContactGroup extends Group {
   ContactMatrixForOther: ContactMatrix_other;
   QFragile: QFragile;
  
-      
+      date = new Date();
 
       constructor(parentKey: string, isRequired: boolean, groupCondition?: Expression) {
       super(parentKey, 'Contact')
@@ -32,28 +32,42 @@ export class ContactGroup extends Group {
       const conditionForInstruct = SurveyEngine.compare.gt(SurveyEngine.multipleChoice.selectionCount(this.Q2.key), 1);
    
       this.Instruct_contact = new Instruct_contact(this.key, conditionForInstruct);
-   
-      const currentDate = new Date();
-      currentDate.setDate(currentDate.getDate() - 1); 
+          
+      /*function getYesterdayDate(): string {
+        const today = new Date();
+        today.setDate(today.getDate() + 2);  // Simuleer dat het overmorgen is
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
 
-      const formattedDate = currentDate.toLocaleDateString( 'nl-NL', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-      });
+        return yesterday.toLocaleDateString('nl-NL', {
+            weekday: 'long',
+            day: '2-digit',
+            month: 'long',
+        });
+    }
+     
+    const formattedDate = getYesterdayDate();*/
 
       const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
       this.ContactMatrixForHome = new ContactMatrix(
         this.key,
         'ContactsHome',
-        new Map([['en', 'Indicate the number of contacts at home (per age category and gender)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
+        new Map([//['en', 'Indicate the number of contacts at home (per age category and gender)'],
+        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
         ]]),
+        /*['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
+        ]]),*/
         conditionForHome,
         isRequired
       );
 
-        /*new Map([
+
+      // Code van Peter (uit Tekenradar weeklyTB vragenlijst):
+      /*const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
+      this.ContactMatrixForHome = new ContactMatrix(
+        this.key,
+        'ContactsHome',
+        new Map([
           ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op `],
         ]), 
         {
@@ -75,9 +89,11 @@ export class ContactGroup extends Group {
     this.ContactMatrixForWork = new ContactMatrix(
       this.key,
       'ContactsWork',
-      new Map([['en', 'Indicate the number of contacts at work (per age category and gender)'],
-      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)`
+      new Map([//['en', 'Indicate the number of contacts at work (per age category and gender)'],
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)`
       ]]),
+      /*['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)`
+      ]]),*/
       conditionForWork,
       isRequired
     );
@@ -87,8 +103,9 @@ export class ContactGroup extends Group {
     this.ContactMatrixForSchool = new ContactMatrix(
       this.key,
       'ContactsSchool',
-      new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],
-      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`]]),
+      new Map([//['en', 'Indicate the number of contacts at school (per age category and gender)'],
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`]]),
+      /*['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`]]),      */
       conditionForSchool,
       isRequired
     );
@@ -98,8 +115,9 @@ export class ContactGroup extends Group {
     this.ContactMatrixForLeisure = new ContactMatrix(
       this.key,
       'ContactsLeisure',
-      new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`]]),
+      new Map([//['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`]]),
+      /*['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op ${formattedDate} tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`]]),*/
       conditionForLeisure,
       isRequired
     );
@@ -109,8 +127,9 @@ export class ContactGroup extends Group {
     this.ContactMatrixForOther = new ContactMatrix_other(
       this.key,
       'ContactsOther',
-      new Map([['en', 'Indicate the number of contacts during other activities (per age category)'],
-      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je op ${formattedDate} tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).`]]),
+      new Map([//['en', 'Indicate the number of contacts during other activities (per age category)'],
+      ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).`]]),
+      /*['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je op ${formattedDate} tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).`]]), */
       conditionForOther,
       isRequired
     );
@@ -487,9 +506,7 @@ class ProtectionUsage extends Item {
 
 
 class Q1 extends Item {
-  
-  currentDate: Date;
-  formattedDate: string;
+ 
   optionKeys = {
     yes: '1',
     no: '0',
@@ -499,16 +516,30 @@ class Q1 extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'Q1');
     this.isRequired = isRequired;
-    this.currentDate = new Date();
-    this.currentDate.setDate(this.currentDate.getDate() - 1); 
-    this.formattedDate = this.currentDate.toLocaleDateString( 'nl-NL', {
+    // Berekening hier is niet meer nodig omdat we dit dynamisch willen doen
+  }
+ 
+  // Nieuwe methode om gisteren te berekenen
+    private getYesterdayDate(): string {
+    //const today = new Date();
+    //today.setDate(today.getDate() + 2);  // Simuleer dat het overmorgen is
+    const yesterday = new Date();          // Bij simulatie: const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+      
+    // Zet de datum weer terug naar normaal (dit hoeft niet altijd, maar kan nuttig zijn)
+    //today.setDate(today.getDate() - 1);
+
+    return yesterday.toLocaleDateString('nl-NL', {
       weekday: 'long',
       day: '2-digit',
       month: 'long',
     });
   }
-  
-    buildItem(): SurveySingleItem {
+ 
+  buildItem(): SurveySingleItem {
+    // Haal de dynamische datum op wanneer deze nodig is
+    const formattedDate = this.getYesterdayDate();
+ 
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -517,11 +548,10 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren, ${this.formattedDate}, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            ['nl', `Heb je gisteren, ${formattedDate}, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
           ])
         },
       ],
-                 
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
@@ -530,7 +560,7 @@ class Q1 extends Item {
           ])
         },
         {
-          key: this.optionKeys.no, role: 'option',
+key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee, ik heb met niemand gesproken en/of aangeraakt, en ik ben NIET dichtbij iemand anders geweest in dezelfde kamer (binnen 3 meter)."],
           ])
@@ -542,7 +572,7 @@ class Q1 extends Item {
           ])
         }
       ]
-    })
+    });
   }
 }
 
@@ -610,8 +640,6 @@ class Q2 extends Item {
 
 class QFragile extends Item {
 
-  currentDate: Date;
-  formattedDate: string;
   optionKeys = {
     no: '0',
   };
@@ -619,23 +647,37 @@ class QFragile extends Item {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'QFragile');
     this.isRequired = isRequired;
-    this.currentDate = new Date();
-    this.currentDate.setDate(this.currentDate.getDate() - 1); 
-    this.formattedDate = this.currentDate.toLocaleDateString( 'nl-NL', {
+    // Berekening hier is niet meer nodig omdat we dit dynamisch willen doen
+  }
+ 
+  // Nieuwe methode om gisteren te berekenen
+    private getYesterdayDate(): string {
+    //const today = new Date();
+    //today.setDate(today.getDate() + 2);  // Simuleer dat het overmorgen is
+    const yesterday = new Date();          // Bij simulatie: const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+      
+    // Zet de datum weer terug naar normaal (dit hoeft niet altijd, maar kan nuttig zijn)
+    //today.setDate(today.getDate() - 1);
+
+    return yesterday.toLocaleDateString('nl-NL', {
       weekday: 'long',
       day: '2-digit',
       month: 'long',
     });
   }
-
+ 
   buildItem(): SurveySingleItem {
+    // Haal de dynamische datum op wanneer deze nodig is
+    const formattedDate = this.getYesterdayDate();
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", `Heb je gisteren, ${this.formattedDate}, een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
+        ["nl", `Heb je gisteren, ${formattedDate}, een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
       ]),
       responseOptions: [
         {
