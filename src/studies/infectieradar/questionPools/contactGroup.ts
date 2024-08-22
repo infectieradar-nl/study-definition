@@ -548,7 +548,8 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren, ${formattedDate}, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            ['nl', `Heb je gisteren met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
+            //['nl', `Heb je gisteren, ${formattedDate}, met tenminste één ander persoon gesproken en/of aangeraakt, of ben je dichtbij een ander geweest in dezelfde kamer (binnen 3 meter)?`],
           ])
         },
       ],
@@ -677,7 +678,8 @@ class QFragile extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ["nl", `Heb je gisteren, ${formattedDate}, een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
+        ["nl", `Heb je gisteren een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
+        //["nl", `Heb je gisteren, ${formattedDate}, een instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)`],
       ]),
       responseOptions: [
         {
