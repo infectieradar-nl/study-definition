@@ -38,7 +38,7 @@ export class ContactGroup extends Group {
       [
         {
           content: new Map([
-            ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
+            ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
             ]])
         },
         {
@@ -46,39 +46,29 @@ export class ContactGroup extends Group {
           dateFormat: 'EEEE dd.MM,',
           languageCodes: ['nl']
         },
+        {
+          content: new Map([
+            ['nl', ` THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`],
+          ])
+        }       
       ],
       conditionForHome,
-      isRequired
+      isRequired,
     );
 
 
-    // Code van Peter (uit Tekenradar weeklyTB vragenlijst):
-    /*const conditionForHome = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.home);
-    this.ContactMatrixForHome = new ContactMatrix(
+    /// WORK
+    const conditionForWork = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.work);
+    this.ContactMatrixForWork = new ContactMatrix(
       this.key,
-      'ContactsHome',
-      new Map([
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je op `],
-      ]),
-      {
-      date: SurveyEngine.timestampWithOffset({ days: -1 }), // date Expression?
-      dateFormat: 'EEEE (dd.MM)',
-      languageCodes: ['nl']
-      },
-      {
-      content: new Map([
-        ['nl', `THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`]])
-        ,conditionForHome,
-        isRequired
-      },
-    );*/
-
-    /*
+      'ContactsWork',
+      /*new Map([//['en', 'Indicate the number of contacts at work (per age category and gender)'],*/
         [
           {
             content: new Map([
-              ['nl', `Heb je gisteren, `],
-            ])
+              [
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+              ]])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
@@ -87,19 +77,10 @@ export class ContactGroup extends Group {
           },
           {
             content: new Map([
-              ['nl', ' instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)?'],
+              ['nl', ` op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collega's)`],
             ])
           }
-        ],*/
-
-    /// WORK
-    const conditionForWork = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.work);
-    this.ContactMatrixForWork = new ContactMatrix(
-      this.key,
-      'ContactsWork',
-      new Map([//['en', 'Indicate the number of contacts at work (per age category and gender)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op je WERK hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Werk = je werk (bijv. klanten, collegas)`
-        ]]),
+        ],
       conditionForWork,
       isRequired
     );
@@ -109,9 +90,26 @@ export class ContactGroup extends Group {
     this.ContactMatrixForSchool = new ContactMatrix(
       this.key,
       'ContactsSchool',
-      new Map([//['en', 'Indicate the number of contacts at school (per age category and gender)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`]]),
-      conditionForSchool,
+      /*new Map([['en', 'Indicate the number of contacts at school (per age category and gender)'],*/
+        [
+          {
+            content: new Map([
+              [
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+              ]])
+          },
+          {
+            date: SurveyEngine.timestampWithOffset({ days: -1 }),
+            dateFormat: 'EEEE dd.MM,',
+            languageCodes: ['nl']
+          },
+          {
+            content: new Map([
+              ['nl', ` op SCHOOL hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). School = onderwijsinstellingen (bijv. docenten, klasgenoten)`],
+            ])
+          }
+        ],
+        conditionForSchool,
       isRequired
     );
 
@@ -120,8 +118,25 @@ export class ContactGroup extends Group {
     this.ContactMatrixForLeisure = new ContactMatrix(
       this.key,
       'ContactsLeisure',
-      new Map([//['en', 'Indicate the number of contacts during leisure (per age category and gender)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`]]),
+      /*new Map([['en', 'Indicate the number of contacts during leisure (per age category and gender)'],*/
+        [
+          {
+            content: new Map([
+              [
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+              ]])
+          },
+          {
+            date: SurveyEngine.timestampWithOffset({ days: -1 }),
+            dateFormat: 'EEEE dd.MM,',
+            languageCodes: ['nl']
+          },
+          {
+            content: new Map([
+              ['nl', ` tijdens VRIJE TIJD hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Vrije tijd = geplande activiteiten met anderen (bijv. mensen die je ontmoet in een café, sportschool of bij iemand anders thuis).`],
+            ])
+          }
+        ],
       conditionForLeisure,
       isRequired
     );
@@ -131,8 +146,25 @@ export class ContactGroup extends Group {
     this.ContactMatrixForOther = new ContactMatrix_other(
       this.key,
       'ContactsOther',
-      new Map([//['en', 'Indicate the number of contacts during other activities (per age category)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie) waarmee je gisteren tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die u ontmoet in het openbaar vervoer).`]]),
+      /*new Map([['en', 'Indicate the number of contacts during other activities (per age category)'],*/
+        [
+          {
+            content: new Map([
+              [
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+              ]])
+          },
+          {
+            date: SurveyEngine.timestampWithOffset({ days: -1 }),
+            dateFormat: 'EEEE dd.MM,',
+            languageCodes: ['nl']
+          },
+          {
+            content: new Map([
+              ['nl', ` tijdens OVERIGE ACTIVITEITEN hebt gesproken en/of aangeraakt, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Overige activiteiten = alle locaties die niet worden genoemd in de andere groepen (bijv. mensen die je ontmoet in het openbaar vervoer).`],
+            ])
+          }
+        ],
       conditionForOther,
       isRequired
     );
