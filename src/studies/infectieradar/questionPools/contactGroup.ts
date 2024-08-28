@@ -17,7 +17,7 @@ export class ContactGroup extends Group {
   ContactMatrixForOther: ContactMatrix_other;
   QFragile: QFragile;
 
-  
+
   constructor(parentKey: string, isRequired: boolean, groupCondition?: Expression) {
     super(parentKey, 'Contact')
     this.groupEditor.setCondition(groupCondition)
@@ -35,10 +35,19 @@ export class ContactGroup extends Group {
     this.ContactMatrixForHome = new ContactMatrix(
       this.key,
       'ContactsHome',
-      new Map([//['en', 'Indicate the number of contacts at home (per age category and gender)'],
-        ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
-        ]]),
-       conditionForHome,
+      [
+        {
+          content: new Map([
+            ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`
+            ]])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -1 }),
+          dateFormat: 'EEEE dd.MM,',
+          languageCodes: ['nl']
+        },
+      ],
+      conditionForHome,
       isRequired
     );
 
@@ -64,24 +73,24 @@ export class ContactGroup extends Group {
       },
     );*/
 
-/*
-    [
-      {
-        content: new Map([
-          ['nl', `Heb je gisteren, `],
-        ])
-      },
-      {
-        date: SurveyEngine.timestampWithOffset({ days: -1 }),
-        dateFormat: 'EEEE dd.MM,',
-        languageCodes: ['nl']
-      },
-      {
-        content: new Map([
-          ['nl', ' instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)?'],
-        ])
-      }
-    ],*/
+    /*
+        [
+          {
+            content: new Map([
+              ['nl', `Heb je gisteren, `],
+            ])
+          },
+          {
+            date: SurveyEngine.timestampWithOffset({ days: -1 }),
+            dateFormat: 'EEEE dd.MM,',
+            languageCodes: ['nl']
+          },
+          {
+            content: new Map([
+              ['nl', ' instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)?'],
+            ])
+          }
+        ],*/
 
     /// WORK
     const conditionForWork = SurveyEngine.multipleChoice.any(this.Q2.key, this.Q2.optionKeys.work);
@@ -512,9 +521,9 @@ class Q1 extends Item {
     this.isRequired = isRequired;
   }
 
-  
+
   buildItem(): SurveySingleItem {
- 
+
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -641,8 +650,8 @@ class QFragile extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: 
-       [
+      questionText:
+        [
           {
             content: new Map([
               ['nl', `Heb je gisteren, `],
