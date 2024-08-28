@@ -48,9 +48,15 @@ export class ContactGroup extends Group {
         },
         {
           content: new Map([
-            ['nl', ` THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`],
+            ['nl', ` THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). `],
           ])
-        }       
+        }, 
+        /* code werkt nog niet:
+          {
+          questionSubText: new Map([
+          ['nl', 'Thuis = je woning (bijv. gezinsleden, bezoekers)'],
+          ])
+        },*/      
       ],
       conditionForHome,
       isRequired,
@@ -696,10 +702,13 @@ class QFragile extends Item {
           },
           {
             content: new Map([
-              ['nl', ' instelling met (veel) kwetsbare mensen bezocht? (kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting)?'],
+              ['nl', ' instelling met (veel) kwetsbare mensen bezocht?'],
             ])
           }
         ],
+      questionSubText: new Map([
+          ["nl", "Kwetsbare mensen zijn mensen met een extra hoog risico voor ernstige klachten bij een besmetting"],
+        ]),
       responseOptions: [
         {
           key: this.optionKeys.no, role: 'option',
