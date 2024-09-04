@@ -38,17 +38,17 @@ export class ContactGroup extends Group {
       [
         {
           content: new Map([
-            ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+            ['nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren `
             ]])
         },
         {
           date: SurveyEngine.timestampWithOffset({ days: -1 }),
-          dateFormat: 'EEEE dd.MM,',
+          dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
           languageCodes: ['nl']
         },
         {
           content: new Map([
-            ['nl', ` THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). `],
+            ['nl', ` THUIS hebt gesproken, of waarbij dichtbij bent geweest in dezelfde kamer (binnen 3 meter). Thuis = je woning (bijv. gezinsleden, bezoekers)`],
           ])
         }, 
         /* code werkt nog niet:
@@ -73,12 +73,12 @@ export class ContactGroup extends Group {
           {
             content: new Map([
               [
-                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren `
               ]])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
-            dateFormat: 'EEEE dd.MM,',
+            dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
             languageCodes: ['nl']
           },
           {
@@ -101,12 +101,12 @@ export class ContactGroup extends Group {
           {
             content: new Map([
               [
-                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren `
               ]])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
-            dateFormat: 'EEEE dd.MM,',
+            dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
             languageCodes: ['nl']
           },
           {
@@ -129,12 +129,12 @@ export class ContactGroup extends Group {
           {
             content: new Map([
               [
-                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren `
               ]])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
-            dateFormat: 'EEEE dd.MM,',
+            dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
             languageCodes: ['nl']
           },
           {
@@ -157,12 +157,12 @@ export class ContactGroup extends Group {
           {
             content: new Map([
               [
-                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren, `
+                'nl', `Geef alsjeblieft het aantal personen aan (per leeftijdscategorie en geslacht) waarmee je gisteren `
               ]])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
-            dateFormat: 'EEEE dd.MM,',
+            dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
             languageCodes: ['nl']
           },
           {
@@ -570,12 +570,12 @@ class Q1 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Heb je gisteren, `],
+            ['nl', `Heb je gisteren `],
           ])
         },
         {
           date: SurveyEngine.timestampWithOffset({ days: -1 }),
-          dateFormat: 'EEEE dd.MM,',
+          dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
           languageCodes: ['nl']
         },
         {
@@ -692,17 +692,17 @@ class QFragile extends Item {
         [
           {
             content: new Map([
-              ['nl', `Heb je gisteren, `],
+              ['nl', `Heb je gisteren `],
             ])
           },
           {
             date: SurveyEngine.timestampWithOffset({ days: -1 }),
-            dateFormat: 'EEEE dd.MM,',
+            dateFormat: '(EEEE) ', /*'EEEE dd.MM,',*/
             languageCodes: ['nl']
           },
           {
             content: new Map([
-              ['nl', ' instelling met (veel) kwetsbare mensen bezocht?'],
+              ['nl', ' een instelling met (veel) kwetsbare mensen bezocht?'],
             ])
           }
         ],
