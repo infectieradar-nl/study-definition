@@ -2564,7 +2564,7 @@ class Q11 extends Item {
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
         ["en", "What do you think is the main reason causing your symptoms?"],
-        ["nl", "Wat is volgens jou de belangrijkste reden van je klachten?"],
+        ["nl", "Wat is volgens jou de belangrijkste oorzaak van je klachten?"],
       ]),
       responseOptions: [
         {
