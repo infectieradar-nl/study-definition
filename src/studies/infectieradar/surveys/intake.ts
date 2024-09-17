@@ -51,7 +51,7 @@ class IntakeDef extends SurveyDefinition {
       surveyKey: surveyKeys.intake,
       name: new Map([
         ["en", "About You"],
-        ["nl", "Achtergrond informatie"],
+        ["nl", "Achtergrondinformatie"],
       ]),
       description: new Map([
         ["en", "The intake survey focues on some background and demographic information."],
