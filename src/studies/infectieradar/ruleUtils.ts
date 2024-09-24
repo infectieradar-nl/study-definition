@@ -111,6 +111,8 @@ const assignSwabNotSelected = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
 )
 
+const selfSwabbingReportKey = 'selfSwabbing'
+
 export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
   // If part of the cohort ->
   StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -118,29 +120,55 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
     ParticipantFlags.selfSwabbing.values.active,
   ),
   // Then do following:
+  StudyEngine.participantActions.reports.init(selfSwabbingReportKey),
+  StudyEngine.if(
+    hasRecentPositiveTest(),
+    // THEN POSITIVE CASE:
+    StudyEngine.do(
+      StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'true'),
+    ),
+    StudyEngine.do(
+      StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'positiveTest', 'false'),
+    )
+  ),
   StudyEngine.if(
     wasNotSampledRecently(),
     // If true:
-    StudyEngine.if(
-      hasRecentPositiveTest(),
-      // THEN POSITIVE CASE:
-      assignSwabSample(),
-      // ELSE NEGATIVE CASE:
+    StudyEngine.do(
       StudyEngine.if(
-        StudyEngine.and(
-          hasRecentSymptoms(),
-          // Use sampler:
-          StudyEngine.externalEventEval(externalServiceNames.samplerIsSelected),
+        hasRecentSymptoms(),
+        // If true:
+        StudyEngine.do(
+          StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'ILI', 'true'),
+          StudyEngine.if(
+            StudyEngine.externalEventEval(externalServiceNames.samplerIsSelected),
+            // If true:
+            StudyEngine.do(
+              StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'selected'),
+              assignSwabSample(),
+            ),
+            // Else:
+            StudyEngine.do(
+              StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'not selected'),
+              assignSwabNotSelected(),
+            ),
+          )
         ),
-        // sampled:
-        assignSwabSample(),
-        // else:
-        assignSwabNotSelected(),
-      )
+        // Else:
+        StudyEngine.do(
+          StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'ILI', 'false'),
+          assignSwabNotSelected(),
+        )
+      ),
+      StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'wasSampledRecently', 'false'),
     ),
     // else:
-    assignSwabNotSelected(),
+    StudyEngine.do(
+      assignSwabNotSelected(),
+      StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'wasSampledRecently', 'true'),
+    ),
   ),
+
   // Flag participant if had any symptoms in last 5 days:
   StudyEngine.if(
     hasRecentSymptoms(),
@@ -216,21 +244,21 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
 /**
  * Interval survey methods:
  */
-const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number) => StudyEngine.participantActions.assignedSurveys.add(
+export const addIntervalSurveyWithOffset = (reference: Expression, offsetWeeks: number, expiresInWeeks: number = 4) => StudyEngine.participantActions.assignedSurveys.add(
   surveyKeys.interval,
   'normal',
   StudyEngine.timestampWithOffset({ days: offsetWeeks * 7 }, reference),
-  StudyEngine.timestampWithOffset({ days: (offsetWeeks + 4) * 7 }, reference),
+  StudyEngine.timestampWithOffset({ days: (offsetWeeks + expiresInWeeks) * 7 }, reference),
 )
 
-const isIntervalFlagEq = (value: number) => StudyEngine.eq(
+export const isIntervalFlagEq = (value: number) => StudyEngine.eq(
   StudyEngine.participantState.getParticipantFlagValueAsNum(
     ParticipantFlags.intervalGroup.key
   ),
   value
 )
 
-const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
+export const ensureIntervalSurveyGroup = () => StudyEngine.ifThen(
   StudyEngine.not(
     StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.intervalGroup.key)
   ),
@@ -329,6 +357,39 @@ export const reassignIntervalSurvey = () => StudyEngine.do(
   )
 )
 
+const temporaryFlagKeyForIntervalStart = 'lastIntervalStart';
+
+export const saveLastIntervalStartAsFlag = () => StudyEngine.if(
+  StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.interval),
+  StudyEngine.participantActions.updateFlag(
+    temporaryFlagKeyForIntervalStart,
+    StudyEngine.participantState.getSurveyKeyAssignedFrom(surveyKeys.interval),
+  ),
+  // handle if interval survey is not assigned yet
+  // Assume it was 4 weeks ago:
+  StudyEngine.participantActions.updateFlag(
+    temporaryFlagKeyForIntervalStart,
+    StudyEngine.timestampWithOffset({ days: -91 }),
+  )
+)
+
+export const getLastIntervalStartFromFlags = () => StudyEngine.participantState.getParticipantFlagValueAsNum(temporaryFlagKeyForIntervalStart)
+
+export const deleteLastIntervalStartFlag = () => StudyEngine.participantActions.removeFlag(temporaryFlagKeyForIntervalStart)
+
+const reassignIntervalFromWeek = (week: number) => StudyEngine.do(
+  saveLastIntervalStartAsFlag(),
+
+  // remove old instances of interval survey:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
+
+  assignIntervalSurvey(
+    StudyEngine.getTsForNextISOWeek(week, getLastIntervalStartFromFlags())
+  ),
+
+  deleteLastIntervalStartFlag()
+)
+
 export const assignIntervalSurveyForQ1 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.intervalHidePregnancyQ.key,
@@ -339,12 +400,7 @@ export const assignIntervalSurveyForQ1 = () => StudyEngine.do(
     ParticipantFlags.intervalHideVaccinationQ.values.false
   ),
 
-  // remove old instances of interval survey:
-  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
-
-  assignIntervalSurvey(
-    StudyEngine.getTsForNextISOWeek(1)
-  ),
+  reassignIntervalFromWeek(1)
 )
 
 export const assignIntervalSurveyForQ2 = () => StudyEngine.do(
@@ -357,12 +413,7 @@ export const assignIntervalSurveyForQ2 = () => StudyEngine.do(
     ParticipantFlags.intervalHideVaccinationQ.values.true
   ),
 
-  // remove old instances of interval survey:
-  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
-
-  assignIntervalSurvey(
-    StudyEngine.getTsForNextISOWeek(14)
-  ),
+  reassignIntervalFromWeek(14)
 )
 
 export const assignIntervalSurveyForQ3 = () => StudyEngine.do(
@@ -375,13 +426,10 @@ export const assignIntervalSurveyForQ3 = () => StudyEngine.do(
     ParticipantFlags.intervalHideVaccinationQ.values.true
   ),
 
-  // remove old instances of interval survey:
-  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
-
-  assignIntervalSurvey(
-    StudyEngine.getTsForNextISOWeek(27)
-  ),
+  reassignIntervalFromWeek(27)
 )
+
+
 
 export const assignIntervalSurveyForQ4 = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(
@@ -393,11 +441,6 @@ export const assignIntervalSurveyForQ4 = () => StudyEngine.do(
     ParticipantFlags.intervalHideVaccinationQ.values.false
   ),
 
-  // remove old instances of interval survey:
-  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.interval, 'all'),
-
-  assignIntervalSurvey(
-    StudyEngine.getTsForNextISOWeek(40)
-  ),
+  reassignIntervalFromWeek(40)
 )
 
