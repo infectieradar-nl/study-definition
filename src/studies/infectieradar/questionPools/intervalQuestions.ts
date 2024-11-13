@@ -760,6 +760,123 @@ export class Q_longsymptoms extends Item {
   }
 }
 
+//IPQ  vragen over perceptie van klachten
+export class Q_IPQ extends Item {
+constructor(parentKey: string,condition: Expression, isRequired?: boolean) {
+  super(parentKey, 'Q_IPQ');
+  this.isRequired = isRequired;
+  this.condition = condition;
+}
+
+buildItem() {
+  return SurveyItems.responsiveSingleChoiceArray({
+    defaultMode: 'horizontal',
+    parentKey: this.parentKey,
+    itemKey: this.itemKey,
+    isRequired: this.isRequired,
+    condition: this.condition,
+    questionText: new Map([
+      ["nl", `Je hebt zojuist aangegeven dat je gezondheidsklachten hebt. 
+        Onderstaande vragen gaan over deze klachten.`]
+    ]),
+    questionSubText: new Map([
+      ["nl", "Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft."],
+    ]),
+    scaleOptions: [
+      {
+        key: '0', content: new Map([
+          ["nl", "Helemaal geen invloed"],
+        ])
+      }, {
+        key: '1', content: new Map([
+          ["nl", ""],
+        ])
+      },{
+        key: '2', content: new Map([
+          ["nl", ""],
+        ])
+      }, {
+        key: '3', content: new Map([
+          ["nl", ""],
+        ])
+      },
+      {
+        key: '4', content: new Map([
+          ["nl", ""],
+        ])
+      }, {
+        key: '5', content: new Map([
+          ["nl", ""],
+        ])
+      }, {
+        key: '6', content: new Map([
+          ["nl", ""],
+        ])
+      },{
+        key: '7', content: new Map([
+          ["nl", ""],
+        ])
+      },{
+        key: '8', content: new Map([
+          ["nl", ""],
+        ])
+      },{
+        key: '9', content: new Map([
+          ["nl", ""],
+        ])
+      },{
+        key: '10', content: new Map([
+          ["nl", "Zeer veel invloed"],
+        ])
+      },
+    ],
+    rows: [
+      {
+        key: 'a', content: new Map([
+          ["nl", "Hoeveel beïnvloeden je klachten je leven? "],
+        ])
+      },
+      {
+        key: 'b', content: new Map([
+          ["nl", "Hoe lang denk je dat je klachten zullen duren? "],
+        ])
+      },
+      {
+        key: 'c', content: new Map([
+          ["nl", "Hoeveel controle vind je dat je hebt over je klachten? "],
+        ])
+      },
+      {
+        key: 'd', content: new Map([
+          ["nl", "Hoeveel denk je dat een behandeling kan helpen bij je klachten?"],
+        ])
+      },
+      {
+        key: 'e', content: new Map([
+          ["nl", "Hoe sterk ervaar je klachten?"],
+        ])
+      },
+      {
+        key: 'f', content: new Map([
+          ["nl", "Hoe bezorgd ben je over je klachten? "],
+        ])
+      },
+      {
+        key: 'g', content: new Map([
+          ["nl", "In welke mate vind je dat je je klachten begrijpt? "],
+        ])
+      },
+      {
+        key: 'h', content: new Map([
+          ["nl", "Hoeveel invloed hebben de klachten op je stemming? (Bijvoorbeeld: maakt de ziekte je boos, bang, van streek of somber?)"],
+        ])
+      },
+    ],
+  })
+}
+}
+
+
 //Oorzaak van zelf-gerapporteerde post-infection symptoms
 export class Q_longsymptoms_condition extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
