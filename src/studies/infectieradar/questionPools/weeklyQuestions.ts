@@ -19,6 +19,7 @@ export class HasSymptomsGroup extends Group {
   Q5: Q5;
   FeverGroup: FeverGroup; // Q6 fever group
   
+  Q_IPQ: Q_IPQ; // symptom worry 
   Q_origin_infect: Q_origin_infect;
   QOriginInfectSource: QOriginInfectSource;
   QOriginInfectSourceGender: QOriginInfectSourceGender;
@@ -65,6 +66,7 @@ export class HasSymptomsGroup extends Group {
     this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
 
     
+    this.Q_IPQ = new Q_IPQ(this.key, true);
     this.AdviceGroup = new AdviceGroup(this.key);
     this.ContactGroup = new ContactGroup(this.key);
     this.Q9 = new Q9(this.key, true);
@@ -93,6 +95,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.QOriginInfectSourceGender.get());
     this.addItem(this.QOriginInfectSourceAgegroup.get());
 
+    this.addItem(this.Q_IPQ.get());
     this.addItem(this.AdviceGroup.get());
     this.addItem(this.ContactGroup.get());
     this.addItem(this.Q9.get());
@@ -1196,7 +1199,84 @@ class QHighestTemp extends Item {
     ]
   }
 }
-
+//IPQ  vragen over perceptie van klachten
+export class Q_IPQ extends Item {
+  constructor(parentKey: string, isRequired?: boolean) {
+    super(parentKey, 'Q_IPQ');
+    this.isRequired = isRequired;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoe bezorgd ben je over je klachten?`]
+      ]),
+      questionSubText: new Map([
+        ["nl", "Klik alsjeblieft het getal aan dat je mening het beste weergeeft."],
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal geen invloed"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer veel invloed"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+  }
 
 class AdviceGroup extends Group {
   QAdvice1: Qadvice1;
