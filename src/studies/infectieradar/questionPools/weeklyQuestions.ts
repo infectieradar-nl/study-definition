@@ -1222,7 +1222,7 @@ export class Q_IPQ extends Item {
       scaleOptions: [
         {
           key: '0', content: new Map([
-            ["nl", "0 - Helemaal geen invloed"],
+            ["nl", "0 - Helemaal niet bezorgd"],
           ])
         }, {
           key: '1', content: new Map([
@@ -1263,7 +1263,7 @@ export class Q_IPQ extends Item {
           ])
         },{
           key: '10', content: new Map([
-            ["nl", "10 - Zeer veel invloed"],
+            ["nl", "10 - Zeer bezorgd"],
           ])
         },
       ],
