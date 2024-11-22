@@ -768,112 +768,159 @@ export class Q_IPQ extends Item {
   }
   
   buildItem() {
-    return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'horizontal',
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
+    return SurveyItems.simpleLikertGroup({
       questionText: new Map([
-        ["nl", `Je hebt zojuist aangegeven dat je gezondheidsklachten hebt. 
-          Onderstaande vragen gaan over deze klachten.`]
-      ]),
-      questionSubText: new Map([
-        ["nl", "Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft."],
+          ["nl", "Je hebt zojuist aangegeven dat je gezondheidsklachten hebt. Onderstaande vragen gaan over deze klachten. Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft."],
       ]),
       scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "0 - Helemaal geen invloed"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "1"],
-          ])
-        },{
-          key: '2', content: new Map([
-            ["nl", "2"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "3"],
-          ])
-        },
-        {
-          key: '4', content: new Map([
-            ["nl", "4"],
-          ])
-        }, {
-          key: '5', content: new Map([
-            ["nl", "5"],
-          ])
-        }, {
-          key: '6', content: new Map([
-            ["nl", "6"],
-          ])
-        },{
-          key: '7', content: new Map([
-            ["nl", "7"],
-          ])
-        },{
-          key: '8', content: new Map([
-            ["nl", "8"],
-          ])
-        },{
-          key: '9', content: new Map([
-            ["nl", "9"],
-          ])
-        },{
-          key: '10', content: new Map([
-            ["nl", "10 - Zeer veel invloed"],
-          ])
-        },
+          {
+              key: '0', content: new Map([
+                  ["nl", "0"],
+              ])
+          },
+          {
+              key: '1', content: new Map([
+                  ["nl", "1"],
+              ]),
+          }, {
+              key: '2', content: new Map([
+                  ["nl", "2"],
+              ])
+          }, {
+              key: '3', content: new Map([
+                  ["nl", "3"],
+              ])
+          }, {
+              key: '4', content: new Map([
+                  ["nl", "4"],
+              ]),
+          }, {
+              key: '5', content: new Map([
+                  ["nl", "5"],
+              ])
+          }, {
+              key: '6', content: new Map([
+                  ["nl", "6"],
+              ])
+          }, {
+              key: '7', content: new Map([
+                  ["nl", "7"],
+              ])
+          }, {
+              key: '8', content: new Map([
+                  ["nl", "8"],
+              ])
+          }, {
+              key: '9', content: new Map([
+                  ["nl", "9"],
+              ])
+          }, {
+              key: '10', content: new Map([
+                  ["nl", "10"],
+              ])
+          }
       ],
       rows: [
-        {
-          key: 'a', content: new Map([
-            ["nl", "Hoeveel beïnvloeden je klachten je leven? "],
-          ])
-        },
-        {
-          key: 'b', content: new Map([
-            ["nl", "Hoe lang denk je dat je klachten zullen duren? "],
-          ])
-        },
-        {
-          key: 'c', content: new Map([
-            ["nl", "Hoeveel controle vind je dat je hebt over je klachten? "],
-          ])
-        },
-        {
-          key: 'd', content: new Map([
-            ["nl", "Hoeveel denk je dat een behandeling kan helpen bij je klachten?"],
-          ])
-        },
-        {
-          key: 'e', content: new Map([
-            ["nl", "Hoe sterk ervaar je klachten?"],
-          ])
-        },
-        {
-          key: 'f', content: new Map([
-            ["nl", "Hoe bezorgd ben je over je klachten? "],
-          ])
-        },
-        {
-          key: 'g', content: new Map([
-            ["nl", "In welke mate vind je dat je je klachten begrijpt? "],
-          ])
-        },
-        {
-          key: 'h', content: new Map([
-            ["nl", "Hoeveel invloed hebben de klachten op je stemming? (Bijvoorbeeld: maakt de ziekte je boos, bang, van streek of somber?)"],
-          ])
-        },
-      ],
-    })
-  }
-  }
+          {
+              key: 'a', content: new Map([
+                  ["nl", "Hoeveel beïnvloeden je klachten je leven?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal geen invloed - 10 zeer veel invloed']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'b', content: new Map([
+                  ["nl", "Hoe lang denk je dat je klachten zullen duren?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 een zeer korte tijd - 10 mijn hele leven']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'c', content: new Map([
+                  ["nl", "Hoeveel controle vind je dat je hebt over je klachten?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal geen controle - 10 zeer veel controle']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'd', content: new Map([
+                  ["nl", "Hoeveel denk je dat een behandeling kan helpen bij je klachten?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal niet -  10 zeer veel']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'e', content: new Map([
+                  ["nl", "Hoe sterk ervaar je klachten?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal geen klachten - 10 veel ernstige klachten']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'f', content: new Map([
+                  ["nl", "Hoe bezorgd ben je over je klachten?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal niet bezorgd - 10 zeer bezorgd']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'g', content: new Map([
+                  ["nl", "In welke mate vind je dat je je klachten begrijpt?"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal geen begrip - 10 zeer veel begrip']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+          {
+              key: 'h', content: new Map([
+                  ["nl", "Hoeveel invloed hebben de klachten op je stemming? (Bijvoorbeeld: maakt de ziekte je boos, bang, van streek of somber?)"],
+              ]), descriptions: [
+                  ComponentGenerators.text({
+                      content: new Map([
+                          ['nl', '0 helemaal geen invloed - 10 zeer veel invloed']
+                      ]),
+                      className: "fst-italic mb-1"
+                  }),
+              ]
+          },
+      ]
+  });
+}
+}
 //Oorzaak van zelf-gerapporteerde post-infection symptoms
 export class Q_longsymptoms_condition extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {
