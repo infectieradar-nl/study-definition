@@ -1,7 +1,7 @@
 import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { matrixKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
-import { Item } from "case-editor-tools/surveys/types";
+import { Item, Group } from "case-editor-tools/surveys/types";
 import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
@@ -759,167 +759,612 @@ export class Q_longsymptoms extends Item {
     })
   }
 }
-//IPQ  vragen over perceptie van klachten
-export class Q_IPQ extends Item {
-  constructor(parentKey: string,condition: Expression, isRequired?: boolean) {
-    super(parentKey, 'Q_IPQ');
-    this.isRequired = isRequired;
+
+//
+export class Consequences extends Item {
+constructor(parentKey: string,condition: Expression) {
+  super(parentKey, 'Q_IPQ_a');
+  this.condition = condition;
+}
+
+buildItem() {
+  return SurveyItems.responsiveSingleChoiceArray({
+    defaultMode: 'horizontal',
+    parentKey: this.parentKey,
+    itemKey: this.itemKey,
+    isRequired: this.isRequired,
+    condition: this.condition,
+    questionText: new Map([
+      ["nl", `Hoeveel beïnvloeden je klachten je leven? `]
+    ]),
+    scaleOptions: [
+      {
+        key: '0', content: new Map([
+          ["nl", "0 - Helemaal geen invloed"],
+        ])
+      }, {
+        key: '1', content: new Map([
+          ["nl", "1"],
+        ])
+      },{
+        key: '2', content: new Map([
+          ["nl", "2"],
+        ])
+      }, {
+        key: '3', content: new Map([
+          ["nl", "3"],
+        ])
+      },
+      {
+        key: '4', content: new Map([
+          ["nl", "4"],
+        ])
+      }, {
+        key: '5', content: new Map([
+          ["nl", "5"],
+        ])
+      }, {
+        key: '6', content: new Map([
+          ["nl", "6"],
+        ])
+      },{
+        key: '7', content: new Map([
+          ["nl", "7"],
+        ])
+      },{
+        key: '8', content: new Map([
+          ["nl", "8"],
+        ])
+      },{
+        key: '9', content: new Map([
+          ["nl", "9"],
+        ])
+      },{
+        key: '10', content: new Map([
+          ["nl", "10 - Zeer veel invloed"],
+        ])
+      },
+    ],
+    rows: [
+      {
+        key: 'f', content: new Map([
+          ["nl", ""],
+        ])
+      },
+    ],
+  })
+}
+}
+
+
+//
+export class Timeline extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_b');
     this.condition = condition;
   }
   
   buildItem() {
-    return SurveyItems.simpleLikertGroup({
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
       questionText: new Map([
-          ["nl", "Je hebt zojuist aangegeven dat je gezondheidsklachten hebt. Onderstaande vragen gaan over deze klachten. Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft."],
+        ["nl", `Hoe lang denk je dat je klachten zullen duren?`]
       ]),
       scaleOptions: [
-          {
-              key: '0', content: new Map([
-                  ["nl", "0"],
-              ])
-          },
-          {
-              key: '1', content: new Map([
-                  ["nl", "1"],
-              ]),
-          }, {
-              key: '2', content: new Map([
-                  ["nl", "2"],
-              ])
-          }, {
-              key: '3', content: new Map([
-                  ["nl", "3"],
-              ])
-          }, {
-              key: '4', content: new Map([
-                  ["nl", "4"],
-              ]),
-          }, {
-              key: '5', content: new Map([
-                  ["nl", "5"],
-              ])
-          }, {
-              key: '6', content: new Map([
-                  ["nl", "6"],
-              ])
-          }, {
-              key: '7', content: new Map([
-                  ["nl", "7"],
-              ])
-          }, {
-              key: '8', content: new Map([
-                  ["nl", "8"],
-              ])
-          }, {
-              key: '9', content: new Map([
-                  ["nl", "9"],
-              ])
-          }, {
-              key: '10', content: new Map([
-                  ["nl", "10"],
-              ])
-          }
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Een zeer korte tijd"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Mijn hele leven"],
+          ])
+        },
       ],
       rows: [
-          {
-              key: 'a', content: new Map([
-                  ["nl", "Hoeveel beïnvloeden je klachten je leven?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal geen invloed - 10 zeer veel invloed']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'b', content: new Map([
-                  ["nl", "Hoe lang denk je dat je klachten zullen duren?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 een zeer korte tijd - 10 mijn hele leven']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'c', content: new Map([
-                  ["nl", "Hoeveel controle vind je dat je hebt over je klachten?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal geen controle - 10 zeer veel controle']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'd', content: new Map([
-                  ["nl", "Hoeveel denk je dat een behandeling kan helpen bij je klachten?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal niet -  10 zeer veel']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'e', content: new Map([
-                  ["nl", "Hoe sterk ervaar je klachten?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal geen klachten - 10 veel ernstige klachten']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'f', content: new Map([
-                  ["nl", "Hoe bezorgd ben je over je klachten?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal niet bezorgd - 10 zeer bezorgd']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'g', content: new Map([
-                  ["nl", "In welke mate vind je dat je je klachten begrijpt?"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal geen begrip - 10 zeer veel begrip']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-          {
-              key: 'h', content: new Map([
-                  ["nl", "Hoeveel invloed hebben de klachten op je stemming? (Bijvoorbeeld: maakt de ziekte je boos, bang, van streek of somber?)"],
-              ]), descriptions: [
-                  ComponentGenerators.text({
-                      content: new Map([
-                          ['nl', '0 helemaal geen invloed - 10 zeer veel invloed']
-                      ]),
-                      className: "fst-italic mb-1"
-                  }),
-              ]
-          },
-      ]
-  });
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
 }
+
+//
+export class PersonalControl extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_c');
+    this.condition = condition;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoeveel controle vind je dat je hebt over je klachten?`]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal geen controle"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer veel controle"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+}
+
+//
+export class TreatmentControl extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_d');
+    this.condition = condition;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoeveel denk je dat een behandeling kan helpen bij je klachten?`]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal niet"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer veel"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+}
+
+//
+export class Identity extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_e');
+    this.condition = condition;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoe sterk ervaar je klachten?`]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal geen klachten"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Veel ernstige klachten"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+}
+//
+export class Concern extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_f');
+    this.condition = condition;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoe bezorgd ben je over je klachten? `]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal niet bezorgd"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer bezorgd"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+}
+
+//
+export class Coherence extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_g');
+    this.condition = condition;
+  }
+  
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `In welke mate vind je dat je je klachten begrijpt?`]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal geen begrip"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer veel begrip"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
+}
+//
+export class EmotionalRepresentation extends Item {
+  constructor(parentKey: string,condition: Expression) {
+    super(parentKey, 'Q_IPQ_h');
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ["nl", `Hoeveel invloed hebben de klachten op je stemming? (Bijvoorbeeld: maakt de ziekte je boos, bang, van streek of somber?)`]
+      ]),
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "0 - Helemaal geen invloed"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
+        },{
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        },
+        {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        },{
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        },{
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        },{
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        },{
+          key: '10', content: new Map([
+            ["nl", "10 - Zeer veel invloed"],
+          ])
+        },
+      ],
+      rows: [
+        {
+          key: 'f', content: new Map([
+            ["nl", ""],
+          ])
+        },
+      ],
+    })
+  }
 }
 //Oorzaak van zelf-gerapporteerde post-infection symptoms
 export class Q_longsymptoms_condition extends Item {

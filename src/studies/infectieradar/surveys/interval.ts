@@ -1,5 +1,5 @@
 import { Group, SurveyDefinition } from "case-editor-tools/surveys/types";
-import { Q12, Q12b, Q_CIS,Q_IPQ,  Q_longsymptoms, Q_longsymptoms_condition, Q_mMRC, } from "../questionPools/intervalQuestions";
+import { Q12, Q12b, Q_CIS,  Q_longsymptoms, Q_longsymptoms_condition, Q_mMRC, Consequences, Timeline, PersonalControl, TreatmentControl, Identity, Concern, Coherence, EmotionalRepresentation} from "../questionPools/intervalQuestions";
 import { surveyKeys } from "../contants";
 import { ParticipantFlags } from "../participantFlags";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
@@ -185,7 +185,15 @@ class LongcovidGroup extends Group {
   Q_mMRC: Q_mMRC;
   Q_longsymptoms: Q_longsymptoms
   Q_longsymptoms_condition: Q_longsymptoms_condition
-  Q_IPQ: Q_IPQ;
+  Q_IPQ_a: Consequences;
+  Q_IPQ_b: Timeline;
+  Q_IPQ_c: PersonalControl;
+  Q_IPQ_d: TreatmentControl;
+  Q_IPQ_e: Identity;
+  Q_IPQ_f: Concern;
+  Q_IPQ_g: Coherence;
+  Q_IPQ_h: EmotionalRepresentation;
+
   Q_healthrank: Q_healthrank;
 
   constructor(parentKey: string, isRequired: boolean, groupCondition?: Expression) {
@@ -198,8 +206,15 @@ class LongcovidGroup extends Group {
     this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Q_mMRC = new Q_mMRC(this.key, isRequired);
     this.Q_longsymptoms = new Q_longsymptoms(this.key, isRequired);
+    this.Q_IPQ_a = new Consequences(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_b = new Timeline(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_c = new PersonalControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_d = new TreatmentControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_e = new Identity(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_f = new Concern(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_g = new Coherence(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
+    this.Q_IPQ_h = new EmotionalRepresentation(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
     this.Q_longsymptoms_condition = new Q_longsymptoms_condition(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5'), isRequired);
-    this.Q_IPQ = new Q_IPQ(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
     this.Q_healthrank = new Q_healthrank(this.key, isRequired);
 
   }
@@ -210,7 +225,14 @@ class LongcovidGroup extends Group {
     this.addItem(this.Q_mMRC.get())
     this.addItem(this.Q_longsymptoms.get())
     this.addItem(this.Q_longsymptoms_condition.get())
-    this.addItem(this.Q_IPQ.get())
+    this.addItem(this.Q_IPQ_a.get())
+    this.addItem(this.Q_IPQ_b.get())
+    this.addItem(this.Q_IPQ_c.get())
+    this.addItem(this.Q_IPQ_d.get())
+    this.addItem(this.Q_IPQ_e.get())
+    this.addItem(this.Q_IPQ_f.get())
+    this.addItem(this.Q_IPQ_g.get())
+    this.addItem(this.Q_IPQ_h.get())
     this.addItem(this.Q_healthrank.get())
   }
 }
