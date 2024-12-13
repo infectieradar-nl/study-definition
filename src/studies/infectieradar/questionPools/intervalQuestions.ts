@@ -762,9 +762,10 @@ export class Q_longsymptoms extends Item {
 
 //
 export class Consequences extends Item {
-constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
   super(parentKey, 'Q_IPQ_a');
   this.condition = condition;
+  this.isRequired = isRequired;
 }
 
 buildItem() {
@@ -839,9 +840,10 @@ buildItem() {
 
 //
 export class Timeline extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_b');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -915,9 +917,10 @@ export class Timeline extends Item {
 
 //
 export class PersonalControl extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_c');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -991,9 +994,10 @@ export class PersonalControl extends Item {
 
 //
 export class TreatmentControl extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_d');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -1067,9 +1071,10 @@ export class TreatmentControl extends Item {
 
 //
 export class Identity extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean){
     super(parentKey, 'Q_IPQ_e');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -1142,9 +1147,10 @@ export class Identity extends Item {
 }
 //
 export class Concern extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_f');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -1218,9 +1224,10 @@ export class Concern extends Item {
 
 //
 export class Coherence extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_g');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
   
   buildItem() {
@@ -1293,9 +1300,10 @@ export class Coherence extends Item {
 }
 //
 export class EmotionalRepresentation extends Item {
-  constructor(parentKey: string,condition: Expression) {
+  constructor(parentKey: string, condition?: Expression, isRequired?: boolean) {
     super(parentKey, 'Q_IPQ_h');
     this.condition = condition;
+    this.isRequired = isRequired;
   }
 
   buildItem() {
@@ -1366,6 +1374,7 @@ export class EmotionalRepresentation extends Item {
     })
   }
 }
+
 //Oorzaak van zelf-gerapporteerde post-infection symptoms
 export class Q_longsymptoms_condition extends Item {
   constructor(parentKey: string, condition: Expression, isRequired?: boolean) {

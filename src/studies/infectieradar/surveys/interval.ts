@@ -206,16 +206,16 @@ class LongcovidGroup extends Group {
     this.Q_CIS = new Q_CIS(this.key, isRequired);
     this.Q_mMRC = new Q_mMRC(this.key, isRequired);
     this.Q_longsymptoms = new Q_longsymptoms(this.key, isRequired);
-    this.Q_IPQ_a = new Consequences(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_b = new Timeline(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_c = new PersonalControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_d = new TreatmentControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_e = new Identity(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_f = new Concern(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_g = new Coherence(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
-    this.Q_IPQ_h = new EmotionalRepresentation(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'));
     this.Q_longsymptoms_condition = new Q_longsymptoms_condition(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5'), isRequired);
-    this.Q_healthrank = new Q_healthrank(this.key, isRequired);
+    this.Q_IPQ_a = new Consequences(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_b = new Timeline(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_c = new PersonalControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_d = new TreatmentControl(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_e = new Identity(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_f = new Concern(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_g = new Coherence(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+    this.Q_IPQ_h = new EmotionalRepresentation(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
+        this.Q_healthrank = new Q_healthrank(this.key, isRequired);
 
   }
 
