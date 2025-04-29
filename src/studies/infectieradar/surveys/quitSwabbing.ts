@@ -132,7 +132,8 @@ class Feedback extends Item {
       inputLabelText: new Map([
         ['nl', ''],
       ]),
-    })
+      maxLength: 1500, // Voeg hier de maximum aantal karakters toe
+    });
   }
 }
 
