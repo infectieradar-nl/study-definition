@@ -45,10 +45,10 @@ export class QGender extends Item {
         {
           key: '2', role: 'option',
           content: new Map([
-          ["en", "Other"],
-          ["nl", "Anders"],
-        ])
-        },          
+            ["en", "Other"],
+            ["nl", "Anders"],
+          ])
+        },
       ]
     })
   }
@@ -138,7 +138,7 @@ export class QBirthdate extends Item {
       max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
     })
     editor.addExistingResponseComponent(dateInputEditor.getComponent(), rg?.key);
-    editor.addExistingResponseComponent({
+    editor.addDisplayComponent({
       key: 'feedback',
       role: 'text',
       style: [{ key: 'className', value: 'fst-italic mt-1' }],
@@ -159,7 +159,7 @@ export class QBirthdate extends Item {
           ]
         },
       ]
-    }, rg?.key);
+    });
 
     // VALIDATIONs
     if (this.isRequired) {
@@ -720,7 +720,7 @@ export class Q4b2NL extends Item {
             ["nl", "Meer dan 5 dagen"],
           ])
         },
-        
+
       ],
     })
   }
@@ -1480,85 +1480,67 @@ export class qNL_house_agegroup extends Item {
     const rg_inner = initMatrixQuestion(matrixKey, [
       {
         key: '1', role: 'responseRow',
+        content: new Map([
+          ["en", "0 - 4 years"],
+          ["nl", "0 - 4 jaar"],
+          ["fr", "0 - 4 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "0 - 4 years"],
-              ["nl", "0 - 4 jaar"],
-              ["fr", "0 - 4 ans"],
-            ])
-          },
           { ...ddg }
         ],
       },
       {
         key: '6', role: 'responseRow',
+        content: new Map([
+          ["en", "5 - 12 years"],
+          ["nl", "5 - 12 jaar"],
+          ["fr", "5 - 12 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "5 - 12 years"],
-              ["nl", "5 - 12 jaar"],
-              ["fr", "5 - 12 ans"],
-            ])
-          },
           { ...ddg }
         ],
       },
       {
         key: '7', role: 'responseRow',
+        content: new Map([
+          ["en", "13 - 18 years"],
+          ["nl", "13 - 18 jaar"],
+          ["fr", "13 - 18 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "13 - 18 years"],
-              ["nl", "13 - 18 jaar"],
-              ["fr", "13 - 18 ans"],
-            ])
-          },
           { ...ddg }
         ],
       },
       {
         key: '3', role: 'responseRow',
+        content: new Map([
+          ["en", "19 - 44 years"],
+          ["nl", "19 - 44 jaar"],
+          ["fr", "19 - 44 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "19 - 44 years"],
-              ["nl", "19 - 44 jaar"],
-              ["fr", "19 - 44 ans"],
-            ])
-          },
           { ...ddg }
         ]
       },
       {
         key: '4', role: 'responseRow',
+        content: new Map([
+          ["en", "45 - 64 years"],
+          ["nl", "45 - 64 jaar"],
+          ["fr", "45 - 64 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "45 - 64 years"],
-              ["nl", "45 - 64 jaar"],
-              ["fr", "45 - 64 ans"],
-            ])
-          },
           { ...ddg }
         ]
       },
       {
         key: '5', role: 'responseRow',
+        content: new Map([
+          ["en", "65+"],
+          ["nl", "65 of ouder"],
+          ["fr", "plus de 65 ans"],
+        ]),
         cells: [
-          {
-            key: 'l', role: 'label',
-            content: new Map([
-              ["en", "65+"],
-              ["nl", "65 of ouder"],
-              ["fr", "plus de 65 ans"],
-            ])
-          },
           { ...ddg }
         ]
       }
