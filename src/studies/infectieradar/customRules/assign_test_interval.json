@@ -1,0 +1,84 @@
+[
+  {
+    "name": "UPDATE_FLAG",
+    "data": [
+      {
+        "dtype": "str",
+        "str": "intervalHidePregnancyQ"
+      },
+      {
+        "dtype": "str",
+        "str": "true"
+      }
+    ]
+  },
+  {
+    "name": "UPDATE_FLAG",
+    "data": [
+      {
+        "dtype": "str",
+        "str": "intervalHidePregnancyQ"
+      },
+      {
+        "dtype": "str",
+        "str": "false"
+      }
+    ]
+  },
+  {
+    "name": "ADD_NEW_SURVEY",
+    "data": [
+      {
+        "str": "interval",
+        "dtype": "str"
+      },
+      {
+        "dtype": "exp",
+        "exp": {
+          "name": "timestampWithOffset",
+          "data": [
+            {
+              "dtype": "num",
+              "num": 0
+            }
+          ],
+          "metadata": {
+            "slotTypes": [
+              "time-delta-picker"
+            ]
+          }
+        }
+      },
+      {
+        "exp": {
+          "name": "timestampWithOffset",
+          "data": [
+            {
+              "num": 2419200,
+              "dtype": "num"
+            }
+          ],
+          "metadata": {
+            "slotTypes": [
+              "time-delta-picker",
+              null
+            ]
+          }
+        },
+        "dtype": "exp"
+      },
+      {
+        "dtype": "str",
+        "str": "normal"
+      }
+    ],
+    "metadata": {
+      "slotTypes": [
+        "survey-key-selector",
+        "timestampWithOffset",
+        "timestampWithOffset",
+        "select-input"
+      ]
+    }
+  }
+]

@@ -89,7 +89,7 @@ export const ParticipantFlags = {
     }
   },
   intervalHideVaccinationQ: {
-    key: 'intervalHidePregnancyQ',
+    key: 'intervalHideVaccinationQ',
     values: {
       true: 'true',
       false: 'false',

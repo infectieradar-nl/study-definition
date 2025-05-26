@@ -3,7 +3,7 @@ import { studyRules } from "./rules";
 import { updateVaccinationFlag_20211103_rules } from "./customRules/updateVaccinationFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
-import { reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToIntake";
+import { moveIntakeToNextSeptember_rules, reinvitePeopleToIntake_rules } from "./customRules/reinvitePeopleToIntake";
 import { updateRetirementFlag_rules } from "./customRules/addRetirementFlag";
 import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
@@ -53,5 +53,6 @@ export const InfectieradarStudy: Study = {
     updateSexFlag_rules,
     resetSeasonalVaccinationFlags_rules,
     fixIntervalAssingmentIssue24Q1_rules,
+    moveIntakeToNextSeptember_rules,
   ]
 }
