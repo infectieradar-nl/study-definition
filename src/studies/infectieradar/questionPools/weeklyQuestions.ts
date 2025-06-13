@@ -1498,57 +1498,41 @@ class Qadvice2 extends Item {
 
     const rg_inner = initMatrixQuestion(matrixKey, [
       {
-        key: 'header', role: 'headerRow', cells: [
-          {
-            key: 'col0', role: 'text', content: new Map([
-              ["nl", "Informatiebron"],
-            ]),
-          },
-          {
-            key: 'col1', role: 'text'
-          },
-        ]
-      },
-      {
-        key: 'r1', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["nl", "Zoekmachine/websites (zoals Google, Thuisarts, etc.)"],
-            ]),
-          },
+        key: 'r1', role: 'responseRow',
+        content: new Map([
+          ["nl", "Zoekmachine/websites (zoals Google, Thuisarts, etc.)"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '1'),
       },
       {
-        key: 'r2', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["nl", "Chatbot (Artificiële Intelligentie, ChatGPT, Gemini, Siri, etc.)"],
-            ]),
-          },
+        key: 'r2', role: 'responseRow',
+        content: new Map([
+          ["nl", "Chatbot (Artificiële Intelligentie, ChatGPT, Gemini, Siri, etc.)"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '2'),
       },
       {
-        key: 'r3', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["nl", "Boeken, tijdschrift en/of krant"],
-            ]),
-          },
+        key: 'r3', role: 'responseRow',
+        content: new Map([
+          ["nl", "Boeken, tijdschrift en/of krant"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '3'),
       },
       {
-        key: 'r4', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["nl", "Familie/vrienden/collega’s/buren/kennissen"],
-            ]),
-          },
+        key: 'r4', role: 'responseRow',
+        content: new Map([
+          ["nl", "Familie/vrienden/collega’s/buren/kennissen"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Qadvice1key, '4'),
