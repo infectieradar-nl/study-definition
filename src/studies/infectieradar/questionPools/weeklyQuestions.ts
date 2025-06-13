@@ -18,13 +18,13 @@ export class HasSymptomsGroup extends Group {
   Q4: Q4;
   Q5: Q5;
   FeverGroup: FeverGroup; // Q6 fever group
-  
-  Q_IPQ: Q_IPQ; // symptom worry 
+
+  Q_IPQ: Q_IPQ; // symptom worry
   Q_origin_infect: Q_origin_infect;
   QOriginInfectSource: QOriginInfectSource;
   QOriginInfectSourceGender: QOriginInfectSourceGender;
   QOriginInfectSourceAgegroup: QOriginInfectSourceAgegroup;
-  
+
   AdviceGroup: AdviceGroup; //healthcare seeking behavior
   ContactGroup: ContactGroup; // contact
   Q9: Q9;
@@ -33,7 +33,7 @@ export class HasSymptomsGroup extends Group {
   Q10bNL: Q10bNL;
   Q10cNL: Q10cNL;
   Q11: Q11;
- 
+
 
 
   constructor(parentKey: string, groupCondition: Expression, hasFeverCondition: Expression) {
@@ -53,7 +53,7 @@ export class HasSymptomsGroup extends Group {
     this.Q4 = new Q4(this.key, this.Q3.key, true);
     this.Q5 = new Q5(this.key, true);
     this.FeverGroup = new FeverGroup(this.key, hasFeverCondition);
-    
+
     const conditionForOriginInfect = SurveyEngine.logic.or(
       SurveyEngine.logic.not(
         SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.hasOnGoingSymptoms.key, ParticipantFlags.hasOnGoingSymptoms.values.yes),
@@ -62,10 +62,10 @@ export class HasSymptomsGroup extends Group {
     )
     this.Q_origin_infect = new Q_origin_infect(this.key, true, conditionForOriginInfect);
     this.QOriginInfectSource = new QOriginInfectSource(this.key, SurveyEngine.singleChoice.any(this.Q_origin_infect.key, '2', '3', '4', '5', '6', '7', '8'), isRequired);
-    this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key,'1'), isRequired);
+    this.QOriginInfectSourceGender = new QOriginInfectSourceGender(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
     this.QOriginInfectSourceAgegroup = new QOriginInfectSourceAgegroup(this.key, SurveyEngine.singleChoice.any(this.QOriginInfectSource.key, '1'), isRequired);
 
-    
+
     this.Q_IPQ = new Q_IPQ(this.key, true);
     this.AdviceGroup = new AdviceGroup(this.key);
     this.ContactGroup = new ContactGroup(this.key);
@@ -78,10 +78,10 @@ export class HasSymptomsGroup extends Group {
     this.Q11 = new Q11(this.key, true);
 
 
-   
+
   }
 
-  
+
   buildGroup() {
     this.addItem(this.q1_2.get());
     this.addItem(this.Q2.get());
@@ -89,7 +89,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.FeverGroup.get());
-    
+
     this.addItem(this.Q_origin_infect.get());
     this.addItem(this.QOriginInfectSource.get());
     this.addItem(this.QOriginInfectSourceGender.get());
@@ -104,7 +104,7 @@ export class HasSymptomsGroup extends Group {
     this.addItem(this.Q10bNL.get());
     this.addItem(this.Q10cNL.get());
     this.addItem(this.Q11.get());
-   
+
   }
 }
 
@@ -1205,7 +1205,7 @@ export class Q_IPQ extends Item {
     super(parentKey, 'Q_IPQ');
     this.isRequired = isRequired;
   }
-  
+
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
@@ -1228,7 +1228,7 @@ export class Q_IPQ extends Item {
           key: '1', content: new Map([
             ["nl", "1"],
           ])
-        },{
+        }, {
           key: '2', content: new Map([
             ["nl", "2"],
           ])
@@ -1249,19 +1249,19 @@ export class Q_IPQ extends Item {
           key: '6', content: new Map([
             ["nl", "6"],
           ])
-        },{
+        }, {
           key: '7', content: new Map([
             ["nl", "7"],
           ])
-        },{
+        }, {
           key: '8', content: new Map([
             ["nl", "8"],
           ])
-        },{
+        }, {
           key: '9', content: new Map([
             ["nl", "9"],
           ])
-        },{
+        }, {
           key: '10', content: new Map([
             ["nl", "10 - Zeer bezorgd"],
           ])
@@ -1276,14 +1276,14 @@ export class Q_IPQ extends Item {
       ],
     })
   }
-  }
+}
 
 class AdviceGroup extends Group {
   QAdvice1: Qadvice1;
   QAdvice2: Qadvice2;
 
   constructor(parentKey: string) {
-    super(parentKey,'advice')
+    super(parentKey, 'advice')
 
     this.QAdvice1 = new Qadvice1(this.key, true);
     //this.QAdvice2 = new QAdvice2(this.key, SurveyEngine.multipleChoice.any(this.QAdvice1.key, this.QAdvice1.optionKeys.gp), true);
@@ -1293,14 +1293,14 @@ class AdviceGroup extends Group {
   buildGroup() {
     this.addItem(this.QAdvice1.get());
     this.addItem(this.QAdvice2.get());
-   // this.addItem(this.Q7b.get());
+    // this.addItem(this.Q7b.get());
   }
 
 }
 
 
 class Qadvice1 extends Item {
-  
+
   constructor(parentKey: string, isRequired: boolean) {
     super(parentKey, 'Qadvice1');
 
@@ -1310,7 +1310,7 @@ class Qadvice1 extends Item {
   buildItem() {
     const optionDisabled = SurveyEngine.multipleChoice.any(
       this.key,
-      '0'    )
+      '0')
 
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
@@ -1319,7 +1319,7 @@ class Qadvice1 extends Item {
       condition: this.condition,
       questionText: new Map([
         ["nl", "Heb je vanwege je klachten informatie opgezocht? En zo ja, waar?"],
-        ]),
+      ]),
       questionSubText: new Map([
         ["en", "Select all options that apply"],
         ["nl", "Meerdere antwoorden mogelijk"],
@@ -1362,7 +1362,7 @@ class Qadvice1 extends Item {
           disabled: optionDisabled,
           content: new Map([
             ["nl", "Ja, ik heb informatie gevraagd aan familie/vrienden/collega’s/buren/kennissen"],
-         ])
+          ])
         },
       ],
     })
@@ -1393,7 +1393,7 @@ class Qadvice1 extends Item {
       {
         content: new Map([
           ["nl", "Selecteer alle relevante bronnen van informatie die je hebt gebruikt."],
-       ]),
+        ]),
       },
     ]
   }
@@ -1419,7 +1419,7 @@ class Qadvice2 extends Item {
     editor.setTitleComponent(
       generateTitleComponent(new Map([
         ["nl", "Hoe tevreden was je met de informatie?"],
-        ]))
+      ]))
     );
 
     // CONDITION
@@ -1430,16 +1430,16 @@ class Qadvice2 extends Item {
       generateHelpGroupComponent([
         {
           content: new Map([
-            
+
             ["nl", "Waarom vragen we dit?"],
-           
+
           ]),
           style: [{ key: 'variant', value: 'h5' }],
         },
         {
           content: new Map([
             ["nl", "Om uit te zoeken hoe nuttig de informatie was."],
-            ]),
+          ]),
           style: [{ key: 'variant', value: 'p' }],
         },
         {
@@ -1852,15 +1852,7 @@ class Q7b extends Item {
       ])
     );
 
-    editor.addDisplayComponent({
-      role: 'text',
-      content: generateLocStrings(
-        new Map([
-          ['en', 'Select the correct number of days'],
-          ['nl', 'Selecteer het juiste aantal dagen'],
-          ["fr", "sélectionnez toutes les options applicables"],
-        ])),
-    })
+
     // RESPONSE PART
     const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
@@ -1992,65 +1984,58 @@ class Q7b extends Item {
       {
         key: 'header', role: 'headerRow', cells: [
           {
-            key: 'col0', role: 'text', content: new Map([
-              ["en", "Medical Service"],
-              ["nl", "Medische hulpverlener"],
-              ["fr", "Service médical"],
+            key: 'col1', role: 'text', content: new Map([
+              ['en', 'Select the correct number of days'],
+              ['nl', 'Selecteer het juiste aantal dagen'],
+              ["fr", "sélectionnez toutes les options applicables"],
             ]),
-          },
-          {
-            key: 'col1', role: 'text'
           },
         ]
       },
       {
-        key: 'r1', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["en", "GP or GP'r practice nurse"],
-              ["nl", "Huisarts of huisartsassistent"],
-              ["fr", "Médecin généraliste"],
-            ]),
-          },
+        key: 'r1', role: 'responseRow',
+        content: new Map([
+          ["en", "GP or GP'r practice nurse"],
+          ["nl", "Huisarts of huisartsassistent"],
+          ["fr", "Médecin généraliste"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Q7key, '1'),
       },
       {
-        key: 'r2', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["en", "Hospital accident & department/out of hours service"],
-              ["nl", "Eerste hulp van het ziekenhuis of huisartsenpost"],
-              ["fr", "Service des urgences d'un hôpital/clinique ou médecin de garde"],
-            ]),
-          },
+        key: 'r2', role: 'responseRow',
+        content: new Map([
+          ["en", "Hospital accident & department/out of hours service"],
+          ["nl", "Eerste hulp van het ziekenhuis of huisartsenpost"],
+          ["fr", "Service des urgences d'un hôpital/clinique ou médecin de garde"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Q7key, '3'),
       },
       {
-        key: 'r3', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["en", "Hospital admission"],
-              ["nl", "Ziekenhuisopname"],
-              ["fr", "Consultation ambulatoire à l'hôpital"],
-            ]),
-          },
+        key: 'r3', role: 'responseRow',
+        content: new Map([
+          ["en", "Hospital admission"],
+          ["nl", "Ziekenhuisopname"],
+          ["fr", "Consultation ambulatoire à l'hôpital"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Q7key, '2'),
       },
       {
-        key: 'r4', role: 'responseRow', cells: [
-          {
-            key: 'col0', role: 'label', content: new Map([
-              ["en", "Other medical services"],
-              ["nl", "Andere medische hulp."],
-              ["fr", "Autre service médical"],
-            ]),
-          },
+        key: 'r4', role: 'responseRow',
+        content: new Map([
+          ["en", "Other medical services"],
+          ["nl", "Andere medische hulp."],
+          ["fr", "Autre service médical"],
+        ]),
+        cells: [
           { ...ddOptions }
         ],
         displayCondition: SurveyEngine.multipleChoice.any(this.Q7key, '4'),
@@ -3000,7 +2985,7 @@ export class QOriginInfectSource extends Item {
             ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
           ])
-        }, 
+        },
       ],
     })
   }
@@ -3046,14 +3031,14 @@ export class QOriginInfectSourceGender extends Item {
             ["en", "Not clear, multiple possible sources"],
             ["nl", "Onduidelijk welk geslacht, meerdere mogelijke bronnen"],
           ])
-        },  
+        },
         {
           key: '4', role: 'option',
           content: new Map([
             ["en", "I don't want to indicate"],
             ["nl", "Wil ik niet aangeven"],
           ])
-        }, 
+        },
       ],
     })
   }
@@ -3064,7 +3049,7 @@ export class QOriginInfectSourceAgegroup extends Item {
   constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'QOriginInfectSourceAgegroup');
     this.isRequired = isRequired;
-    this.condition = condition;    
+    this.condition = condition;
   }
 
   buildItem() {
