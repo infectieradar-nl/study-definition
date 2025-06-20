@@ -4,9 +4,12 @@ import { Expression } from "survey-engine/data_types";
 import { externalServiceNames, surveyKeys } from "./contants";
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
-import { SwabEntry } from "./surveys/swabEntry";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { Weekly } from "./surveys/weekly";
+
+const SwabEntry = {
+  key: 'SwabEntry',
+}
 
 
 export const handleSelfSwabbingIsInvited = () => StudyEngine.ifThen(

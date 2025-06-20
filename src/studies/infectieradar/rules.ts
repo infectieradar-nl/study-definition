@@ -4,7 +4,6 @@ import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpre
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
-import { SwabEntry } from "./surveys/swabEntry";
 import { SwabSample } from "./surveys/swabSample";
 import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { externalServiceNames, messageTypes, reports, surveyKeys } from "./contants";
@@ -133,6 +132,13 @@ const handleWeekly = StudyEngine.ifThen(
   ),
   handleSelfSwabbingLogic(),
 )
+
+const SwabEntry = {
+  key: 'SwabEntry',
+  Consent: {
+    key: 'SwabEntry.Consent',
+  }
+}
 
 const handleSwabEntry = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(SwabEntry.key),

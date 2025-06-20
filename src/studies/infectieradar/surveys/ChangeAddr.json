@@ -1,0 +1,610 @@
+{
+  "props": {
+    "name": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "str": "Contactgegevens wijzigen"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "str": "Met dit formulier kunt u uw contactgegevens wijzigen."
+          }
+        ]
+      }
+    ],
+    "typicalDuration": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "str": "Lees meer over het zelftest-onderzoek onder Informatie."
+          }
+        ]
+      }
+    ]
+  },
+  "versionId": "",
+  "surveyDefinition": {
+    "key": "ChangeAddr",
+    "items": [
+      {
+        "key": "ChangeAddr.Intro",
+        "components": {
+          "role": "root",
+          "order": {
+            "name": "sequential"
+          },
+          "items": [
+            {
+              "key": "xrl",
+              "role": "markdown",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "str": "## Adres wijzigen\n\nMet dit formulier kunt u uw adres wijzigen."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "key": "ChangeAddr.Addr",
+        "components": {
+          "role": "root",
+          "order": {
+            "name": "sequential"
+          },
+          "items": [
+            {
+              "role": "title",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "str": "Wat is uw adres?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "rg",
+              "role": "responseGroup",
+              "items": [
+                {
+                  "key": "contact",
+                  "role": "contact",
+                  "items": [
+                    {
+                      "key": "addressSearchBtn",
+                      "role": "addressSearchBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Zoek adres"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "addressError",
+                      "role": "addressError",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Fout bij het ophalen van adres"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "address",
+                      "role": "address",
+                      "items": [
+                        {
+                          "key": "street",
+                          "role": "street",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Straat"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Straatnaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "key": "hint",
+                              "role": "hint",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": ""
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Gebruik de bovenstaande knop om uw adres te vinden"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^\\S.*$"
+                          }
+                        },
+                        {
+                          "key": "street2",
+                          "role": "street2",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": ""
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": ""
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "city",
+                          "role": "city",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Stad"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Plaatsnaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Er klopt iets niet"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "postalCode",
+                          "role": "postalCode",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Vul hier uw volledige postcode in:"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "1234AB"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Er klopt iets niet."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[1-9][0-9]{3}\\s?[A-Z]{2}$"
+                          }
+                        },
+                        {
+                          "key": "houseNumber",
+                          "role": "houseNumber",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Vul hier uw huisnummer in:"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "##"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "key": "hint",
+                              "role": "hint",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Wat is je huisnummer. Bijzondere toevoegingen kunt u in het andere veld kwijt"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Er klopt iets niet."
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Adres"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "previewLabel",
+                      "role": "previewLabel",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Zoek uw adres op basis van uw postcode en huisnummer."
+                            }
+                          ]
+                        }
+                      ],
+                      "description": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": ""
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "btnLabel",
+                      "role": "btnLabel",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Klik hier"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "dialog",
+                      "role": "dialog",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Zoek uw adres:"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Vul eerst uw volledige postcode en huisnummer in"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "cancelBtn",
+                      "role": "cancelBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Cancel"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "saveBtn",
+                      "role": "saveBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Opslaan"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "resetBtn",
+                      "role": "resetBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Reset"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "name",
+                      "role": "name",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Wat is je naam?"
+                            }
+                          ]
+                        }
+                      ],
+                      "items": [
+                        {
+                          "key": "givenName",
+                          "role": "givenName",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Voornaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Voornaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Vul alstublieft uw voornaam in"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "familyName",
+                          "role": "familyName",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Achternaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Achternaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Vul alstublieft uw achternaam in"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "role": "subtitle",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "str": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "confidentialMode": "replace",
+        "mapToKey": "SwabEntry.Addr",
+        "validations": [
+          {
+            "key": "seh",
+            "type": "hard",
+            "rule": {
+              "name": "hasResponse",
+              "data": [
+                {
+                  "str": "ChangeAddr.Addr"
+                },
+                {
+                  "str": "rg"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "selectionMethod": {
+      "name": "sequential"
+    }
+  }
+}

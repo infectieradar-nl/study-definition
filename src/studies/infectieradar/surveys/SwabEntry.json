@@ -1,0 +1,954 @@
+{
+  "id": "684194ec237f11adaed9ff6e",
+  "surveyKey": "SwabEntry",
+  "props": {
+    "name": [
+      {
+        "code": "en",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Register for Testing in Infectieradar"
+          }
+        ]
+      },
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Aanmelden voor het zelftest-onderzoek in Infectieradar"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "code": "en",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Click here to participate in selftests"
+          }
+        ]
+      },
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Klik hier om deel te nemen het zelftest-onderzoek."
+          }
+        ]
+      }
+    ],
+    "typicalDuration": [
+      {
+        "code": "en",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Fill in your personal details so we can send you the tests, and you can see testresults."
+          }
+        ]
+      },
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Lees meer over het zelftest-onderzoek onder Informatie."
+          }
+        ]
+      }
+    ]
+  },
+  "published": 1749128428,
+  "surveyDefinition": {
+    "id": "000000000000000000000000",
+    "key": "SwabEntry",
+    "items": [
+      {
+        "id": "000000000000000000000000",
+        "key": "SwabEntry.Intro",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "markdown",
+              "key": "xrl",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "\n## Zelftest-onderzoek\nMet dit formulier kan je jezelf registreren als deelnemer voor het zelftest-onderzoek. Meer informatie over dit onderzoek kan je [*hier*](https://www.infectieradar.nl/about-selfteststudy) vinden.\n"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        }
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "SwabEntry.Consent",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "title",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "Aanvullende toestemming zelftest-onderzoek"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "markdown",
+              "key": "cEI",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "\nOm deel te nemen aan het [zelftest-onderzoek](https://www.infectieradar.nl/about-selfteststudy) moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan.\nVink hieronder \"Toestemming geven\" aan om de toestemmingsverklaring te lezen.\n"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": null,
+              "items": [
+                {
+                  "role": "consent",
+                  "key": "con",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "label",
+                      "key": "label",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Toestemming geven"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "title",
+                      "key": "title",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Toestemmingsformulier"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "content",
+                      "key": "content",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "\n**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het [zelftest-onderzoek van Infectieradar](https://www.infectieradar.nl/about-selfteststudy). Ik weet dat ik hiermee enkel mijn toestemming geef voor deelname aan dit onderzoek en dat het RIVM mijn gegevens mag verwerken voor een taak van algemeen belang.\n\nHet onderzoek is gericht op het in kaart brengen van gezondheidsklachten die kunnen wijzen op infectieziekten, zoals het coronavirus (COVID-19) of het influenza-virus (griep). Tevens kan een infectieziekte worden gevonden waarbij wij op basis van de wet verplicht zijn om deze te melden aan de GGD. Dit onderzoek is van belang om na te gaan of het aantal mensen met klachten toe- of afneemt en om de verspreiding van infectieziekten in de gaten te houden. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Infectieradar](https://www.infectieradar.nl/privacy).\n\nOok:\n-\tHeb ik de informatie op de website van Infectieradar over het [onderzoek](https://www.infectieradar.nl/about-selfteststudy) en de [privacyverklaring](https://www.infectieradar.nl/privacy) over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.\n-\tHeb ik goed over mijn deelname aan het onderzoek kunnen nadenken.\n-\tWeet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming. Na het stopzetten van de deelname zijn alleen nog mijn onderzoeksgegevens en eventueel ingezonden neus- en keelmonsters voor het onderzoek beschikbaar, de onderzoeksgegevens en monsters zijn dan echter niet meer te herleiden tot mij als persoon. Daarnaast gelden de bewaartermijnen, zoals opgegeven in de [privacyverklaring](https://www.infectieradar.nl/privacy), voor mijn overige persoonsgegevens.\n-\tWeet ik dat de onderzoeksgegevens van mijn eventuele neus- en keelmonster(s) tot 15 jaar na ontvangst bewaard kan worden en later nog voor een ander onderzoek kunnen worden gebruikt. En weet ik dat mijn contactgegevens en accountgegevens tot 2 jaar na de laatste inlog op Infectieradar of het (zelftest)portaal [GLEAN](https://rivmportal.glean.nl/) worden bewaard en mijn onderzoeksgegevens tot 15 jaar na het invullen van de vragenlijsten. Ik weet dat onderzoeksgegevens kunnen worden gedeeld met de deelnemers aan het samenwerkingsverband Influenzanet. De onderzoeksresultaten hebben geen bewaartermijn en kunnen dus gepubliceerd blijven.\n-\tWeet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord), mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer), mijn onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder andere de eerste 4 cijfers van mijn postcode, mijn geboortejaar en maand, gegevens over mijn gezondheid en zelftest- en neus- en keelmonster-testuitslagen) en mijn eventuele neus- en keelmonster(s) worden verwerkt.\n-\tWeet ik dat voor het versturen van nieuwe zelftest- en neus- en keelmonster-afnamepakketjes mijn contactgegevens (naam, adres, woonplaats, postcode, telefoonnummer) worden gebruikt.\n-\tWeet ik dat voor het versturen van de testuitslag van mijn neus- en keelmonster mijn accountgegevens (e-mailadres) en mijn contactgegevens (telefoonnummer) worden gebruikt.\n- Weet ik dat, indien er een infectieziekte wordt gevonden die het RIVM verplicht is om te melden aan de GGD, deze aan de GGD gemeld wordt.\n- Weet ik dat de GGD contact met mij kan opnemen nadat het RIVM een melding heeft gemaakt.\n-\tVerklaar ik dat ik 16 jaar of ouder ben.\n        "
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "acceptBtn",
+                      "key": "acceptBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Ja, ik geef toestemming"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "rejectBtn",
+                      "key": "rejectBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Ik doe toch niet mee"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        },
+        "validations": [
+          {
+            "key": "r1",
+            "type": "hard",
+            "rule": {
+              "name": "hasResponse",
+              "data": [
+                {
+                  "dtype": "str",
+                  "str": "SwabEntry.Consent"
+                },
+                {
+                  "dtype": "str",
+                  "str": "rg"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "SwabEntry.Infos",
+        "condition": {
+          "name": "or",
+          "data": [
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "eq",
+                "data": [
+                  {
+                    "dtype": "exp",
+                    "exp": {
+                      "name": "getAttribute",
+                      "data": [
+                        {
+                          "dtype": "exp",
+                          "exp": {
+                            "name": "getAttribute",
+                            "data": [
+                              {
+                                "dtype": "exp",
+                                "exp": {
+                                  "name": "getContext"
+                                }
+                              },
+                              {
+                                "dtype": "str",
+                                "str": "participantFlags"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "selfSwabbing"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "dtype": "str",
+                    "str": "invitedWithoutCode"
+                  }
+                ]
+              }
+            },
+            {
+              "dtype": "exp",
+              "exp": {
+                "name": "hasResponse",
+                "data": [
+                  {
+                    "dtype": "str",
+                    "str": "SwabEntry.CodeVal"
+                  },
+                  {
+                    "dtype": "str",
+                    "str": "rg.cv"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "markdown",
+              "key": "KvW",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "\n## Naam, adres, e-mail en 06-nummer\nVoor het versturen en ontvangen van testen gebruikt het RIVM het portaal [GLEAN](https://rivmportal.glean.nl/). Dit is een aparte website waar je extra testen kunt bestellen en je uitslag kan inzien.\nDit [portaal](https://rivmportal.glean.nl/) staat los van de Infectieradarwebsite en maakt gebruik van een inlogprocedure met e-mail en SMS.\nDaarom vragen we hieronder je naam/adres/e-mail en 06-nummer achter te laten. De testen ontvang je dan automatisch in enkele weken.\n"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        }
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "SwabEntry.Addr",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "title",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "Wat is uw adres?"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": null,
+              "items": [
+                {
+                  "role": "contact",
+                  "key": "contact",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "addressSearchBtn",
+                      "key": "addressSearchBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Zoek adres"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "addressError",
+                      "key": "addressError",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Fout bij het ophalen van adres"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "address",
+                      "key": "address",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Adres"
+                            }
+                          ]
+                        }
+                      ],
+                      "items": [
+                        {
+                          "role": "street",
+                          "key": "street",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Straat"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "role": "hint",
+                              "key": "hint",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": ""
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            },
+                            {
+                              "role": "error",
+                              "key": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Gebruik de bovenstaande knop om uw adres te vinden"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^\\S.*$"
+                          },
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Straatnaam"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "role": "street2",
+                          "key": "street2",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": ""
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "role": "error",
+                              "key": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": ""
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "city",
+                          "key": "city",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Stad"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "role": "error",
+                              "key": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Er klopt iets niet"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Plaatsnaam"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "role": "postalCode",
+                          "key": "postalCode",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Vul hier uw volledige postcode in:"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "role": "error",
+                              "key": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": ""
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "1234AB"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "role": "houseNumber",
+                          "key": "houseNumber",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Vul hier uw huisnummer in:"
+                                }
+                              ]
+                            }
+                          ],
+                          "items": [
+                            {
+                              "role": "hint",
+                              "key": "hint",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Wat is je huisnummer. Bijzondere toevoegingen kunt u in het andere veld kwijt"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            },
+                            {
+                              "role": "error",
+                              "key": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Er klopt iets niet."
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "##"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "previewLabel",
+                      "key": "previewLabel",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Zoek uw adres op basis van uw postcode en huisnummer."
+                            }
+                          ]
+                        }
+                      ],
+                      "description": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": ""
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "role": "btnLabel",
+                      "key": "btnLabel",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Klik hier"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "dialog",
+                      "key": "dialog",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Zoek uw adres:"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Vul eerst uw volledige postcode en huisnummer in"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "role": "cancelBtn",
+                      "key": "cancelBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Cancel"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "saveBtn",
+                      "key": "saveBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Opslaan"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "resetBtn",
+                      "key": "resetBtn",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Reset"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "key": "name",
+                      "role": "name",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "str": "Wat is je naam?"
+                            }
+                          ]
+                        }
+                      ],
+                      "items": [
+                        {
+                          "key": "givenName",
+                          "role": "givenName",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Voornaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Voornaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Vul alstublieft uw voornaam in"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "key": "familyName",
+                          "role": "familyName",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Achternaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "str": "Achternaam"
+                                }
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "items": [
+                            {
+                              "key": "error",
+                              "role": "error",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "str": "Vul alstublieft uw achternaam in"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "subtitle",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": ""
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        },
+        "validations": [
+          {
+            "key": "seh",
+            "type": "hard",
+            "rule": {
+              "name": "hasResponse",
+              "data": [
+                {
+                  "dtype": "",
+                  "str": "SwabEntry.Addr"
+                },
+                {
+                  "dtype": "",
+                  "str": "rg"
+                }
+              ]
+            }
+          }
+        ],
+        "confidentialMode": "replace"
+      }
+    ],
+    "selectionMethod": {
+      "name": "sequential"
+    }
+  },
+  "versionId": "25-06-1"
+}
