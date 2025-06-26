@@ -10,9 +10,24 @@ export const reinvitePeopleToIntake_rules = {
     StudyEngine.ifThen(
       StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ months: -1 }), surveyKeys.intake),
       // THEN:
-       // add intake on top, and weekly after:
+      // add intake on top, and weekly after:
       StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'prio'),
       StudyEngine.participantActions.assignedSurveys.add(surveyKeys.weekly, 'prio'),
+    )
+  ]
+}
+
+export const moveIntakeToNextSeptember_rules = {
+  name: "moveIntakeToNextSeptember",
+  rules: [
+    StudyEngine.ifThen(
+      StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ months: -1 }), surveyKeys.intake),
+      // THEN:
+      StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.intake, 'all'),
+      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.intake, 'normal',
+        StudyEngine.getTsForNextStartOfMonth('September')
+      ),
+      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.intake, 'optional')
     )
   ]
 }
