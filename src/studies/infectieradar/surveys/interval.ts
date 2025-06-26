@@ -28,7 +28,7 @@ class IntervalDef extends SurveyDefinition {
       ]),
       description: new Map([
         ["en", "This periodic survey focues on long term health outcomes and relevant updates."],
-        ["nl", "Klik op deze vragenlijst om vragen te beantwoorden over lange termijn klachten en de overdracht van luchtweginfecties. Vul deze alsjeblieft ook in als je geen klachten had."],
+        ["nl", "Klik op deze vragenlijst om vragen te beantwoorden over lange termijn klachten en de overdracht van luchtweginfecties. Vul deze alsjeblieft ook in als u geen klachten had."],
       ]),
       durationText: new Map([
         ["en", "This will take 10 minutes."],

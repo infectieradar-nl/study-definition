@@ -55,7 +55,7 @@ class IntakeDef extends SurveyDefinition {
       ]),
       description: new Map([
         ["en", "The intake survey focues on some background and demographic information."],
-        ["nl", "Klik op dit aanmeldingsformulier om je achtergrondinformatie in te vullen."],
+        ["nl", "Klik op dit aanmeldingsformulier om uw achtergrondinformatie in te vullen."],
       ]),
       durationText: new Map([
         ["en", "This will take 5 minutes."],
