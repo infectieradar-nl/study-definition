@@ -55,10 +55,7 @@ const handleIntake = StudyEngine.ifThen(
 
   StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'optional'),
   StudyEngine.participantActions.assignedSurveys.add(Intake.key, 'normal',
-    StudyEngine.getTsForNextISOWeek(
-      23,
-      StudyEngine.timestampWithOffset({ days: 4 * 7 })
-    )
+    StudyEngine.getTsForNextStartOfMonth('September', StudyEngine.timestampWithOffset({ days: 8 * 7 }))
   ),
 
   StudyEngine.if(
