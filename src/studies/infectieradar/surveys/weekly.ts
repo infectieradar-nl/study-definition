@@ -2,7 +2,7 @@ import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
 import { Q1aNL, Q1b1NL, Q1b2NL, Q1b3NL, Q1d1NL, Q1d3NL, Q1dNL, Q1gNL, Q1kNL, Q2title, Q3title, Q4title } from "../questionPools/coronaTest";
 import { FinalText, HasSymptomsGroup, QWithin24hours, SelfSwabTemporaryInfo, SymptomsGroup } from "../questionPools/weeklyQuestions";
-import { surveyKeys } from "../contants";
+import { surveyKeys } from "../constants";
 import { ParticipantFlags } from "../participantFlags";
 
 class WeeklyDef extends SurveyDefinition {

@@ -1,5 +1,5 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { surveyKeys } from "../contants";
+import { surveyKeys } from "../constants";
 import { ParticipantFlags } from "../participantFlags";
 import { addIntervalSurveyWithOffset, deleteLastIntervalStartFlag, ensureIntervalSurveyGroup, getLastIntervalStartFromFlags, isIntervalFlagEq, saveLastIntervalStartAsFlag } from "../ruleUtils";
 import { Expression } from "survey-engine/data_types";

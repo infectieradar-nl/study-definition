@@ -2,7 +2,7 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
-import { surveyKeys } from "../contants";
+import { surveyKeys } from "../constants";
 
 class SwabSampleDef extends SurveyDefinition {
   Intro: Intro;

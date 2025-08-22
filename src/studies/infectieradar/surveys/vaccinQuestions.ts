@@ -1,6 +1,6 @@
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { surveyKeys } from '../contants';
+import { surveyKeys } from '../constants';
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 

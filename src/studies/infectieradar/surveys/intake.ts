@@ -1,8 +1,10 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyEngine } from "case-editor-tools/surveys";
-import { Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q21NL, Q22NL, Q23NL, Q26NL, Q4b1NL, Q4b2NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, qNL_house_total, qNL_house_agegroup, 
-  Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, qNL_covidvac_lastseason, qNL_covidvac_curseason, qNL_covidvac_date, qNL_covidvac_reason, qNL_covidvac_not_reason, FinalText, SelfSwabInvite } from "../questionPools/intakeQuestions";
-import { surveyKeys } from "../contants";
+import {
+  Q10, Q10b, Q10c, Q10d, Q11, Q12, Q12b, Q13, Q14, Q15, Q16, Q20NL, Q21NL, Q22NL, Q23NL, Q26NL, Q4b1NL, Q4b2NL, Q4cNL, Q4cNLb, Q4cNLc, Q4d, Q5, qNL_house_total, qNL_house_agegroup,
+  Q6b, Q7b, Q8, Q9, QBirthdate, QGender, QMainActivity, QPostal, qNL_covidvac_lastseason, qNL_covidvac_curseason, qNL_covidvac_date, qNL_covidvac_reason, qNL_covidvac_not_reason, FinalText, SelfSwabInvite
+} from "../questionPools/intakeQuestions";
+import { surveyKeys } from "../constants";
 
 class IntakeDef extends SurveyDefinition {
   QGender: QGender;
@@ -41,7 +43,7 @@ class IntakeDef extends SurveyDefinition {
   qNL_covidvac_curseason: qNL_covidvac_curseason;
   qNL_covidvac_date: qNL_covidvac_date;
   qNL_covidvac_reason: qNL_covidvac_reason;
-  qNL_covidvac_not_reason:  qNL_covidvac_not_reason;
+  qNL_covidvac_not_reason: qNL_covidvac_not_reason;
   Q26NL: Q26NL;
   SelfSwabInvite: SelfSwabInvite;
   FinalText: FinalText;
@@ -85,8 +87,8 @@ class IntakeDef extends SurveyDefinition {
     this.Q4d = new Q4d(this.key, isRequired);
     this.Q5 = new Q5(this.key, isRequired);
     this.qNL_house_total = new qNL_house_total(this.key, isRequired);
-    this.qNL_house_agegroup = new qNL_house_agegroup(this.key, 
-      SurveyEngine.singleChoice.any(this.qNL_house_total.key, '1', '2', '3', '4', '5', '6', '7', '8', '99'), 
+    this.qNL_house_agegroup = new qNL_house_agegroup(this.key,
+      SurveyEngine.singleChoice.any(this.qNL_house_total.key, '1', '2', '3', '4', '5', '6', '7', '8', '99'),
       isRequired);
     this.Q6b = new Q6b(this.key, this.qNL_house_agegroup.key, isRequired);
     this.Q7b = new Q7b(this.key, isRequired);

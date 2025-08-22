@@ -1,6 +1,6 @@
 import { Group, SurveyDefinition } from "case-editor-tools/surveys/types";
-import { Q12, Q12b, Q_CIS,  Q_longsymptoms, Q_longsymptoms_condition, Q_mMRC, Consequences, Timeline, PersonalControl, TreatmentControl, Identity, Concern, Coherence, EmotionalRepresentation} from "../questionPools/intervalQuestions";
-import { surveyKeys } from "../contants";
+import { Q12, Q12b, Q_CIS, Q_longsymptoms, Q_longsymptoms_condition, Q_mMRC, Consequences, Timeline, PersonalControl, TreatmentControl, Identity, Concern, Coherence, EmotionalRepresentation } from "../questionPools/intervalQuestions";
+import { surveyKeys } from "../constants";
 import { ParticipantFlags } from "../participantFlags";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
@@ -120,8 +120,8 @@ class Intro_long extends Item {
 We vragen of je last hebt van vermoeidheid, concentratieproblemen of kortademigheid.
 Dit zijn klachten waar je last van kunt blijven houden na een besmetting.
 Maar je kan deze klachten ook krijgen door een andere reden.
-Het maakt voor de vragen hieronder niet uit of je wel of geen besmetting hebt gehad. 
-Ook maakt het niet of je de klachten hebt door een andere reden. 
+Het maakt voor de vragen hieronder niet uit of je wel of geen besmetting hebt gehad.
+Ook maakt het niet of je de klachten hebt door een andere reden.
 `
 
   buildItem(): SurveySingleItem {
@@ -215,7 +215,7 @@ class LongcovidGroup extends Group {
     this.Q_IPQ_f = new Concern(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
     this.Q_IPQ_g = new Coherence(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
     this.Q_IPQ_h = new EmotionalRepresentation(this.key, SurveyEngine.singleChoice.any(this.Q_longsymptoms.key, '3', '4', '5', '6'), isRequired);
-        this.Q_healthrank = new Q_healthrank(this.key, isRequired);
+    this.Q_healthrank = new Q_healthrank(this.key, isRequired);
 
   }
 

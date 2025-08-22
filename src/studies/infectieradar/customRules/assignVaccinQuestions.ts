@@ -1,5 +1,5 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { surveyKeys } from "../contants";
+import { surveyKeys } from "../constants";
 
 
 export const assignVaccinQuestions_rules = {

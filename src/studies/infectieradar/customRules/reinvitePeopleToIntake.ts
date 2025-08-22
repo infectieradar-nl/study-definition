@@ -1,5 +1,5 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { messageTypes, surveyKeys } from "../contants";
+import { messageTypes, surveyKeys } from "../constants";
 import { Intake } from "../surveys/intake";
 
 

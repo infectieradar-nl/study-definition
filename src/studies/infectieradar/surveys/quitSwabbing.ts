@@ -2,7 +2,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { Expression } from 'survey-engine/data_types';
-import { surveyKeys } from '../contants';
+import { surveyKeys } from '../constants';
 
 
 class QuitSwabbing_Def extends SurveyDefinition {

@@ -2,7 +2,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { Expression } from 'survey-engine/data_types';
-import { surveyKeys } from '../contants';
+import { surveyKeys } from '../constants';
 import { ParticipantFlags } from '../participantFlags';
 
 
@@ -105,11 +105,11 @@ class RecommendTest extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-## Doe alsjeblieft een coronazelftest. 
+## Doe alsjeblieft een coronazelftest.
 
-Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster, maar we vragen je wel om een coronazelftest te doen. 
-Dit omdat je klachten hebt die duiden op een luchtweginfectie. 
-De uitslag van deze zelftest kan je eenvoudig doorgeven door nogmaals de link in je (wekelijkse) e-mail te klikken. 
+Deze week ben je **NIET** geselecteerd voor het insturen van een neus- of keelmonster, maar we vragen je wel om een coronazelftest te doen.
+Dit omdat je klachten hebt die duiden op een luchtweginfectie.
+De uitslag van deze zelftest kan je eenvoudig doorgeven door nogmaals de link in je (wekelijkse) e-mail te klikken.
 Heb je geen zelftesten meer: bestel dan nieuwe via [GLEAN](https://rivmportal.glean.nl/user/auth).
 
 Nogmaals dank voor het melden.

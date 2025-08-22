@@ -2,7 +2,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { Expression } from 'survey-engine/data_types';
-import { surveyKeys } from '../contants';
+import { surveyKeys } from '../constants';
 
 
 class SwabStudyfull_Def extends SurveyDefinition {
@@ -53,7 +53,7 @@ class ExplanationText extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Op dit moment is het maximaal aantal deelnemers voor het ontvangen van zelftesten bereikt. Dit betekend dat je elke week je klachten door geeft maar dat je geen zelftest hoeft te doen (voor het onderzoek) of iets hoeft op te sturen naar het RIVM als je klachten hebt. Je informatie en deelname is nog steeds zeer waardevol.     
+Op dit moment is het maximaal aantal deelnemers voor het ontvangen van zelftesten bereikt. Dit betekend dat je elke week je klachten door geeft maar dat je geen zelftest hoeft te doen (voor het onderzoek) of iets hoeft op te sturen naar het RIVM als je klachten hebt. Je informatie en deelname is nog steeds zeer waardevol.
 `
             ],
           ]),
