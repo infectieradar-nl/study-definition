@@ -6,7 +6,7 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabSample } from "./surveys/swabSample";
 import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
-import { externalServiceNames, messageTypes, reports, surveyKeys } from "./constants";
+import { CustomEventKeys, externalServiceNames, messageTypes, reports, surveyKeys } from "./constants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
@@ -296,6 +296,24 @@ const timerRules: Expression[] = [
   handleIntervalQuestionnaireExpired(),
 ]
 
+
+const handleOrderTestKit = StudyEngine.ifThen(
+  StudyEngine.checkEventKey(CustomEventKeys.orderTestKit),
+  // THEN:
+  StudyEngine.participantActions.reports.init(reports.orderTestKit.key),
+  StudyEngine.participantActions.reports.updateData(
+    reports.orderTestKit.key,
+    reports.orderTestKit.dataKeys.kitType,
+    StudyEngine.eventPayload.getEventPayloadValueAsStr('kitType'),
+  )
+  // schedule message
+)
+
+const customEventRules: Expression[] = [
+  handleOrderTestKit,
+]
+
+
 /**
  * STUDY RULES
  */
@@ -303,4 +321,6 @@ export const studyRules = new StudyRules(
   entryRules,
   submitRules,
   timerRules,
+  undefined,
+  customEventRules,
 )

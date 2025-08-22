@@ -24,6 +24,12 @@ export const reports = {
   },
   selfSwabbingQuit: {
     key: 'selfSwabbingQuit'
+  },
+  orderTestKit: {
+    key: 'orderTestKit',
+    dataKeys: {
+      kitType: 'kitType'
+    }
   }
 }
 
@@ -31,5 +37,10 @@ export const messageTypes = {
   reinviteToIntake: 'reinviteToIntake',
   selftestConfirmation: 'selftest-confirmation',
   invitationSelfswabExistingusers: 'invitation-selfswab-existingusers',
-  infosAfterSelectionForSwabbing: 'infos-after-selection-for-swabbing'
+  infosAfterSelectionForSwabbing: 'infos-after-selection-for-swabbing',
+  onOrderTestKitReceived: 'onOrderTestKitReceived'
+}
+
+export enum CustomEventKeys {
+  orderTestKit = 'order-test-kit'
 }
