@@ -305,8 +305,18 @@ const handleOrderTestKit = StudyEngine.ifThen(
     reports.orderTestKit.key,
     reports.orderTestKit.dataKeys.kitType,
     StudyEngine.eventPayload.getEventPayloadValueAsStr('kitType'),
+  ),
+  // send message
+  StudyEngine.ifThen(
+    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'covid'),
+    // THEN:
+    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedCovid),
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'self'),
+    // THEN:
+    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedSelf),
   )
-  // schedule message
 )
 
 const customEventRules: Expression[] = [

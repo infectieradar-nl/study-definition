@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@types/node": "^16.10.3",
-    "case-editor-tools": "^1.7.0",
+    "case-editor-tools": "^1.7.1",
     "survey-engine": "^1.3.2",
     "typescript": "^4.4.3"
   }

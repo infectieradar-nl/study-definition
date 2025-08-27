@@ -7,10 +7,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-16.10.3.tgz"
   integrity sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==
 
-case-editor-tools@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.7.0.tgz#c84bd2384865cfade60c9bb778d863e9f4f9f99a"
-  integrity sha512-yE+Y6EVhQGclTWvSAjObsx/5ioq2tp68Owtuz565SZsIuaVkr5ezWYr1vJBRq2UCnPkzzW23oy9If5AcB6pJgg==
+case-editor-tools@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.7.1.tgz#5d152f8393b41097e3e506aa544e2079323d323b"
+  integrity sha512-kT4Bvm+XjpRYJKYZ3w2+btS3rHJCYGBzBqVALunkgYF1DIi3YfpR5K1ZtSl0K9mLPndiqIfgijTvTsN0MdsaHw==
   dependencies:
     survey-engine "^1.2.0"
 
