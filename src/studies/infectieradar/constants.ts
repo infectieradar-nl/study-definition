@@ -38,8 +38,8 @@ export const messageTypes = {
   selftestConfirmation: 'selftest-confirmation',
   invitationSelfswabExistingusers: 'invitation-selfswab-existingusers',
   infosAfterSelectionForSwabbing: 'infos-after-selection-for-swabbing',
-  onOrderTestKitReceivedSelf: 'onOrderTestKitReceivedSelf',
-  onOrderTestKitReceivedCovid: 'onOrderTestKitReceivedCovid'
+  onOrderTestKitReceivedNkMonster: 'onOrderTestKitReceived-nk_monster',
+  onOrderTestKitReceivedCorona: 'onOrderTestKitReceived-corona'
 }
 
 export enum CustomEventKeys {

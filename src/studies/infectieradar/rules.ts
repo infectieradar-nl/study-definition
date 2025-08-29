@@ -308,14 +308,14 @@ const handleOrderTestKit = StudyEngine.ifThen(
   ),
   // send message
   StudyEngine.ifThen(
-    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'covid'),
+    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'corona'),
     // THEN:
-    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedCovid),
+    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedCorona),
   ),
   StudyEngine.ifThen(
-    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'self'),
+    StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'nk_monster'),
     // THEN:
-    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedSelf),
+    StudyEngine.participantActions.messages.sendNow(messageTypes.onOrderTestKitReceivedNkMonster),
   )
 )
 
