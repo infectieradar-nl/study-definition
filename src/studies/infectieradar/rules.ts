@@ -6,7 +6,7 @@ import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabSample } from "./surveys/swabSample";
 import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
-import { CustomEventKeys, externalServiceNames, messageTypes, reports, surveyKeys } from "./constants";
+import { CustomEventKeys, externalServiceNames, linkingCodeKeys, messageTypes, reports, studyCodeLists, surveyKeys } from "./constants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
@@ -148,6 +148,20 @@ const handleSwabEntry = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag(
       ParticipantFlags.selfSwabbing.key,
       ParticipantFlags.selfSwabbing.values.active
+    ),
+    // draw linking code for self swabbing - if no code yet
+    StudyEngine.if(
+      StudyEngine.not(
+        StudyEngine.participantState.linkingCode.has(
+          linkingCodeKeys.selfSwabbing
+        ),
+      ),
+      StudyEngine.do(
+        StudyEngine.participantActions.linkingCodes.drawFromStudyCodeList(
+          studyCodeLists.selfSwabbingLinkingCodes,
+          linkingCodeKeys.selfSwabbing
+        )
+      ),
     ),
     StudyEngine.participantActions.externalEventHandler(externalServiceNames.entryCodeUsed),
     StudyEngine.participantActions.reports.init(reports.selfSwabbingEntry.key),

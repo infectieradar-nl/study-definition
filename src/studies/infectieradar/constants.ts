@@ -42,6 +42,14 @@ export const messageTypes = {
   onOrderTestKitReceivedCorona: 'onOrderTestKitReceived-corona'
 }
 
+export const linkingCodeKeys = {
+  selfSwabbing: 'labResultLinkingCode'
+}
+
+export const studyCodeLists = {
+  selfSwabbingLinkingCodes: 'selfSwabbingLinkingCodes'
+}
+
 export enum CustomEventKeys {
   orderTestKit = 'order-test-kit'
 }
