@@ -7,10 +7,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-16.10.3.tgz"
   integrity sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==
 
-case-editor-tools@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.7.1.tgz#5d152f8393b41097e3e506aa544e2079323d323b"
-  integrity sha512-kT4Bvm+XjpRYJKYZ3w2+btS3rHJCYGBzBqVALunkgYF1DIi3YfpR5K1ZtSl0K9mLPndiqIfgijTvTsN0MdsaHw==
+case-editor-tools@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.7.2.tgz#949986edbfe706f4af3354f7803b7b92aafdcdef"
+  integrity sha512-y1L69BLDzqPri4pkzLGj1R5/l254NcidsQdsj3VLT8APqPtrdb7Kk2T95s3cPsMBkLtMVcsCdEo49kj1ohRmRQ==
   dependencies:
     survey-engine "^1.2.0"
 
@@ -26,10 +26,10 @@ survey-engine@^1.2.0:
   dependencies:
     date-fns "^2.29.3"
 
-survey-engine@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.3.2.tgz#f21f726fa52c5109039ad13a980255bfbcdb255b"
-  integrity sha512-SVrNMkvvIaUan0kBl005Mzk5KJ4IbQkEB1TT1QZegFrEdFX57RhZsL0oWaU8rfViUfzSGH2pjuojRthsQzWRbw==
+survey-engine@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.3.4.tgz#7a0a4b9e01b763fa7f5f6e317cd3b492b5c88735"
+  integrity sha512-lrahT+67kPqw1dkVz2XpeuZjmeXm33f4+fJWFbO6UIatAjzIuCAcimz550k0O93zbOPz8YfNPcpmDcMkAVNn8g==
   dependencies:
     date-fns "^2.29.3"
 
