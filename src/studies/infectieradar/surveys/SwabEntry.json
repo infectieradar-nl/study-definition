@@ -1,5 +1,5 @@
 {
-  "id": "684194ec237f11adaed9ff6e",
+  "id": "68d64df50a00c574eb7fcdcf",
   "surveyKey": "SwabEntry",
   "props": {
     "name": [
@@ -63,7 +63,7 @@
       }
     ]
   },
-  "published": 1749128428,
+  "published": 1758875125,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "SwabEntry",
@@ -132,7 +132,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "\nOm deel te nemen aan het [zelftest-onderzoek](https://www.infectieradar.nl/about-selfteststudy) moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan.\nVink hieronder \"Toestemming geven\" aan om de toestemmingsverklaring te lezen.\n"
+                      "str": "\nOm deel te nemen aan het [zelftest-onderzoek](https://www.infectieradar.nl/informatie/about-selfteststudy) moeten we toestemming hebben om je adresgegevens te verwerken. Ook hebben we je toestemming nodig om de neus- en keelmonsters die je instuurt te testen in het laboratorium en op te slaan.\nVink hieronder \"Toestemming geven\" aan om de toestemmingsverklaring te lezen.\n"
                     }
                   ]
                 }
@@ -341,7 +341,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "\n## Naam, adres, e-mail en 06-nummer\nVoor het versturen en ontvangen van testen gebruikt het RIVM het portaal [GLEAN](https://rivmportal.glean.nl/). Dit is een aparte website waar je extra testen kunt bestellen en je uitslag kan inzien.\nDit [portaal](https://rivmportal.glean.nl/) staat los van de Infectieradarwebsite en maakt gebruik van een inlogprocedure met e-mail en SMS.\nDaarom vragen we hieronder je naam/adres/e-mail en 06-nummer achter te laten. De testen ontvang je dan automatisch in enkele weken.\n"
+                      "str": "## Naam, adres, e-mail en 06-nummer\n\nVoor het versturen en ontvangen van testen vragen we hieronder uw naam/adres/e-mail en 06-nummer achter te laten. De testen ontvangt u dan automatisch in enkele weken."
                     }
                   ]
                 }
@@ -796,13 +796,14 @@
                       "description": null
                     },
                     {
-                      "key": "name",
                       "role": "name",
+                      "key": "name",
                       "content": [
                         {
                           "code": "nl",
                           "parts": [
                             {
+                              "dtype": "",
                               "str": "Wat is je naam?"
                             }
                           ]
@@ -810,92 +811,101 @@
                       ],
                       "items": [
                         {
-                          "key": "givenName",
                           "role": "givenName",
+                          "key": "givenName",
                           "content": [
                             {
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Voornaam"
                                 }
                               ]
                             }
                           ],
-                          "description": [
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Voornaam"
-                                }
-                              ]
-                            }
-                          ],
-                          "properties": {
-                            "pattern": "^[A-Za-z\\s\\-']+$"
-                          },
                           "items": [
                             {
-                              "key": "error",
                               "role": "error",
+                              "key": "error",
                               "content": [
                                 {
                                   "code": "nl",
                                   "parts": [
                                     {
+                                      "dtype": "",
                                       "str": "Vul alstublieft uw voornaam in"
                                     }
                                   ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Voornaam"
                                 }
                               ]
                             }
                           ]
                         },
                         {
-                          "key": "familyName",
                           "role": "familyName",
+                          "key": "familyName",
                           "content": [
                             {
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Achternaam"
                                 }
                               ]
                             }
                           ],
-                          "description": [
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "str": "Achternaam"
-                                }
-                              ]
-                            }
-                          ],
-                          "properties": {
-                            "pattern": "^[A-Za-z\\s\\-']+$"
-                          },
                           "items": [
                             {
-                              "key": "error",
                               "role": "error",
+                              "key": "error",
                               "content": [
                                 {
                                   "code": "nl",
                                   "parts": [
                                     {
+                                      "dtype": "",
                                       "str": "Vul alstublieft uw achternaam in"
                                     }
                                   ]
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "properties": {
+                            "pattern": "^[A-Za-z\\s\\-']+$"
+                          },
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Achternaam"
                                 }
                               ]
                             }
                           ]
                         }
-                      ]
+                      ],
+                      "description": null
                     }
                   ],
                   "description": null
@@ -950,5 +960,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "25-06-1"
+  "versionId": "25-09-1"
 }
