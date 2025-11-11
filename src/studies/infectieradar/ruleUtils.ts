@@ -1,7 +1,7 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { Duration } from "case-editor-tools/types/duration";
 import { Expression } from "survey-engine/data_types";
-import { externalServiceNames, surveyKeys } from "./constants";
+import { externalServiceNames, reports, surveyKeys } from "./constants";
 import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
@@ -447,3 +447,12 @@ export const assignIntervalSurveyForQ4 = () => StudyEngine.do(
   reassignIntervalFromWeek(40)
 )
 
+
+export const addOrderTestKitReport = (kitType: Expression | string) => StudyEngine.do(
+  StudyEngine.participantActions.reports.init(reports.orderTestKit.key),
+  StudyEngine.participantActions.reports.updateData(
+    reports.orderTestKit.key,
+    reports.orderTestKit.dataKeys.kitType,
+    kitType,
+  ),
+)

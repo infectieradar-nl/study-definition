@@ -5,7 +5,7 @@ import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabSample } from "./surveys/swabSample";
-import { assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
+import { addOrderTestKitReport, assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { CustomEventKeys, externalServiceNames, linkingCodeKeys, messageTypes, reports, studyCodeLists, surveyKeys } from "./constants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
@@ -171,6 +171,8 @@ const handleSwabEntry = StudyEngine.ifThen(
     ),
     StudyEngine.participantActions.assignedSurveys.add(QuitSwabbing.key, 'optional'),
     StudyEngine.participantActions.messages.add(messageTypes.selftestConfirmation, StudyEngine.timestampWithOffset({ days: 0 })),
+    addOrderTestKitReport('nk_monster'),
+    addOrderTestKitReport('corona'),
   )
 )
 
@@ -314,12 +316,7 @@ const timerRules: Expression[] = [
 const handleOrderTestKit = StudyEngine.ifThen(
   StudyEngine.checkEventKey(CustomEventKeys.orderTestKit),
   // THEN:
-  StudyEngine.participantActions.reports.init(reports.orderTestKit.key),
-  StudyEngine.participantActions.reports.updateData(
-    reports.orderTestKit.key,
-    reports.orderTestKit.dataKeys.kitType,
-    StudyEngine.eventPayload.getEventPayloadValueAsStr('kitType'),
-  ),
+  addOrderTestKitReport(StudyEngine.eventPayload.getEventPayloadValueAsStr('kitType')),
   // send message
   StudyEngine.ifThen(
     StudyEngine.eventPayload.hasEventPayloadKeyWithValue('kitType', 'corona'),
