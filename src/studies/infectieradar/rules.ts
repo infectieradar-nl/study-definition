@@ -172,7 +172,7 @@ const handleSwabEntry = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(QuitSwabbing.key, 'optional'),
     StudyEngine.participantActions.messages.add(messageTypes.selftestConfirmation, StudyEngine.timestampWithOffset({ days: 0 })),
     addOrderTestKitReport('nk_monster'),
-    addOrderTestKitReport('corona'),
+    // addOrderTestKitReport('corona'),
   )
 )
 
