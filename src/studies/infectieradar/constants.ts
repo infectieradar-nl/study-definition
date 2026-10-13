@@ -51,5 +51,14 @@ export const studyCodeLists = {
 }
 
 export enum CustomEventKeys {
-  orderTestKit = 'order-test-kit'
+  orderTestKit = 'order-test-kit',
+  participantIdentifierLinked = 'participant-identifier-linked',
+}
+
+export const studyVariables = {
+  pienterSampleMaxParticipants: 'pienterSampleMaxParticipants',
+}
+
+export const studyCounters = {
+  pienterSample: 'pienter_sample',
 }

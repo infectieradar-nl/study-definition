@@ -11,6 +11,7 @@ import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
 import { SwabNotSelected } from "./surveys/swabNotSelected";
 import { Interval } from "./surveys/interval";
+import { handleParticipantIdentifierLinked } from "./participantIdentifierLinking";
 
 const quarterSwithOffset = 2 // weeks
 
@@ -332,6 +333,7 @@ const handleOrderTestKit = StudyEngine.ifThen(
 
 const customEventRules: Expression[] = [
   handleOrderTestKit,
+  handleParticipantIdentifierLinked,
 ]
 
 

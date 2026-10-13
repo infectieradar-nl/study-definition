@@ -1,4 +1,8 @@
 export const ParticipantFlags = {
+  pienterSample: {
+    key: 'pienter_sample',
+    // Value is the enrolment sequence from the study counter.
+  },
   hasOnGoingSymptoms: {
     key: 'prev',
     values: {
