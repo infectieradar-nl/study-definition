@@ -5,7 +5,7 @@ import { ParticipantFlags } from "./participantFlags";
 import { Intake } from "./surveys/intake";
 import { Weekly } from "./surveys/weekly";
 import { SwabSample } from "./surveys/swabSample";
-import { addOrderTestKitReport, assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
+import { addOrderTestKitReport, assignIntervalSurveyForQ1, assignIntervalSurveyForQ2, assignIntervalSurveyForQ3, assignIntervalSurveyForQ4, clearPienterSwabInvitation, handleExpired_removeSurvey, handleSelfSwabbingIsInvited, handleSelfSwabbingLogic, isCurrentISOWeekSmallerThan, isSurveyExpired, reassignIntervalSurvey } from "./ruleUtils";
 import { CustomEventKeys, externalServiceNames, linkingCodeKeys, messageTypes, reports, studyCodeLists, surveyKeys } from "./constants";
 import { QuitSwabbing } from "./surveys/quitSwabbing";
 import { SwabStudyfull } from "./surveys/swabStudyFull";
@@ -98,6 +98,8 @@ const handleIntake = StudyEngine.ifThen(
 const handleWeekly = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(Weekly.key),
   // then do:
+  // Retire the previous fallback invitation before selecting for the new weekly.
+  clearPienterSwabInvitation(),
   StudyEngine.participantActions.assignedSurveys.remove(Weekly.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(Weekly.key, 'prio', StudyEngine.timestampWithOffset({
     minutes: 5,
@@ -193,10 +195,18 @@ const handleSwabStudyFull = StudyEngine.ifThen(
 )
 
 const handleSwabSample = StudyEngine.ifThen(
-  StudyEngine.checkSurveyResponseKey(SwabSample.key),
+  StudyEngine.and(
+    StudyEngine.checkSurveyResponseKey(SwabSample.key),
+    StudyEngine.participantState.hasSurveyKeyAssigned(SwabSample.key),
+  ),
   // THEN:
   StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
-  StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse),
+  StudyEngine.ifThen(
+    StudyEngine.not(
+      StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
+    ),
+    StudyEngine.participantActions.externalEventHandler(externalServiceNames.samplerInviteResponse),
+  ),
   StudyEngine.ifThen(
     StudyEngine.singleChoice.any(SwabSample.Confirm.key, SwabSample.Confirm.optionKeys.yes),
     StudyEngine.participantActions.updateFlag(
@@ -204,7 +214,8 @@ const handleSwabSample = StudyEngine.ifThen(
       StudyEngine.timestampWithOffset({ days: 0 }),
     ),
     StudyEngine.participantActions.messages.add(messageTypes.infosAfterSelectionForSwabbing, StudyEngine.timestampWithOffset({ hours: 0 }))
-  )
+  ),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
 )
 
 const handleSwabNotSelected = StudyEngine.ifThen(
@@ -229,6 +240,7 @@ const handleQuitSwabbing = StudyEngine.ifThen(
     ),
     StudyEngine.participantActions.assignedSurveys.remove(SwabEntry.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
     StudyEngine.participantActions.assignedSurveys.remove(QuitSwabbing.key, 'all'),
     StudyEngine.participantActions.confidentialResponses.removeAll(),
     StudyEngine.participantActions.reports.init(reports.selfSwabbingQuit.key),
@@ -308,7 +320,11 @@ const submitRules: Expression[] = [
 
 const timerRules: Expression[] = [
   autoRemoveContactData,
-  handleExpired_removeSurvey(SwabSample.key),
+  StudyEngine.ifThen(
+    isSurveyExpired(SwabSample.key),
+    StudyEngine.participantActions.assignedSurveys.remove(SwabSample.key, 'all'),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
+  ),
   handleExpired_removeSurvey(SwabNotSelected.key),
   handleIntervalQuestionnaireExpired(),
 ]

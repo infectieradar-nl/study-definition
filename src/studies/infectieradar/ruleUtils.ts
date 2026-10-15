@@ -102,19 +102,30 @@ const hasRecentNegativeTestAndRecentSymptoms = () => StudyEngine.and(
   hasRecentSymptoms(),
 );*/
 
-const assignSwabSample = () => StudyEngine.do(
+const selfSwabbingReportKey = 'selfSwabbing'
+
+export const clearPienterSwabInvitation = () => StudyEngine.ifThen(
+  StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabSample, 'all'),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
+)
+
+const assignSwabSample = (selectionSource: 'random' | 'pienter') => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabNotSelected, 'all'),
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabSample, 'all'),
+  selectionSource === 'pienter'
+    ? StudyEngine.participantActions.updateFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key, StudyEngine.timestampWithOffset({ seconds: 0 }))
+    : StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
+  StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'selectionSource', selectionSource),
   StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabSample, 'immediate', undefined, StudyEngine.timestampWithOffset({ hours: 12 })),
 )
 
 const assignSwabNotSelected = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabSample, 'all'),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.selfSwabbingPienterInvitationTime.key),
   StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.SwabNotSelected, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(surveyKeys.SwabNotSelected, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 1 }))
 )
-
-const selfSwabbingReportKey = 'selfSwabbing'
 
 export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
   // If part of the cohort ->
@@ -148,12 +159,16 @@ export const handleSelfSwabbingLogic = () => StudyEngine.ifThen(
             // If true:
             StudyEngine.do(
               StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'selected'),
-              assignSwabSample(),
+              assignSwabSample('random'),
             ),
             // Else:
             StudyEngine.do(
               StudyEngine.participantActions.reports.updateData(selfSwabbingReportKey, 'sampler', 'not selected'),
-              assignSwabNotSelected(),
+              StudyEngine.if(
+                StudyEngine.participantState.hasParticipantFlagKey(ParticipantFlags.pienterSample.key),
+                assignSwabSample('pienter'),
+                assignSwabNotSelected(),
+              ),
             ),
           )
         ),

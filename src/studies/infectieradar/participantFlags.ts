@@ -37,6 +37,10 @@ export const ParticipantFlags = {
   selfSwabbingSampledTime: {
     key: 'selfSwabbingSampledTime',
   },
+  selfSwabbingPienterInvitationTime: {
+    key: 'selfSwabbingPienterInvitationTime',
+    // Timestamp of the current Pienter fallback invitation; no random slot was reserved.
+  },
   selfSwabbingHasNoTestInLastWeekly: {
     key: 'selfSwabbingHasNoTestInLastWeekly',
     values: {
